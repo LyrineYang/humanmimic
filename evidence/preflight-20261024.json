@@ -1,0 +1,37 @@
+{
+  "status": "awaiting_gpu_access",
+  "upstream_commit": "45c03facbf848e0c743091b7d9c17952096ff908",
+  "source_directory": "/Users/nianzhen/Documents/Codex/2026-10-24/ni/work/GR00T-WholeBodyControl",
+  "local_platform": "macOS arm64; NVIDIA GPU unavailable",
+  "remote_preflight": "dsai_2 SSH connection closed at jump host; GPU status unverified",
+  "source_checks": [
+    {
+      "file": "gear_sonic/scripts/run_sim_loop.py",
+      "exists": true,
+      "syntax": "passed"
+    },
+    {
+      "file": "gear_sonic/examples/live_camera_teleop/webcam_stream.py",
+      "exists": true,
+      "syntax": "passed"
+    },
+    {
+      "file": "gear_sonic/examples/live_camera_teleop/soma_pt_to_sonic_v3.py",
+      "exists": true,
+      "syntax": "passed"
+    },
+    {
+      "file": "gear_sonic/examples/live_camera_teleop/soma_to_smpl.py",
+      "exists": true,
+      "syntax": "passed"
+    },
+    {
+      "file": "download_from_hf.py",
+      "exists": true,
+      "syntax": "passed"
+    }
+  ],
+  "runtime_validation": "not run",
+  "required_next_input": "Reachable NVIDIA Linux host and writable project directory",
+  "source_mutations": "No tracked files changed; existing Desktop repository unchanged"
+}

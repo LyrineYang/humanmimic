@@ -1,0 +1,52 @@
+{
+  "currency": "USD",
+  "price_checked_date": "2026-10-25",
+  "timezone": "Asia/Shanghai",
+  "price_source": "https://modal.com/pricing",
+  "authorization": "research_and_preparation_only",
+  "reported_credit_usd": 30.0,
+  "verified_available_credit_usd": null,
+  "project_spend_usd": 0.0,
+  "project_limit_usd": 30.0,
+  "working_stop_usd": 25.0,
+  "unallocated_reserve_usd": 5.0,
+  "out_of_pocket_limit_usd": 0.0,
+  "platform_limits_verified": false,
+  "execution_policy": {
+    "preferred_gpu": "L4",
+    "allowed_gpus_after_authorization": ["L4", "A10", "L40S"],
+    "max_containers": 1,
+    "gpu_count": 1,
+    "first_preflight_timeout_seconds": 300,
+    "default_timeout_seconds": 900,
+    "configured_retries": 0,
+    "persistent_online_service": false,
+    "estimated_cost_reservation_multiplier": 1.25,
+    "note": "这是计划配置，不是已实现的费用拦截器；平台重启、冷启动与其他收费需另行核对。"
+  },
+  "estimate_assumptions": {
+    "compute_kind": "ordinary_gpu_function",
+    "region_multiplier": 1.0,
+    "physical_cpu_cores": 2,
+    "system_memory_gib": 8,
+    "includes_build_load_idle_storage_egress": false
+  },
+  "rates_usd_per_second": {
+    "cpu_per_physical_core": 0.0000131,
+    "memory_per_gib": 0.00000222,
+    "gpu": {
+      "L4": 0.000222,
+      "A10": 0.000306,
+      "L40S": 0.000542,
+      "H100": 0.001097
+    }
+  },
+  "allocation_usd": {
+    "preflight": 1.0,
+    "reference_tracking": 5.0,
+    "offline_video": 6.0,
+    "scene_adaptation": 8.0,
+    "final_verification": 5.0,
+    "unallocated_reserve": 5.0
+  }
+}

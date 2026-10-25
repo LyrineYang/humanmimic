@@ -1,0 +1,10 @@
+.DS_Store
+.local/
+.venv*/
+__pycache__/
+*.py[cod]
+runs/
+models/
+cache/
+*.engine
+*.plan

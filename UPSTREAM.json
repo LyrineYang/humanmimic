@@ -1,0 +1,8 @@
+{
+  "repository": "https://github.com/NVlabs/GR00T-WholeBodyControl.git",
+  "path": "vendor/GR00T-WholeBodyControl",
+  "commit": "45c03facbf848e0c743091b7d9c17952096ff908",
+  "local_source_changes": false,
+  "checkout": "sparse; LFS files not downloaded",
+  "execution_target": "Windows desktop Codex configured to run its agent in WSL2"
+}
