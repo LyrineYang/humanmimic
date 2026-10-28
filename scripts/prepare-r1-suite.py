@@ -70,12 +70,15 @@ def prepare(manifest_path, output):
     commands = ["#!/usr/bin/env bash", "set -u", f"cd {shlex.quote(str(ROOT))}", "source scripts/activate-r1.sh || exit 1",
                 "# Runs are serial because every controller uses DDS domain 0.",
                 "# Continue after failed trials and retain all results; do not replace failures."]
-    trials = []
+    trials, guards = [], []
     for motion, cfg in resolved:
         config_path = output / f"{motion['name']}.json"
         config_path.write_text(json.dumps(cfg, indent=2) + "\n")
         for trial in range(1, 3):
             run_path = output / f"{motion['name']}-trial-{trial:02d}"
+            for reserved in [run_path, Path(str(run_path) + ".launch.log"), Path(str(run_path) + ".audit.log")]:
+                quoted = shlex.quote(str(reserved))
+                guards.append(f"if [[ -e {quoted} || -L {quoted} ]]; then echo 'Existing trial evidence: refusing to rerun the suite' >&2; exit 1; fi")
             run = [sys.executable, str(ROOT / "scripts/run-r1-reproduction.py"), "--evaluation", str(config_path), "--output", str(run_path)]
             summarize = [sys.executable, str(ROOT / "scripts/summarize-r1.py"), "--run", str(run_path)]
             commands.extend([f"# {motion['name']}, trial {trial}",
@@ -83,9 +86,12 @@ def prepare(manifest_path, output):
                              f"  if ! {shlex.join(summarize)} > {shlex.quote(str(run_path) + '.audit.log')} 2>&1; then",
                              f"    touch {shlex.quote(str(run_path / 'audit-failed.flag'))}",
                              f"    echo 'Audit failed: {run_path.name}' >&2", "  fi",
-                             "else", f"  echo 'Trial failed: {run_path.name}; retain the evidence' >&2", "fi"])
+                             "else", f"  mkdir -p {shlex.quote(str(run_path))}",
+                             f"  touch {shlex.quote(str(run_path / 'launcher-failed.flag'))}",
+                             f"  echo 'Trial failed: {run_path.name}; retain the evidence' >&2", "fi"])
             trials.append({"motion": motion["name"], "trial": trial, "run_directory": str(run_path.relative_to(ROOT)),
                            "status": "awaiting_verification"})
+    commands[4:4] = guards
     commands.append(shlex.join([sys.executable, str(ROOT / "scripts/audit-r1-suite.py"), "--suite", str(output)]))
     (output / "run-trials.sh").write_text("\n".join(commands) + "\n")
     (output / "trials.json").write_text(json.dumps(trials, indent=2) + "\n")

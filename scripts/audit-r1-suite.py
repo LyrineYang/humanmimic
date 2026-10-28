@@ -56,7 +56,7 @@ def audit(directory):
                 detail = "Complete frozen-config trial audit" if passed else "Trial failed or does not match the frozen evidence requirements"
             elif (run / "metrics.json").exists() and read(run / "metrics.json").get("status") == "failed":
                 status, detail = "failed", "Controller/physics trial failure; raw evidence retained"
-            elif (run / "artifact-error.json").exists() or (run / "audit-failed.flag").exists():
+            elif any((run / name).exists() for name in ["artifact-error.json", "audit-failed.flag", "launcher-failed.flag"]):
                 status, detail = "failed", "Artifact generation/audit failed; inspect the retained error"
             statuses.append(status)
             results.append({"motion": motion["name"], "trial": trial, "status": status,

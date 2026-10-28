@@ -61,8 +61,8 @@
 - 最新证据：环境 `runs/r1-full-setup-20261028/results.json`；交付报告 `runs/r1-reproduction-20261028-01/REPORT.md`；完整指标 `full-sample-metrics.json`；原始物理状态 `actual-state.npz`；录像 `actual-execution.mp4`；审计 `completion-audit.json`、`independent-artifact-audit.json`。本轮目标不等于整个四阶段项目完成。
 
 - 配置入口回归 `passed`：`runs/r1-configurable-runner-20261028-01/`，新增按动作配置与参考哈希/帧数校验后，完整 Macarena 再运行 1375 帧，RMSE 0.13754351595441291 rad、未跌倒；27.52 秒实际状态录像完整解码通过。此项为工具验证，不替换下一轮十试次。汇总工具已用该真实结果验证：识别一次通过与九次未运行，整体仍 awaiting_verification。
-- 下一轮准备 `passed`：`configs/r1-suite.json` 固定 Macarena、dance in da party、squat、walking quip 360、forward lunge 官方镜像样例，覆盖上下肢；全部文件与固定上游 LFS SHA256 一致。准备工具生成五份动作配置与十个固定试次，错误哈希会拒绝生成执行入口；汇总工具在未执行时正确返回 `awaiting_verification`。准备证据 `runs/r1-suite-ready-20261028-03/`，十试次未启动；既有演示不替换清单试次。
-- Git 发布：远程已有私有仓库 `https://github.com/LyrineYang/humanoid-demo`，本轮已读取其 `d515531` 历史并合并，保留先前发布及 handoff 排查证据。WSL 的 gh 登录和私有仓库 fetch 现已通过；此前缺少认证的记录仅为历史，handoff 本身未重试。
+- 下一轮准备 `passed`：`configs/r1-suite.json` 固定 Macarena、dance in da party、squat、walking quip 360、forward lunge 官方镜像样例，覆盖上下肢；全部文件与固定上游 LFS SHA256 一致。准备工具生成五份动作配置与十个固定试次，错误哈希会拒绝生成执行入口；汇总工具在未执行时正确返回 `awaiting_verification`。准备证据 `runs/r1-suite-ready-20261028-04/`，十试次未启动；既有演示不替换清单试次。
+- Git 发布：远程已有私有仓库 `https://github.com/LyrineYang/humanoid-demo`，本轮已读取其 `d515531` 历史并合并，保留先前发布及 handoff 排查证据。WSL 的 gh 登录、私有仓库 fetch、R1 内容 push 与从 GitHub 新克隆均已通过；此前缺少认证的记录仅为历史，handoff 本身未重试。
 
 以下为本轮完整配置之前的历史状态，当前状态以上述结果为准。
 
