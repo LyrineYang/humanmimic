@@ -7,7 +7,7 @@
 ## 如何启动
 
 1. 桌面项目已建立在 `/Users/nianzhen/Desktop/humanoid-demo`。本轮只迁移资料、保存未修改的官方依赖并建立 Git 基线，不在 Mac 开始部署或改机器人代码。
-2. 在 Windows 桌面应用的设置中将代理切换为 WSL，并重启应用。只把集成终端改为 WSL 不等于改变代理执行环境。
+2. 可以沿用 Windows 原生代理，通过 `wsl.exe --cd /home/lyrine/projects/humanoid-demo --exec ...` 执行 Linux 命令。主要做 Linux/CUDA 开发时，推荐将应用代理切换为 WSL 并重启；这不是部署前的硬性门槛。只把集成终端改为 WSL 不等于改变代理执行环境。
 3. 按 [远程协作说明](REMOTE_WORK.md) 连接 Windows 主机。执行项目在 WSL 内，例如 `~/projects/humanoid-demo`；同账号登录不会自动复制项目文件或把本聊天切换到另一台机器。
 4. 在实际执行端读取 [PLAN.md](PLAN.md)，使用 [STARTUP_PROMPT.md](STARTUP_PROMPT.md)。需要持久执行时，再由用户激活其中的 `/goal`。
 5. 代理负责依赖、实现与验证。人负责一次性配对主机、开放项目和短时摄像头配合。

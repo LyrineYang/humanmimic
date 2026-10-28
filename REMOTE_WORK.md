@@ -2,13 +2,17 @@
 
 本项目优先让Windows笔记本提供GPU和WSL环境，Mac通过Codex远程控制查看、指导和验收同一执行端。不要把“登录同一账号”“控制另一台主机”“迁移聊天和Git状态”混为一项操作。
 
+2026-10-28 当前安排：优先 handoff 原聊天到已登记的远端项目 `/home/lyrine/projects/humanoid-demo`。首次实际迁移因 Git origin 无法匹配而失败。用户已授权创建并推送私有仓库 `https://github.com/LyrineYang/humanoid-demo`；仓库已创建，本地 CLI 授权及首次推送待完成。随后检查远端 origin 和私有仓库访问能力，再从另一个聊天或应用界面重试 handoff。
+
 ## Windows 应用能否操作 WSL
 
-可以。Windows原生代理默认在PowerShell执行，也能按需调用 `wsl`。如果主要工作是Linux、CUDA和机器人仿真，建议在桌面应用Settings中把agent从Windows native切到WSL，并重启应用，然后打开WSL项目目录。
+可以。Windows原生代理默认在PowerShell执行，也能按需调用 `wsl`，现有预检已验证这条路径。建立 WSL 文件系统中的副本、将 agent 切换为 WSL 是推荐配置，不是开始仿真的硬性前提。如果主要工作是Linux、CUDA和机器人仿真，建议在桌面应用Settings中把agent从Windows native切到WSL，并重启应用，然后打开WSL项目目录。
+
+2026-10-26 当前工具能力：可通过远端聊天执行命令、准备项目文件和验证结果；没有修改 Windows 应用 agent 选择器的工具接口，且 Computer Use 禁止操作 Codex 应用界面。因此项目文件准备可由代理代办，Windows 应用内切换与重启需要用户操作；不能通过修改未文档化的内部配置冒充完成设置。
 
 集成终端与agent的设置互相独立。仅把终端选成WSL，不能证明代理本身已在WSL执行。开始前让代理报告 `uname -a`、`pwd` 与 `nvidia-smi`。
 
-添加WSL项目时，可在添加项目的文件选择器输入 `\\wsl$\`，选择Linux发行版和 `home/<user>/projects/humanoid-demo`。WSL代理搭配Linux文件系统；若坚持用Windows原生代理，官方建议项目保存在Windows盘并通过 `/mnt/<drive>/` 访问，两种布局不要混用。
+添加WSL项目时，可在添加项目的文件选择器输入 `\\wsl$\`，选择Linux发行版和 `home/<user>/projects/humanoid-demo`。WSL代理优先搭配Linux文件系统；若使用Windows原生代理，官方建议项目保存在Windows盘并通过 `/mnt/<drive>/` 访问。
 
 来源：[Windows桌面应用与WSL](https://learn.chatgpt.com/docs/windows/windows-app#windows-subsystem-for-linux-wsl)。
 
@@ -29,7 +33,11 @@
 - 远程接管Windows已有聊天：保持该聊天在Windows执行，Mac查看和发送指令。它不等于迁移当前Mac聊天。
 - Handoff当前聊天：先连接Windows主机，并在两端保存同一个Git仓库对应的项目；然后由用户在聊天底部选择目标运行位置并确认Hand off。应用转移聊天与Git状态，目标端建立或复用工作树。若工具从当前聊天发起，不能把自身交接出去，应由用户使用界面，或从另一个已获授权的聊天发起。
 
-本项目当前只在Mac执行了 `git init`，还没有Git远端或Windows项目副本。先选择仓库同步方式并在Windows登记同仓库项目，再确认Handoff目的地可选。不要为了匹配主机而随意公开仓库或上传凭据。来源：[聊天跨主机交接](https://learn.chatgpt.com/docs/remote-connections#hand-off-a-chat-between-hosts)。
+2026-10-28 已验证：WSL 主仓库在 `/home/lyrine/projects/humanoid-demo`，Windows 文件管理器地址为 `\\wsl.localhost\Ubuntu\home\lyrine\projects\humanoid-demo`；应用已登记该 Git 项目，原生 Bash 命令已在仓库目录运行。Windows 桌面的 `C:\Users\Oscar\Desktop\humanoid-demo-remote` 是另一处日志目录，不能作为主仓库。
+
+Handoff 不限定 GitHub 服务。本机安装版应用要求两端 origin 都能解析出相同的主机／所有者／仓库，并使用相同仓库子目录。GitHub 网页登录、Codex GitHub 连接器和 Windows/WSL Git 命令认证分别生效；本机登录成功不能证明远端能访问私有仓库。先在执行端以不输出凭据的方式检查 `gh auth status`（若已安装）及 `GIT_TERMINAL_PROMPT=0 git ls-remote origin HEAD`。不要把访问令牌写入 URL、聊天或版本库，不覆盖远端未提交修改。
+
+来源：[聊天跨主机交接](https://learn.chatgpt.com/docs/remote-connections#hand-off-a-chat-between-hosts)。匹配代码与失败证据：`runs/handoff-attempt-20261028/`。
 
 ## 同账号不等于同步所有本地内容
 

@@ -20,6 +20,8 @@ R4：实现并评估场景约束动作修正，在静态障碍物伸手避碰任
 
 资源是 RTX 4060 笔记本、WSL、32GB 系统内存，预计 8GB 显存，实际以 nvidia-smi 为准。先在 WSL 检查 GPU、实际可用内存、系统与图形环境、磁盘、必要模型资产和 Git LFS。项目放在 Linux 文件系统。不要重装系统或在 WSL 安装 Linux NVIDIA 显示驱动。
 
+2026-10-28 已确认远端原生 Bash/WSL 命令和已登记的 Git 项目 `/home/lyrine/projects/humanoid-demo`；若使用 Windows 原生代理，仍可通过 wsl.exe --cd /home/lyrine/projects/humanoid-demo --exec 显式调用 Linux 程序。固定实际 Linux 工作目录和 Python 路径，不重复要求用户切换 agent。主仓库副本已验证，SONIC 子模块实体、环境与模型仍需部署。用户已授权创建并推送私有 GitHub 仓库 `https://github.com/LyrineYang/humanoid-demo`；仓库已创建，首次推送和远端访问认证仍待验证，handoff 尚未成功。
+
 先跑 SONIC 单独执行的短样例，再测 GEM-X 单独推理，再测并行运行的峰值显存与耗时。保持感知和控制独立运行。显存不足时先缩短视频、减小推理批次和时间窗口，减少预览；不要直接降控制频率或改权重来掩盖失败。
 
 Modal 只补充离线视频推理、无界面物理验证和小规模场景实验。当前仅授权调研与准备，尚未授权启动计费任务。需要执行时先展示一个有限时长预检及其费用上界，获得一次明确的额度内运行授权；之后在该授权范围持续推进，不为每次常规调用重复询问。信用额度不是自动停止保证；不得增加自付费用。预算、剩余额度、任务超时、并发和支出记录遵守 configs/budget.json 与 RESOURCES.md。不要把持久 Goal 当成云计费授权。
