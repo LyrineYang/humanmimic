@@ -1,0 +1,21 @@
+diff --git a/gear_sonic_deploy/src/g1/g1_deploy_onnx_ref/src/g1_deploy_onnx_ref.cpp b/gear_sonic_deploy/src/g1/g1_deploy_onnx_ref/src/g1_deploy_onnx_ref.cpp
+index c83a586..0b35f6e 100644
+--- a/gear_sonic_deploy/src/g1/g1_deploy_onnx_ref/src/g1_deploy_onnx_ref.cpp
++++ b/gear_sonic_deploy/src/g1/g1_deploy_onnx_ref/src/g1_deploy_onnx_ref.cpp
+@@ -2215,7 +2215,15 @@ class G1Deploy {
+       }
+       
+       // Initialize ChannelFactory
+-      ChannelFactory::Instance()->Init(0, networkInterface);
++      // Optional simulation-only DDS configuration for loopback without multicast.
++      if (const char* dds_config = std::getenv("R1_DDS_CONFIG_FILE")) {
++        if (networkInterface != "lo") {
++          throw std::runtime_error("R1_DDS_CONFIG_FILE requires loopback interface lo");
++        }
++        ChannelFactory::Instance()->Init(std::string(dds_config));
++      } else {
++        ChannelFactory::Instance()->Init(0, networkInterface);
++      }
+ 
+       // Initialize Dex3 hands (ChannelFactory already initialized above)
+       dex3_hands_.initialize("");

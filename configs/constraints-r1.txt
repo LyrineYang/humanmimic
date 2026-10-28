@@ -1,0 +1,8 @@
+# Match the fixed SONIC source's NumPy/SciPy requirements.
+numpy==1.26.4
+scipy==1.15.3
+torch==2.7.1
+# Pinocchio 2.7 and OpenCV 4.11 retain NumPy 1.x compatibility.
+pin==2.7.0
+opencv-python==4.11.0.86
+mujoco==3.3.7

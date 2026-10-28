@@ -4,14 +4,14 @@
 
 先完成三个共用底座的复现，再完成一个能比较效果的自研模块。项目不以源码安装成功、参考姿态动画或一次演示替代物理控制验证。
 
-| 编号 | 动作来源与路径 | 状态 |
-| --- | --- | --- |
-| R1 | 少量 G1 数据集动作 → SONIC → MuJoCo | awaiting_verification |
-| R2 | 实际视频 → GEM-X → SOMA 转 SMPL → 缓存回放 → SONIC | awaiting_verification |
-| R3 | 现场摄像头 → 同一动作转换与流式接口 → SONIC | needs_input |
-| R4 | 原始参考动作与障碍物几何 → 自研动作修正 → SONIC | awaiting_verification |
+| 编号 | 动作来源与路径 | 实现进度 | 运行验收 |
+| --- | --- | --- | --- |
+| R1 | 少量 G1 数据集动作 → SONIC → MuJoCo | 完整本机环境、默认权重、C++ 控制器、记录与评估工具已就绪；Macarena 完整动作已复现一次并生成录像 | 单次复现 passed；五动作各两次整体验收 awaiting_verification |
+| R2 | 实际视频 → GEM-X → SOMA 转 SMPL → 缓存回放 → SONIC | 官方桥接源码已准备；模型与链路未集成 | 未运行；awaiting_verification |
+| R3 | 现场摄像头 → 同一动作转换与流式接口 → SONIC | 尚未接入相机 | 未运行；needs_input |
+| R4 | 原始参考动作与障碍物几何 → 自研动作修正 → SONIC | 自研模块尚未编写 | 未运行；awaiting_verification |
 
-所有状态目前仅表示待实现或待验证；没有一项通过运行验收。先固定默认 SONIC 权重及配套配置。低延迟官方权重仅作为后续对照，不作为自研贡献。
+当前一句话进度：Windows 主机 zhen 的 WSL 上，R1 完整本机环境已部署，默认 SONIC 经官方 TensorRT C++ 控制器完成 Macarena 的 1375 帧闭环物理执行，全动作 29 关节 RMSE 0.13617 rad、未跌倒，已生成完整实际状态录像；本次完整环境加一次复现的交付已通过，原计划五动作双次验收及 R2–R4 仍未完成。默认 SONIC 权重和配套配置保持固定；低延迟官方权重仅作为后续对照，不作为自研贡献。
 
 ## 验收与数据划分
 
@@ -51,22 +51,44 @@
 
 ## 当前状态
 
-更新于 2026-10-25，Asia/Shanghai。
+更新于 2026-10-28，Asia/Shanghai。
 
-- 用户资源：RTX 4060 笔记本，已装 WSL，系统内存 32GB；用户表示可通过 Codex 远程连接。WSL 版本、发行版、实际可用内存、GPU 驱动和相机可达性尚待该机器预检。
-- 当前执行端仍是 Mac。2026-10-24 已检出官方 SONIC 精简源码，固定提交 `45c03facbf848e0c743091b7d9c17952096ff908`，并对 5 个相关 Python 入口进行 AST 语法解析，均通过。
+- 本轮完整环境配置 `passed`：沿用 `humanoid-r1` conda / Python 3.10.22 / MuJoCo 3.3.7，补齐 CUDA 开发工具 12.8.93、TensorRT 10.13.3.9 C++ 库与头文件、ONNX Runtime C++ 1.22.0、Eigen 3.4 等；默认 SONIC 编码器、解码器、匹配 observation 配置、规划器与 Macarena 样例均已下载并记录 SHA256。C++ 控制器编译与动态链接检查通过。固定上游提交不变，仅保留 `patches/sonic-loopback-dds.patch` 的仿真专用 DDS 配置入口；策略、增益和动作逻辑未修改。
+- 本机通信修复 `passed`：实测本机 loopback UDP 256/1200 字节可收、2180/8192 字节丢失；DDS 配置改为显式 lo 单播发现、1200 字节消息/1024 字节分片，未更改系统网络。conda 编译器旧式 RPATH 会覆盖库选择，控制器改为 RUNPATH，并为官方配套 DDS C/C++ 库建立项目内 SONAME 链接。Python 0.10.2 预编译轮子实际内置 C 0.11.0，改为源码构建绑定，两端统一使用 SDK 配套 C 0.10.2；初步配置时自行构建的 C 库保留为历史准备产物，不作为当前运行库。实际运行库路径与合成消息诊断均已保存。
+- 完整单动作复现 `passed`：`runs/r1-reproduction-20261028-01/`，官方样例 `macarena_001__A545`，1375/1375 播放帧，名义 27.5 秒，全量关节 RMSE **0.1361738375518422 rad**（门槛 ≤0.35）。未跌倒、未触发控制中止，最低根部高度 0.6564 m；自由根部、重力、接触和控制器启用，播放期间弹力带关闭，没有实际 qpos/qvel 覆写或自动复位。第 04 轮 10 秒预检先通过，RMSE 0.12775 rad；前三轮通信/启动失败证据均保留，未放宽验收门槛。
+- 数据与录像审计 `passed`：原生控制器 CSV 保留全部 1375 个播放样本；在线 ZMQ 收尾缺少最后一条（索引 1385），其余 1374 条与原生实际值最大差约 5e-10 rad，参考值最大差 5e-6 rad（CSV 精度）。全量指标使用同一控制时刻的完整原生 CSV，无拟合时间平移，全部参考帧已与原始动作核对。物理时间严格以 0.005 s 递增。实际轨迹回放录像为 H.264、640×360、25 fps、688 帧、27.52 秒，完整解码及首中尾预览通过；录像是物理执行结束后的实际状态离屏渲染，不是参考姿态动画。
+- 分项状态：源码解析、基础环境、完整动作无界面闭环和实际轨迹回放 `passed`；GPU 图形加速与图形窗口 `awaiting_verification`（当前录像使用 Mesa llvmpipe 软件渲染），现场相机 `needs_input`。本轮仅官方样例/调试动作，未使用保留测试集；未连接真机、训练、修改驱动或启动计费资源，新增云费用 0 美元。R1 五动作各两次的整体验收仍为 `awaiting_verification`。
+- 最新证据：环境 `runs/r1-full-setup-20261028/results.json`；交付报告 `runs/r1-reproduction-20261028-01/REPORT.md`；完整指标 `full-sample-metrics.json`；原始物理状态 `actual-state.npz`；录像 `actual-execution.mp4`；审计 `completion-audit.json`、`independent-artifact-audit.json`。本轮目标不等于整个四阶段项目完成。
+
+以下为本轮完整配置之前的历史状态，当前状态以上述结果为准。
+
+- 2026-10-28 按用户偏好完成 R1 初步 conda 配置，环境配置 `passed`：项目级 Miniforge 26.9.4-1（官方 SHA256 验证），环境 `humanoid-r1`，Python 3.10.22、PyTorch 2.7.1+cu128、NumPy 1.26.4、SciPy 1.15.3、MuJoCo 3.3.7、Pinocchio 2.7.0、OpenCV 4.11.0.86、CycloneDDS Python/C 0.10.2、官方 gear_sonic 0.1.0 与 Unitree SDK 1.0.1。conda-forge 无 CycloneDDS 0.10.2，改从官方标签编译到环境前缀；未改 SDK 依赖要求。源码子模块固定原提交且工作区无修改；G1 模型目录 68 个文件无 LFS 指针，已存 SHA256 清单。激活：`source scripts/activate-r1.sh`；环境配置、约束与 pip 锁定文件位于 `configs/`。
+- 环境实测 `passed`：目标 RTX 4060 上 CUDA 矩阵运算最大绝对差约 0.000122；五个 R1 入口在 conda Python 3.10 下 AST 解析通过，官方模拟器 `--help` 和模块导入通过；G1 URDF 加载 43 自由度，MuJoCo 场景 50 qpos/49 qvel/43 执行器，开启重力与自由根部完成 200 步（0.4 秒）基础物理步进。EGL 离屏图像已生成，渲染器为 Mesa llvmpipe（CPU 软件渲染）；日志存在 `/dev/dri` 权限提示，GPU 图形加速仍 `awaiting_verification`。`pip check` 通过，conda/pip 完整版本快照已保存。
+- 上述物理步进未启用 SONIC 控制器，不能证明稳定性或跟踪成功；未创建 DDS 通道，仿真通信往返未测。动画回放、SONIC 闭环无界面测试均 `awaiting_verification`；现场相机仍 `needs_input`。TensorRT 10.13 C++ 开发库、CUDA 开发文件、部署程序编译、策略权重、参考动作和 R1 评估工具尚待完成。未改系统 Python、驱动或 `~/.bashrc`，未启动计费资源，云费用新增 0 美元。证据：`runs/r1-conda-setup-20261028/results.json`；静态渲染图 `smoke-01/g1-offscreen.png`，无动作录像。
+
+- 2026-10-28 17:40 WSL 环境预检 `passed`（仅指完成环境观察）：当前主机 `zhen`，代理直接在 `/home/lyrine/projects/humanoid-demo` 执行；Ubuntu 24.04.4 LTS、WSL2 内核 6.18.54.1、Python 3.12.3；CPU Ryzen 9 7945HX，WSL 可见 32 个逻辑 CPU、内存约 15.23 GiB（可用约 13.64 GiB）、Swap 4 GiB。RTX 4060 Laptop GPU 8188 MiB，驱动 596.49；`nvidia-smi` 与 CUDA 驱动初始化、设备枚举均 `passed`，尚无 PyTorch CUDA 运算证据。C 盘余约 67.00 GiB、D 盘约 179.00 GiB；WSL 根文件系统显示约 950.53 GiB 可用，这是虚拟磁盘报告值，不能代替宿主盘容量。Git HEAD 为 `b60a87778838f35c0bb771a29991cb4ede685bb7`，既有人工作区修改已保留。原始证据见 `runs/preflight-20261028-174003-wsl/`。
+- 配置前 17:40 部署就绪检查 `failed`：当时 SONIC 子模块固定为 `45c03facbf848e0c743091b7d9c17952096ff908` 但未初始化，目录内无 Python 源码；`/usr/bin/python3` 缺少 pip、torch、mujoco、numpy、onnxruntime、cv2 等，项目内无虚拟环境，Git LFS 命令不可用。源码 AST、动画回放、无界面物理仿真当时均 `awaiting_verification`。WSLg 与显示变量存在；无 `/dev/video*`，现场相机为 `needs_input`。默认命令沙箱因缺少 bubblewrap 启动失败，本次通过获准的沙箱外命令完成预检，未改动系统；该沙箱问题本轮未修复。进程名快照未发现项目仿真或训练。当前副本不含 2026-10-26 的 `runs/` 原始输出，旧记录仅作历史说明。
+
+- 2026-10-26 远端环境检查 `passed`（仅指本次检查已完成）：实际确认 `zhen` 为 Windows 11 家庭版，代理命令使用 PowerShell 7.6.5，cwd 为 `C:\Users\Oscar\Desktop\humanoid-demo-remote`；代理尚未切换到 WSL。WSL 3.0.3.0，默认 Ubuntu 24.04.4 LTS、WSL2，Linux 可见约 15 GiB 内存、可用约 14 GiB、Swap 4 GiB。Windows 与 WSL 的 nvidia-smi 都识别 RTX 4060 Laptop GPU（8188 MiB），驱动 596.49。C 盘剩余约 23.66 GiB，D 盘约 164.76 GiB。当前远端目录不是 Git 仓库，`/home/lyrine/projects/humanoid-demo` 不存在；部署尚未就绪。原始输出和检查结果见 `runs/preflight-20261026-remote/environment-command-evidence.json`、`results.json`。未修改代理设置，未安装依赖或启动仿真；R1–R4 仍未通过运行验收。
+
+- 用户资源：RTX 4060 笔记本，32GB 物理内存、WSL 可见约 15.23 GiB；WSL/GPU 预检与 PyTorch CUDA 运算已通过，相机和图形窗口未验收，离屏渲染当前为软件路径。
+- 历史执行端为 Mac。2026-10-24 已检出官方 SONIC 精简源码，固定提交 `45c03facbf848e0c743091b7d9c17952096ff908`，并对 5 个相关 Python 入口进行 AST 语法解析，均通过；该结果不能替代当前 WSL 的源码与运行检查。
 - 桌面项目现位于 `/Users/nianzhen/Desktop/humanoid-demo`，官方源码迁入 `vendor/GR00T-WholeBodyControl` 并以子模块固定原提交。该目录不包含完整 LFS 实体，不能直接当成完整安装。历史预检保存于 `evidence/preflight-20261024.json`。
 - 桌面旧仓库未修改。2026-10-24 的 dsai_2 SSH 预检被跳板端关闭，尚未重测；当前首选已经转为用户的 4060。
-- 用户报告 Modal 有 30 美元额度；未读取账户余额，未启动计费任务。本次只准备启动资料，当前没有活跃 Goal 或自动化。
+- 2026-10-25 用户报告 Modal 有 30 美元额度；当时未读取账户余额或启动计费任务，仅准备启动资料，没有活跃 Goal 或自动化。本轮仍未启动云计费资源。
 - 2026-10-25 用户要求后续通过 Codex 远程控制协作。本轮停止实现推进；核对官方源码没有已暂存或未暂存的业务代码修改，无需对它执行 reset。仅迁移文档、固定依赖和初始化项目 Git。
-- 当前聊天“调研人形机器人视频动作复刻”已关联到新桌面项目humanoid-demo。现有会话的执行cwd仍记录为原生成目录，本轮文件操作显式指定桌面项目路径；项目归属迁移不等于已经切换执行主机。Windows主机配对与跨主机Handoff仍需另外完成。
+- 聊天“调研人形机器人视频动作复刻”已关联桌面项目 humanoid-demo。2026-10-26 已验证 Mac 能控制 Windows 主机 zhen 的执行聊天；Mac 本地聊天仍在 Mac 执行。跨主机 Handoff 尚未进行，远端 Git 项目仍需准备。
 - 已核对官方main仍为 `45c03facbf848e0c743091b7d9c17952096ff908`，迁入的子模块与之相同。旧桌面仓库除未跟踪AGENTS.md外工作区干净，无本地独有分支提交，但存在一条stash；删除旧目录前须确认新项目 `.local/legacy-sonic/` 的恢复包与AGENTS.md备份已验证。恢复包不提交Git。
+
+2026-10-26 历史环境检查期间曾因网络问题等待、辅助脚本写入审批超时；随后同一远端回合改用直接命令，取得所需输出。初次受限调用的 CIM/WSL 状态查询报权限错误，后续调用成功；最后 Linux 合并命令返回 128 来自 Git 目录检查失败，不能误报为 WSL 或 GPU 失败。当时仿真部署与运行仍为 `awaiting_verification`。
 
 ## 下一步
 
-1. 先按 REMOTE_WORK.md 完成 Windows 主机配对和 WSL 代理设置。在实际执行端确认 WSL2、nvidia-smi、Linux 可用内存、图形和相机路径；Mac 端不继续部署。
-2. 获取固定版源码、匹配权重、最少参考动作和 LFS 实体；创建独立环境，不运行会删除已有环境的安装步骤。
-3. R1 的 10 秒预检 → 单个完整动作 → 五动作验收。预检通过后才扩大下载和评测。
+2026-10-28 用户本次指定的“R1 完整环境配置加一次完整动作复现及结果”已完成并通过审计；一次复现不替代本计划五动作、各两次的完整 R1 验收，门槛不变。本轮证据位于 `runs/r1-full-setup-20261028/` 和 `runs/r1-reproduction-20261028-01/`。云计费授权不变。
+
+1. 复用现有环境、默认权重、C++ 控制器及 DDS 分片配置；通过 `source scripts/activate-r1.sh` 激活。默认命令沙箱缺少 bubblewrap 的工具问题未修复，本次经获准的沙箱外命令完成全部部署与运行；不因此重建环境或更改驱动。
+2. 后续完整 R1 验收：预先固定五段动作和两次试次，沿用 0.35 rad、未跌倒和未跟踪失败的门槛。当前仅 Macarena 的一次完整复现通过，仍需其第二次及其余动作的完整评测；失败试次完整保留。
+3. 图形窗口/GPU 渲染与现场相机按各自目标另行验证；当前实际轨迹录像已可通过软件离屏生成。
 4. GEM-X 单独视频推理 → 缓存流式回放 → 与控制并行测显存；推进 R2，再现场验收 R3。
 5. 用已经通过的参考动作开始 R4。任何现场等待期间继续独立开发与离线验证。
 

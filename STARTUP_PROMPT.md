@@ -20,6 +20,8 @@ R4：实现并评估场景约束动作修正，在静态障碍物伸手避碰任
 
 资源是 RTX 4060 笔记本、WSL、32GB 系统内存，预计 8GB 显存，实际以 nvidia-smi 为准。先在 WSL 检查 GPU、实际可用内存、系统与图形环境、磁盘、必要模型资产和 Git LFS。项目放在 Linux 文件系统。不要重装系统或在 WSL 安装 Linux NVIDIA 显示驱动。
 
+2026-10-28 用户指定偏好 conda，本次“R1 完整环境配置加一次完整动作复现及结果”已通过：Macarena 1375 帧、全动作 RMSE 0.13617 rad、未跌倒，报告与录像在 runs/r1-reproduction-20261028-01/。后续先读取该证据，不重复安装或重复执行本次 Goal。复用项目 `.local/miniforge3` 下的 `humanoid-r1`，通过 `source scripts/activate-r1.sh` 激活；保留 CUDA 12.8、TensorRT 10.13.3、源码构建的 CycloneDDS 绑定、SDK 配套运行库、RUNPATH 及 configs/r1-dds.xml 的 loopback 单播/分片配置。源码提交不变，局部仿真传输补丁见 UPSTREAM.json。配置见 configs/environment-r1.yml、configs/constraints-r1.txt、configs/r1-evaluation.json。单次复现不替代 PLAN.md 五动作各两次的 R1 验收，不改变四项最终验收，也不授权计费资源、真机或从零训练。
+
 先跑 SONIC 单独执行的短样例，再测 GEM-X 单独推理，再测并行运行的峰值显存与耗时。保持感知和控制独立运行。显存不足时先缩短视频、减小推理批次和时间窗口，减少预览；不要直接降控制频率或改权重来掩盖失败。
 
 Modal 只补充离线视频推理、无界面物理验证和小规模场景实验。当前仅授权调研与准备，尚未授权启动计费任务。需要执行时先展示一个有限时长预检及其费用上界，获得一次明确的额度内运行授权；之后在该授权范围持续推进，不为每次常规调用重复询问。信用额度不是自动停止保证；不得增加自付费用。预算、剩余额度、任务超时、并发和支出记录遵守 configs/budget.json 与 RESOURCES.md。不要把持久 Goal 当成云计费授权。

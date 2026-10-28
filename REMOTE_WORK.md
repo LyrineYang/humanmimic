@@ -29,9 +29,11 @@
 - 远程接管Windows已有聊天：保持该聊天在Windows执行，Mac查看和发送指令。它不等于迁移当前Mac聊天。
 - Handoff当前聊天：先连接Windows主机，并在两端保存同一个Git仓库对应的项目；然后由用户在聊天底部选择目标运行位置并确认Hand off。应用转移聊天与Git状态，目标端建立或复用工作树。若工具从当前聊天发起，不能把自身交接出去，应由用户使用界面，或从另一个已获授权的聊天发起。
 
-本项目当前只在Mac执行了 `git init`，还没有Git远端或Windows项目副本。先选择仓库同步方式并在Windows登记同仓库项目，再确认Handoff目的地可选。不要为了匹配主机而随意公开仓库或上传凭据。来源：[聊天跨主机交接](https://learn.chatgpt.com/docs/remote-connections#hand-off-a-chat-between-hosts)。
+2026-10-26 实测：Mac 已可访问远端主机 `zhen`，Windows 项目目录为 `C:\Users\Oscar\Desktop\humanoid-demo-remote`，但该目录尚不是 Git 仓库；`/home/lyrine/projects/humanoid-demo` 不存在。WSL2、Ubuntu 24.04.4 与 WSL 内 nvidia-smi 已通过检查，当前代理仍从 Windows PowerShell 发起命令。先建立对应的 Git 工作副本、登记同仓库项目，再确认 Handoff 目的地可选；代理切换 WSL 尚未执行。不要为了匹配主机而随意公开仓库或上传凭据。证据：`runs/preflight-20261026-remote/results.json`。来源：[聊天跨主机交接](https://learn.chatgpt.com/docs/remote-connections#hand-off-a-chat-between-hosts)。
 
 ## 同账号不等于同步所有本地内容
+
+2026-10-28 已实测当前代理直接在主机 zhen 的 Ubuntu/WSL2 内执行，工作目录 `/home/lyrine/projects/humanoid-demo` 是 Git 工作副本。`humanoid-r1` conda、CUDA/TensorRT/ONNX Runtime C++ 环境、默认 SONIC 权重和官方控制器已配置，通过一次 1375 帧 Macarena 闭环物理复现；激活命令为 `source scripts/activate-r1.sh`。WSL 本机大 UDP 包丢失通过项目内 DDS 小包分片与 lo 单播配置解决，未改系统网络。离屏录像使用 CPU 软件路径，图形窗口与现场相机未验收。此前“目录不存在、仅从 Windows 调用 WSL”是历史状态；本次副本未带入旧 `runs/` 证据。当前证据：`runs/r1-full-setup-20261028/results.json`、`runs/r1-reproduction-20261028-01/REPORT.md`。
 
 远程连接让你访问主机上的聊天和项目，不是把所有设备的磁盘、模型、环境和会话目录互相复制。代码用Git同步，运行结果保存到约定位置，现场资源由实际执行主机提供。
 

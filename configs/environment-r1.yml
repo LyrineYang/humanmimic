@@ -1,0 +1,27 @@
+name: humanoid-r1
+channels:
+  - nvidia
+  - conda-forge
+dependencies:
+  - python=3.10
+  - pip
+  - setuptools
+  - wheel
+  - git-lfs
+  - ffmpeg
+  - cmake>=3.24,<4
+  - ninja
+  - pkg-config
+  - cuda-cudart-dev=12.8
+  - cuda-nvcc=12.8
+  - eigen=3.4
+  - yaml-cpp=0.8
+  - msgpack-cxx
+  - zeromq=4.3.5
+  - cppzmq
+  - nlohmann_json
+  - gtest
+  - zlib
+# Build cyclonedds Python 0.10.2 from source. Both Python and C++ use the
+# official Unitree SDK's matched C/C++ DDS runtime via .local/unitree-dds.
+# TensorRT 10.13.3 and ONNX Runtime 1.22.0 are project-local native SDKs.
