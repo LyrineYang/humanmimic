@@ -42,6 +42,8 @@
 
 | 2026-10-28 Asia/Shanghai | 私有 GitHub 仓库创建与发布准备 | 用户明确授权；浏览器创建 LyrineYang/humanoid-demo 成功，页面标记 Private。待提交的12个普通文件未发现常见凭据格式，SONIC只保存gitlink；本机gh未登录，已启动设备授权，首次推送needs_input，远端认证尚未核对 | `runs/github-publish-20261028/private-repository.png`、`results.json` | 整理本地提交并配置真实origin；用户完成CLI授权后推送，随后检查远端origin与私有仓库访问，再验证handoff |
 
+| 2026-10-28 Asia/Shanghai | 首次私有仓库推送完成 | passed：用户完成GitHub设备验证，本机gh登录LyrineYang；提交7042ef2推送main并建立origin/main跟踪；gh repo view确认isPrivate=true。远端环境配置正在进行，新增文件尚未合并，不执行覆盖式同步 | `runs/github-publish-20261028/results.json` | 继续核对远端origin与认证；本聊天仍在Mac，handoff未完成 |
+
 原预检JSON中的Mac路径是当时的历史位置。迁移到WSL后，第一条运行记录应产生新的目标环境证据，不能沿用旧路径作为当前运行位置。
 
 ## 每次运行的记录模板

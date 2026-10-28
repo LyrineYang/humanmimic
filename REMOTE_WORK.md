@@ -2,7 +2,7 @@
 
 本项目优先让Windows笔记本提供GPU和WSL环境，Mac通过Codex远程控制查看、指导和验收同一执行端。不要把“登录同一账号”“控制另一台主机”“迁移聊天和Git状态”混为一项操作。
 
-2026-10-28 当前安排：优先 handoff 原聊天到已登记的远端项目 `/home/lyrine/projects/humanoid-demo`。首次实际迁移因 Git origin 无法匹配而失败。用户已授权创建并推送私有仓库 `https://github.com/LyrineYang/humanoid-demo`；仓库已创建，本地 CLI 授权及首次推送待完成。随后检查远端 origin 和私有仓库访问能力，再从另一个聊天或应用界面重试 handoff。
+2026-10-28 当前安排：优先 handoff 原聊天到已登记的远端项目 `/home/lyrine/projects/humanoid-demo`。首次实际迁移因 Git origin 无法匹配而失败。用户已授权创建并推送私有仓库 `https://github.com/LyrineYang/humanoid-demo`；私有仓库已创建，本地 CLI 授权及首次 main 推送均已完成。随后检查远端 origin 和私有仓库访问能力，再从另一个聊天或应用界面重试 handoff。
 
 ## Windows 应用能否操作 WSL
 
