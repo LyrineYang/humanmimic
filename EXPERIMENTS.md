@@ -44,6 +44,8 @@
 
 | 2026-10-28 Asia/Shanghai | 首次私有仓库推送完成 | passed：用户完成GitHub设备验证，本机gh登录LyrineYang；提交7042ef2推送main并建立origin/main跟踪；gh repo view确认isPrivate=true。远端环境配置正在进行，新增文件尚未合并，不执行覆盖式同步 | `runs/github-publish-20261028/results.json` | 继续核对远端origin与认证；本聊天仍在Mac，handoff未完成 |
 
+| 2026-10-28 Asia/Shanghai | WSL 私有仓库 origin 与访问检查 | origin配置passed；git ls-remote认证失败退出128，缺HTTPS用户名，访问needs_input；gh未安装。远端HEAD仍b60a877，工作区状态未变，未pull/fetch或覆盖新增环境文件，未中断环境安装 | 远端聊天01a18200-e7fa-7063-8afc-d73f214619e9；远端`runs/github-publish-20261028/remote-git-access.json` | 两端origin一致，handoff未重试；后续在WSL完成Git认证并复查访问，不复制本机令牌 |
+
 原预检JSON中的Mac路径是当时的历史位置。迁移到WSL后，第一条运行记录应产生新的目标环境证据，不能沿用旧路径作为当前运行位置。
 
 ## 每次运行的记录模板

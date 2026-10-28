@@ -20,7 +20,7 @@ R4：实现并评估场景约束动作修正，在静态障碍物伸手避碰任
 
 资源是 RTX 4060 笔记本、WSL、32GB 系统内存，预计 8GB 显存，实际以 nvidia-smi 为准。先在 WSL 检查 GPU、实际可用内存、系统与图形环境、磁盘、必要模型资产和 Git LFS。项目放在 Linux 文件系统。不要重装系统或在 WSL 安装 Linux NVIDIA 显示驱动。
 
-2026-10-28 已确认远端原生 Bash/WSL 命令和已登记的 Git 项目 `/home/lyrine/projects/humanoid-demo`；若使用 Windows 原生代理，仍可通过 wsl.exe --cd /home/lyrine/projects/humanoid-demo --exec 显式调用 Linux 程序。固定实际 Linux 工作目录和 Python 路径，不重复要求用户切换 agent。主仓库副本已验证，SONIC 子模块实体、环境与模型仍需部署。用户已授权创建并推送私有 GitHub 仓库 `https://github.com/LyrineYang/humanoid-demo`；私有仓库已创建且本机首次推送通过，远端 origin 和私有仓库访问认证仍待验证，handoff 尚未成功。远端聊天已开始独立配置 R1 conda 环境；先核对其活跃任务和新增文件，不覆盖或重复安装。
+2026-10-28 已确认远端原生 Bash/WSL 命令和已登记的 Git 项目 `/home/lyrine/projects/humanoid-demo`；若使用 Windows 原生代理，仍可通过 wsl.exe --cd /home/lyrine/projects/humanoid-demo --exec 显式调用 Linux 程序。固定实际 Linux 工作目录和 Python 路径，不重复要求用户切换 agent。主仓库副本已验证，SONIC 子模块实体、环境与模型仍需部署。用户已授权创建并推送私有 GitHub 仓库 `https://github.com/LyrineYang/humanoid-demo`；私有仓库已创建且本机首次推送通过，远端 origin 已配置为同一仓库，私有仓库访问仍缺 HTTPS 认证（git ls-remote退出128，gh未安装）；handoff 尚未重试成功。远端聊天已开始独立配置 R1 conda 环境；先核对其活跃任务和新增文件，不覆盖或重复安装。
 
 先跑 SONIC 单独执行的短样例，再测 GEM-X 单独推理，再测并行运行的峰值显存与耗时。保持感知和控制独立运行。显存不足时先缩短视频、减小推理批次和时间窗口，减少预览；不要直接降控制频率或改权重来掩盖失败。
 

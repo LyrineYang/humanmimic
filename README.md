@@ -24,7 +24,7 @@
 | [configs/budget.json](configs/budget.json) | 预算和价格计算输入 |
 | [REMOTE_WORK.md](REMOTE_WORK.md) | Windows WSL 与跨设备协作步骤 |
 
-官方精简源码位于 `vendor/GR00T-WholeBodyControl`，以 Git 子模块固定版本，未下载模型与完整 LFS 资产。项目未配置 Git 远端、未推送；跨设备同步需先选择已有私有远端或明确的传输方式。前三项功能尚未通过运行验收。
+官方精简源码位于 `vendor/GR00T-WholeBodyControl`，以 Git 子模块固定版本，未下载模型与完整 LFS 资产。私有 Git 远端已建立并完成首次推送：[LyrineYang/humanoid-demo](https://github.com/LyrineYang/humanoid-demo)。两端使用同一 origin，远端认证和 handoff 结果以 [远程协作说明](REMOTE_WORK.md) 与 [当前计划](PLAN.md) 为准。R1–R4 尚未通过运行验收。
 
 ## 方法参考
 

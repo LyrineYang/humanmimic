@@ -11,7 +11,7 @@
 | R3 | 现场摄像头 → 同一动作转换与流式接口 → SONIC | 尚未接入相机 | 未运行；needs_input |
 | R4 | 原始参考动作与障碍物几何 → 自研动作修正 → SONIC | 自研模块尚未编写 | 未运行；awaiting_verification |
 
-当前一句话进度：远端硬件预检和 WSL 主仓库副本已完成；SONIC 子模块实体、依赖、权重、参考动作和验收工具仍未部署，尚无仿真运行结果。远端已登记 Git 项目 `/home/lyrine/projects/humanoid-demo`。2026-10-28 实际 handoff 因没有匹配项目失败；安装版应用以两端 Git origin 的仓库标识及相同仓库子目录匹配，同名目录和相同 HEAD 不足以匹配。用户现已明确授权创建私有 GitHub 仓库并推送本项目；已创建 `https://github.com/LyrineYang/humanoid-demo`，浏览器确认 Private。本机 CLI 已登录正确账号；本地提交 `7042ef2` 已推送到私有仓库 main（`passed`），origin 已配置。远端 GitHub 认证与 origin 配置尚未复核，handoff 尚未成功。远端聊天正在按用户另一项请求配置 R1 conda 环境，已有新增配置与脚本，禁止用拉取或重置覆盖这些改动；远端后续运行证据以该聊天为准。证据：`runs/handoff-attempt-20261028/`、`runs/github-publish-20261028/`。
+当前一句话进度：远端硬件预检和 WSL 主仓库副本已完成；SONIC 子模块实体、依赖、权重、参考动作和验收工具仍未部署，尚无仿真运行结果。远端已登记 Git 项目 `/home/lyrine/projects/humanoid-demo`。2026-10-28 实际 handoff 因没有匹配项目失败；安装版应用以两端 Git origin 的仓库标识及相同仓库子目录匹配，同名目录和相同 HEAD 不足以匹配。用户现已明确授权创建私有 GitHub 仓库并推送本项目；已创建 `https://github.com/LyrineYang/humanoid-demo`，浏览器确认 Private。本机 CLI 已登录正确账号；本地提交 `7042ef2` 已推送到私有仓库 main（`passed`），origin 已配置。远端 origin 已配置为同一私有仓库（`passed`）；WSL 未安装 gh，禁止交互的 git ls-remote 因无法取得 HTTPS 用户名而退出128，私有仓库访问为 `needs_input`。两端已有相同仓库标识，但 handoff 尚未重试，不能宣称已迁移。远端聊天正在按用户另一项请求配置 R1 conda 环境，已有新增配置与脚本，禁止用拉取或重置覆盖这些改动；远端后续运行证据以该聊天为准。证据：`runs/handoff-attempt-20261028/`、`runs/github-publish-20261028/`。
 
 ## 验收与数据划分
 
