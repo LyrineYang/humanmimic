@@ -244,16 +244,23 @@ def render_actual_video(output, window):
 def run(args):
     import zmq
     import msgpack
+    evaluation = args.evaluation.resolve()
+    config = json.loads(evaluation.read_text())
+    reference = UPSTREAM / "gear_sonic_deploy/reference/example" / config["motion_name"]
+    reference_csv = reference / "joint_pos.csv"
+    if hashlib.sha256(reference_csv.read_bytes()).hexdigest() != config["reference_csv_sha256"]:
+        raise ValueError("Reference CSV does not match the frozen evaluation configuration")
+    reference_values = np.loadtxt(reference_csv, delimiter=",", skiprows=1)
+    if reference_values.shape != (config["reference_frames"], config["effective_joint_count"]):
+        raise ValueError("Reference frame/joint count does not match the frozen configuration")
     output = args.output.resolve()
     output.mkdir(parents=True, exist_ok=False)
-    config = json.loads((ROOT / "configs/r1-evaluation.json").read_text())
-    reference = UPSTREAM / "gear_sonic_deploy/reference/example" / config["motion_name"]
     motions = output / "motion-input"
     motions.mkdir()
     (motions / config["motion_name"]).symlink_to(reference, target_is_directory=True)
     config["run_mode"] = "preflight" if args.preflight else "full"
     config["script_sha256"] = hashlib.sha256(Path(__file__).read_bytes()).hexdigest()
-    config["evaluation_sha256"] = hashlib.sha256((ROOT / "configs/r1-evaluation.json").read_bytes()).hexdigest()
+    config["evaluation_sha256"] = hashlib.sha256(evaluation.read_bytes()).hexdigest()
     config["dds_xml_sha256"] = hashlib.sha256((ROOT / "configs/r1-dds.xml").read_bytes()).hexdigest()
     config["upstream_commit"] = subprocess.check_output(["git", "-C", str(UPSTREAM), "rev-parse", "HEAD"], text=True).strip()
     patch = subprocess.check_output(["git", "-C", str(UPSTREAM), "diff", "--binary"])
@@ -400,6 +407,8 @@ def run(args):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--evaluation", type=Path, default=ROOT / "configs/r1-evaluation.json",
+                        help="Frozen per-motion evaluation JSON; defaults to the original Macarena baseline")
     parser.add_argument("--preflight", action="store_true")
     parser.add_argument("--sim-worker", action="store_true", help=argparse.SUPPRESS)
     parsed = parser.parse_args()

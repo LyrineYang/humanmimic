@@ -69,6 +69,45 @@ cmake -S vendor/GR00T-WholeBodyControl/gear_sonic_deploy -B .local/build/sonic-d
 cmake --build .local/build/sonic-deploy --target g1_deploy_onnx_ref --parallel 2
 ```
 
+## 本阶段归档与下一轮 R1
+
+已完成：项目内 conda 环境、原生推理依赖、官方控制器编译、WSL DDS 修复、完整 Macarena 物理执行及实际状态录像。可随 Git 同步的结果见 [基线摘要与产物哈希](evidence/r1-baseline-20261028.json)。上面的 `runs/` 报告和录像只存在于原执行机，克隆仓库不会获得它们。
+
+下一轮仍是 R1 原定五动作验收，固定清单和全部资产 SHA256 在 [r1-suite.json](configs/r1-suite.json)：
+
+| 动作 | 类别 | 有效帧 / 时长 | 完整试次 |
+| --- | --- | --- | --- |
+| Macarena | 上肢手势 | 1375 / 27.50 s | 2 |
+| Dance in da party | 全身舞蹈 | 497 / 9.94 s | 2 |
+| Squat | 下肢深蹲 | 424 / 8.48 s | 2 |
+| Walking quip 360 | 行走转向 | 455 / 9.10 s | 2 |
+| Forward lunge（官方镜像样例） | 下肢弓步 | 399 / 7.98 s | 2 |
+
+五个样例资产已在本机获取，并与固定上游 LFS 对象逐项核对。CSV 表头不计入帧数。两个原有 Macarena 演示/工具验证结果不替换本清单的固定试次；全部十次都保留，至少四个动作的两次均满足原门槛才通过。它们属于官方样例/调试动作，不能称为未见保留测试。
+
+准备工具只核对输入并生成命令，不启动控制器。每轮使用新目录：
+
+```bash
+source scripts/activate-r1.sh
+python scripts/prepare-r1-suite.py --output runs/r1-suite-NEW
+# 下一轮开始执行时运行；所有控制器串行使用同一 DDS domain。
+bash runs/r1-suite-NEW/run-trials.sh
+# 可单独复核，未完成返回 2，失败返回 1，通过返回 0。
+python scripts/audit-r1-suite.py --suite runs/r1-suite-NEW
+```
+
+运行脚本新增 `--evaluation <冻结配置.json>`，默认仍用原 Macarena 配置。准备程序检查动作、固定策略、二进制、DDS 和补丁哈希；汇总程序核对全帧、相同评估规则、物理条件、策略/控制器版本及视频审计，报告全部十次。就绪检查通过只表示可以运行，五动作验收仍为 `awaiting_verification`。R1 后按计划接 GEM-X 视频链路（R2）。
+
+新机器需单独重建环境。使用 [Linux conda 精确包清单](configs/conda-r1-linux-64.explicit.txt)、pip 锁定文件和 [原生依赖下载地址/校验清单](configs/r1-native-dependencies.json)；原生包仅解压到项目内，不安装系统驱动。先获取固定子模块，再应用补丁：
+
+```bash
+GIT_LFS_SKIP_SMUDGE=1 git submodule update --init
+git -C vendor/GR00T-WholeBodyControl apply --check "$PWD/patches/sonic-loopback-dds.patch"
+git -C vendor/GR00T-WholeBodyControl apply "$PWD/patches/sonic-loopback-dds.patch"
+```
+
+仅在新检出且尚未应用补丁时执行以上两条 apply。获取 G1 模型、x86_64 SDK 和清单中的五段动作 LFS 实体后，建立 `.local/unitree-dds/include` 与 `.local/unitree-dds-lib` 对应的 SDK 头文件/SONAME 链接，再构建 Python DDS 源码绑定与控制器。不同机器重新编译的二进制/运行库需重新记录和验收，不能冒用本机通过记录。大型模型、环境和原始 `runs/` 不随 Git 上传。
+
 ## 文档职责
 
 | 文件 | 只维护什么 |

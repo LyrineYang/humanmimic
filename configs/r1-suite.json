@@ -1,0 +1,283 @@
+{
+  "schema_version": 1,
+  "status": "frozen_preparation",
+  "dataset_role": "Official examples/debug suite; not unseen held-out tests. No physical results used to choose four additional motions.",
+  "upstream_commit": "45c03facbf848e0c743091b7d9c17952096ff908",
+  "upstream_patch_sha256": "edd0b9e9d1808dceee7bd8c5dd5e3d1195222b2cdffbb976f1b26a5d214215df",
+  "evaluation_file": "configs/r1-evaluation.json",
+  "evaluation_sha256": "467bb6257757d9cb3e892a3ee23fbc5a7f0e0bda3c5154b0c0b226bf96f4303d",
+  "hardware": "zhen WSL2; RTX 4060 Laptop 8 GiB; same runtime and default policy as the baseline",
+  "runtime_inputs": [
+    {
+      "path": "models/sonic-default/policy/release/model_encoder.onnx",
+      "bytes": 50100513,
+      "sha256": "013ab0287236aa2721e13f1e936d699db982302d0de0bfcdae76d5c3245362d3"
+    },
+    {
+      "path": "models/sonic-default/policy/release/model_decoder.onnx",
+      "bytes": 40900688,
+      "sha256": "c7241a123eaa36b5d64bad19540efde93cac1ad443bd4572fd12ca99898118ed"
+    },
+    {
+      "path": "models/sonic-default/policy/release/observation_config.yaml",
+      "bytes": 2336,
+      "sha256": "466d05947c78af6c76388adfb86e3a2a77b2a1d921a64883ed3d085ebf58de1b"
+    },
+    {
+      "path": "vendor/GR00T-WholeBodyControl/gear_sonic_deploy/target/release/g1_deploy_onnx_ref",
+      "bytes": 5496240,
+      "sha256": "14dfb37512079ecbe9d586cb5dadae1b65f08129493bdfd73f0e95b46481cf3c"
+    },
+    {
+      "path": "configs/r1-dds.xml",
+      "bytes": 592,
+      "sha256": "648f0933457878e6590b5765746b15b5d0698c1efb143d6e3789ad4426a9cf54"
+    }
+  ],
+  "trials_per_motion": 2,
+  "minimum_passing_motions": 4,
+  "selection_rule": "Count a motion only if both fixed full trials pass the unchanged <=0.35 rad, no-fall and no-tracking-failure rules. Keep failures and report all ten trials.",
+  "prior_baseline": "runs/r1-reproduction-20261028-01 is exploratory evidence; it is not silently substituted for a scheduled suite trial.",
+  "motions": [
+    {
+      "name": "macarena_001__A545",
+      "category": "upper-body gesture",
+      "frames": 1375,
+      "nominal_seconds": 27.5,
+      "files": [
+        {
+          "name": "body_ang_vel.csv",
+          "bytes": 549203,
+          "sha256": "365ff87303477c486c48e686c784d3d34916412a773df4a4e99c2cd4c6c19668"
+        },
+        {
+          "name": "body_lin_vel.csv",
+          "bytes": 549152,
+          "sha256": "a49b30041cdf177a9f280388e17b281fbd9b8ea6c7cff0e598df7b6a58e472cb"
+        },
+        {
+          "name": "body_pos.csv",
+          "bytes": 539165,
+          "sha256": "9c3b3d37759a6d647ece48fb2ee83a672804aace61a465be1ecffda9dc0a9ec7"
+        },
+        {
+          "name": "body_quat.csv",
+          "bytes": 724208,
+          "sha256": "b8b12818a64405764dee8035f84948a5d9db55332576065f79cd79962a99375d"
+        },
+        {
+          "name": "info.txt",
+          "bytes": 1234,
+          "sha256": "e503ce33651f079fd184b0046b3b51741025e7a690e53d28ded6c8d94e720adc"
+        },
+        {
+          "name": "joint_pos.csv",
+          "bytes": 378610,
+          "sha256": "c5d3346b84d18f654d41119f77b3c22158222a0ed8e0cfdd5d1e365cd2f928bc"
+        },
+        {
+          "name": "joint_vel.csv",
+          "bytes": 378310,
+          "sha256": "a253beca302630400e4f94d92e2af7fb0d8492b13dc202f9f23941b35dfbde66"
+        },
+        {
+          "name": "metadata.txt",
+          "bytes": 463,
+          "sha256": "18ab95c70b1ec9ac221b387e2508999cc81c2572ca5f537d273884ad6454c357"
+        }
+      ]
+    },
+    {
+      "name": "dance_in_da_party_001__A464",
+      "category": "whole-body dance",
+      "frames": 497,
+      "nominal_seconds": 9.94,
+      "files": [
+        {
+          "name": "body_ang_vel.csv",
+          "bytes": 198326,
+          "sha256": "68b2bcc5a3021a7daeb4983c74d024916550c7f09678f3d7d5fe42ade262eb24"
+        },
+        {
+          "name": "body_lin_vel.csv",
+          "bytes": 198916,
+          "sha256": "615bb8eaedfdc3b7318a22cd2a82511713b70358d0641ce076350b9c45661f1c"
+        },
+        {
+          "name": "body_pos.csv",
+          "bytes": 196595,
+          "sha256": "e0031119fcce358bbaf7ad7134ab2ab7299e621c6f95e1099a9e29ab13e23335"
+        },
+        {
+          "name": "body_quat.csv",
+          "bytes": 264120,
+          "sha256": "ee91908150c8f4391ba35a25995e8a0b6c6f00212ce425a33cb1ff9e05d5b2da"
+        },
+        {
+          "name": "info.txt",
+          "bytes": 1212,
+          "sha256": "15c2a58e95ea38d10ff7025fdc82e5527bed805a407d6009efc1c6bb12505c28"
+        },
+        {
+          "name": "joint_pos.csv",
+          "bytes": 136735,
+          "sha256": "17027b288d550a06701c4e1ca3759f76accdfdc78d7aceb5325579a4cb2567b6"
+        },
+        {
+          "name": "joint_vel.csv",
+          "bytes": 136932,
+          "sha256": "9fcb9531a144c5a39573fd765d251e733ec372c5499ea03cc9c450d203f5b451"
+        },
+        {
+          "name": "metadata.txt",
+          "bytes": 465,
+          "sha256": "6e909b50d495d025ea6ed5e750dd5c4a9e5d96852d41e46887a018e2a79b935c"
+        }
+      ]
+    },
+    {
+      "name": "squat_001__A359",
+      "category": "lower-body squat",
+      "frames": 424,
+      "nominal_seconds": 8.48,
+      "files": [
+        {
+          "name": "body_ang_vel.csv",
+          "bytes": 169755,
+          "sha256": "9de87460d6dedc06cc36214912abd998aed6645658b7340c170b1e4d0f68c08d"
+        },
+        {
+          "name": "body_lin_vel.csv",
+          "bytes": 169562,
+          "sha256": "5908f9da9d5767326386ada07311596a6ffff63080c700fb1fc1ce8ef1222d2b"
+        },
+        {
+          "name": "body_pos.csv",
+          "bytes": 166311,
+          "sha256": "ad98ccf42203c2246f2cdf43a64806642a2930bf525a3fef77956f6d727a7a09"
+        },
+        {
+          "name": "body_quat.csv",
+          "bytes": 225133,
+          "sha256": "b1e6ab7b81de682fed07720ee6d21ba99f02812631f262bfcf77f6c39e0c164b"
+        },
+        {
+          "name": "info.txt",
+          "bytes": 1165,
+          "sha256": "8c79c05b3dcf9e486fd9f76637e8da6253d548268505b8404a5905b78e21b4e8"
+        },
+        {
+          "name": "joint_pos.csv",
+          "bytes": 117187,
+          "sha256": "fd6b07ac5d66a3ffb78999eefc12f6934402b3103853e71d4667858dab088e8d"
+        },
+        {
+          "name": "joint_vel.csv",
+          "bytes": 116285,
+          "sha256": "246e8225dcdf410339bbaa6700375e92b217166de6e497c5168c4c4eb34dd38c"
+        },
+        {
+          "name": "metadata.txt",
+          "bytes": 453,
+          "sha256": "eb85b850b1be3de857c39a714f793313c36acce33ebce7a858aa3da968581cc6"
+        }
+      ]
+    },
+    {
+      "name": "walking_quip_360_R_002__A428",
+      "category": "lower-body locomotion/turn",
+      "frames": 455,
+      "nominal_seconds": 9.1,
+      "files": [
+        {
+          "name": "body_ang_vel.csv",
+          "bytes": 181741,
+          "sha256": "df7e5fa6819cd52420c281dbe93635c16714bf30101f7b0b4c679c4412820e41"
+        },
+        {
+          "name": "body_lin_vel.csv",
+          "bytes": 184968,
+          "sha256": "d6a3a422928e04d13259b3c00c4d12baea0b94cee9892d8b50811d6487005254"
+        },
+        {
+          "name": "body_pos.csv",
+          "bytes": 180909,
+          "sha256": "711ba143ef134e70c277b594a4f2206a227daf58c25c36b1b4f64f10e6954377"
+        },
+        {
+          "name": "body_quat.csv",
+          "bytes": 242492,
+          "sha256": "ac868ecb5abfab8251563bec2e0eb3c46ff9200874c914cc2f6f981220da0d62"
+        },
+        {
+          "name": "info.txt",
+          "bytes": 1182,
+          "sha256": "d5a86572fa584da236f80e20886e74cf4ec55d2dd61e186f05857f121dd1d956"
+        },
+        {
+          "name": "joint_pos.csv",
+          "bytes": 125123,
+          "sha256": "49aa248f12d69304a928191e9942ad3236991dc82bbf001e0ced9442d409a42f"
+        },
+        {
+          "name": "joint_vel.csv",
+          "bytes": 125250,
+          "sha256": "ad103e8e4bacbb057461305ccd6cfb6aecbe86179b4077afd7ffdce1ad659b1a"
+        },
+        {
+          "name": "metadata.txt",
+          "bytes": 466,
+          "sha256": "fd89792ca764b2f704df122015c1d7cf43d7667f9d7545cc680585a45df1c859"
+        }
+      ]
+    },
+    {
+      "name": "forward_lunge_R_001__A359_M",
+      "category": "lower-body lunge",
+      "frames": 399,
+      "nominal_seconds": 7.98,
+      "files": [
+        {
+          "name": "body_ang_vel.csv",
+          "bytes": 159964,
+          "sha256": "396694f19db6c173ee78e1dfe3071911f33bc187a1db95fa6083041ad35337df"
+        },
+        {
+          "name": "body_lin_vel.csv",
+          "bytes": 160048,
+          "sha256": "dfb2246510395ea656e3cdddad47fc8834292a0b14d277036b3a48cba7ecc5bf"
+        },
+        {
+          "name": "body_pos.csv",
+          "bytes": 158711,
+          "sha256": "8b81bfbd03fddadc5c7858200fc7635169f86b355b00566a3786da58766ca794"
+        },
+        {
+          "name": "body_quat.csv",
+          "bytes": 212100,
+          "sha256": "65e322f25dc5b493d184dfc8dc420907385c255ee79ba839cc5544f9bb93ab4a"
+        },
+        {
+          "name": "info.txt",
+          "bytes": 1177,
+          "sha256": "b6dd1aa2388b78b2940180a6e145a22fad72043ad79ed3c1914e35b2c619f3a0"
+        },
+        {
+          "name": "joint_pos.csv",
+          "bytes": 109082,
+          "sha256": "ba1d5f70ef05ed9cd8abf5bb3dc94f3fab404069c6613eb6164926cf792b7929"
+        },
+        {
+          "name": "joint_vel.csv",
+          "bytes": 109762,
+          "sha256": "5a279b94233fc70c7cc14294db5549b94401a63d1dfec23b96bd42298207eff2"
+        },
+        {
+          "name": "metadata.txt",
+          "bytes": 465,
+          "sha256": "4e0f92ccd182f7b8b65155276c5e69a8ade9d46d3c2e4ad3a3664d823a6d3548"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "scope": "Downloaded and extracted into project-local prefixes; no apt installation or driver change",
+  "TensorRT": {
+    "version": "10.13.3.9",
+    "prefix": ".local/tensorrt-10.13.3",
+    "packages": [
+      {
+        "url": "https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2404/x86_64/libnvinfer10_10.13.3.9-1+cuda12.9_amd64.deb",
+        "sha256": "e4361bf6bfe4a27623d0880c439d53b73baea9a3692d48dbeab91366b80dd2af",
+        "bytes": 1214349658
+      },
+      {
+        "url": "https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2404/x86_64/libnvinfer-headers-dev_10.13.3.9-1+cuda12.9_amd64.deb",
+        "sha256": "ebffa2a89481c341b42c556372a96c5a4a18827040d390d157cebe1a0f8abf98",
+        "bytes": 111470
+      },
+      {
+        "url": "https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2404/x86_64/libnvinfer-headers-plugin-dev_10.13.3.9-1+cuda12.9_amd64.deb",
+        "sha256": "e5677038a024ccbff4331cad46585622587a7dd19c4022d30083c6d8c496d01d",
+        "bytes": 6060
+      },
+      {
+        "url": "https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2404/x86_64/libnvinfer-plugin10_10.13.3.9-1+cuda12.9_amd64.deb",
+        "sha256": "842adb49aab91ae60699aa5d98720a757b98ca48dd2d4a49dd6b417b6fcab5e1",
+        "bytes": 15317528
+      },
+      {
+        "url": "https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2404/x86_64/libnvonnxparsers10_10.13.3.9-1+cuda12.9_amd64.deb",
+        "sha256": "eb917a18fc176b5a95c5dbe19af82d3838f76dbefc6f0460695a851f3b1cd825",
+        "bytes": 1438258
+      },
+      {
+        "url": "https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2404/x86_64/libnvonnxparsers-dev_10.13.3.9-1+cuda12.9_amd64.deb",
+        "sha256": "2aee13f100df181b34233c23607f3a1ffff33387a16e388d34b843f9c1bdb404",
+        "bytes": 2149454
+      }
+    ]
+  },
+  "ONNX_Runtime": {
+    "version": "1.22.0",
+    "url": "https://github.com/microsoft/onnxruntime/releases/download/v1.22.0/onnxruntime-linux-x64-1.22.0.tgz",
+    "sha256": "8344d55f93d5bc5021ce342db50f62079daf39aaafb5d311a451846228be49b3",
+    "prefix": ".local/onnxruntime-linux-x64-1.22.0",
+    "role": "C++ build dependency; official SONIC policy remains TensorRT GPU inference."
+  }
+}

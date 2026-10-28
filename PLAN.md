@@ -6,7 +6,7 @@
 
 | 编号 | 动作来源与路径 | 实现进度 | 运行验收 |
 | --- | --- | --- | --- |
-| R1 | 少量 G1 数据集动作 → SONIC → MuJoCo | 完整本机环境、默认权重、C++ 控制器、记录与评估工具已就绪；Macarena 完整动作已复现一次并生成录像 | 单次复现 passed；五动作各两次整体验收 awaiting_verification |
+| R1 | 少量 G1 数据集动作 → SONIC → MuJoCo | 完整本机环境、C++ 控制器与单动作录像已完成；五动作资产、冻结配置及十试次入口已准备 | 单次复现 passed；五动作各两次整体验收 awaiting_verification |
 | R2 | 实际视频 → GEM-X → SOMA 转 SMPL → 缓存回放 → SONIC | 官方桥接源码已准备；模型与链路未集成 | 未运行；awaiting_verification |
 | R3 | 现场摄像头 → 同一动作转换与流式接口 → SONIC | 尚未接入相机 | 未运行；needs_input |
 | R4 | 原始参考动作与障碍物几何 → 自研动作修正 → SONIC | 自研模块尚未编写 | 未运行；awaiting_verification |
@@ -60,6 +60,8 @@
 - 分项状态：源码解析、基础环境、完整动作无界面闭环和实际轨迹回放 `passed`；GPU 图形加速与图形窗口 `awaiting_verification`（当前录像使用 Mesa llvmpipe 软件渲染），现场相机 `needs_input`。本轮仅官方样例/调试动作，未使用保留测试集；未连接真机、训练、修改驱动或启动计费资源，新增云费用 0 美元。R1 五动作各两次的整体验收仍为 `awaiting_verification`。
 - 最新证据：环境 `runs/r1-full-setup-20261028/results.json`；交付报告 `runs/r1-reproduction-20261028-01/REPORT.md`；完整指标 `full-sample-metrics.json`；原始物理状态 `actual-state.npz`；录像 `actual-execution.mp4`；审计 `completion-audit.json`、`independent-artifact-audit.json`。本轮目标不等于整个四阶段项目完成。
 
+- 配置入口回归 `passed`：`runs/r1-configurable-runner-20261028-01/`，新增按动作配置与参考哈希/帧数校验后，完整 Macarena 再运行 1375 帧，RMSE 0.13754351595441291 rad、未跌倒；27.52 秒实际状态录像完整解码通过。此项为工具验证，不替换下一轮十试次。汇总工具已用该真实结果验证：识别一次通过与九次未运行，整体仍 awaiting_verification。
+- 下一轮准备 `passed`：`configs/r1-suite.json` 固定 Macarena、dance in da party、squat、walking quip 360、forward lunge 官方镜像样例，覆盖上下肢；全部文件与固定上游 LFS SHA256 一致。准备工具生成五份动作配置与十个固定试次，错误哈希会拒绝生成执行入口；汇总工具在未执行时正确返回 `awaiting_verification`。准备证据 `runs/r1-suite-ready-20261028-03/`，十试次未启动；既有演示不替换清单试次。
 - Git 发布：远程已有私有仓库 `https://github.com/LyrineYang/humanoid-demo`，本轮已读取其 `d515531` 历史并合并，保留先前发布及 handoff 排查证据。WSL 的 gh 登录和私有仓库 fetch 现已通过；此前缺少认证的记录仅为历史，handoff 本身未重试。
 
 以下为本轮完整配置之前的历史状态，当前状态以上述结果为准。
@@ -89,7 +91,7 @@
 2026-10-28 用户本次指定的“R1 完整环境配置加一次完整动作复现及结果”已完成并通过审计；一次复现不替代本计划五动作、各两次的完整 R1 验收，门槛不变。本轮证据位于 `runs/r1-full-setup-20261028/` 和 `runs/r1-reproduction-20261028-01/`。云计费授权不变。
 
 1. 复用现有环境、默认权重、C++ 控制器及 DDS 分片配置；通过 `source scripts/activate-r1.sh` 激活。默认命令沙箱缺少 bubblewrap 的工具问题未修复，本次经获准的沙箱外命令完成全部部署与运行；不因此重建环境或更改驱动。
-2. 后续完整 R1 验收：预先固定五段动作和两次试次，沿用 0.35 rad、未跌倒和未跟踪失败的门槛。当前仅 Macarena 的一次完整复现通过，仍需其第二次及其余动作的完整评测；失败试次完整保留。
+2. 后续完整 R1 验收：清单已固定在 `configs/r1-suite.json`，沿用 0.35 rad、未跌倒和未跟踪失败的门槛。用 `scripts/prepare-r1-suite.py --output runs/r1-suite-NEW` 重新校验并生成串行入口，再运行该目录的 `run-trials.sh`；`scripts/audit-r1-suite.py --suite <目录>` 报告全部十试次，至少四个动作两次均通过才标记整个 R1 passed。当前准备完成，十试次尚未执行；全部失败证据保留。
 3. 图形窗口/GPU 渲染与现场相机按各自目标另行验证；当前实际轨迹录像已可通过软件离屏生成。
 4. GEM-X 单独视频推理 → 缓存流式回放 → 与控制并行测显存；推进 R2，再现场验收 R3。
 5. 用已经通过的参考动作开始 R4。任何现场等待期间继续独立开发与离线验证。

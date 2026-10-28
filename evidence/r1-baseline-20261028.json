@@ -1,0 +1,155 @@
+{
+  "schema_version": 1,
+  "scope": "One complete physical R1 reproduction, not five-motion acceptance",
+  "status": "passed",
+  "date": "2026-10-28",
+  "source_git_commit": "45c03facbf848e0c743091b7d9c17952096ff908",
+  "environment": {
+    "os": "WSL2 Ubuntu 24.04.4",
+    "gpu": "RTX 4060 Laptop 8188 MiB",
+    "python": "3.10.22",
+    "torch": "2.7.1+cu128",
+    "mujoco": "3.3.7",
+    "TensorRT": "10.13.3.9",
+    "CUDA_development": "12.8.93",
+    "ONNX_Runtime_Cpp": "1.22.0",
+    "CycloneDDS_Python": "0.10.2 source build",
+    "CycloneDDS_C": "matched Unitree SDK 0.10.2",
+    "rendering": "Mesa llvmpipe software EGL"
+  },
+  "motion": "macarena_001__A545",
+  "full_metrics": {
+    "status": "passed",
+    "control_samples": 1375,
+    "joint_rmse_rad": 0.1361738375518422,
+    "joint_rmse_limit_rad": 0.35,
+    "all_motion_frames_present": true,
+    "online_packet_sample_count": 1374,
+    "online_packet_missing_indices": [
+      1385
+    ],
+    "csv_vs_zmq_measured_max_delta_rad": 4.999999858590343e-10,
+    "csv_vs_zmq_reference_max_delta_rad": 5.000000000032756e-06,
+    "alignment": "Native actual q.csv and controller-reference.csv from the same control tick; consecutive indices verified. Native q.csv is already in measured MuJoCo order, checked against all available ZMQ samples. No time shift or threshold change.",
+    "per_joint_rmse_rad": [
+      0.10564565811883432,
+      0.0874554085412115,
+      0.06176183956368605,
+      0.10161569097913678,
+      0.07594968515876611,
+      0.06399427995871396,
+      0.11403647174083167,
+      0.07684654420047951,
+      0.06227773346061668,
+      0.08808275371294784,
+      0.1086043747747654,
+      0.04204908710656724,
+      0.06505555981087768,
+      0.023011542177931724,
+      0.22894044410049502,
+      0.12616327178852932,
+      0.1063668707102439,
+      0.14479044915030928,
+      0.15595686401630587,
+      0.20404741631479395,
+      0.11928207855847588,
+      0.24989671866891286,
+      0.10246275270204346,
+      0.10149844368143629,
+      0.1634636694840407,
+      0.17376586666646693,
+      0.18250823046786965,
+      0.14541066697218769,
+      0.26581684625068996
+    ]
+  },
+  "physics": {
+    "fell": false,
+    "minimum_root_height_m": 0.6564058708072773,
+    "elastic_band_off_during_playback": true,
+    "finite_states": true,
+    "dds_commands_received": true,
+    "nonzero_control_torques": true,
+    "free_root_gravity_contact_controller": true,
+    "actual_state_overwrites": false
+  },
+  "source_config_hashes": {
+    "script_sha256": "722e205e5f2a5a493c2265bc8d5bec4f39ada8dcbdb0f4c2116279cfa83b0161",
+    "evaluation_sha256": "467bb6257757d9cb3e892a3ee23fbc5a7f0e0bda3c5154b0c0b226bf96f4303d",
+    "dds_xml_sha256": "648f0933457878e6590b5765746b15b5d0698c1efb143d6e3789ad4426a9cf54",
+    "upstream_patch_sha256": "edd0b9e9d1808dceee7bd8c5dd5e3d1195222b2cdffbb976f1b26a5d214215df",
+    "binary_sha256": "14dfb37512079ecbe9d586cb5dadae1b65f08129493bdfd73f0e95b46481cf3c"
+  },
+  "policy_hashes": {
+    "model_encoder.onnx": "013ab0287236aa2721e13f1e936d699db982302d0de0bfcdae76d5c3245362d3",
+    "observation_config.yaml": "466d05947c78af6c76388adfb86e3a2a77b2a1d921a64883ed3d085ebf58de1b",
+    "model_decoder.onnx": "c7241a123eaa36b5d64bad19540efde93cac1ad443bd4572fd12ca99898118ed"
+  },
+  "artifacts": [
+    {
+      "local_path": "runs/r1-reproduction-20261028-01/REPORT.md",
+      "bytes": 2697,
+      "sha256": "124dbc9baf165d3d43bd8334de1b848f9dcaeb42d7d4d3eca1d235ba8b91f3b1"
+    },
+    {
+      "local_path": "runs/r1-reproduction-20261028-01/actual-execution.mp4",
+      "bytes": 1415517,
+      "sha256": "e073baf6f37d497b800d2f9970b2a32cf41ece84dc04cc42c19c9e5232cc4898"
+    },
+    {
+      "local_path": "runs/r1-reproduction-20261028-01/actual-state.npz",
+      "bytes": 7964305,
+      "sha256": "0c4068501b2d6a552082402195b5c87316c44f37de93c2d331db50c336b7815e"
+    },
+    {
+      "local_path": "runs/r1-reproduction-20261028-01/full-sample-tracking.npz",
+      "bytes": 852112,
+      "sha256": "909fe262809069b3721a7037b70823ca7db1f651fa8fdedb333e77a2d73642f5"
+    },
+    {
+      "local_path": "runs/r1-reproduction-20261028-01/full-sample-metrics.json",
+      "bytes": 1380,
+      "sha256": "d3dde27629cb7c0c09805cdc9024c40cc98d24492769c493241f5bc8a097d59b"
+    },
+    {
+      "local_path": "runs/r1-reproduction-20261028-01/completion-audit.json",
+      "bytes": 502,
+      "sha256": "42bd89f9228047ba1e4ca21e66f0a1e6273329f6fb0b700cc994829c42c5ca8c"
+    },
+    {
+      "local_path": "runs/r1-reproduction-20261028-01/independent-artifact-audit.json",
+      "bytes": 360,
+      "sha256": "b328f037dc66f5f65518ef75d6c5ba3d3b3895039b4929c5c19c30a7e956b5c6"
+    }
+  ],
+  "artifact_availability": "Raw artifacts remain on the original machine under ignored runs/. This versioned summary contains hashes and metrics, not the raw data or video.",
+  "cloud_cost_usd": 0,
+  "R1_five_motion_acceptance": "awaiting_verification",
+  "GPU_graphics": "awaiting_verification",
+  "live_camera": "needs_input",
+  "follow_up_configurable_runner_verification": {
+    "status": "passed",
+    "scope": "Validation of configurable single-motion runner and suite audit, not a scheduled suite trial",
+    "run": "runs/r1-configurable-runner-20261028-01",
+    "full_control_samples": 1375,
+    "joint_rmse_rad": 0.13754351595441291,
+    "fell": false,
+    "video": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_name": "h264",
+          "width": 640,
+          "height": 360,
+          "r_frame_rate": "25/1",
+          "duration": "27.520000",
+          "nb_read_frames": "688"
+        }
+      ]
+    },
+    "partial_suite_audit": "One complete trial recognized; nine unrun entries pending and no motion counted as passing",
+    "negative_asset_check": "passed",
+    "cloud_cost_usd": 0
+  }
+}
