@@ -2,6 +2,8 @@
 
 本项目优先让Windows笔记本提供GPU和WSL环境，Mac通过Codex远程控制查看、指导和验收同一执行端。不要把“登录同一账号”“控制另一台主机”“迁移聊天和Git状态”混为一项操作。
 
+2026-10-28 Git 同步核验：私有仓库 `https://github.com/LyrineYang/humanoid-demo` 已存在，WSL 的 gh 登录和 fetch 已通过。本轮命令需临时移除指向不可用本地端口的代理变量；未更改持久代理或账号配置。Git 同步与聊天 handoff 分别验收，后者未重试。
+
 ## Windows 应用能否操作 WSL
 
 可以。Windows原生代理默认在PowerShell执行，也能按需调用 `wsl`。如果主要工作是Linux、CUDA和机器人仿真，建议在桌面应用Settings中把agent从Windows native切到WSL，并重启应用，然后打开WSL项目目录。

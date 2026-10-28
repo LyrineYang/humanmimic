@@ -60,6 +60,8 @@
 - 分项状态：源码解析、基础环境、完整动作无界面闭环和实际轨迹回放 `passed`；GPU 图形加速与图形窗口 `awaiting_verification`（当前录像使用 Mesa llvmpipe 软件渲染），现场相机 `needs_input`。本轮仅官方样例/调试动作，未使用保留测试集；未连接真机、训练、修改驱动或启动计费资源，新增云费用 0 美元。R1 五动作各两次的整体验收仍为 `awaiting_verification`。
 - 最新证据：环境 `runs/r1-full-setup-20261028/results.json`；交付报告 `runs/r1-reproduction-20261028-01/REPORT.md`；完整指标 `full-sample-metrics.json`；原始物理状态 `actual-state.npz`；录像 `actual-execution.mp4`；审计 `completion-audit.json`、`independent-artifact-audit.json`。本轮目标不等于整个四阶段项目完成。
 
+- Git 发布：远程已有私有仓库 `https://github.com/LyrineYang/humanoid-demo`，本轮已读取其 `d515531` 历史并合并，保留先前发布及 handoff 排查证据。WSL 的 gh 登录和私有仓库 fetch 现已通过；此前缺少认证的记录仅为历史，handoff 本身未重试。
+
 以下为本轮完整配置之前的历史状态，当前状态以上述结果为准。
 
 - 2026-10-28 按用户偏好完成 R1 初步 conda 配置，环境配置 `passed`：项目级 Miniforge 26.9.4-1（官方 SHA256 验证），环境 `humanoid-r1`，Python 3.10.22、PyTorch 2.7.1+cu128、NumPy 1.26.4、SciPy 1.15.3、MuJoCo 3.3.7、Pinocchio 2.7.0、OpenCV 4.11.0.86、CycloneDDS Python/C 0.10.2、官方 gear_sonic 0.1.0 与 Unitree SDK 1.0.1。conda-forge 无 CycloneDDS 0.10.2，改从官方标签编译到环境前缀；未改 SDK 依赖要求。源码子模块固定原提交且工作区无修改；G1 模型目录 68 个文件无 LFS 指针，已存 SHA256 清单。激活：`source scripts/activate-r1.sh`；环境配置、约束与 pip 锁定文件位于 `configs/`。

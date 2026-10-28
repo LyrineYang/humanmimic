@@ -12,6 +12,8 @@
 4. 在实际执行端读取 [PLAN.md](PLAN.md)，使用 [STARTUP_PROMPT.md](STARTUP_PROMPT.md)。需要持久执行时，再由用户激活其中的 `/goal`。
 5. 代理负责依赖、实现与验证。人负责一次性配对主机、开放项目和短时摄像头配合。
 
+私有项目仓库：[LyrineYang/humanoid-demo](https://github.com/LyrineYang/humanoid-demo)。源码与配置由 Git 同步，环境和运行资产按下文单独准备。
+
 ## R1 的 conda 环境
 
 用户于 2026-10-28 指定使用 conda。已配置 WSL Linux 文件系统内的项目级 Miniforge，独立环境名 `humanoid-r1`；Python 3.10 跟随固定版官方 MuJoCo 安装脚本。基础工具由 conda-forge 管理，官方 Python 包及 CUDA 版 PyTorch 通过环境内 pip 安装。配置为 [environment-r1.yml](configs/environment-r1.yml)、[constraints-r1.txt](configs/constraints-r1.txt) 和 [pip 版本锁定文件](configs/requirements-r1.lock.txt)。
