@@ -9,6 +9,7 @@ import csv
 import hashlib
 import json
 import os
+import pickle
 from pathlib import Path
 import pty
 import select
@@ -28,6 +29,34 @@ UPSTREAM = ROOT / "vendor/GR00T-WholeBodyControl"
 
 def write_json(path, value):
     path.write_text(json.dumps(value, indent=2, ensure_ascii=False) + "\n")
+
+
+def run_paced_simulation(sim):
+    """Preserve official updates while preventing cumulative sleep overshoot."""
+    sim_cnt = 0
+    redis_stamp = time.time()
+    deadline = time.monotonic()
+    while sim._running and (sim.sim_env.viewer is None or sim.sim_env.viewer.is_running()):
+        sim.sim_env.sim_step()
+        now = time.time()
+        if now - redis_stamp > .1 and sim.redis_client is not None:
+            head_pose = sim.sim_env.get_head_pose()
+            sim.redis_client.set("head_pos", pickle.dumps(head_pose[:3]))
+            sim.redis_client.set("head_quat", pickle.dumps(head_pose[3:]))
+            redis_stamp = now
+        if sim_cnt % int(sim.viewer_dt / sim.sim_dt) == 0:
+            sim.sim_env.update_viewer()
+        if sim_cnt % int(sim.reward_dt / sim.sim_dt) == 0:
+            sim.sim_env.update_reward()
+        if sim_cnt % int(sim.image_dt / sim.sim_dt) == 0:
+            sim.sim_env.update_render_caches()
+        deadline += sim.sim_dt
+        remaining = deadline - time.monotonic()
+        if remaining > 0:
+            time.sleep(remaining)
+        elif remaining < -1.0:
+            raise RuntimeError("Simulation pacing fell over one second behind wall time")
+        sim_cnt += 1
 
 
 def sim_worker(output):
@@ -54,6 +83,7 @@ def sim_worker(output):
         "free_root": True, "gravity": model.opt.gravity.tolist(),
         "state_assignment_during_execution": False,
         "auto_reset_disabled": True,
+        "pacing": "Absolute monotonic deadline; official sim_step and auxiliary updates retained",
     })
     rows = []
     original_step = env.sim_step
@@ -103,7 +133,7 @@ def sim_worker(output):
             if (output / "stop.flag").exists() or time.monotonic() - started > 360:
                 return
             time.sleep(.02)
-        sim.start()
+        run_paced_simulation(sim)
     finally:
         if rows:
             names = ["monotonic", "sim_time", "qpos", "qvel", "ctrl", "body_q",
@@ -259,6 +289,8 @@ def run(args):
     motions.mkdir()
     (motions / config["motion_name"]).symlink_to(reference, target_is_directory=True)
     config["run_mode"] = "preflight" if args.preflight else "full"
+    config["simulation_pacing"] = "absolute monotonic deadlines at the original 200 Hz"
+    config["video_requested"] = not args.no_video
     config["script_sha256"] = hashlib.sha256(Path(__file__).read_bytes()).hexdigest()
     config["evaluation_sha256"] = hashlib.sha256(evaluation.read_bytes()).hexdigest()
     config["dds_xml_sha256"] = hashlib.sha256((ROOT / "configs/r1-dds.xml").read_bytes()).hexdigest()
@@ -385,7 +417,10 @@ def run(args):
     if (output / "actual-state.npz").exists() and packets:
         try:
             metrics, window = evaluate(output, packets, events, config, complete, failure, args.preflight)
-            if not args.preflight:
+            if args.no_video:
+                metrics["scope"] = "Diagnostic physical execution only; video omitted; not suite acceptance"
+                write_json(output / "metrics.json", metrics)
+            if not args.preflight and not args.no_video:
                 render_actual_video(output, window)
         except Exception:
             error = traceback.format_exc()
@@ -410,6 +445,7 @@ if __name__ == "__main__":
     parser.add_argument("--evaluation", type=Path, default=ROOT / "configs/r1-evaluation.json",
                         help="Frozen per-motion evaluation JSON; defaults to the original Macarena baseline")
     parser.add_argument("--preflight", action="store_true")
+    parser.add_argument("--no-video", action="store_true", help="Diagnostic only; omit video, so this run cannot satisfy suite acceptance")
     parser.add_argument("--sim-worker", action="store_true", help=argparse.SUPPRESS)
     parsed = parser.parse_args()
     if parsed.sim_worker:

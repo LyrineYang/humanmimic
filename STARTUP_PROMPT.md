@@ -54,3 +54,9 @@ R4 的假设是：在保持动作相似度和支撑稳定性的约束下，修�
 ```
 
 Goal 属于执行它的对话。它不是 Markdown 文件的后台进程，也不会自动把 Mac 对话连接到 WSL。当前资料未创建 Goal 或计划任务。[官方说明](https://developers.openai.com/cookbook/examples/codex/using_goals_in_codex#how-to-write-a-goal)
+
+用户已授权直接执行 R1 整批验收，当前批次 runs/r1-suite-acceptance-20261028-01。先检查该批次进程与日志，不能重复启动或覆盖试次。驱动当前 621.01，前阶段基线为 596.49；本轮同环境串行执行十次，原门槛不变。
+
+首批 R1 验收已完整结束且 failed（3/10，0/5 双次通过），不要覆盖。已用独立三动作诊断验证仿真绝对 deadline 修复，当前正式重验目录 runs/r1-suite-acceptance-20261029-02；先查这一批进程/日志，不重复运行。物理步长、策略/动作/验收门槛不变，云计费仍未授权。
+
+最新活跃正式批次为 runs/r1-suite-acceptance-20261029-03（统一驱动617.42）；02因中断且驱动变化排除。先用 scripts/resume-r1-suite.py --suite <该目录> --check-only 核对，再由该入口恢复；已有成功物理试次只恢复产物，失败不重跑，驱动变化需另起完整批次，不混用结果。

@@ -1,0 +1,85 @@
+{
+  "status": "passed",
+  "scope": "Simulation pacing repair diagnostics only; not full R1 acceptance",
+  "date": "2026-10-29 Asia/Shanghai",
+  "change": "Absolute monotonic deadlines at the original 200 Hz, retaining official sim_step and auxiliary updates",
+  "unchanged": [
+    "official C++ controller",
+    "policy weights",
+    "control gains",
+    "five fixed reference motions",
+    "gravity/contact/free root",
+    "0.005 s physical integration",
+    "0.35 rad and no-fall/no-tracking-failure rules"
+  ],
+  "before_batch": "runs/r1-suite-acceptance-20261028-01",
+  "before_gate": "failed: 3/10 trials, 0/5 motions twice",
+  "diagnostic_full_metrics": [
+    {
+      "motion": "dance_in_da_party_001__A464",
+      "status": "passed",
+      "scope": "Diagnostic only, no video and not suite acceptance",
+      "full_frames": 497,
+      "full_joint_rmse_rad": 0.17368863908320986,
+      "fell": false,
+      "source_sha256": "403a487c51ee5dd677d6d36e6e15e1336cb2c6af1cc336eb6bc56ead69cfc65f"
+    },
+    {
+      "motion": "squat_001__A359",
+      "status": "passed",
+      "scope": "Diagnostic only, no video and not suite acceptance",
+      "full_frames": 424,
+      "full_joint_rmse_rad": 0.13165748725569448,
+      "fell": false,
+      "source_sha256": "403a487c51ee5dd677d6d36e6e15e1336cb2c6af1cc336eb6bc56ead69cfc65f"
+    },
+    {
+      "motion": "walking_quip_360_R_002__A428",
+      "status": "passed",
+      "scope": "Diagnostic only, no video and not suite acceptance",
+      "full_frames": 455,
+      "full_joint_rmse_rad": 0.11130108051522936,
+      "fell": false,
+      "source_sha256": "403a487c51ee5dd677d6d36e6e15e1336cb2c6af1cc336eb6bc56ead69cfc65f"
+    }
+  ],
+  "diagnostic_realtime_factors": [
+    {
+      "motion": "dance",
+      "status": "passed",
+      "complete": true,
+      "samples": 497,
+      "online_rmse": 0.1738089942103618,
+      "fell": false,
+      "realtime_factor": 0.9999945141049511,
+      "scope": "Diagnostic physical execution only; video omitted; not suite acceptance"
+    },
+    {
+      "motion": "squat",
+      "status": "passed",
+      "complete": true,
+      "samples": 424,
+      "online_rmse": 0.13172287453016981,
+      "fell": false,
+      "realtime_factor": 1.0000901094447097,
+      "scope": "Diagnostic physical execution only; video omitted; not suite acceptance"
+    },
+    {
+      "motion": "walking",
+      "status": "passed",
+      "complete": true,
+      "samples": 455,
+      "online_rmse": 0.11136849018921144,
+      "fell": false,
+      "realtime_factor": 0.9999888544253748,
+      "scope": "Diagnostic physical execution only; video omitted; not suite acceptance"
+    }
+  ],
+  "driver_during_before_and_diagnostics": "621.01",
+  "current_full_batch_driver": "617.42",
+  "current_full_batch": "runs/r1-suite-acceptance-20261029-03",
+  "current_full_acceptance": "awaiting_verification",
+  "interrupted_batch": "runs/r1-suite-acceptance-20261029-02: excluded; only two physical trials before interruption and driver change",
+  "cloud_cost_usd": 0,
+  "heldout_test_used": false
+}

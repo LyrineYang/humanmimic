@@ -1,0 +1,177 @@
+{
+  "status": "failed",
+  "date": "2026-10-29 Asia/Shanghai",
+  "batch": "runs/r1-suite-acceptance-20261028-01",
+  "trial_passed": 3,
+  "trial_failed": 7,
+  "motions_both_trials_passed": 0,
+  "required_passing_motions": 4,
+  "cloud_cost_usd": 0,
+  "driver_version": "621.01",
+  "baseline_driver_version": "596.49",
+  "config_and_source_unchanged_during_batch": true,
+  "independent_reference_and_physics_audit": "passed",
+  "suite_audit": {
+    "status": "failed",
+    "passing_motions": 0,
+    "required_passing_motions": 4,
+    "trials": [
+      {
+        "motion": "macarena_001__A545",
+        "trial": 1,
+        "status": "passed",
+        "joint_rmse_rad": 0.13471399851106688,
+        "run_directory": "runs/r1-suite-acceptance-20261028-01/macarena_001__A545-trial-01",
+        "detail": "Complete frozen-config trial audit"
+      },
+      {
+        "motion": "macarena_001__A545",
+        "trial": 2,
+        "status": "failed",
+        "joint_rmse_rad": null,
+        "run_directory": "runs/r1-suite-acceptance-20261028-01/macarena_001__A545-trial-02",
+        "detail": "Controller/physics trial failure; raw evidence retained"
+      },
+      {
+        "motion": "dance_in_da_party_001__A464",
+        "trial": 1,
+        "status": "failed",
+        "joint_rmse_rad": null,
+        "run_directory": "runs/r1-suite-acceptance-20261028-01/dance_in_da_party_001__A464-trial-01",
+        "detail": "Controller/physics trial failure; raw evidence retained"
+      },
+      {
+        "motion": "dance_in_da_party_001__A464",
+        "trial": 2,
+        "status": "failed",
+        "joint_rmse_rad": null,
+        "run_directory": "runs/r1-suite-acceptance-20261028-01/dance_in_da_party_001__A464-trial-02",
+        "detail": "Controller/physics trial failure; raw evidence retained"
+      },
+      {
+        "motion": "squat_001__A359",
+        "trial": 1,
+        "status": "failed",
+        "joint_rmse_rad": null,
+        "run_directory": "runs/r1-suite-acceptance-20261028-01/squat_001__A359-trial-01",
+        "detail": "Controller/physics trial failure; raw evidence retained"
+      },
+      {
+        "motion": "squat_001__A359",
+        "trial": 2,
+        "status": "passed",
+        "joint_rmse_rad": 0.141098925808946,
+        "run_directory": "runs/r1-suite-acceptance-20261028-01/squat_001__A359-trial-02",
+        "detail": "Complete frozen-config trial audit"
+      },
+      {
+        "motion": "walking_quip_360_R_002__A428",
+        "trial": 1,
+        "status": "failed",
+        "joint_rmse_rad": null,
+        "run_directory": "runs/r1-suite-acceptance-20261028-01/walking_quip_360_R_002__A428-trial-01",
+        "detail": "Controller/physics trial failure; raw evidence retained"
+      },
+      {
+        "motion": "walking_quip_360_R_002__A428",
+        "trial": 2,
+        "status": "failed",
+        "joint_rmse_rad": null,
+        "run_directory": "runs/r1-suite-acceptance-20261028-01/walking_quip_360_R_002__A428-trial-02",
+        "detail": "Controller/physics trial failure; raw evidence retained"
+      },
+      {
+        "motion": "forward_lunge_R_001__A359_M",
+        "trial": 1,
+        "status": "failed",
+        "joint_rmse_rad": null,
+        "run_directory": "runs/r1-suite-acceptance-20261028-01/forward_lunge_R_001__A359_M-trial-01",
+        "detail": "Controller/physics trial failure; raw evidence retained"
+      },
+      {
+        "motion": "forward_lunge_R_001__A359_M",
+        "trial": 2,
+        "status": "passed",
+        "joint_rmse_rad": 0.13940968728963432,
+        "run_directory": "runs/r1-suite-acceptance-20261028-01/forward_lunge_R_001__A359_M-trial-02",
+        "detail": "Complete frozen-config trial audit"
+      }
+    ],
+    "motions": [
+      {
+        "motion": "macarena_001__A545",
+        "both_trials_passed": false
+      },
+      {
+        "motion": "dance_in_da_party_001__A464",
+        "both_trials_passed": false
+      },
+      {
+        "motion": "squat_001__A359",
+        "both_trials_passed": false
+      },
+      {
+        "motion": "walking_quip_360_R_002__A428",
+        "both_trials_passed": false
+      },
+      {
+        "motion": "forward_lunge_R_001__A359_M",
+        "both_trials_passed": false
+      }
+    ],
+    "scope": "R1 five-motion/two-trial gate only; R2-R4 remain separate"
+  },
+  "timing": [
+    {
+      "trial": "macarena_001__A545-trial-01",
+      "status": "passed",
+      "physical_time_per_wall_time": 0.9709191164121
+    },
+    {
+      "trial": "macarena_001__A545-trial-02",
+      "status": "failed",
+      "physical_time_per_wall_time": 0.9511762422888062
+    },
+    {
+      "trial": "dance_in_da_party_001__A464-trial-01",
+      "status": "failed",
+      "physical_time_per_wall_time": 0.8336590166313469
+    },
+    {
+      "trial": "dance_in_da_party_001__A464-trial-02",
+      "status": "failed",
+      "physical_time_per_wall_time": 0.8833902429153808
+    },
+    {
+      "trial": "squat_001__A359-trial-01",
+      "status": "failed",
+      "physical_time_per_wall_time": 0.8330412839300592
+    },
+    {
+      "trial": "squat_001__A359-trial-02",
+      "status": "passed",
+      "physical_time_per_wall_time": 0.897979115794402
+    },
+    {
+      "trial": "walking_quip_360_R_002__A428-trial-01",
+      "status": "failed",
+      "physical_time_per_wall_time": 0.8188609693415366
+    },
+    {
+      "trial": "walking_quip_360_R_002__A428-trial-02",
+      "status": "failed",
+      "physical_time_per_wall_time": 0.8467685791540219
+    },
+    {
+      "trial": "forward_lunge_R_001__A359_M-trial-01",
+      "status": "failed",
+      "physical_time_per_wall_time": 0.8825611838078752
+    },
+    {
+      "trial": "forward_lunge_R_001__A359_M-trial-02",
+      "status": "passed",
+      "physical_time_per_wall_time": 0.96080036669603
+    }
+  ],
+  "next_hypothesis": "Relative sleep in the official loop accumulates scheduling overshoot, allowing the fixed 50 Hz reference/controller to outrun physical simulation. Requires a separately identified diagnostic; no causal claim yet."
+}

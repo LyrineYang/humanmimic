@@ -108,6 +108,22 @@ git -C vendor/GR00T-WholeBodyControl apply "$PWD/patches/sonic-loopback-dds.patc
 
 仅在新检出且尚未应用补丁时执行以上两条 apply。获取 G1 模型、x86_64 SDK 和清单中的五段动作 LFS 实体后，建立 `.local/unitree-dds/include` 与 `.local/unitree-dds-lib` 对应的 SDK 头文件/SONAME 链接，再构建 Python DDS 源码绑定与控制器。不同机器重新编译的二进制/运行库需重新记录和验收，不能冒用本机通过记录。大型模型、环境和原始 `runs/` 不随 Git 上传。
 
+## 整批执行与中断恢复
+
+首轮五动作双次运行已保留完整失败证据，见 [首轮摘要](evidence/r1-batch-20261029.json)。检查发现仿真使用逐步相对 sleep 时，物理时间仅为墙钟的 0.82–0.97，而参考动作仍按墙钟 50 Hz 播放。运行器现使用绝对截止时间节拍，物理步长、策略、增益和动作不变；[三项独立诊断](evidence/r1-pacing-repair-20261029.json)恢复约 1.000 实时比例并完整通过，诊断不替代正式验收。
+
+当前统一驱动 617.42 的正式目录为 `runs/r1-suite-acceptance-20261029-03`，状态以 PLAN.md 和该目录 `suite-audit.json` 为准。原驱动 621.01 的中断批次不混入此轮。
+
+本轮目录已包含执行前环境清单 `execution-manifest.json`，可使用检查点入口恢复：
+
+```bash
+source scripts/activate-r1.sh
+python scripts/resume-r1-suite.py --suite runs/r1-suite-acceptance-20261029-03 --check-only
+python scripts/resume-r1-suite.py --suite runs/r1-suite-acceptance-20261029-03
+```
+
+先看日志与活跃进程；有控制器运行时不要重复调用。入口校验 GPU/驱动、Python 包版本、冻结源码和权重；驱动改变时拒绝续测，需另建统一环境的完整批次。已成功的物理试次只补录像/审计，先保存中断录像；失败或中断的物理试次保留，不自动重跑替换。新批次仍可使用上面的准备工具和单次启动脚本；使用恢复入口前必须先记录执行环境清单。`--no-video` 只用于独立诊断，缺少完整录像与产物审计的运行不能通过整批验收。
+
 ## 文档职责
 
 | 文件 | 只维护什么 |
