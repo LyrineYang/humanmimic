@@ -56,7 +56,7 @@ python scripts/run-r1-reproduction.py --output runs/r1-new-reproduction
 python scripts/summarize-r1.py --run runs/r1-new-reproduction
 ```
 
-脚本会保存原始配置、版本/权重校验、实际状态、参考值、失败判定和录像；`summarize-r1.py` 用完整原生 CSV 复核所有帧，并校验视频。前四轮预检和失败证据均保留。当前仅完成一次完整动作，原计划五动作各两次的 R1 整体验收仍为 awaiting_verification。
+脚本会保存原始配置、版本/权重校验、实际状态、参考值、失败判定和录像；`summarize-r1.py` 用完整原生 CSV 复核所有帧，并校验视频。前四轮预检和失败证据均保留。以上为前阶段单动作基线；当前固定五动作各两次的整体验收已通过，见下方正式验收结果。
 
 需要增量重编译现有控制器时，保持 RUNPATH 设置，避免 conda 的旧式 RPATH 覆盖 SDK 配套 DDS 库：
 
@@ -69,11 +69,11 @@ cmake -S vendor/GR00T-WholeBodyControl/gear_sonic_deploy -B .local/build/sonic-d
 cmake --build .local/build/sonic-deploy --target g1_deploy_onnx_ref --parallel 2
 ```
 
-## 本阶段归档与下一轮 R1
+## R1 归档与固定复跑配置
 
 已完成：项目内 conda 环境、原生推理依赖、官方控制器编译、WSL DDS 修复、完整 Macarena 物理执行及实际状态录像。可随 Git 同步的结果见 [基线摘要与产物哈希](evidence/r1-baseline-20261028.json)。上面的 `runs/` 报告和录像只存在于原执行机，克隆仓库不会获得它们。
 
-下一轮仍是 R1 原定五动作验收，固定清单和全部资产 SHA256 在 [r1-suite.json](configs/r1-suite.json)：
+以下为已用于正式验收、后续复跑保持不变的五动作清单，全部资产 SHA256 在 [r1-suite.json](configs/r1-suite.json)：
 
 | 动作 | 类别 | 有效帧 / 时长 | 完整试次 |
 | --- | --- | --- | --- |
@@ -96,7 +96,7 @@ bash runs/r1-suite-NEW/run-trials.sh
 python scripts/audit-r1-suite.py --suite runs/r1-suite-NEW
 ```
 
-运行脚本新增 `--evaluation <冻结配置.json>`，默认仍用原 Macarena 配置。准备程序检查动作、固定策略、二进制、DDS 和补丁哈希；汇总程序核对全帧、相同评估规则、物理条件、策略/控制器版本及视频审计，报告全部十次。就绪检查通过只表示可以运行，五动作验收仍为 `awaiting_verification`。R1 后按计划接 GEM-X 视频链路（R2）。
+运行脚本新增 `--evaluation <冻结配置.json>`，默认仍用原 Macarena 配置。准备程序检查动作、固定策略、二进制、DDS 和补丁哈希；汇总程序核对全帧、相同评估规则、物理条件、策略/控制器版本及视频审计，报告全部十次。就绪检查通过只表示可以运行；当前一次完整正式批次已验收通过，后续复跑仍需独立审计。R1 后按计划接 GEM-X 视频链路（R2）。
 
 新机器需单独重建环境。使用 [Linux conda 精确包清单](configs/conda-r1-linux-64.explicit.txt)、pip 锁定文件和 [原生依赖下载地址/校验清单](configs/r1-native-dependencies.json)；原生包仅解压到项目内，不安装系统驱动。先获取固定子模块，再应用补丁：
 
@@ -124,6 +124,16 @@ python scripts/resume-r1-suite.py --suite runs/r1-suite-acceptance-20261029-03
 
 先看日志与活跃进程；有控制器运行时不要重复调用。入口校验 GPU/驱动、Python 包版本、冻结源码和权重；驱动改变时拒绝续测，需另建统一环境的完整批次。已成功的物理试次只补录像/审计，先保存中断录像；失败或中断的物理试次保留，不自动重跑替换。新批次仍可使用上面的准备工具和单次启动脚本；使用恢复入口前必须先记录执行环境清单。`--no-video` 只用于独立诊断，缺少完整录像与产物审计的运行不能通过整批验收。
 
+## R1 正式整批验收结果
+
+2026-10-29，固定五动作各两次全部通过：**10/10试次、5/5动作双次通过、6300个完整控制样本，无跌倒**。同一RTX4060 Laptop、驱动617.42，关节RMSE范围 **0.10875–0.17517 rad**，原门槛≤0.35。物理时间/墙钟比例0.99995–1.00005；十段实际状态录像和全量原生控制日志已独立审计。
+
+- 可随Git同步：[完整验收摘要与产物SHA256](evidence/r1-acceptance-20261029.json)。
+- 原执行机：[正式报告](runs/r1-suite-acceptance-20261029-03/REPORT.md)、[全部结果](runs/r1-suite-acceptance-20261029-03/results.json)、[十试次汇总](runs/r1-suite-acceptance-20261029-03/suite-audit.json)。
+- [舞蹈完整实际轨迹录像](runs/r1-suite-acceptance-20261029-03/dance_in_da_party_001__A464-trial-01/actual-execution.mp4)。报告包含全部十段录像与原始数据链接。
+
+首轮失败与第二轮中断均保留，没有以诊断或成功片段替换试次。此结论仅覆盖本机R1官方样例工程验收；GPU图形加速/窗口与现场相机未验收，R2–R4尚未完成。下一阶段按PLAN推进R2视频链路。模型、环境、原始轨迹和录像保持本机存储，新增云费用0美元。
+
 ## 文档职责
 
 | 文件 | 只维护什么 |
@@ -136,7 +146,7 @@ python scripts/resume-r1-suite.py --suite runs/r1-suite-acceptance-20261029-03
 | [configs/budget.json](configs/budget.json) | 预算和价格计算输入 |
 | [REMOTE_WORK.md](REMOTE_WORK.md) | Windows WSL 与跨设备协作步骤 |
 
-官方源码以 Git 子模块固定版本，路径为 `vendor/GR00T-WholeBodyControl`；本机完整环境与一次闭环复现已通过。局部仿真 DDS 配置补丁见 [UPSTREAM.json](UPSTREAM.json) 和 [补丁文件](patches/sonic-loopback-dds.patch)，策略、增益和动作逻辑保持官方版本。原计划的 R1 整体验收与 R2–R4 仍待完成。运行资产、环境及 runs 不提交 Git。
+官方源码以 Git 子模块固定版本，路径为 `vendor/GR00T-WholeBodyControl`；本机完整环境与一次闭环复现已通过。局部仿真 DDS 配置补丁见 [UPSTREAM.json](UPSTREAM.json) 和 [补丁文件](patches/sonic-loopback-dds.patch)，策略、增益和动作逻辑保持官方版本。R1整体验收已通过；R2–R4仍待完成。运行资产、环境及 runs 不提交 Git。
 
 ## 方法参考
 

@@ -1,0 +1,570 @@
+{
+  "schema_version": 1,
+  "status": "passed",
+  "date": "2026-10-29 Asia/Shanghai",
+  "batch": "runs/r1-suite-acceptance-20261029-03",
+  "completed_utc": "2026-10-29T11:48:13.720850+00:00",
+  "trial_passed": 10,
+  "trial_failed": 0,
+  "passing_motions": 5,
+  "required_passing_motions": 4,
+  "complete_control_samples": 6300,
+  "source_and_runtime_frozen": true,
+  "uniform_driver": "617.42",
+  "gpu": "name, driver_version, memory.total [MiB]\nNVIDIA GeForce RTX 4060 Laptop GPU, 617.42, 8188 MiB",
+  "source_sha256": {
+    "configs/r1-suite.json": "da9d5028617fca35a7ac89a2a1d03c2eac3aa826736235bd216a563d16874a1b",
+    "configs/r1-evaluation.json": "467bb6257757d9cb3e892a3ee23fbc5a7f0e0bda3c5154b0c0b226bf96f4303d",
+    "configs/r1-dds.xml": "648f0933457878e6590b5765746b15b5d0698c1efb143d6e3789ad4426a9cf54",
+    "scripts/run-r1-reproduction.py": "403a487c51ee5dd677d6d36e6e15e1336cb2c6af1cc336eb6bc56ead69cfc65f",
+    "scripts/summarize-r1.py": "b07cc618604318bd449b3d8e0a92505c1d4e878c8761993c7b4325e1ab44594a",
+    "scripts/prepare-r1-suite.py": "e7223cecd8296769fbdf6a67fa0d7c3e07072cc9cd7e68c55bb8d69550916e11",
+    "scripts/audit-r1-suite.py": "ceeabac07fc89806cdc670fa8a6b61a66b4e5c8e1d5e6404a5626c433f82e50e",
+    "scripts/resume-r1-suite.py": "7c31ba26efbc4c1df7406f6d75eb6ae2f43d790fe6090fb323e8735385e2764c"
+  },
+  "independent_trajectory_audit": "passed",
+  "simulation_realtime_factor_range": [
+    0.9999489155879133,
+    1.0000453667284714
+  ],
+  "full_trial_rmse_range_rad": [
+    0.10875182609302213,
+    0.17517063709826325
+  ],
+  "scope": "R1 fixed official/debug five-motion/two-trial engineering gate, not unseen-test generalization or R2-R4 completion",
+  "cloud_cost_usd": 0,
+  "heldout_test_used": false,
+  "prior_failed_batch": "runs/r1-suite-acceptance-20261028-01: 3/10 trials, 0/5 motions twice; kept",
+  "interrupted_batch": "runs/r1-suite-acceptance-20261029-02: only two physical trials under 621.01; excluded",
+  "diagnostics": "runs/r1-pacing-repair-20261029: three no-video diagnostic actions under 621.01; excluded",
+  "trials": [
+    {
+      "motion": "macarena_001__A545",
+      "trial": 1,
+      "status": "passed",
+      "joint_rmse_rad": 0.1337821333104394,
+      "run_directory": "runs/r1-suite-acceptance-20261029-03/macarena_001__A545-trial-01",
+      "detail": "Complete frozen-config trial audit",
+      "expected_frames": 1375,
+      "playback_frames": 1375,
+      "partial_online_rmse_rad": 0.1338116878872413,
+      "minimum_root_height_m": 0.6553624340402499,
+      "fell": false,
+      "realtime_factor": 0.9999621658677557,
+      "artifacts": [
+        {
+          "path": "runs/r1-suite-acceptance-20261029-03/macarena_001__A545-trial-01/metrics.json",
+          "bytes": 2122,
+          "sha256": "4b033110ffb7604c883bfb51a0a52c3aa54524da32fc71aeb808ab73ac881abd"
+        },
+        {
+          "path": "runs/r1-suite-acceptance-20261029-03/macarena_001__A545-trial-01/actual-state.npz",
+          "bytes": 8142280,
+          "sha256": "729c5afe1412ca2f28dc46c1197c6e0879c0b1a961850ecc9315ac400ca2649f"
+        },
+        {
+          "path": "runs/r1-suite-acceptance-20261029-03/macarena_001__A545-trial-01/controller-csv/q.csv",
+          "bytes": 579747,
+          "sha256": "3f5e8b08a8f51a72eedbf92fbb37581d3dbfca1c560e10d1a0c467db3c10e7ee"
+        },
+        {
+          "path": "runs/r1-suite-acceptance-20261029-03/macarena_001__A545-trial-01/controller-reference.csv",
+          "bytes": 462857,
+          "sha256": "e59052f9df461264337322b158bfe578352c60c5ddf50b5892b8d1e958961c62"
+        },
+        {
+          "path": "runs/r1-suite-acceptance-20261029-03/macarena_001__A545-trial-01/actual-execution.mp4",
+          "bytes": 1419993,
+          "sha256": "7e759995baf3d93812c170deca5d5818696d8603d45e3205d3de05e9d20e0df7"
+        }
+      ],
+      "video": {
+        "codec_name": "h264",
+        "width": 640,
+        "height": 360,
+        "r_frame_rate": "25/1",
+        "duration": "27.520000",
+        "nb_read_frames": "688"
+      },
+      "online_missing_indices": [
+        1385
+      ]
+    },
+    {
+      "motion": "macarena_001__A545",
+      "trial": 2,
+      "status": "passed",
+      "joint_rmse_rad": 0.13408869165832163,
+      "run_directory": "runs/r1-suite-acceptance-20261029-03/macarena_001__A545-trial-02",
+      "detail": "Complete frozen-config trial audit",
+      "expected_frames": 1375,
+      "playback_frames": 1375,
+      "partial_online_rmse_rad": 0.13411874382590377,
+      "minimum_root_height_m": 0.656267608383824,
+      "fell": false,
+      "realtime_factor": 0.9999953468215678,
+      "artifacts": [
+        {
+          "path": "runs/r1-suite-acceptance-20261029-03/macarena_001__A545-trial-02/metrics.json",
+          "bytes": 2121,
+          "sha256": "257f92557f98f8787e4abeb7f4be2558e5a84d4b1071287ee505cc4dc9d9e21d"
+        },
+        {
+          "path": "runs/r1-suite-acceptance-20261029-03/macarena_001__A545-trial-02/actual-state.npz",
+          "bytes": 8146496,
+          "sha256": "4583ce9b3168edef267854cf356ef158ef9380c22ced625bc523df349edd4e19"
+        },
+        {
+          "path": "runs/r1-suite-acceptance-20261029-03/macarena_001__A545-trial-02/controller-csv/q.csv",
+          "bytes": 579681,
+          "sha256": "241e781a9d1e8aa48a0e3c6166c2614c3a0a5bf7af57ff939e60cd306af21810"
+        },
+        {
+          "path": "runs/r1-suite-acceptance-20261029-03/macarena_001__A545-trial-02/controller-reference.csv",
+          "bytes": 462857,
+          "sha256": "e59052f9df461264337322b158bfe578352c60c5ddf50b5892b8d1e958961c62"
+        },
+        {
+          "path": "runs/r1-suite-acceptance-20261029-03/macarena_001__A545-trial-02/actual-execution.mp4",
+          "bytes": 1414145,
+          "sha256": "5c386dc2524b3b2f1154ecb1af5ac8ebe80b6ad84cd52d4027af1ba331973bdb"
+        }
+      ],
+      "video": {
+        "codec_name": "h264",
+        "width": 640,
+        "height": 360,
+        "r_frame_rate": "25/1",
+        "duration": "27.520000",
+        "nb_read_frames": "688"
+      },
+      "online_missing_indices": [
+        1385
+      ]
+    },
+    {
+      "motion": "dance_in_da_party_001__A464",
+      "trial": 1,
+      "status": "passed",
+      "joint_rmse_rad": 0.1726995348139445,
+      "run_directory": "runs/r1-suite-acceptance-20261029-03/dance_in_da_party_001__A464-trial-01",
+      "detail": "Complete frozen-config trial audit",
+      "expected_frames": 497,
+      "playback_frames": 497,
+      "partial_online_rmse_rad": 0.17283181027659095,
+      "minimum_root_height_m": 0.6717690196337247,
+      "fell": false,
+      "realtime_factor": 1.0000453667284714,
+      "artifacts": [
+        {
+          "path": "runs/r1-suite-acceptance-20261029-03/dance_in_da_party_001__A464-trial-01/metrics.json",
+          "bytes": 2124,
+          "sha256": "7455d2d5a0651e1e31088670671bc87fd7ccd1253447c7741d391b134ded56bc"
+        },
+        {
+          "path": "runs/r1-suite-acceptance-20261029-03/dance_in_da_party_001__A464-trial-01/actual-state.npz",
+          "bytes": 3504862,
+          "sha256": "a1a6fab1c3f5fd0073df516d22e6a9f48f0da05ceefd14d52b4dfbb0944b5d8d"
+        },
+        {
+          "path": "runs/r1-suite-acceptance-20261029-03/dance_in_da_party_001__A464-trial-01/controller-csv/q.csv",
+          "bytes": 211869,
+          "sha256": "27e5581013976654766b41a2ce511e97582d7eb080b5ab0118e52cb520f1d4a4"
+        },
+        {
+          "path": "runs/r1-suite-acceptance-20261029-03/dance_in_da_party_001__A464-trial-01/controller-reference.csv",
+          "bytes": 168866,
+          "sha256": "ca7b002a1f173d99326ed9db8cc36ceab64ed900d1d80a217f79c21d0b382e09"
+        },
+        {
+          "path": "runs/r1-suite-acceptance-20261029-03/dance_in_da_party_001__A464-trial-01/actual-execution.mp4",
+          "bytes": 617193,
+          "sha256": "d50d7a6554b5a2b8ac18cba41f0b75295c456d5e8570613fe8b077b7c15c742a"
+        }
+      ],
+      "video": {
+        "codec_name": "h264",
+        "width": 640,
+        "height": 360,
+        "r_frame_rate": "25/1",
+        "duration": "9.960000",
+        "nb_read_frames": "249"
+      },
+      "online_missing_indices": [
+        507
+      ]
+    },
+    {
+      "motion": "dance_in_da_party_001__A464",
+      "trial": 2,
+      "status": "passed",
+      "joint_rmse_rad": 0.17517063709826325,
+      "run_directory": "runs/r1-suite-acceptance-20261029-03/dance_in_da_party_001__A464-trial-02",
+      "detail": "Complete frozen-config trial audit",
+      "expected_frames": 497,
+      "playback_frames": 497,
+      "partial_online_rmse_rad": 0.17529970667862407,
+      "minimum_root_height_m": 0.6733819667795369,
+      "fell": false,
+      "realtime_factor": 0.9999954030408424,
+      "artifacts": [
+        {
+          "path": "runs/r1-suite-acceptance-20261029-03/dance_in_da_party_001__A464-trial-02/metrics.json",
+          "bytes": 2125,
+          "sha256": "f14650a6b6191d21aaae5068c67c140e68d81f64aaa3fe7d99701a2fe1976cce"
+        },
+        {
+          "path": "runs/r1-suite-acceptance-20261029-03/dance_in_da_party_001__A464-trial-02/actual-state.npz",
+          "bytes": 3506419,
+          "sha256": "40e90aab579027d91d6402447af81332806e1daf428b01859f05448ca282e5f6"
+        },
+        {
+          "path": "runs/r1-suite-acceptance-20261029-03/dance_in_da_party_001__A464-trial-02/controller-csv/q.csv",
+          "bytes": 211704,
+          "sha256": "71ce2a73a64d06c752dc0056a861af4baffb8fbf341533ab31fb71662464caf2"
+        },
+        {
+          "path": "runs/r1-suite-acceptance-20261029-03/dance_in_da_party_001__A464-trial-02/controller-reference.csv",
+          "bytes": 168866,
+          "sha256": "ca7b002a1f173d99326ed9db8cc36ceab64ed900d1d80a217f79c21d0b382e09"
+        },
+        {
+          "path": "runs/r1-suite-acceptance-20261029-03/dance_in_da_party_001__A464-trial-02/actual-execution.mp4",
+          "bytes": 629619,
+          "sha256": "64bd0556f8d4427433187fb74dc37ef780e8a20734cdb2514625120b3f31ad5d"
+        }
+      ],
+      "video": {
+        "codec_name": "h264",
+        "width": 640,
+        "height": 360,
+        "r_frame_rate": "25/1",
+        "duration": "9.960000",
+        "nb_read_frames": "249"
+      },
+      "online_missing_indices": [
+        507
+      ]
+    },
+    {
+      "motion": "squat_001__A359",
+      "trial": 1,
+      "status": "passed",
+      "joint_rmse_rad": 0.1341921022374407,
+      "run_directory": "runs/r1-suite-acceptance-20261029-03/squat_001__A359-trial-01",
+      "detail": "Complete frozen-config trial audit",
+      "expected_frames": 424,
+      "playback_frames": 424,
+      "partial_online_rmse_rad": 0.13425776175283669,
+      "minimum_root_height_m": 0.4540931949972226,
+      "fell": false,
+      "realtime_factor": 1.0000042574474486,
+      "artifacts": [
+        {
+          "path": "runs/r1-suite-acceptance-20261029-03/squat_001__A359-trial-01/metrics.json",
+          "bytes": 2118,
+          "sha256": "0d9267d7028cd3d680817ab5c2b267df63ce6ca9cda6767e307f39e9de433540"
+        },
+        {
+          "path": "runs/r1-suite-acceptance-20261029-03/squat_001__A359-trial-01/actual-state.npz",
+          "bytes": 3112875,
+          "sha256": "508b81175cf2ccd27490b0e2754fc9f5f6048216475c4107fd831ba3c83a2656"
+        },
+        {
+          "path": "runs/r1-suite-acceptance-20261029-03/squat_001__A359-trial-01/controller-csv/q.csv",
+          "bytes": 181862,
+          "sha256": "0a206cb7f848a6eb106440badce5e8aacd147e72abcd68ba81f6e9a4a4dde793"
+        },
+        {
+          "path": "runs/r1-suite-acceptance-20261029-03/squat_001__A359-trial-01/controller-reference.csv",
+          "bytes": 142709,
+          "sha256": "69ee2d5219034593bcf669da802e03803d3299301535c08fe4ff40527d85750b"
+        },
+        {
+          "path": "runs/r1-suite-acceptance-20261029-03/squat_001__A359-trial-01/actual-execution.mp4",
+          "bytes": 467473,
+          "sha256": "02210d9407ca0e90d151d71eed985a21284cd5ddbfdccab298e607032892e3d4"
+        }
+      ],
+      "video": {
+        "codec_name": "h264",
+        "width": 640,
+        "height": 360,
+        "r_frame_rate": "25/1",
+        "duration": "8.480000",
+        "nb_read_frames": "212"
+      },
+      "online_missing_indices": [
+        434
+      ]
+    },
+    {
+      "motion": "squat_001__A359",
+      "trial": 2,
+      "status": "passed",
+      "joint_rmse_rad": 0.13121084636323335,
+      "run_directory": "runs/r1-suite-acceptance-20261029-03/squat_001__A359-trial-02",
+      "detail": "Complete frozen-config trial audit",
+      "expected_frames": 424,
+      "playback_frames": 424,
+      "partial_online_rmse_rad": 0.1312749152752621,
+      "minimum_root_height_m": 0.4481279646216857,
+      "fell": false,
+      "realtime_factor": 1.000013182956823,
+      "artifacts": [
+        {
+          "path": "runs/r1-suite-acceptance-20261029-03/squat_001__A359-trial-02/metrics.json",
+          "bytes": 2118,
+          "sha256": "1db13711aac3c847a7497db66726269228a5994f7ae489a092b76987d6050835"
+        },
+        {
+          "path": "runs/r1-suite-acceptance-20261029-03/squat_001__A359-trial-02/actual-state.npz",
+          "bytes": 3112191,
+          "sha256": "a4b98b1d076162e5e2a379799b07a55ac8399831fb6ff0dea1c98d730a1e2cb1"
+        },
+        {
+          "path": "runs/r1-suite-acceptance-20261029-03/squat_001__A359-trial-02/controller-csv/q.csv",
+          "bytes": 182018,
+          "sha256": "cfa72d46c849fa452b37542ae873773f45ee03cca1e9d77400ee8b8da80e9ceb"
+        },
+        {
+          "path": "runs/r1-suite-acceptance-20261029-03/squat_001__A359-trial-02/controller-reference.csv",
+          "bytes": 142709,
+          "sha256": "69ee2d5219034593bcf669da802e03803d3299301535c08fe4ff40527d85750b"
+        },
+        {
+          "path": "runs/r1-suite-acceptance-20261029-03/squat_001__A359-trial-02/actual-execution.mp4",
+          "bytes": 463882,
+          "sha256": "e1f1cf1bd77bb65a1caea36f6b8b1b03184caa1af4ec92ca794ae83b9c09fb76"
+        }
+      ],
+      "video": {
+        "codec_name": "h264",
+        "width": 640,
+        "height": 360,
+        "r_frame_rate": "25/1",
+        "duration": "8.480000",
+        "nb_read_frames": "212"
+      },
+      "online_missing_indices": [
+        434
+      ]
+    },
+    {
+      "motion": "walking_quip_360_R_002__A428",
+      "trial": 1,
+      "status": "passed",
+      "joint_rmse_rad": 0.1091789204618584,
+      "run_directory": "runs/r1-suite-acceptance-20261029-03/walking_quip_360_R_002__A428-trial-01",
+      "detail": "Complete frozen-config trial audit",
+      "expected_frames": 455,
+      "playback_frames": 455,
+      "partial_online_rmse_rad": 0.10917891970888653,
+      "minimum_root_height_m": 0.7332442330945692,
+      "fell": false,
+      "realtime_factor": 0.9999907279584231,
+      "artifacts": [
+        {
+          "path": "runs/r1-suite-acceptance-20261029-03/walking_quip_360_R_002__A428-trial-01/metrics.json",
+          "bytes": 2129,
+          "sha256": "4c29cb347c3aa9062eb9507c5620b14905627fab83a99d22087f1e8c306b0d53"
+        },
+        {
+          "path": "runs/r1-suite-acceptance-20261029-03/walking_quip_360_R_002__A428-trial-01/actual-state.npz",
+          "bytes": 3281204,
+          "sha256": "dd2f587dfde9a7c76447efafe64ced3df105991629a6c094ad7f3c07c71a9ec0"
+        },
+        {
+          "path": "runs/r1-suite-acceptance-20261029-03/walking_quip_360_R_002__A428-trial-01/controller-csv/q.csv",
+          "bytes": 194443,
+          "sha256": "79f9ad61254a707e588d9b262bbaacf60a5aeccbb595fc2a90d76b82a8b502c3"
+        },
+        {
+          "path": "runs/r1-suite-acceptance-20261029-03/walking_quip_360_R_002__A428-trial-01/controller-reference.csv",
+          "bytes": 156421,
+          "sha256": "763ec81db3a3f34a4795cc885ef14c70ee99694c0cd9e15f6d5e68b73fe54785"
+        },
+        {
+          "path": "runs/r1-suite-acceptance-20261029-03/walking_quip_360_R_002__A428-trial-01/actual-execution.mp4",
+          "bytes": 632144,
+          "sha256": "c0483971412707b109179c96413d012d614f4bc0297e0615cb5e6d6b9bd68e8c"
+        }
+      ],
+      "video": {
+        "codec_name": "h264",
+        "width": 640,
+        "height": 360,
+        "r_frame_rate": "25/1",
+        "duration": "9.120000",
+        "nb_read_frames": "228"
+      },
+      "online_missing_indices": []
+    },
+    {
+      "motion": "walking_quip_360_R_002__A428",
+      "trial": 2,
+      "status": "passed",
+      "joint_rmse_rad": 0.10875182609302213,
+      "run_directory": "runs/r1-suite-acceptance-20261029-03/walking_quip_360_R_002__A428-trial-02",
+      "detail": "Complete frozen-config trial audit",
+      "expected_frames": 455,
+      "playback_frames": 455,
+      "partial_online_rmse_rad": 0.10881386342829678,
+      "minimum_root_height_m": 0.7325386896519376,
+      "fell": false,
+      "realtime_factor": 1.0000032105598111,
+      "artifacts": [
+        {
+          "path": "runs/r1-suite-acceptance-20261029-03/walking_quip_360_R_002__A428-trial-02/metrics.json",
+          "bytes": 2124,
+          "sha256": "90480f52b43ce47a1a7fe36a1abd5949819305b1ab49b8f1c70fb9ca2bc1c14c"
+        },
+        {
+          "path": "runs/r1-suite-acceptance-20261029-03/walking_quip_360_R_002__A428-trial-02/actual-state.npz",
+          "bytes": 3276987,
+          "sha256": "8e033805c7a2182f8b4fc32f856e440e609a209a3096fa69c614ff6dc2f145c8"
+        },
+        {
+          "path": "runs/r1-suite-acceptance-20261029-03/walking_quip_360_R_002__A428-trial-02/controller-csv/q.csv",
+          "bytes": 194407,
+          "sha256": "b87ef607aa0a42973bb628179a51f05800dc2d313830b9061fc14d5fc864b5c5"
+        },
+        {
+          "path": "runs/r1-suite-acceptance-20261029-03/walking_quip_360_R_002__A428-trial-02/controller-reference.csv",
+          "bytes": 156421,
+          "sha256": "763ec81db3a3f34a4795cc885ef14c70ee99694c0cd9e15f6d5e68b73fe54785"
+        },
+        {
+          "path": "runs/r1-suite-acceptance-20261029-03/walking_quip_360_R_002__A428-trial-02/actual-execution.mp4",
+          "bytes": 633818,
+          "sha256": "6e8a7cdaded2994389d22f68cb5c3d2ee40fdd0ab7362ab627558eaa32ec0723"
+        }
+      ],
+      "video": {
+        "codec_name": "h264",
+        "width": 640,
+        "height": 360,
+        "r_frame_rate": "25/1",
+        "duration": "9.120000",
+        "nb_read_frames": "228"
+      },
+      "online_missing_indices": [
+        465
+      ]
+    },
+    {
+      "motion": "forward_lunge_R_001__A359_M",
+      "trial": 1,
+      "status": "passed",
+      "joint_rmse_rad": 0.1341482393000039,
+      "run_directory": "runs/r1-suite-acceptance-20261029-03/forward_lunge_R_001__A359_M-trial-01",
+      "detail": "Complete frozen-config trial audit",
+      "expected_frames": 399,
+      "playback_frames": 399,
+      "partial_online_rmse_rad": 0.1342090063123537,
+      "minimum_root_height_m": 0.5380024512263358,
+      "fell": false,
+      "realtime_factor": 0.9999489155879133,
+      "artifacts": [
+        {
+          "path": "runs/r1-suite-acceptance-20261029-03/forward_lunge_R_001__A359_M-trial-01/metrics.json",
+          "bytes": 2127,
+          "sha256": "46e3e43414e3a352927d26dd4eb5236b9deaaf99622afacfe2efd36047696dc6"
+        },
+        {
+          "path": "runs/r1-suite-acceptance-20261029-03/forward_lunge_R_001__A359_M-trial-01/actual-state.npz",
+          "bytes": 2983525,
+          "sha256": "9626cf4fdba7f51516685923378ad0045aaa48911e4c708aec483231380b01b5"
+        },
+        {
+          "path": "runs/r1-suite-acceptance-20261029-03/forward_lunge_R_001__A359_M-trial-01/controller-csv/q.csv",
+          "bytes": 170596,
+          "sha256": "83fc3ae70eec14257083f5b2b540ac0221185d1bf1da67c2029ff0db515be5a5"
+        },
+        {
+          "path": "runs/r1-suite-acceptance-20261029-03/forward_lunge_R_001__A359_M-trial-01/controller-reference.csv",
+          "bytes": 136527,
+          "sha256": "c796d830e4d797d367da57ca46096d09e968ab071242f04efdb82cab051e3a55"
+        },
+        {
+          "path": "runs/r1-suite-acceptance-20261029-03/forward_lunge_R_001__A359_M-trial-01/actual-execution.mp4",
+          "bytes": 495468,
+          "sha256": "bac546203b708207c19fd7537b4dd359624b42e12eae24e01e5f55adb6c0743a"
+        }
+      ],
+      "video": {
+        "codec_name": "h264",
+        "width": 640,
+        "height": 360,
+        "r_frame_rate": "25/1",
+        "duration": "8.000000",
+        "nb_read_frames": "200"
+      },
+      "online_missing_indices": [
+        409
+      ]
+    },
+    {
+      "motion": "forward_lunge_R_001__A359_M",
+      "trial": 2,
+      "status": "passed",
+      "joint_rmse_rad": 0.13573852592805463,
+      "run_directory": "runs/r1-suite-acceptance-20261029-03/forward_lunge_R_001__A359_M-trial-02",
+      "detail": "Complete frozen-config trial audit",
+      "expected_frames": 399,
+      "playback_frames": 399,
+      "partial_online_rmse_rad": 0.1358058071281038,
+      "minimum_root_height_m": 0.5359436790372616,
+      "fell": false,
+      "realtime_factor": 1.0000025250688342,
+      "artifacts": [
+        {
+          "path": "runs/r1-suite-acceptance-20261029-03/forward_lunge_R_001__A359_M-trial-02/metrics.json",
+          "bytes": 2129,
+          "sha256": "29c554030ed750d6b733db9c0c496a85ce18e9494c08e92859445da681ccfd17"
+        },
+        {
+          "path": "runs/r1-suite-acceptance-20261029-03/forward_lunge_R_001__A359_M-trial-02/actual-state.npz",
+          "bytes": 2992065,
+          "sha256": "f8a05cdfd5ddccc6b02148e9d42dd32ebdb6f5ebd0ed7cd16eca2910614c4a6b"
+        },
+        {
+          "path": "runs/r1-suite-acceptance-20261029-03/forward_lunge_R_001__A359_M-trial-02/controller-csv/q.csv",
+          "bytes": 170162,
+          "sha256": "e0d626ea9df75c560232ab3a480ba6d72190c6d915ff505f4a254ad2b628f0ed"
+        },
+        {
+          "path": "runs/r1-suite-acceptance-20261029-03/forward_lunge_R_001__A359_M-trial-02/controller-reference.csv",
+          "bytes": 136191,
+          "sha256": "dfbcf2fd6cbd2459d576dda2b5d373b332c5ba9f7bc6441e552040ef063e5b4d"
+        },
+        {
+          "path": "runs/r1-suite-acceptance-20261029-03/forward_lunge_R_001__A359_M-trial-02/actual-execution.mp4",
+          "bytes": 507224,
+          "sha256": "78304d8d87c208933f1a5c0166346d1333d18f442a78bab45308db941b4249f1"
+        }
+      ],
+      "video": {
+        "codec_name": "h264",
+        "width": 640,
+        "height": 360,
+        "r_frame_rate": "25/1",
+        "duration": "8.040000",
+        "nb_read_frames": "201"
+      },
+      "online_missing_indices": [
+        408
+      ]
+    }
+  ],
+  "completed_resume_verification": {
+    "status": "passed",
+    "complete_suite_resume_exit": 0,
+    "physical_trial_start_count_before": 10,
+    "physical_trial_start_count_after": 10,
+    "all_saved_physical_artifact_hashes_unchanged": true,
+    "cloud_cost_usd": 0
+  },
+  "final_delivery_audit": "passed",
+  "report": "runs/r1-suite-acceptance-20261029-03/REPORT.md"
+}

@@ -78,8 +78,9 @@
   "driver_during_before_and_diagnostics": "621.01",
   "current_full_batch_driver": "617.42",
   "current_full_batch": "runs/r1-suite-acceptance-20261029-03",
-  "current_full_acceptance": "awaiting_verification",
+  "current_full_acceptance": "passed",
   "interrupted_batch": "runs/r1-suite-acceptance-20261029-02: excluded; only two physical trials before interruption and driver change",
   "cloud_cost_usd": 0,
-  "heldout_test_used": false
+  "heldout_test_used": false,
+  "formal_result": "evidence/r1-acceptance-20261029.json"
 }
