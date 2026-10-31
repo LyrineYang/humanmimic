@@ -138,3 +138,46 @@ next_action: null
 - 2026-10-29 当前统一驱动617.42正式整批 `passed`：五动作各两次全部完成，10/10通过、5/5动作双次通过（门槛至少4/5），6300/6300原生控制样本；无跌倒/跟踪中止，完整29关节RMSE范围0.1087518261–0.1751706371rad，原≤0.35门槛不变。逐动作两次：Macarena 0.133782/0.134089，dance 0.172700/0.175171，squat 0.134192/0.131211，walking 0.109179/0.108752，lunge 0.134148/0.135739rad。
 - 最终独立审计 `passed`：全部原始参考逐帧一致、物理时间连续0.005s无复位、播放弹力带关闭且重力/接触/自由根部/控制器启用，十段实际轨迹录像完整解码；物理时间/墙钟0.999949–1.000045。源/配置/策略/当前GPU版本保持冻结。已完成批次再次调用恢复入口后，物理启动数仍为10，全部已归档物理产物哈希不变。原失败批次和跨驱动中断批次继续保留/排除，不降低标准或混算。报告 `runs/r1-suite-acceptance-20261029-03/REPORT.md`、results.json、suite-audit.json、independent-trajectory-audit.json、completed-resume-verification.json；Git摘要 `evidence/r1-acceptance-20261029.json`。
 - 决定 keep：保留绝对节拍修复、恢复入口和所有成功/失败证据，R1工程验收通过，下一阶段推进R2。未使用保留测试集、真机、训练或计费资源，云费用0美元；源码、闭环无界面与实际轨迹回放passed，GPU图形/窗口awaiting_verification，现场相机needs_input。整个四阶段项目未完成。
+
+- 2026-10-29 R2交付约定补充：用户明确要求项目包含生成结果和demo。修改前预期为保持已定视频→GEM-X→SOMA/SMPL→SONIC路线与至少4/5保留视频门槛，补齐每阶段可复跑入口/真实结果包/demo；R2默认本地一键离线入口、缓存和指标报告、原视频—骨架—实际仿真三路对照MP4。文档检查passed；R2实现/运行仍awaiting_verification，未启动安装、推理、视频测试或云计费任务。视频来源与额外网页偏好只需简短确认。证据 `runs/r2-deliverables-plan-20261029/results.json`。
+
+- 2026-10-30 R2来源/demo规格确认：用户明确普通YouTube单目/K-pop视频作为主要检验对象，可由代理搜索相关数据集；demo同步展示原片、动作提取可视化与机器人实际执行，保留中间结果，源视频内容无需剪辑。修改前预期为保持既定路线及5调试/5保留、至少4/5门槛，只完善输入/交付规格。已核对AIST++、BRACE、FineDance官方说明并找到YouTube候选；候选未下载、未视觉验明或用于提取，不冒充冻结测试清单。AIST只用单路RGB输入，BRACE复杂地面技巧单独作挑战，不用现成标注代替提取。文档与来源调研passed；R2实现/运行awaiting_verification；无新增安装、模型推理或云费用。证据 `runs/r2-source-demo-20261030/results.json`、`source-candidates.json`。
+
+- 2026-10-30 R2 Goal审核稿与资源预检：用户要求先审核下一阶段命令，未启动Goal/安装/推理或计费。预期为复用R1、本机资源与现有D盘空间，完整实现R2及5调试/5保留验收和三路demo。RO检查确认4060 8188MiB、当时约1936MiB占用，WSL约15GiB；C约余11GiB、D约余263GiB，WSL虚拟盘位于C。核对OpenAI官方Goal文档及GEM-X官方安装/推理/配置说明，记录新版API/依赖与固定桥接的适配风险，不将其他模型的显存数字套用于GEM-X。建议串行离线提取→缓存释放→控制→渲染，先实测再判断8GB能力；资源不足保持原验收并继续可行工作，云计费需另行授权。文档/资源检查passed，R2实现与运行awaiting_verification。证据 `runs/r2-goal-review-20261030/results.json` 和 goal-draft.txt。
+
+
+## 2026-10-30 R2 串行可行性、时间与存储成本审核
+
+- 修改前预期：用户请求估计4060串行方案、时间/存储成本并审核prompt；仅作只读硬件/源码/模型元数据核对与文档修订，不把资源评估Goal当作R2执行授权。预期 `runs/r2-resource-estimate-20261030/preparation.json`。
+- 评估证据 `passed`：当前GPU8188MiB、约5.8GiB空闲，WSL15.2GiB，C约10.2GiB/D约262.2GiB；未发现活跃提取/控制/渲染任务。官方新分支按模型分阶段释放、ViTPose要求FP32且带翻转；三个主要权重合计7,114,371,056B。旧SONIC桥接API与新版不同，最终运行版本尚未选定，未将第三方显存传闻或文件体积当峰值保证。
+- 估算：10段平均30秒完整原片，假设有效提取2–10fps；首demo6–16工程小时，稳定后一轮1.5–5小时，R2含工程工作2–5工作日。十段已有R1日志观察软件机器人渲染3.0–3.4fps，累计5分钟原片约37–42分钟；人体渲染/GEM-X速度尚未验证。CPU慢速情景约4–16小时/轮，非测得性能。新增空间规划40–80GiB，建议D预留100GiB；单条完整预检及最长调试片需更新估算。预算不是截止期限或成功承诺。
+- 决定 `keep` 文档修订：STARTUP_PROMPT审核稿加入D独立conda/缓存/TMPDIR/结果布局、低磁盘保护建议、按需解码、完整数值中间结果、分阶段profile和禁止超时重提任务；修正旧启动提示中“缩短视频”和R2先并行的表述，保持完整源片与R3实时门槛分开。原5调试/5保留、至少4/5稳定完成及所有失败保留要求不变。
+- 分项：资源调研/估算文档passed；R2代码实现、GEM-X本机显存/吞吐、闭环与demo均awaiting_verification；现场相机needs_input。未下载安装大模型、新建环境、运行推理/仿真、写D盘、连接真机、训练或使用云计费，新增云费用0美元。当前资源评估目标完成不等于R2执行Goal已启动。
+- 证据：`runs/r2-resource-estimate-20261030/REPORT.md`、results.json、gem-x-hf-tree.json、soma-x-hf-tree.json、official-source-excerpts.json、r1-render-observations.json；小型版本化摘要 `evidence/r2-resource-estimate-20261030.json`。下一步待用户审核执行稿后按原路线做本机完整单视频资源预检。
+
+
+## 2026-10-30 R2执行授权与D盘兼容预检
+
+- 用户批准更新后Goal：本机4060、D独立conda及100GiB规划；完整单视频预检后按实测预算继续整批，保留中间结果/三路demo，暂不使用计费云。Goal统一在STARTUP_PROMPT.md，执行状态在PLAN.md，不新增记忆文件。
+- 修改前预期与版本策略见 runs/r2-setup-20261030-01/manifest.json：D盘不同于WSL根所在盘不应阻止Linux/CUDA运行，但需实测DrvFS链接、执行、导入和I/O。
+- D基础探针passed：ELF执行、相对符号链接执行、跨根目录链接读取、同D硬链接均通过；大小写不敏感，后续检查安装路径和导入冲突。64MiB有界探针顺序写163MiB/s、缓存读207MiB/s；300个512字节文件写1.04s，未当作冷读模型性能。临时测试数据已移除，探针代码/日志与结果保留在运行目录。
+- 决定keep D专用目录 /mnt/d/humanoid-demo-r2，100GiB为项目规划上界并监测宿主空闲，不创建100GiB占位文件；独立prefix/包缓存/TMPDIR/模型/新结果都在D。原R1环境和补丁保留，新增云费用0。conda/CUDA、GEM-X与全链路仍awaiting_verification。
+
+
+## 2026-10-31 R2中断恢复、路径核对与桥接实现
+
+- 前一轮为progress：D基础兼容/conda运行通过，固定源码并启动依赖/模型下载。恢复时旧句柄21142/63284缺失，进程检查无相关任务；保留469,762,048B模型分片和原安装日志，不将观察超时当失败。此前审批服务报告应用网络权限撤销；本次正常审批访问已恢复，没有绕过检查。恢复记录 runs/r2-setup-20261030-01/interruption-20261031.json。
+- 当前资源：驱动仍617.42；GPU空闲约7GiB。C盘曾仅余3.8GiB，用户确认自行释放后复查约21GiB，满足原10GiB保护线。新环境、权重、conda/pip/HF/torch缓存、TMPDIR及新结果逐项确认在D；C保护线是Windows/WSL运行余量，不是额外下载额度，源码仓库仍在WSL根文件系统。
+- 资产校验passed：按固定HF版本恢复完整下载，所有公开LFS SHA256一致，下载结果 /mnt/d/humanoid-demo-r2/runs/asset-download-20261030/results.json。恢复后网络约10–12MiB/s，与旧0.5MiB/s情况分开记录。
+- 代码实现：新增分阶段提取缓存/资源采样、SOMA新版几何到官方SONIC转换适配，以及复用R1仿真工作进程的Protocol-v3缓存物理回放入口。AST检查passed；四帧完整消息与官方pack_pose_message逐字节一致passed，修正初版header count与帧数混淆；真实SOMA转换、CUDA推理和物理运行尚未验证。
+- 单独下载的Mixkit51314完整原片约21.94s、526帧；抽帧发现末段脚部出框，不进入基本全身可见门槛或YouTube保留集，只保留为辅助挑战候选，尚未提取。仍继续筛选普通YouTube/K-pop来源，不替换最终普通视频验收。
+- D环境PyTorch/GEM-X安装仍在同一任务35644进行；修正全局PYTHONPATH只含GEM-X，SONIC helper仅转换时显式加入，避免pip将R1源码metadata误识别为R2安装包。未升级R1，未用保留集、真机、训练或计费云，费用0。最新分项状态见 runs/r2-setup-20261030-01/progress-20261031.json。
+
+
+## 2026-10-31 R2独立环境通过并启动完整视频预检
+
+- D环境CUDA/依赖分项passed：PyTorch2.10.0+cu128、transformers5.3.0、py-soma-x0.3.3、numpy2.2.6、scipy1.15.3；矩阵512x512最大绝对差4.1962e-5。首次Torch导入26.675s，整套依赖导入144.824s，未将冷启动时间当作模型逐帧吞吐。隔离后的pip check通过，R1源metadata不再混入R2。原安装任务末尾旧PYTHONPATH导致的pip check失败保留，无需重装已正确安装的依赖。
+- SOMA接口首次中性姿态检查failed：旧解析使用110关节原始rig名称给77关节公开输出索引，index84越界。按SOMA官方public_joint_names/public_joint_indices核对公开77布局，与GEM native77名称逐项一致后修复适配；相同真实资产、相同官方SONIC坐标数学重验passed。初次失败与修正结果都保留，未以截断索引/默认零值掩盖错误。
+- 首条原始27.933s、838帧的普通YouTube单人舞蹈原片QqvZAUEOrAQ进入端到端调试预检，完整源文件SHA047574246202c1e6f80b7e7ed46ac15c5968debe37fc06730adf9e41dab13213。原片约20帧首黑和20帧尾黑保留并要求记录缺失/填补；不是保留测试，未把带多画面或双人的候选混入基本单人门槛。源片预处理已完成，原始PTS与30Hz映射存档，当前正在CPU人物检测阶段。
+- 启动前预期见video-preflight-expectation-20261031.json；初始进程检查误匹配启动器文本，在模型执行前被纠正，未重复启动已活跃任务。已保存与执行哈希一致的源码快照。预处理耗时141.59s，后续峰值显存/耗时、转换、物理/三路demo仍awaiting_verification；不把准备或接口通过等同于R2完成。
+- 本轮仍仅本机4060/CPU，无训练、真机、驱动更改或计费云。R1源码/默认策略与物理步进保留，新原生TensorRT缓存也安排到D，所用SONIC权重与已通过R1逐项SHA一致后才执行。证据根runs/r2-setup-20261030-01/及runs/r2-preflight-youtube-QqvZAUEOrAQ-20261031-01/，Git摘要evidence/r2-setup-20261031.json。

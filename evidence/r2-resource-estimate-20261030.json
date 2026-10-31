@@ -1,0 +1,133 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-30",
+  "status": "passed",
+  "scope": "完成资源评估和执行提示审核稿修订；passed不表示R2运行通过",
+  "r2_implementation_status": "awaiting_verification",
+  "gemx_runtime_profile_status": "awaiting_verification",
+  "conclusion": "4060离线串行方案值得先预检；单阶段显存和质量验收尚未证实，不保证8GB必然足够，不推及R3实时并行",
+  "hardware_observations": {
+    "gpu_total_mib": 8188,
+    "approx_free_gpu_gib": 5.8,
+    "driver": "617.42",
+    "wsl_ram_gib_approx": 15.2,
+    "host_c_free_gib_approx": 10.2,
+    "host_d_free_gib_approx": 262.2,
+    "wsl_virtual_disk_on_host_c": true,
+    "source_files": [
+      "gpu.txt",
+      "memory.txt",
+      "disk.txt"
+    ],
+    "snapshot_not_reservation": true
+  },
+  "official_gemx_source_revision": "20555befe2fbbe5b2015e1fff7ff214dc18ea9d6",
+  "selected_runtime_revision": null,
+  "weight_bytes": {
+    "body_s240000.ckpt": 3538753341,
+    "vitpose.pth": 3388483384,
+    "motion_native77_e774_s292175.ckpt": 187134331
+  },
+  "weight_total_bytes": 7114371056,
+  "soma_body_assets_bytes": 125483361,
+  "soma_asset_revision": "v0.3.3",
+  "planning_assumptions": {
+    "videos": 10,
+    "mean_complete_source_duration_seconds": 30,
+    "total_seconds": 300,
+    "extraction_fps": 30,
+    "total_extraction_frames": 9000,
+    "effective_extraction_fps_assumed": [
+      2,
+      10
+    ],
+    "robot_video_fps": 25,
+    "robot_video_dimensions": [
+      640,
+      360
+    ],
+    "robot_video_frames": 7500,
+    "source_content_trimmed": false
+  },
+  "time_estimates": {
+    "initial_download_gib": [
+      15,
+      25
+    ],
+    "initial_demo_engineering_hours": [
+      6,
+      16
+    ],
+    "stable_batch_wall_hours": [
+      1.5,
+      5
+    ],
+    "whole_r2_working_days": [
+      2,
+      5
+    ],
+    "hours_per_working_day": 8,
+    "slow_cpu_scenario_effective_fps": [
+      0.2,
+      1
+    ],
+    "slow_cpu_batch_hours": [
+      4,
+      16
+    ],
+    "gemx_fps_measured": false,
+    "r1_robot_render_fps_measured": [
+      3.0,
+      3.4
+    ],
+    "uncertainty": "依赖/访问/显存适配、动作提取和物理执行失败可能超出，非截止时间或成功保证"
+  },
+  "storage_estimates_gib": {
+    "new_environment": [
+      10,
+      18
+    ],
+    "matched_weights_assets": [
+      8,
+      12
+    ],
+    "temporary_package_build_peak": [
+      5,
+      15
+    ],
+    "one_pass_sources_intermediates_videos": [
+      3,
+      10
+    ],
+    "preserved_debug_failures": [
+      10,
+      20
+    ],
+    "rounded_incremental_peak": [
+      40,
+      80
+    ],
+    "recommended_d_free_reservation": 100,
+    "proposed_c_min_free": 10,
+    "proposed_d_min_free": 20,
+    "uncompressed_1080p_rgb_for_300s_at_30hz": 52.14214324951172,
+    "thresholds_are_review_proposals": true
+  },
+  "authorizations_unchanged": {
+    "new_cloud_cost_usd": 0,
+    "paid_execution_authorized": false,
+    "training_launched": false,
+    "large_model_downloads": false,
+    "gemx_installed": false,
+    "d_written": false
+  },
+  "evidence_directory": "runs/r2-resource-estimate-20261030",
+  "report": "runs/r2-resource-estimate-20261030/REPORT.md",
+  "sources": [
+    "https://huggingface.co/nvidia/GEM-X/tree/main",
+    "https://huggingface.co/api/models/nvidia/SOMA-X/tree/v0.3.3?recursive=true&expand=false",
+    "https://github.com/NVlabs/GEM-X/blob/20555befe2fbbe5b2015e1fff7ff214dc18ea9d6/gem/inference/body_video.py",
+    "https://github.com/NVlabs/GEM-X/blob/20555befe2fbbe5b2015e1fff7ff214dc18ea9d6/gem/common/pose2d/native77.py",
+    "https://github.com/NVlabs/GEM-X/blob/20555befe2fbbe5b2015e1fff7ff214dc18ea9d6/gem/inference/video.py"
+  ]
+}

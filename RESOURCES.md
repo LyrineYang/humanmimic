@@ -17,6 +17,24 @@
 
 系统的32GB内存不等于WSL可用32GB，先用 `free -h` 测量。项目与缓存优先放在 Linux 文件系统而不是 `/mnt/c`。[Microsoft 文件系统建议](https://learn.microsoft.com/en-us/windows/wsl/filesystems)
 
+## 2026-10-30 R2 启动前资源观察
+
+- 本机实测4060 Laptop 8188MiB，检查时约1936MiB已占用；WSL可见约15GiB内存、约13GiB available。R1固定十试次已通过，GEM-X本机推理尚无峰值显存/吞吐证据，不能承诺8GB必然足够。
+- 宿主C盘约余11GiB，D盘约余263GiB。Windows发行版登记路径确认WSL虚拟盘在C盘；Linux df显示约901GiB可用是虚拟容量，不能据此批量下载模型。先核查新增占用并规划D盘专用大缓存，保留原环境/资产；本轮未移动WSL、删除文件或写入D盘。
+- R2优先离线分阶段：检测/特征/时序推理分别测量，缓存并释放模型后再运行SONIC/MuJoCo，最后渲染；CPU检测、小batch和已支持的分块优先于同时常驻全部模型。串行吞吐较慢不等于无法完成R2；实时相机并行属于R3，需另测。
+- 当前GEM-X官方文档使用独立的Body Pose、ViTPose与Body Motion配置，支持motion-cache及分阶段加载。当前主分支的Python/PyTorch/API要求与固定SONIC桥接示例已有差异，应选固定兼容版本或明确适配，单独建conda环境，不能直接升级已通过的R1。官方未在本次核对页面给出本机8GB完整链路保证。[安装说明](https://github.com/NVlabs/GEM-X/blob/main/docs/INSTALL.md)、[推理说明](https://github.com/NVlabs/GEM-X/blob/main/docs/DEMO.md)。
+- Modal仍只是用户此前报告的额度，余额未核实、计费执行未授权；确需离线云卸载时先准备预检费用上界，再按既有预算规则授权执行，不以信用额度当自动零支出保护。
+
+## 2026-10-30 串行方案时间与存储审核
+
+4060离线R2有合理可行性，建议先做完整调试视频预检，不能把串行当作8GB必然足够的证明。官方当前代码按阶段释放模型；ViTPose默认FP32并有翻转双分支，不能假定全局半精度无损。公开Body Pose/ViTPose/Body Motion文件合计7.11GB（6.63GiB），文件体积不等于单阶段峰值显存。正式安装前仍需确定与SONIC桥接匹配的版本。
+
+以10段平均30秒完整原片计算：首demo预算6–16工程小时；环境稳定后一轮约1.5–5小时；含实现、筛源、冻结和报告的R2预算2–5工作日。提取吞吐采用2–10输入fps的假设而非实测；R1软件机器人渲染日志实测3.0–3.4输出fps，累计5分钟原片对应机器人渲染约37–42分钟。若CPU辅助较多，慢速情景可达4–16小时/轮；必须据首条完整视频的实测修正，不保证在估算内通过。
+
+新增环境10–18GiB、匹配权重/资产8–12GiB、临时包/构建5–15GiB、单轮输入/数值/视频3–10GiB、保留调试失败10–20GiB，合计规划40–80GiB，建议D盘预留100GiB。当前C约10.2GiB余量，D约262.2GiB；conda prefix、包缓存、HF/torch缓存、TMPDIR和新结果需一并布局到D，先验证WSL下可运行性，保留现有环境和产物。C至少10GiB、D至少20GiB空闲为执行稿中的运行保护建议，尚非用户批准的新预算。无需移动WSL；不默认展开永久保存全部RGB（1080p/30Hz/300s原始RGB约52.1GiB）。保留源片、全部关键数值中间结果及独立/合成视频。
+
+详见本机 `runs/r2-resource-estimate-20261030/REPORT.md`，Git摘要 [evidence/r2-resource-estimate-20261030.json](evidence/r2-resource-estimate-20261030.json)；官方来源与计算假设均保留。STARTUP_PROMPT.md已更新审核稿，R2执行尚未激活，推理/显存验收仍awaiting_verification，云计费授权不变。
+
 ## WSL 部署检查
 
 通过 Codex 执行 WSL 终端即可，不需要额外配置 SSH。当前 Mac 对话不能因此假定已有笔记本执行权限。

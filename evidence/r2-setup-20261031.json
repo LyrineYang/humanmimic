@@ -1,0 +1,229 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-31",
+  "status": "awaiting_verification",
+  "scope": "R2环境、资产和接口准备已通过；首条真实视频全链路在运行，非R2整批完成",
+  "goal_prompt": "STARTUP_PROMPT.md 当前R2 Goal",
+  "storage_root": "/mnt/d/humanoid-demo-r2",
+  "storage_planning_gib": 100,
+  "components": {
+    "d-filesystem-probe.json": {
+      "status": "passed",
+      "scope": "D盘基础文件系统兼容探针；不代表conda/CUDA或GEM-X通过",
+      "linux_elf_exec": true,
+      "relative_symlink_exec": true,
+      "cross_root_symlink_read": true,
+      "same_d_hardlink": true,
+      "case_sensitive": false,
+      "sequential_write_mib_s": 163.16019474587992,
+      "warm_sequential_read_mib_s": 206.63708835377375,
+      "small_300_files_write_seconds": 1.0445598249989416,
+      "benchmark_is_warm_and_bounded": true,
+      "remaining_d_gib": 262.1358985900879,
+      "planned_project_gib": 100,
+      "conda_runtime_status": "awaiting_verification",
+      "cuda_status": "awaiting_verification"
+    },
+    "conda-runtime.json": {
+      "status": "passed",
+      "scope": "D盘独立conda Python/SSL/SQLite/动态库/ffmpeg，不包含CUDA或GEM-X",
+      "python": "3.12.16 (main, Oct 26 2026, 11:37:43) [GCC 15.3.0]",
+      "prefix": "/mnt/d/humanoid-demo-r2/envs/humanoid-r2",
+      "executable": "/mnt/d/humanoid-demo-r2/envs/humanoid-r2/bin/python",
+      "ssl": "OpenSSL 3.6.5 29 Sep 2026",
+      "ffmpeg": "ffmpeg version 9.0.2 Copyright (c) 2000-2026 the FFmpeg developers"
+    },
+    "d-conda-cuda-smoke-20261031.json": {
+      "status": "passed",
+      "scope": "D盘独立环境的PyTorch导入与目标4060 CUDA运算；不证明GEM-X单模型显存或全链路成功",
+      "prefix": "/mnt/d/humanoid-demo-r2/envs/humanoid-r2",
+      "torch": "2.10.0+cu128",
+      "torch_path": "/mnt/d/humanoid-demo-r2/envs/humanoid-r2/lib/python3.12/site-packages/torch/__init__.py",
+      "cuda_build": "12.8",
+      "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "torch_import_seconds": 26.675228442999924,
+      "max_abs_matrix_error": 4.1961669921875e-05,
+      "framework_peak_allocated_bytes": 11665408,
+      "total_wall_seconds": 27.54594223899994,
+      "gpu_snapshot": "name, driver_version, memory.total [MiB], memory.used [MiB], memory.free [MiB]\nNVIDIA GeForce RTX 4060 Laptop GPU, 617.42, 8188 MiB, 1484 MiB, 6473 MiB\n"
+    },
+    "r2-dependencies-isolated-20261031.json": {
+      "status": "passed",
+      "scope": "R2依赖导入/隔离与pip check，不含真实GEM-X推理",
+      "prefix": "/mnt/d/humanoid-demo-r2/envs/humanoid-r2",
+      "packages": {
+        "torch": "2.10.0+cu128",
+        "torchvision": "0.25.0+cu128",
+        "transformers": "5.3.0",
+        "py-soma-x": "0.3.3",
+        "numpy": "2.2.6",
+        "scipy": "1.15.3",
+        "onnxruntime": "1.31.1",
+        "opencv-python-headless": "4.14.0.94",
+        "warp-lang": "1.18.0"
+      },
+      "import_seconds": 144.8235743109999,
+      "R1_package_metadata_visible": false
+    },
+    "soma-interface-check-20261031.json": {
+      "status": "passed",
+      "scope": "SOMA真实几何/官方SONIC转换接口中性姿态检查，不是视频提取或物理验收",
+      "public_joint_count": 77,
+      "raw_target_rig_joint_count": 110,
+      "smpl_indices": [
+        0,
+        67,
+        72,
+        1,
+        68,
+        73,
+        2,
+        69,
+        74,
+        3,
+        70,
+        75,
+        4,
+        11,
+        39,
+        6,
+        12,
+        40,
+        13,
+        41,
+        14,
+        42,
+        24,
+        52
+      ],
+      "smpl_shape": [
+        1,
+        24,
+        3
+      ],
+      "body_quat": [
+        [
+          0.7071067690849304,
+          0.0,
+          0.0,
+          -0.7071067690849304
+        ]
+      ],
+      "joint_extent_m": [
+        [
+          0.1625334918498993,
+          1.4366060495376587,
+          1.5130107402801514
+        ]
+      ],
+      "wall_seconds_after_import": 43.21777690499994,
+      "cache": "/mnt/d/humanoid-demo-r2/cache/warp/1.18.0"
+    },
+    "protocol-compatibility.json": {
+      "status": "passed",
+      "scope": "complete four-frame wire message byte-identical to official SONIC pack_pose_message, including header count=1; no physical execution",
+      "wire_bytes": 4468,
+      "full_wire_equal": true
+    }
+  },
+  "assets": {
+    "status": "passed",
+    "scope": "Asset identity/download only; runtime not validated",
+    "files": [
+      {
+        "path": "models/gem-x/body_s240000.ckpt",
+        "bytes": 3538753341,
+        "sha256": "e244d27f2834eb6382c5f6b9cbf2a38681b685514a1b2e86f8f3d2592d614959",
+        "published_hash_verified": true
+      },
+      {
+        "path": "models/gem-x/vitpose.pth",
+        "bytes": 3388483384,
+        "sha256": "8e3eec71dbd6bb745eba8c6debe3e4b97bcfd1d01f300099f2eedf50b9a80c8e",
+        "published_hash_verified": true
+      },
+      {
+        "path": "models/gem-x/motion_native77_e774_s292175.ckpt",
+        "bytes": 187134331,
+        "sha256": "c7790f4587e518bcea40cb8281c9be2233d37f6caa668835462542760dcf82aa",
+        "published_hash_verified": true
+      },
+      {
+        "path": "models/gem-x/body_config.json",
+        "bytes": 1086,
+        "sha256": "61c29c72b93f88789ecb7beb21c526c78e92e24ffbce91d91e51984272b26368",
+        "published_hash_verified": false
+      },
+      {
+        "path": "models/gem-x/motion_stats_raw.npz",
+        "bytes": 21320,
+        "sha256": "b7719b634e0fc1f001005605d117d77448c8d4a110923149df58529c68112ed6",
+        "published_hash_verified": true
+      },
+      {
+        "path": "models/gem-x/motion_native77.yaml",
+        "bytes": 823,
+        "sha256": "5d5dff8ee849d3bcf53c28ce60340114980fe59062fa427c1f343655849cad8d",
+        "published_hash_verified": false
+      },
+      {
+        "path": "models/gem-x/body_video_native77.yaml",
+        "bytes": 1286,
+        "sha256": "796a306aca61e0c928888a23d74996740795bfa7cd1735bdc184d1e5274a02d7",
+        "published_hash_verified": false
+      },
+      {
+        "path": "models/soma-v0.3.3/SOMA_neutral.npz",
+        "bytes": 26608121,
+        "sha256": "5829af4a5333abdba5ad449360b868faacee99d395971e62f35c0e7169432b63",
+        "published_hash_verified": true
+      },
+      {
+        "path": "models/soma-v0.3.3/SOMA_template_rig.usda",
+        "bytes": 28306038,
+        "sha256": "a952cb7bdf4ccd801e355d53122d395b985b69d0d9181439edad5081bb171856",
+        "published_hash_verified": true
+      },
+      {
+        "path": "models/soma-v0.3.3/SOMA_procedural_transforms.json",
+        "bytes": 20045,
+        "sha256": "9853e19ab51625ffaa7d9e7ccf0e443272c2740837604e6bacd66604e8edf509",
+        "published_hash_verified": false
+      },
+      {
+        "path": "models/soma-v0.3.3/correctives_model.pt",
+        "bytes": 70549157,
+        "sha256": "411d061a651051a7a4ec941543495d35eac21e5a7a69c8ce042b89cd12772a43",
+        "published_hash_verified": true
+      },
+      {
+        "path": "models/yolox_humanart.zip",
+        "bytes": 368200375,
+        "sha256": "1c6fccc5cd450eb563b1fe4eba13c9bdf9ea8263b6ae1cb3ada765aa4ebea2c7",
+        "published_hash_verified": false
+      },
+      {
+        "path": "models/gem-x/yolox_humanart.onnx",
+        "bytes": 396283264,
+        "sha256": "8e9ea96a176bd48501eaaa77216e49ee30794d2f8ba80c7b9862beca4ea972da",
+        "published_hash_verified": false
+      }
+    ],
+    "wall_seconds_this_invocation": 625.6055253659999,
+    "cloud_cost_usd": 0
+  },
+  "first_video_preflight": {
+    "status": "running",
+    "run": "runs/r2-preflight-youtube-QqvZAUEOrAQ-20261031-01",
+    "source_url": "https://www.youtube.com/watch?v=QqvZAUEOrAQ",
+    "source_role": "debug",
+    "complete_source_seconds": 27.933333333333334,
+    "source_content_trimmed": false,
+    "raw_source_frames": 838,
+    "physical_and_demo_status": "awaiting_verification"
+  },
+  "heldout_used": false,
+  "batch_acceptance": "not_started",
+  "new_cloud_cost_usd": 0,
+  "r1_preserved": true
+}

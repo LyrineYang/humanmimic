@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "authorization": "local_r2_execution_approved_2026-10-30",
+  "storage_root_default": "/mnt/d/humanoid-demo-r2",
+  "project_planning_limit_gib": 100,
+  "min_c_free_gib": 10,
+  "min_d_free_gib": 20,
+  "cuda_device": "cuda:0",
+  "gpu_name_expected": "NVIDIA GeForce RTX 4060 Laptop GPU",
+  "model_stages_parallel": false,
+  "videos_parallel": 1,
+  "first_pose_batch_size": 1,
+  "first_observation_batch_size": 1,
+  "cloud_execution_authorized": false,
+  "source_gemx_revision": "20555befe2fbbe5b2015e1fff7ff214dc18ea9d6",
+  "heldout_used": false,
+  "note": "100GiB为项目容量规划及运行监控上界，不是操作系统独占配额；不创建占位大文件"
+}

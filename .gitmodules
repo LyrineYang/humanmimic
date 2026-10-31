@@ -1,3 +1,6 @@
 [submodule "sonic"]
 	path = vendor/GR00T-WholeBodyControl
 	url = https://github.com/NVlabs/GR00T-WholeBodyControl.git
+[submodule "gemx"]
+	path = vendor/GEM-X
+	url = https://github.com/NVlabs/GEM-X.git

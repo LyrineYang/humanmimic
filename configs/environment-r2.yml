@@ -1,0 +1,9 @@
+# Prefix and package cache are set by scripts/activate-r2.sh.
+name: humanoid-r2
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12
+  - pip
+  - ffmpeg
+  - psutil

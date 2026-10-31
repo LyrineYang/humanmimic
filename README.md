@@ -154,3 +154,19 @@ python scripts/resume-r1-suite.py --suite runs/r1-suite-acceptance-20261029-03
 
 - [OpenAI 蛋白折叠架构探索案例](https://learn.chatgpt.com/use-cases/discover-protein-folding-architectures)
 - [OpenAI Goal 编写指南](https://developers.openai.com/cookbook/examples/codex/using_goals_in_codex#how-to-write-a-goal)
+
+
+## R2 本机视频链路（当前预检中）
+
+当前D盘独立conda/CUDA、固定GEM-X资产与SOMA/SMPL接口已检查通过；首条完整YouTube原片正在预检，物理/三路demo与5调试+5保留整批尚未验收。当前执行Goal统一保存在 [STARTUP_PROMPT.md](STARTUP_PROMPT.md)，状态与验收见 [PLAN.md](PLAN.md)。
+
+独立前缀、模型、下载缓存、临时文件与新结果根为 `/mnt/d/humanoid-demo-r2`，源码仍在WSL Linux目录。C盘10GiB为系统运行余量，不是额外下载额度；100GiB为D上的项目容量规划。源视频完整保留，不自动截到60秒；当前先用原始上传即不超过60秒的视频，超限输入拒绝而不静默剪辑。
+
+```bash
+source scripts/activate-r2.sh
+bash scripts/run-r2-demo.sh /absolute/input.mp4 my-run-id https://www.youtube.com/watch?v=VIDEO_ID
+```
+
+入口依次执行分阶段提取与缓存、官方SONIC坐标转换、复用R1的真实MuJoCo闭环，再生成完整时间轴的原片—2D/3D提取—实际状态三路MP4。结果在D根的 `runs/my-run-id/`；失败与所有中间结果保留，仿真停止后的画面明确标记，缓存复演不当作新的提取或物理验收。新run id用于新尝试，既有物理结果不会被自动覆盖。
+
+环境配置见 `configs/environment-r2.yml`、`configs/constraints-r2.txt`，资源规则见 `configs/r2-resources.json`；固定GEM-X是Git子模块，独立环境不升级R1。当前已有的实际检查摘要见 [evidence/r2-setup-20261031.json](evidence/r2-setup-20261031.json)。
