@@ -58,13 +58,22 @@
     }
   },
   "active_debug_batch": {
-    "run": "runs/r2-debug-orchestration-20261101-01",
-    "source_commit": "840bb87",
+    "run": "runs/r2-debug-throughput-orchestration-20261101-01",
     "sources_remaining": [
       "vTx_ldn6MCA",
       "6uqztDO_7kQ",
       "2e_7XBmpw14"
     ],
+    "adopted_active_pose_task": "runs/r2-debug-vTx_ldn6MCA-20261101-01/throughput-recovery-01-task.json",
     "heldout_started": false
+  },
+  "execution_policy": {
+    "priority": "throughput",
+    "source": "configs/r2-execution-policy.json",
+    "software_temperature_gates": false,
+    "per_frame_idle_seconds": 0,
+    "checkpoint_frames": 32,
+    "on_local_reboot": "server handoff; no further local retry",
+    "acceptance_changed": false
   }
 }

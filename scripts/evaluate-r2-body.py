@@ -13,6 +13,7 @@ from pathlib import Path
 import numpy as np
 
 from r2_common import PROJECT, SONIC, sha256, storage_check, write_json
+from r2_geometry import body_frame_descriptors, descriptor_difference
 
 POINTS = ("left_hip", "right_hip", "left_knee", "right_knee", "left_ankle", "right_ankle", "left_shoulder", "right_shoulder", "left_elbow", "right_elbow", "left_wrist", "right_wrist")
 SMPL_INDICES = (1, 2, 4, 5, 7, 8, 16, 17, 18, 19, 20, 21)
@@ -45,6 +46,7 @@ def descriptors(points, up_axis=2):
         values[f"{side}_wrist_height_shoulder_units"] = (wrist[:, up_axis] - shoulder[:, up_axis]) / np.maximum(arm, 1e-8)
         values[f"{side}_ankle_height_hip_units"] = (ankle[:, up_axis] - hip[:, up_axis]) / np.maximum(leg, 1e-8)
         values[f"{side}_wrist_outward_shoulder_units"] = sign * np.sum((wrist - shoulder) * lateral, axis=-1) / np.maximum(arm, 1e-8)
+    values.update(body_frame_descriptors(points, up_axis))
     return values
 
 
@@ -169,7 +171,7 @@ def evaluate_events(annotation, source_times, human, robot, valid):
 def run(args):
     storage_check(args.output)
     args.output.mkdir(parents=True, exist_ok=False)
-    report = {"status": "awaiting_verification", "scope": "R2 body geometry/timing/key-event audit; extracted human is not 3D ground truth", "body_error_acceptance_threshold": None, "body_error_is_reporting_only": True, "joint_pos_zero_field_used_as_target": False, "time_shift_fitted": False, "evaluator_sha256": sha256(__file__)}
+    report = {"status": "awaiting_verification", "scope": "R2 body geometry/timing/key-event audit; extracted human is not 3D ground truth", "body_error_acceptance_threshold": None, "body_error_is_reporting_only": True, "joint_pos_zero_field_used_as_target": False, "time_shift_fitted": False, "evaluator_sha256": sha256(__file__), "geometry_helper_sha256": sha256(Path(__file__).with_name("r2_geometry.py")), "twist_error_wrap": "[-pi,pi)"}
     try:
         physical = json.loads((args.physical / "physical-metrics.json").read_text())
         report["physical_status"] = physical["status"]
@@ -189,7 +191,7 @@ def run(args):
         errors = {}
         for name in human:
             mask = valid & np.isfinite(human[name]) & np.isfinite(robot[name])
-            difference = robot[name][mask] - human[name][mask]
+            difference = descriptor_difference(name, robot[name][mask], human[name][mask])
             errors[name] = {"samples": int(mask.sum()), "rmse": float(np.sqrt(np.mean(difference**2))) if len(difference) else None, "mae": float(np.mean(abs(difference))) if len(difference) else None, "units": "rad" if name.endswith("_rad") else "limb_length_ratio"}
         finite = valid.any() and all(np.isfinite(human[name][valid]).all() and np.isfinite(robot[name][valid]).all() for name in human)
         report["body_error"] = {"status": "passed" if finite else "failed", "scope": "Measured robot/extracted human descriptors on verified consumed ticks; morphology differs", "per_feature": errors, "all_covered_descriptors_finite": bool(finite), "actual_state_coverage_fraction": float(valid.mean()), "provenance": provenance}

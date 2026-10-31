@@ -13,9 +13,9 @@ CODE = (
     "activate-r1.sh", "activate-r2.sh", "run-r2-demo.sh", "extract-r2-video.py",
     "r2_common.py", "r2_smpl.py", "r2_timeline.py", "r2_geometry.py", "cache-r2-pose2d.py",
     "run-r2-checkpoint-recovery.py", "run-r2-physical.py", "run-r1-reproduction.py",
-    "evaluate-r2-body.py", "render-r2-demo.py", "audit-r2-run.py", "freeze-r2-suite.py", "summarize-r2-suite.py", "run-r2-suite.py",
+    "evaluate-r2-body.py", "render-r2-demo.py", "audit-r2-run.py", "freeze-r2-suite.py", "summarize-r2-suite.py", "run-r2-suite.py", "run-r2-throughput-recovery.py",
 )
-CONFIGS = ("r2-resources.json", "r1-evaluation.json", "r1-dds.xml", "constraints-r2.txt",
+CONFIGS = ("r2-resources.json", "r2-execution-policy.json", "r1-evaluation.json", "r1-dds.xml", "constraints-r2.txt",
            "requirements-r2.lock.txt", "conda-r2-linux-64.explicit.txt")
 
 

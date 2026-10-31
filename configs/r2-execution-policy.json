@@ -1,0 +1,16 @@
+{
+  "authorization_date": "2026-11-01",
+  "authorization": "User requested throughput priority, fewer interruption precautions, and server handoff after shutdown",
+  "execution_priority": "throughput",
+  "software_temperature_gates": false,
+  "per_frame_idle_seconds": 0,
+  "mandatory_cooling_between_cohorts": false,
+  "temperature_recording": true,
+  "checkpoint_frames": 32,
+  "durable_checkpoints": true,
+  "driver_fan_clock_power_changes": false,
+  "local_boot_id_authorized": "fa0233fb-701c-42d8-81da-0d007d2efe7d",
+  "after_local_shutdown_or_reboot": "Stop local retries and migrate when the user connects the server",
+  "cloud_execution_authorized": false,
+  "acceptance_rules_changed": false
+}

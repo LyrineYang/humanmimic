@@ -17,7 +17,7 @@ from r2_common import PROJECT, STORAGE, sha256, storage_check, write_json
 
 
 def active_pipeline():
-    names = {"extract-r2-video.py", "run-r2-physical.py", "render-r2-demo.py", "run-r2-demo.sh", "g1_deploy_onnx_ref"}
+    names = {"extract-r2-video.py", "run-r2-physical.py", "render-r2-demo.py", "run-r2-demo.sh", "cache-r2-pose2d.py", "cache-r2-paced-pose2d.py", "run-r2-throughput-recovery.py", "run-r2-checkpoint-recovery.py", "g1_deploy_onnx_ref"}
     found = []
     for entry in Path("/proc").glob("[0-9]*/cmdline"):
         try:
