@@ -221,7 +221,7 @@
     "source_content_trimmed": false,
     "raw_source_frames": 838,
     "physical_and_demo_status": "awaiting_verification",
-    "execution_state": "bounded cooled checkpoint recovery after repeated abnormal host reboot",
+    "execution_state": "Cooled bounded cohorts, final frames pending; full 3D/physics/demo not yet run",
     "completed_stages": {
       "prepare": {
         "status": "passed",
@@ -313,7 +313,7 @@
     "resume_entrypoint": "scripts/resume-r2-demo.py",
     "resume_gpu_free_mib_required": 5120,
     "resume_observation": "runs/r2-preflight-youtube-QqvZAUEOrAQ-20261031-01/resume-observation-20261101-0120.json",
-    "pose2d_verified_frames": 416,
+    "pose2d_verified_frames": 800,
     "pose2d_expected_frames": 838,
     "exact_partition_equivalence": {
       "status": "passed",
@@ -330,7 +330,8 @@
     "checkpoint_recovery_evidence": "runs/r2-preflight-youtube-QqvZAUEOrAQ-20261031-01/interruption-checkpoint-audit-20261101-0157.json",
     "peak_pose2d_framework_allocated_bytes": 3540864000,
     "peak_pose2d_framework_reserved_bytes": 3642753024,
-    "host_abnormal_restart_root_cause": "not established"
+    "host_abnormal_restart_root_cause": "not established",
+    "verified_chunk_count": 25
   },
   "heldout_used": false,
   "batch_acceptance": "not_started",
@@ -530,5 +531,14 @@
     "connection_provided": false,
     "server_tasks_started": false,
     "paid_resources_started": false
+  },
+  "cohort_scheduling_checks": {
+    "status": "passed",
+    "scope": "CPU-only cohort scheduling checks, not new inference",
+    "stops_after_completion": true,
+    "minimum_30_second_rests_between_cohorts": true,
+    "over_temperature_wait_stops_at_120_seconds": true,
+    "maximum_four_cohorts_enforced": true,
+    "no_cuda_initialized": true
   }
 }
