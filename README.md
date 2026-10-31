@@ -158,7 +158,7 @@ python scripts/resume-r1-suite.py --suite runs/r1-suite-acceptance-20261029-03
 
 ## R2 本机视频链路
 
-当前D盘独立conda/CUDA、固定GEM-X资产与SOMA/SMPL接口已检查通过；两条调试片已通过完整提取、物理和对照视频验收，5调试+5保留整批仍在运行。当前执行Goal统一保存在 [STARTUP_PROMPT.md](STARTUP_PROMPT.md)，状态与验收见 [PLAN.md](PLAN.md)。
+当前D盘独立conda/CUDA、固定GEM-X资产与SOMA/SMPL接口已检查通过；三条调试片已通过完整提取、物理和对照视频验收，5调试+5保留整批仍在运行。当前执行Goal统一保存在 [STARTUP_PROMPT.md](STARTUP_PROMPT.md)，状态与验收见 [PLAN.md](PLAN.md)。
 
 独立前缀、模型、下载缓存、临时文件与新结果根为 `/mnt/d/humanoid-demo-r2`，源码仍在WSL Linux目录。C盘10GiB为系统运行余量，不是额外下载额度；100GiB为D上的项目容量规划。源视频完整保留，不自动截到60秒；当前先用原始上传即不超过60秒的视频，超限输入拒绝而不静默剪辑。
 
@@ -225,7 +225,7 @@ python scripts/inspect-r2-sources.py /absolute/video.mp4 \
 
 物理录像单独恢复使用R1环境中的 `python scripts/run-r2-physical.py --reference <已完成提取目录>/sonic-reference.npz --output <已有物理目录> --render-only`。此入口只对已停止运行的实际状态按原生消费时钟重评/渲染，不启动控制器；已有录像必须先带哈希归档，不会自动覆盖。首片原始失败、旧派生录像及源码版本分别保留。默认单片/整批入口已集成原速姿态检查点，状态以PLAN为准。
 
-R2当前已完成两条调试：首片舞蹈及[完整深蹲对照](runs/r2-debug-squat-20261101-01/demo-attempt-02/comparison.mp4)，7/7下蹲/站起事件通过。[两片进度及失败试次索引](evidence/r2-debug-progress-20261101.json)。5+5来源/事件在configs/r2-suite-draft.json，仍未冻结或使用保留推理。
+R2当前三条调试passed：首片舞蹈、59秒[Cupid完整对照](runs/r2-debug-2e_7XBmpw14-20261101-01/demo/comparison.mp4)（2952源参考/5事件全通过，见同目录REPORT.md）及[完整深蹲对照](runs/r2-debug-squat-20261101-01/demo-attempt-02/comparison.mp4)，7/7下蹲/站起事件通过。[当前进度及失败试次索引](evidence/r2-debug-progress-20261101.json)。5+5来源/事件在configs/r2-suite-draft.json，仍未冻结或使用保留推理。
 
 批次入口使用完整源，跳过已审计终态，按视频和模型阶段串行：
 

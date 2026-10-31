@@ -1,7 +1,7 @@
 {
   "status": "awaiting_verification",
   "scope": "R2 batch progress; not suite acceptance",
-  "debug_completed": 3,
+  "debug_completed": 4,
   "debug_required": 5,
   "heldout_used": 0,
   "heldout_required": 5,
@@ -45,6 +45,25 @@
       "media_review": "runs/r2-debug-6uqztDO_7kQ-20261101-01/run-audit-media-review-20261101.json",
       "demo": "runs/r2-debug-6uqztDO_7kQ-20261101-01/demo/comparison.mp4",
       "report": "runs/r2-debug-6uqztDO_7kQ-20261101-01/REPORT.md"
+    },
+    {
+      "id": "2e_7XBmpw14",
+      "status": "passed",
+      "events": "5/5",
+      "original_frames": 1771,
+      "control_frames": 2952,
+      "source_reference_frames_consumed": 2952,
+      "minimum_root_height_m": 0.599636382364978,
+      "fell": false,
+      "source_clock_p95_abs_seconds": 4.900000010641392e-05,
+      "actual_state_sha256": "47f80f12d23f0a7dca741fb399c6088ec13fe7a83d8fb5632e141c3838f7b44c",
+      "demo_frames": 1476,
+      "demo_fps": 25,
+      "all_five_media_full_decode": "passed",
+      "visual_review": "passed, first/middle/tail",
+      "audit": "runs/r2-debug-2e_7XBmpw14-20261101-01/run-audit.json",
+      "report": "runs/r2-debug-2e_7XBmpw14-20261101-01/REPORT.md",
+      "demo": "runs/r2-debug-2e_7XBmpw14-20261101-01/demo/comparison.mp4"
     }
   ],
   "source_manifest": "configs/r2-suite-draft.json",
@@ -99,11 +118,13 @@
   "active_debug_batch": {
     "run": "runs/r2-debug-throughput-orchestration-20261101-01",
     "sources_remaining": [
-      "vTx_ldn6MCA",
-      "2e_7XBmpw14"
+      "vTx_ldn6MCA"
     ],
     "adopted_active_pose_task": "runs/r2-debug-vTx_ldn6MCA-20261101-01/throughput-recovery-01-task.json",
-    "heldout_started": false
+    "heldout_started": false,
+    "main_queue_ended": true,
+    "serial_followup": "runs/r2-debug-arm-finish-20261101-01",
+    "followup_pid": 129032
   },
   "execution_policy": {
     "priority": "throughput",
@@ -114,9 +135,9 @@
     "on_local_reboot": "server handoff; no further local retry",
     "acceptance_changed": false
   },
-  "debug_passed": 2,
+  "debug_passed": 3,
   "debug_failed": 1,
-  "debug_awaiting_verification": 2,
+  "debug_awaiting_verification": 1,
   "startup_diagnostic": {
     "status": "awaiting_verification",
     "scope": "Fixed reference prefix ablation only, not canonical suite acceptance",
@@ -137,19 +158,12 @@
     "/mnt/c": 19.15255355834961,
     "/mnt/d": 271.98745346069336
   },
-  "updated_unix": 1793485133.6344194,
-  "pending_final_audits": {
-    "2e_7XBmpw14": {
-      "status": "awaiting_verification",
-      "extraction": "passed, all8stages",
-      "physical": "passed",
-      "source_frames_consumed": "2952/2952",
-      "fell": false,
-      "minimum_root_height_m": 0.599636382364978,
-      "events": "5/5passed",
-      "body": "passed",
-      "demo": "generating, whole-video decode and visual review still required",
-      "actual_state_sha256": "47f80f12d23f0a7dca741fb399c6088ec13fe7a83d8fb5632e141c3838f7b44c"
-    }
+  "updated_unix": 1793488056.8932412,
+  "pending_final_audits": {},
+  "rendering_candidate": {
+    "status": "passed, three-state timing/geometry/visual check only",
+    "run": "runs/r2-render-throughput-check-20261101-01",
+    "median_speed_ratio": 2.023036039578067,
+    "enabled": false
   }
 }

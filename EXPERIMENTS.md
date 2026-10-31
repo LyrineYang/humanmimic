@@ -300,3 +300,11 @@ next_action: null
 - 全1771帧缓存置信度补齐：extraction-diagnostics-20261101-03.json明确原始/主轨迹1723帧，末48帧/1.6秒沿用框；SMPL24置信度>0.25比例0.9728966685，但只是非校准描述、不是准确率。早前02报告的2D待验证状态保留。无额外模型推理。
 - 实际状态录像CPU软件渲染较慢，期望先写runs/r2-render-throughput-check-20261101-01/expectation.json；独立复演相同0/29.5/59秒三状态，对照默认光照与关闭阴影/反射（无物理步进或在线控制）。三个分割几何图逐元素相同，状态文件SHA不变，图像首/中/尾人工核验passed。热身后的默认RGB单帧[0.4821,0.4939,0.4477]s，对照[0.2383,0.2440,0.2006]s，中位比2.023；背景原CPU渲染仍在，不能外推为纯独占硬件或全视频已通过。source.py/probe.log/comparison.png/comparison-reviewed.json留原始证据，现行渲染设置未改。EGL仍走软件路径，GPU图形/窗口没有因此passed。
 - 期间一次不可读/proc编码器I/O节点被误解为退出，随即以真实ps存活和文件持续增长纠正；没有终止或重跑任何任务。最终原渲染正常结束后才读取正式physics/body指标。keep该候选，待既有所有队列与同控制脚本的起始衔接诊断结束后再统一启用/测全视频，不破坏当前缓存身份或受控对照。
+
+
+## 2026-11-01 第三片Cupid完整调试正式通过
+
+- 完整视频、提取、转换、实际物理、身体/事件与最终媒体审计全部passed：原始/归一化1771帧/59.033s，2952/2952源参考，真实状态未覆写，最低根高0.599636m，5/5预标注事件方向/顺序通过，无拟合时间偏移。native source clock P95abs49微秒，actual-state SHA47f80f12d23f0a7dca741fb399c6088ec13fe7a83d8fb5632e141c3838f7b44c。
+- 三路comparison1476帧/25fps/59.04s，source/extraction/robot/comparison及实际状态录像共5个MP4全帧解码passed，所有实际机器人帧可用。人工核验25/737/1463帧：原片、2D、3D与真实机器人对齐清晰，原片最后48帧黑尾完整保留，填框标记可见；visual-audit绑定最终comparison SHA58a851a72563c594cf561627c0e331033c2a2859e0bace944931d41c49a1a631。
+- 证据runs/r2-debug-2e_7XBmpw14-20261101-01/{REPORT.md,run-audit.json,visual-audit.json,demo/comparison.mp4}。初审awaiting文件保留，最终审计另存canonical；没有改写原实际轨迹或源参考。当前调试3passed/1failed/1待验收，保留0/5；整批仍awaiting_verification。代码/小摘要已持续提交，不上传大模型、受限资产或凭据，云费用0。
+- 主队列PID128105已退出，旧调度failed包含踏步实际失败及已被单独恢复接管的旧臂资源失败，不重启。后续PID129032正在完成臂环绕转换/物理/demo，camera/motion/postprocess缓存已完整；随后自动运行同原控制脚本的踏步起始衔接诊断PID136971，再执行完整CPU检测线程对照PID138951。暂不修改这几个活跃对照依赖的原物理/提取/渲染源码。
