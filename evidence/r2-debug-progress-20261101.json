@@ -91,8 +91,9 @@
       "raw_detection_frames": 1723,
       "dominant_track_observed_frames": 1723,
       "filled_primary_frames": 48,
-      "pose_confidence_status": "awaiting_verification",
-      "diagnostic": "/mnt/d/humanoid-demo-r2/runs/r2-debug-2e_7XBmpw14-20261101-01/extraction-diagnostics-20261101-02.json"
+      "pose_confidence_status": "passed",
+      "diagnostic": "/mnt/d/humanoid-demo-r2/runs/r2-debug-2e_7XBmpw14-20261101-01/extraction-diagnostics-20261101-03.json",
+      "mapped_smpl24_fraction_confidence_above_025": 0.9728966685488425
     }
   },
   "active_debug_batch": {
@@ -136,5 +137,19 @@
     "/mnt/c": 19.15255355834961,
     "/mnt/d": 271.98745346069336
   },
-  "updated_unix": 1793485133.6344194
+  "updated_unix": 1793485133.6344194,
+  "pending_final_audits": {
+    "2e_7XBmpw14": {
+      "status": "awaiting_verification",
+      "extraction": "passed, all8stages",
+      "physical": "passed",
+      "source_frames_consumed": "2952/2952",
+      "fell": false,
+      "minimum_root_height_m": 0.599636382364978,
+      "events": "5/5passed",
+      "body": "passed",
+      "demo": "generating, whole-video decode and visual review still required",
+      "actual_state_sha256": "47f80f12d23f0a7dca741fb399c6088ec13fe7a83d8fb5632e141c3838f7b44c"
+    }
+  }
 }
