@@ -14,7 +14,7 @@ from r2_common import GEMX, PROJECT, SONIC, STORAGE, sha256, storage_check, writ
 
 def active_tasks():
     found = []
-    scripts = {b"extract-r2-video.py", b"run-r2-physical.py", b"cache-r2-pose2d.py", b"cache-r2-paced-pose2d.py", b"run-r2-throughput-recovery.py", b"run-r2-checkpoint-recovery.py", b"render-r2-demo.py", b"run-r2-demo.sh", b"run-r2-suite.py", b"run-r2-video.py", b"prepare-r2-startup-diagnostic.py"}
+    scripts = {b"extract-r2-video.py", b"run-r2-physical.py", b"cache-r2-pose2d.py", b"cache-r2-paced-pose2d.py", b"run-r2-throughput-recovery.py", b"run-r2-checkpoint-recovery.py", b"render-r2-demo.py", b"run-r2-demo.sh", b"run-r2-suite.py", b"run-r2-video.py", b"prepare-r2-startup-diagnostic.py", b"benchmark-r2-detection.py"}
     for path in Path("/proc").glob("[0-9]*/cmdline"):
         if int(path.parent.name) == os.getpid():
             continue

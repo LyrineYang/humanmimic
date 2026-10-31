@@ -268,3 +268,12 @@ next_action: null
 - 调试分析：源开始比策略启动晚1.08185s；正式源开始前机器人高度已从0.9645降至0.6036m并倾斜，随后跌倒。踏步首参考右膝屈曲1.82777rad，固定首姿态50帧预热可能造成站立→高单腿的突变，尚未确认根因。独立诊断准备固定100帧/2秒骨方向SLERP+smoothstep前缀，保留首四元数/上半身与腿骨长，全部574原始运动样本逐值不变，最大骨长误差5.96e-8m；CPU几何边界检查passed，真实执行awaiting_verification。单次诊断PID136971在Cupid+臂环绕队列结束后运行，绝不覆盖原失败或纳入canonical通过计数。
 - 活跃任务：Cupid检测1470.001s passed，features继续；主队列PID128105、臂后续PID129032均在同一允许boot上。调试现2passed/1failed/2待验收，保留0/5；运行预算不变，云费用0。本机再次关机就按用户要求停止本机重试，待接入服务器迁移。
 - 证据：踏步runs/r2-debug-6uqztDO_7kQ-20261101-01/{REPORT.md,startup-fall-diagnosis-20261101.json,run-audit-media-review-20261101.json,visual-failure-review-20261101.jpg}；setup/{single-video-entry-check,frozen-runtime-guard-check,report-media-regression}-20261101.json；runs/r2-startup-transition-diagnostic-20261101-01/{expectation,geometry-check,preparation,task}.json。keep实现/证据，诊断真实结果未出前不修改主物理/转换源码；5调试完成后再冻结保留。
+
+
+## 2026-11-01 最长调试片特征与CPU检测瓶颈
+
+- 上一Goal轮为实质进展：提交并推送095b315，一键入口、冻结身份、失败媒体审计和调试起始衔接源码已保存；本轮直接检查同一boot/startticks的活跃进程，没有重复任务。
+- 实测 `passed`（仅单阶段）：Cupid完整1771帧/59.033s视频，CPU检测1470.001s，GPU特征529.009s，系统总显存峰值4931MiB、进程树峰值4,370,276,352B；完整3D/物理/demo尚awaiting_verification。原速姿态PID138962已接续，D盘冷加载约3分钟后显存与RSS上升，实际进程持续活动，未因观察超时重启；软件温度门槛关闭，原生FP32/batch1和32帧检查点不变。
+- 调度修复预期先记录：默认ORT CPU检测持续使用近32线程，长片检测成为瓶颈。新benchmark-r2-detection.py在前序所有队列与启动衔接诊断结束后，以固定8/1线程对完整344帧踏步调试片做一次同模型/解码/阈值/NMS/官方跟踪与裁剪对照。全部raw_boxes/raw_scores、track/frame IDs、observed/valid_span、主框/平滑裁剪框、其他人物框和填充标签逐值相同才通过；任意差异failed。候选另存D目录，原缓存哈希前后核对，尚未修改现行提取源码或采用该线程设置。
+- 当前只是源码/串行调度准备：PID138951/startticks1502463/boot fa0233fb-701c-42d8-81da-0d007d2efe7d等待PID136971，等价/性能awaiting_verification，无新增GPU推理或保留使用。期望/源码快照/任务日志在runs/r2-detection-throughput-check-20261101-01/。若速度有提升，报告两轮导入/缓存热状态不同，不能把worker总耗时当作纯模型速度对比。
+- 冻结只读预检正确返回awaiting_verification，当前缺Cupid最终调试审计；臂环绕资源失败仍由既定后续队列处理，不能把这次预检当作可以提前进入保留集。云费用0。
