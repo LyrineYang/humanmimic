@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "role": "debug",
+  "annotation_basis": "Original source contact sheets only, before extracted 3D or robot execution",
+  "left_right_convention": "Anatomical side as observed in the uploaded input; unknown source mirror is not undone",
+  "video_mirrored": "unknown",
+  "source_content_trimmed": false,
+  "time_shift_fitted": false,
+  "source_url": "https://www.youtube.com/watch?v=2e_7XBmpw14",
+  "source_sha256": "fcd29a7e38f6c0d745dfe844a74096d0c64f596422a269714d1d9d72e4407af0",
+  "events": [
+    {
+      "id": "left-wrist-high",
+      "description": "Left wrist near head",
+      "feature": "left_wrist_height_shoulder_units",
+      "extremum": "max",
+      "threshold": 0.25,
+      "window_seconds": [
+        5.7,
+        6.8
+      ],
+      "source_event_seconds": 6.2
+    },
+    {
+      "id": "right-hand-salute",
+      "description": "Right wrist near forehead",
+      "feature": "right_wrist_height_shoulder_units",
+      "extremum": "max",
+      "threshold": 0.25,
+      "window_seconds": [
+        15.0,
+        16.1
+      ],
+      "source_event_seconds": 15.5
+    },
+    {
+      "id": "first-visible-crouch",
+      "description": "Visible crouch before returning upright",
+      "feature": "left_knee_flexion_rad",
+      "extremum": "max",
+      "threshold": 0.7,
+      "window_seconds": [
+        24.3,
+        25.4
+      ],
+      "source_event_seconds": 24.83
+    },
+    {
+      "id": "second-visible-crouch",
+      "description": "Second clear crouch",
+      "feature": "left_knee_flexion_rad",
+      "extremum": "max",
+      "threshold": 0.7,
+      "window_seconds": [
+        33.6,
+        34.8
+      ],
+      "source_event_seconds": 34.13
+    },
+    {
+      "id": "right-arm-outward",
+      "description": "Right arm extended to subject right near final dance phrase",
+      "feature": "right_wrist_outward_shoulder_units",
+      "extremum": "max",
+      "threshold": 0.6,
+      "window_seconds": [
+        52.1,
+        53.4
+      ],
+      "source_event_seconds": 52.77
+    }
+  ],
+  "notes": [
+    "Final original black tail retained; no events placed where the person is not visible."
+  ]
+}

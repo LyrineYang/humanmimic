@@ -218,3 +218,16 @@ python scripts/inspect-r2-sources.py /absolute/video.mp4 \
 - 对照保留完整时间轴、2D覆盖及对应3D骨架、真实记录状态离线渲染；无拟合时间偏移。八项身体角度误差约0.163–0.391rad只作报告，不能称为人体真值误差或R1关节跟踪误差。
 
 物理录像单独恢复使用R1环境中的 `python scripts/run-r2-physical.py --reference <已完成提取目录>/sonic-reference.npz --output <已有物理目录> --render-only`。此入口只对已停止运行的实际状态按原生消费时钟重评/渲染，不启动控制器；已有录像必须先带哈希归档，不会自动覆盖。首片原始失败、旧派生录像及源码版本分别保留。默认整批入口的冷却检查点集成正在继续，状态以PLAN为准。
+
+R2当前已完成两条调试：首片舞蹈及[完整深蹲对照](runs/r2-debug-squat-20261101-01/demo-attempt-02/comparison.mp4)，7/7下蹲/站起事件通过。[两片进度及失败试次索引](evidence/r2-debug-progress-20261101.json)。5+5来源/事件在configs/r2-suite-draft.json，仍未冻结或使用保留推理。
+
+批次入口使用完整源，跳过已审计终态，按视频和模型阶段串行：
+
+```bash
+source scripts/activate-r2.sh
+python scripts/run-r2-suite.py --manifest configs/r2-suite-draft.json --role debug \
+  --output "$R2_STORAGE_ROOT/runs/r2-debug-orchestration-NEW" --check-only
+# 去掉 --check-only 后执行；先查已有任务，勿重复提交。
+```
+
+每片自动保留提取、物理、身体/事件、全时间轴三路demo和初审。视觉检查须绑定最终comparison SHA，未核验返回2；失败返回1并保存证据。freeze-r2-suite.py在5条调试未审计时拒绝冻结，冻结后才允许heldout入口；summarize-r2-suite.py报告全部10来源并执行至少4/5门槛。它们不将程序结束或MP4生成当作整批通过。

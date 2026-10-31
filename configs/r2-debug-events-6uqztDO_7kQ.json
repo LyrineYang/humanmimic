@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "role": "debug",
+  "annotation_basis": "Original source contact sheets only, before extracted 3D or robot execution",
+  "left_right_convention": "Anatomical side as observed in the uploaded input; unknown source mirror is not undone",
+  "video_mirrored": "unknown",
+  "source_content_trimmed": false,
+  "time_shift_fitted": false,
+  "source_url": "https://www.youtube.com/watch?v=6uqztDO_7kQ",
+  "source_sha256": "b098df444409a7f23f17d70b14d072c9e552e99e94d796762cae87af3214fe81",
+  "events": [
+    {
+      "id": "lift-left-1",
+      "description": "Alternating left knee lift",
+      "feature": "left_knee_flexion_rad",
+      "extremum": "max",
+      "threshold": 0.7,
+      "window_seconds": [
+        0.02,
+        0.45
+      ],
+      "source_event_seconds": 0.2
+    },
+    {
+      "id": "lift-right-2",
+      "description": "Alternating right knee lift",
+      "feature": "right_knee_flexion_rad",
+      "extremum": "max",
+      "threshold": 0.7,
+      "window_seconds": [
+        1.02,
+        1.45
+      ],
+      "source_event_seconds": 1.2
+    },
+    {
+      "id": "lift-left-3",
+      "description": "Alternating left knee lift",
+      "feature": "left_knee_flexion_rad",
+      "extremum": "max",
+      "threshold": 0.7,
+      "window_seconds": [
+        2.02,
+        2.45
+      ],
+      "source_event_seconds": 2.2
+    },
+    {
+      "id": "lift-right-4",
+      "description": "Alternating right knee lift",
+      "feature": "right_knee_flexion_rad",
+      "extremum": "max",
+      "threshold": 0.7,
+      "window_seconds": [
+        3.02,
+        3.45
+      ],
+      "source_event_seconds": 3.2
+    },
+    {
+      "id": "lift-left-5",
+      "description": "Alternating left knee lift",
+      "feature": "left_knee_flexion_rad",
+      "extremum": "max",
+      "threshold": 0.7,
+      "window_seconds": [
+        4.02,
+        4.45
+      ],
+      "source_event_seconds": 4.2
+    },
+    {
+      "id": "lift-right-6",
+      "description": "Alternating right knee lift",
+      "feature": "right_knee_flexion_rad",
+      "extremum": "max",
+      "threshold": 0.7,
+      "window_seconds": [
+        5.02,
+        5.45
+      ],
+      "source_event_seconds": 5.2
+    }
+  ],
+  "notes": [
+    "Side assignment from original side view and outer trouser stripe; apparent near leg is subject right. Dense first2s source-only contact sheet retained."
+  ]
+}

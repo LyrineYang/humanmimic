@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "role": "heldout",
+  "source_url": "https://www.youtube.com/watch?v=dIfUVvoVXRM",
+  "source_sha256": "ce1f678dc87e8b702f941cc3a254b8d8d925dab7e8807a99ca3988294cfb0760",
+  "annotation_basis": "Original full-source contact sheets and selected high-resolution source stills only; no extracted keypoints/3D or robot results examined",
+  "left_right_convention": "Anatomical side as observed in this uploaded input; no attempt to undo original mirroring",
+  "video_mirrored": true,
+  "source_content_trimmed": false,
+  "time_shift_fitted": false,
+  "notes": [
+    "Uploader explicitly labels mirrored; input is not unmirrored. Source-only high-resolution six-frame strip used to avoid interpreting low-resolution arm gestures incorrectly. One physical dancer; mirror edge remains in original scene."
+  ],
+  "events": [
+    {
+      "id": "initial-right-hand-high",
+      "description": "Right hand near forehead",
+      "feature": "right_wrist_height_shoulder_units",
+      "extremum": "max",
+      "threshold": 0.25,
+      "window_seconds": [
+        0,
+        0.8
+      ],
+      "source_event_seconds": 0.2
+    },
+    {
+      "id": "hands-near-head",
+      "description": "Hands near head, right wrist",
+      "feature": "right_wrist_height_shoulder_units",
+      "extremum": "max",
+      "threshold": 0.25,
+      "window_seconds": [
+        8.8,
+        9.9
+      ],
+      "source_event_seconds": 9.37
+    },
+    {
+      "id": "left-arm-up",
+      "description": "Left forearm/hand raised above shoulder",
+      "feature": "left_wrist_height_shoulder_units",
+      "extremum": "max",
+      "threshold": 0.25,
+      "window_seconds": [
+        18.2,
+        19.3
+      ],
+      "source_event_seconds": 18.77
+    },
+    {
+      "id": "late-bent-knees",
+      "description": "Late knee bend",
+      "feature": "left_knee_flexion_rad",
+      "extremum": "max",
+      "threshold": 0.7,
+      "window_seconds": [
+        27.6,
+        28.8
+      ],
+      "source_event_seconds": 28.17
+    },
+    {
+      "id": "final-bent-knees",
+      "description": "Final clear bent-knee pose",
+      "feature": "left_knee_flexion_rad",
+      "extremum": "max",
+      "threshold": 0.7,
+      "window_seconds": [
+        31.4,
+        32.5
+      ],
+      "source_event_seconds": 31.93
+    }
+  ]
+}

@@ -6,6 +6,7 @@ absolute 200 Hz pacing, policy, gains and no-reset recording are reused.
 
 import argparse
 import csv
+import errno
 import importlib.util
 import json
 import os
@@ -51,12 +52,23 @@ def read_rows(path):
         return list(csv.DictReader(stream))
 
 
-def last_input_frame(path):
-    if not path.exists():
+def last_input_frame(path, read_errors=None):
+    try:
+        if not path.exists():
+            return None
+        with path.open("rb") as stream:
+            stream.seek(max(0, path.stat().st_size - 4096))
+            text = stream.read().decode(errors="replace")
+    except OSError as error:
+        # DrvFS can briefly return ENODATA while the native logger writes.
+        # This observer must not stop control or invent a consumed sample.
+        # Persistent failure is still bounded by the unchanged run deadline.
+        if error.errno not in (errno.ENODATA, errno.EAGAIN, errno.EINTR, errno.ENOENT):
+            raise
+        if read_errors is not None:
+            key = errno.errorcode[error.errno]
+            read_errors[key] = read_errors.get(key, 0) + 1
         return None
-    with path.open("rb") as stream:
-        stream.seek(max(0, path.stat().st_size - 4096))
-        text = stream.read().decode(errors="replace")
     lines = text.splitlines()
     if not text.endswith("\n"):
         lines = lines[:-1]
@@ -200,6 +212,7 @@ def run(args):
     sim = controller = None
     master = None
     events, packets = [], []
+    live_read_errors = {}
     transcript = ""
     enabled = policy_started = released = None
     sends = 0
@@ -251,7 +264,7 @@ def run(args):
                         (output / "release.flag").touch()
                         released = now
                         events.append({"name": "band_release_requested", "monotonic": now})
-                consumed = last_input_frame(output / "controller-input.csv")
+                consumed = last_input_frame(output / "controller-input.csv", live_read_errors)
                 if consumed is not None and consumed >= warmup + count:
                     complete = True
                     events.append({"name": "complete_source_consumed", "monotonic": now, "next_control_frame": consumed})
@@ -272,7 +285,7 @@ def run(args):
         r1.stop_process(controller); r1.stop_process(sim)
         if master is not None: os.close(master)
         subscriber.close(0); publisher.close(0); context.term()
-        write_json(output / "run-events.json", {"events": events, "source_completed": complete, "failure": failure, "packets": len(packets), "whole_cache_sends_before_policy": sends})
+        write_json(output / "run-events.json", {"events": events, "source_completed": complete, "failure": failure, "packets": len(packets), "whole_cache_sends_before_policy": sends, "transient_live_csv_read_errors": live_read_errors})
     return evaluate_recorded(args.reference, output, complete, failure, args.video)
 
 

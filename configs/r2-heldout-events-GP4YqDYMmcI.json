@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "role": "heldout",
+  "source_url": "https://www.youtube.com/watch?v=GP4YqDYMmcI",
+  "source_sha256": "090d542c11a51b9cc54a17d6f59aac44fe9de94d7c15eb055ef68896ea924938",
+  "annotation_basis": "Original full-source contact sheets and selected high-resolution source stills only; no extracted keypoints/3D or robot results examined",
+  "left_right_convention": "Anatomical side as observed in this uploaded input; no attempt to undo original mirroring",
+  "video_mirrored": "unknown",
+  "source_content_trimmed": false,
+  "time_shift_fitted": false,
+  "notes": [
+    "8.6s raw source still confirms left knee lift. Original reflective studio and entire video retained."
+  ],
+  "events": [
+    {
+      "id": "initial-right-hand",
+      "description": "Right wrist near forehead",
+      "feature": "right_wrist_height_shoulder_units",
+      "extremum": "max",
+      "threshold": 0.25,
+      "window_seconds": [
+        0,
+        0.7
+      ],
+      "source_event_seconds": 0.2
+    },
+    {
+      "id": "hands-near-face",
+      "description": "Hands folded near face; clear left elbow flexion",
+      "feature": "left_elbow_flexion_rad",
+      "extremum": "max",
+      "threshold": 0.7,
+      "window_seconds": [
+        3.8,
+        4.8
+      ],
+      "source_event_seconds": 4.3
+    },
+    {
+      "id": "left-knee-up",
+      "description": "Left knee bent and lifted across body",
+      "feature": "left_knee_flexion_rad",
+      "extremum": "max",
+      "threshold": 0.7,
+      "window_seconds": [
+        8.1,
+        9.1
+      ],
+      "source_event_seconds": 8.6
+    },
+    {
+      "id": "both-hands-overhead",
+      "description": "Both arms overhead, right wrist",
+      "feature": "right_wrist_height_shoulder_units",
+      "extremum": "max",
+      "threshold": 0.25,
+      "window_seconds": [
+        12.3,
+        13.4
+      ],
+      "source_event_seconds": 12.9
+    },
+    {
+      "id": "wide-crouch",
+      "description": "Wide knee bend",
+      "feature": "left_knee_flexion_rad",
+      "extremum": "max",
+      "threshold": 0.7,
+      "window_seconds": [
+        22.4,
+        23.5
+      ],
+      "source_event_seconds": 22.93
+    },
+    {
+      "id": "late-overhead",
+      "description": "Late overhead pose, left wrist",
+      "feature": "left_wrist_height_shoulder_units",
+      "extremum": "max",
+      "threshold": 0.25,
+      "window_seconds": [
+        25.2,
+        26.3
+      ],
+      "source_event_seconds": 25.8
+    }
+  ]
+}

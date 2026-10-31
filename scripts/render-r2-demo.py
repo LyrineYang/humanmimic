@@ -37,7 +37,6 @@ def main(args):
     physical = args.physical.resolve()
     storage_check(args.output)
     output = args.output.resolve()
-    output.mkdir(parents=True, exist_ok=False)
     conversion = json.loads((source / "conversion.json").read_text())
     metadata = json.loads((source / "source.json").read_text())
     metrics = json.loads((physical / "physical-metrics.json").read_text())
@@ -50,6 +49,8 @@ def main(args):
     from r2_smpl import build_soma_to_smpl_index
     point_map = build_soma_to_smpl_index(list(SOMA77_JOINT_NAMES))
     joint_map = conversion["smpl_indices"]
+    # Validate prerequisite files before reserving the final output directory.
+    output.mkdir(parents=True, exist_ok=False)
     capture = cv2.VideoCapture(str(source / "normalized.mp4"))
     robot_path = physical / "actual-execution.mp4"
     robot = cv2.VideoCapture(str(robot_path)) if robot_path.exists() else None

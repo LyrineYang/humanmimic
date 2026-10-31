@@ -5,6 +5,7 @@ the original producer source remain unchanged, with both source hashes saved.
 """
 
 import argparse
+from contextlib import nullcontext
 import errno
 import fcntl
 import gc
@@ -39,11 +40,13 @@ def durable_json(path, value):
         os.close(directory)
 
 
-def run_cycles(module, options, args, record, identity):
+def run_cycles(module, options, args, record, identity, *, lock_held=False):
     """Finite cohorts; release GPU tensors and cool fully between cohorts."""
     import torch
-    with (args.extraction / "extraction.lock").open("a") as lock:
-        fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+    context = nullcontext() if lock_held else (args.extraction / "extraction.lock").open("a")
+    with context as lock:
+        if not lock_held:
+            fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
         for cycle in range(args.cycles):
             identity.update({"cycle": cycle + 1, "phase": "computing_bounded_cohort"})
             durable_json(record, identity)
@@ -72,7 +75,7 @@ def run_cycles(module, options, args, record, identity):
                 time.sleep(5)
 
 
-def main(args):
+def main(args, *, lock_held=False):
     storage_check(args.extraction)
     producer = PROJECT / "scripts/cache-r2-pose2d.py"
     spec = importlib.util.spec_from_file_location("r2_checkpoint_producer", producer)
@@ -81,7 +84,7 @@ def main(args):
     cache = args.extraction / "pose2d-checkpoints"
     cache.mkdir(exist_ok=True)
     record = cache / f"durable-recovery-{time.time_ns()}.json"
-    identity = {"status": "awaiting_verification", "scope": "Bounded debug recovery; not full source completion until producer says so", "producer_sha256": sha256(producer), "durable_metadata_wrapper_sha256": sha256(__file__), "metadata_writer_only_override": True, "inference_method_modified": False, "maximum_new_chunks_per_cohort": args.max_new_chunks, "maximum_cohorts": args.cycles, "minimum_rest_between_cohorts_seconds": 30, "maximum_temperature_before_next_cohort_c": 55, "maximum_temperature_before_chunk_c": args.maximum_temperature_c, "precision_model_augmentation_unchanged": True, "expectation": "Verify prior chunk hashes, keep exact inference, save at most three new 32-frame chunks per cohort after cool-down; release GPU weights and rest between at most four cohorts; fsync metadata before/after rename", "cloud_cost_usd": 0}
+    identity = {"status": "awaiting_verification", "scope": "Finite cooled checkpoint extraction; not full source completion until producer says so", "producer_sha256": sha256(producer), "durable_metadata_wrapper_sha256": sha256(__file__), "metadata_writer_only_override": True, "inference_method_modified": False, "parent_holds_extraction_lock": lock_held, "maximum_new_chunks_per_cohort": args.max_new_chunks, "maximum_cohorts": args.cycles, "minimum_rest_between_cohorts_seconds": 30, "maximum_temperature_before_next_cohort_c": 55, "maximum_temperature_before_chunk_c": args.maximum_temperature_c, "precision_model_augmentation_unchanged": True, "expectation": "Verify prior chunk hashes, keep exact inference, at most three new 32-frame chunks per cohort; release weights and rest between a finite number of cohorts; fsync metadata", "cloud_cost_usd": 0}
     durable_json(record, identity)
     snapshot = cache / f"durable-wrapper-{identity['durable_metadata_wrapper_sha256']}.py"
     if not snapshot.exists():
@@ -90,7 +93,7 @@ def main(args):
     module.write_json = durable_json
     options = argparse.Namespace(extraction=args.extraction, chunk_frames=32, max_new_chunks=args.max_new_chunks, minimum_start_free_mib=6144, maximum_temperature_c=args.maximum_temperature_c)
     try:
-        code = run_cycles(module, options, args, record, identity)
+        code = run_cycles(module, options, args, record, identity, lock_held=lock_held)
     except Exception as error:
         identity.update({"status": "failed", "error": str(error)})
         durable_json(record, identity)

@@ -1,8 +1,8 @@
 """Checkpoint the official independent-frame native77 detector without trimming.
 
-An auxiliary producer for interrupted debug extraction. Frozen extractor code
-is unchanged. Completion records name this producer and its exact provenance;
-the existing master verifies the resulting cache before continuing.
+Used by debug and explicitly frozen heldout extraction. Completion records
+name this producer and its exact provenance; the master verifies every cached
+output before continuing. Only the schedule partitions independent images.
 """
 
 import argparse
@@ -14,7 +14,7 @@ import shutil
 import subprocess
 import time
 
-from r2_common import GEMX, sha256, storage_check, write_json
+from r2_common import GEMX, PROJECT, STORAGE, sha256, storage_check, write_json
 
 
 def resources():
@@ -44,8 +44,21 @@ def run(args):
 
 def locked_run(args, output):
     original = json.loads((output / "input.json").read_text())
-    if original["role"] != "debug":
-        raise ValueError("This recovery producer is for debug preflight only; heldout requires the frozen suite")
+    if original["role"] == "heldout":
+        frozen_path = Path(original["frozen_suite_path"])
+        frozen = json.loads(frozen_path.read_text())
+        if sha256(frozen_path) != original["frozen_suite_sha256"] or frozen["status"] != "frozen":
+            raise ValueError("Heldout suite identity changed")
+        if original["input_sha256"] not in [item["source_sha256"] for item in frozen["heldout"]]:
+            raise ValueError("Input is not in the frozen heldout suite")
+        for relative, digest in frozen["source_code_sha256"].items():
+            if sha256(PROJECT / relative) != digest:
+                raise ValueError(f"Frozen source changed: {relative}")
+        ledger = STORAGE / "runs/heldout-use-ledger.jsonl"
+        if not ledger.is_file() or not any(row.get("input_sha256") == original["input_sha256"] and row.get("suite_sha256") == original["frozen_suite_sha256"] and row.get("run") == str(output) and row.get("used") is True for row in (json.loads(line) for line in ledger.read_text().splitlines())):
+            raise ValueError("Heldout inference requires a durable prior-use ledger record")
+    elif original["role"] != "debug":
+        raise ValueError("Unknown extraction role")
     config = json.loads((output / "resolved-model-config.json").read_text())
     if config["observations"]["batch_size"] != 1:
         raise ValueError("The verified checkpoint method requires original batch size 1")

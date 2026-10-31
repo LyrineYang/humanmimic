@@ -13,6 +13,6 @@
   "first_observation_batch_size": 1,
   "cloud_execution_authorized": false,
   "source_gemx_revision": "20555befe2fbbe5b2015e1fff7ff214dc18ea9d6",
-  "heldout_used": false,
-  "note": "100GiB为项目容量规划及运行监控上界，不是操作系统独占配额；不创建占位大文件"
+  "note": "100GiB为项目容量规划及运行监控上界，不是操作系统独占配额；不创建占位大文件",
+  "heldout_use_ledger_relative": "runs/heldout-use-ledger.jsonl"
 }

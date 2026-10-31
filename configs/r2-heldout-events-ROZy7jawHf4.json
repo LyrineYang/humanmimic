@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "role": "heldout",
+  "source_url": "https://www.youtube.com/watch?v=ROZy7jawHf4",
+  "source_sha256": "a3f05efb4b5abb965708a865f87ce8974cac54df2e57c7f3bed6a0d30398e335",
+  "annotation_basis": "Original full-source contact sheets and selected high-resolution source stills only; no extracted keypoints/3D or robot results examined",
+  "left_right_convention": "Anatomical side as observed in this uploaded input; no attempt to undo original mirroring",
+  "video_mirrored": "unknown",
+  "source_content_trimmed": false,
+  "time_shift_fitted": false,
+  "notes": [
+    "Cable forces are not reconstructed; only visible body motion is input. Positive signed twist is anatomical left relative to pelvis."
+  ],
+  "events": [
+    {
+      "id": "trunk-1",
+      "description": "Turn toward anatomical right",
+      "feature": "torso_twist_rad",
+      "extremum": "min",
+      "threshold": -0.15,
+      "window_seconds": [
+        0.9,
+        2.1
+      ],
+      "source_event_seconds": 1.5
+    },
+    {
+      "id": "trunk-2",
+      "description": "Turn toward anatomical left",
+      "feature": "torso_twist_rad",
+      "extremum": "max",
+      "threshold": 0.15,
+      "window_seconds": [
+        3.1,
+        4.3
+      ],
+      "source_event_seconds": 3.7
+    },
+    {
+      "id": "trunk-3",
+      "description": "Turn toward anatomical right",
+      "feature": "torso_twist_rad",
+      "extremum": "min",
+      "threshold": -0.15,
+      "window_seconds": [
+        4.8,
+        6.0
+      ],
+      "source_event_seconds": 5.4
+    },
+    {
+      "id": "trunk-4",
+      "description": "Turn toward anatomical left",
+      "feature": "torso_twist_rad",
+      "extremum": "max",
+      "threshold": 0.15,
+      "window_seconds": [
+        6.7,
+        7.9
+      ],
+      "source_event_seconds": 7.3
+    },
+    {
+      "id": "trunk-5",
+      "description": "Turn toward anatomical right",
+      "feature": "torso_twist_rad",
+      "extremum": "min",
+      "threshold": -0.15,
+      "window_seconds": [
+        8.3,
+        9.5
+      ],
+      "source_event_seconds": 8.9
+    },
+    {
+      "id": "trunk-6",
+      "description": "Turn toward anatomical left",
+      "feature": "torso_twist_rad",
+      "extremum": "max",
+      "threshold": 0.15,
+      "window_seconds": [
+        9.8,
+        11.0
+      ],
+      "source_event_seconds": 10.4
+    },
+    {
+      "id": "trunk-7",
+      "description": "Turn toward anatomical right",
+      "feature": "torso_twist_rad",
+      "extremum": "min",
+      "threshold": -0.15,
+      "window_seconds": [
+        11.4,
+        12.6
+      ],
+      "source_event_seconds": 12.0
+    },
+    {
+      "id": "trunk-8",
+      "description": "Turn toward anatomical left",
+      "feature": "torso_twist_rad",
+      "extremum": "max",
+      "threshold": 0.15,
+      "window_seconds": [
+        12.9,
+        13.95
+      ],
+      "source_event_seconds": 13.5
+    }
+  ]
+}

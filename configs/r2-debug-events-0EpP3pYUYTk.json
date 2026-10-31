@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "role": "debug",
+  "source_url": "https://www.youtube.com/watch?v=0EpP3pYUYTk",
+  "source_sha256": "309f58cef7d7e9143d4dbad71da1fcac5468e729107bcd8f847ca3accbc643a7",
+  "annotation_basis": "Original 24fps source contact sheet only, before extracted 3D or robot execution; no model outputs examined",
+  "left_right_convention": "Anatomical subject side as observed; unknown source mirroring is not inverted",
+  "video_mirrored": "unknown",
+  "source_content_trimmed": false,
+  "time_shift_fitted": false,
+  "events": [
+    {
+      "id": "squat-1",
+      "description": "Visible knee bend at squat bottom",
+      "feature": "left_knee_flexion_rad",
+      "extremum": "max",
+      "threshold": 0.7,
+      "window_seconds": [
+        1.0,
+        2.3
+      ],
+      "source_event_seconds": 1.7
+    },
+    {
+      "id": "stand-2",
+      "description": "Return to upright knees between squats",
+      "feature": "left_knee_flexion_rad",
+      "extremum": "min",
+      "threshold": 0.3,
+      "window_seconds": [
+        2.6,
+        3.2
+      ],
+      "source_event_seconds": 2.9
+    },
+    {
+      "id": "squat-3",
+      "description": "Visible knee bend at squat bottom",
+      "feature": "left_knee_flexion_rad",
+      "extremum": "max",
+      "threshold": 0.7,
+      "window_seconds": [
+        3.6,
+        4.8
+      ],
+      "source_event_seconds": 4.2
+    },
+    {
+      "id": "stand-4",
+      "description": "Return to upright knees between squats",
+      "feature": "left_knee_flexion_rad",
+      "extremum": "min",
+      "threshold": 0.3,
+      "window_seconds": [
+        5.4,
+        6.0
+      ],
+      "source_event_seconds": 5.7
+    },
+    {
+      "id": "squat-5",
+      "description": "Visible knee bend at squat bottom",
+      "feature": "left_knee_flexion_rad",
+      "extremum": "max",
+      "threshold": 0.7,
+      "window_seconds": [
+        6.6,
+        7.7
+      ],
+      "source_event_seconds": 7.2
+    },
+    {
+      "id": "stand-6",
+      "description": "Return to upright knees between squats",
+      "feature": "left_knee_flexion_rad",
+      "extremum": "min",
+      "threshold": 0.3,
+      "window_seconds": [
+        8.2,
+        8.8
+      ],
+      "source_event_seconds": 8.5
+    },
+    {
+      "id": "squat-7",
+      "description": "Visible knee bend at squat bottom",
+      "feature": "left_knee_flexion_rad",
+      "extremum": "max",
+      "threshold": 0.7,
+      "window_seconds": [
+        9.2,
+        10.2
+      ],
+      "source_event_seconds": 9.7
+    }
+  ]
+}

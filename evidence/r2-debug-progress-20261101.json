@@ -1,0 +1,40 @@
+{
+  "status": "awaiting_verification",
+  "scope": "R2 batch progress; not suite acceptance",
+  "debug_completed": 2,
+  "debug_required": 5,
+  "heldout_used": 0,
+  "heldout_required": 5,
+  "heldout_required_passes": 4,
+  "completed_debug": [
+    {
+      "id": "QqvZAUEOrAQ",
+      "status": "passed",
+      "events": "6/6",
+      "audit": "runs/r2-preflight-youtube-QqvZAUEOrAQ-20261031-01/run-audit-20261101.json"
+    },
+    {
+      "id": "0EpP3pYUYTk",
+      "status": "passed",
+      "events": "7/7",
+      "attempts": [
+        {
+          "path": "physical",
+          "status": "failed",
+          "reason": "Live CSV observer ENODATA after192 source samples, no fall"
+        },
+        {
+          "path": "physical-attempt-02",
+          "status": "passed",
+          "minimum_root_height_m": 0.45914820588877603,
+          "fell": false
+        }
+      ],
+      "audit": "runs/r2-debug-squat-20261101-01/run-audit.json"
+    }
+  ],
+  "source_manifest": "configs/r2-suite-draft.json",
+  "frozen_suite": false,
+  "heldout_event_annotations": "source-only, saved before inference; still not frozen",
+  "cloud_cost_usd": 0
+}

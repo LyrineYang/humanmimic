@@ -3,6 +3,7 @@
 import argparse
 from dataclasses import asdict
 import fcntl
+from fractions import Fraction
 import json
 import os
 from pathlib import Path
@@ -15,7 +16,7 @@ import traceback
 from r2_common import GEMX, PROJECT, SONIC, STORAGE, run_profiled, sha256, storage_check, write_json
 
 STAGES = ("prepare", "detect", "features", "pose2d", "camera", "motion", "postprocess", "convert")
-OUTPUTS = {"prepare": ["source.json", "source-pts.json", "frame-time-mapping.json", "normalized.mp4"], "detect": ["tracks.pt"], "features": ["features.pt"], "pose2d": ["keypoints2d.pt"], "camera": ["camera.pt"], "motion": ["motion-raw.pt"], "postprocess": ["motion-processed.pt"], "convert": ["soma-joints.npz", "smpl-source.npz", "sonic-reference.npz", "conversion.json"]}
+OUTPUTS = {"prepare": ["source.json", "source-pts.json", "frame-time-mapping.json", "normalized.mp4", "source-framehash.csv", "selected-framehash.csv", "selected-frame-mapping.json", "normalization-command.json"], "detect": ["tracks.pt"], "features": ["features.pt"], "pose2d": ["keypoints2d.pt"], "camera": ["camera.pt"], "motion": ["motion-raw.pt"], "postprocess": ["motion-processed.pt"], "convert": ["soma-joints.npz", "smpl-source.npz", "sonic-reference.npz", "conversion.json"]}
 
 
 def tensor_load(path):
@@ -32,8 +33,16 @@ def save_tensor(path, value):
 
 
 def configuration():
-    from gem.inference.body_video import load_body_video_config
-    config = load_body_video_config(GEMX / "docs/configs/body_video_native77.yaml")
+    # Same path resolution as the pinned official loader, without importing
+    # every perception model in CPU-only workers.
+    from gem.inference.inputs import load_mapping
+    path = (GEMX / "docs/configs/body_video_native77.yaml").resolve()
+    config = load_mapping(path)
+    for section, keys in (("pose", ("checkpoint",)), ("observations", ("checkpoint",)), ("detector", ("checkpoint",)), ("motion", ("checkpoint", "stats")), ("camera", ("rotations",))):
+        for key in keys:
+            value = config.get(section, {}).get(key)
+            if value is not None:
+                config[section][key] = str((path.parent / value).resolve())
     for section, filename in [("pose", "body_s240000.ckpt"), ("observations", "vitpose.pth"), ("detector", "yolox_humanart.onnx"), ("motion", "motion_native77_e774_s292175.ckpt")]:
         config[section]["checkpoint"] = str(STORAGE / "models/gem-x" / filename)
     config["motion"]["stats"] = str(STORAGE / "models/gem-x/motion_stats_raw.npz")
@@ -46,8 +55,6 @@ def configuration():
 
 def worker(stage, output):
     import numpy as np
-    import torch
-    torch.set_num_threads(8)
     from gem.inference.video import VideoFrames
     config = configuration()
     if stage in ("postprocess", "convert"):
@@ -63,7 +70,7 @@ def worker(stage, output):
                 os.link(original, source)
             except OSError:
                 shutil.copy2(original, source)
-        probe = subprocess.check_output(["ffprobe", "-v", "error", "-select_streams", "v:0", "-show_frames", "-show_entries", "frame=best_effort_timestamp_time,pkt_duration_time,duration_time", "-of", "json", str(source)], text=True)
+        probe = subprocess.check_output(["ffprobe", "-v", "error", "-select_streams", "v:0", "-show_frames", "-show_streams", "-show_entries", "stream=time_base:frame=best_effort_timestamp,best_effort_timestamp_time,pkt_duration_time,duration_time", "-of", "json", str(source)], text=True)
         source_frames = json.loads(probe)
         write_json(output / "source-pts.json", source_frames)
         source_pts = np.array([float(frame["best_effort_timestamp_time"]) for frame in source_frames["frames"]])
@@ -75,18 +82,42 @@ def worker(stage, output):
             original_meta = {"path": str(source), "frame_count": len(frames), "fps": frames.fps, "width": frames.width, "height": frames.height, "duration": len(frames) / frames.fps, "first_pts": float(source_pts[0]), "last_pts": float(source_pts[-1]), "selected_interval": "entire source; no -ss/-t"}
         # Keep the full VFR source; duration estimated as frame_count/fps must
         # never become an ffmpeg -t cutoff. Retain original PTS separately.
-        subprocess.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-nostdin", "-n", "-i", str(source), "-map", "0:v:0", "-vf", "setpts=PTS-STARTPTS,fps=30,pad=ceil(iw/2)*2:ceil(ih/2)*2", "-c:v", "libx264", "-crf", "18", "-pix_fmt", "yuv420p", "-an", "-movflags", "+faststart", str(normalized)], check=True)
+        from r2_timeline import normalize
+        exact_mapping = normalize(source, output)
+        source_integer_pts = [int(frame["best_effort_timestamp"]) for frame in source_frames["frames"]]
+        source_tb = Fraction(source_frames["streams"][0]["time_base"])
+        filter_tb = Fraction(exact_mapping["source_time_base"])
+        if len(source_integer_pts) != exact_mapping["source_frames"] or any((pts - source_integer_pts[0]) * source_tb != raw * filter_tb for pts, raw in zip(source_integer_pts, exact_mapping["source_pts_after_startpts"])):
+            raise ValueError("Raw filter PTS do not correspond to original source integer timestamps")
         with VideoFrames(normalized) as frames:
             normalized_meta = {"path": str(normalized), "frame_count": len(frames), "fps": frames.fps, "width": frames.width, "height": frames.height, "duration": len(frames) / frames.fps}
             times = np.arange(len(frames), dtype=np.float64) / 30
         if normalized_meta["duration"] + 1 / 30 < source_pts[-1] - source_pts[0]:
             raise ValueError("Normalized video failed to cover the original final timestamp")
+        if normalized_meta["frame_count"] != exact_mapping["normalized_frames"]:
+            raise ValueError("Encoded normalized video frame count differs from selected-frame proof")
         mapped = np.clip(np.searchsorted(source_pts - source_pts[0], times, side="right") - 1, 0, len(source_pts) - 1)
-        write_json(output / "frame-time-mapping.json", {"normalized_fps": 30, "original_pts_origin": float(source_pts[0]), "normalized_times": times.tolist(), "preceding_source_frame_indices": mapped.tolist(), "source_pts": source_pts.tolist(), "content_trimmed": False, "time_shift_fitted": False})
+        write_json(output / "frame-time-mapping.json", {"normalized_fps": 30, "original_pts_origin": float(source_pts[0]), "original_integer_pts": source_integer_pts, "original_time_base": str(source_tb), "normalized_times": times.tolist(), "selected_source_frame_indices": exact_mapping["selected_source_frame_indices"], "selection_proof": "selected-frame-mapping.json and input/output raw-frame hashes", "preceding_source_frame_indices": mapped.tolist(), "source_pts": source_pts.tolist(), "content_trimmed": False, "time_shift_fitted": False})
         metadata = {"source": original_meta, "normalized": normalized_meta}
         write_json(output / "source.json", {**metadata, "url": info.get("source_url"), "sha256": sha256(source), "role": info["role"], "content_trimmed": False})
         write_json(output / "resolved-model-config.json", config)
         return
+    if stage == "pose2d":
+        # The master owns extraction.lock for the lifetime of this worker.
+        # Preserve the producer's model/crops/precision; only schedule cohorts.
+        import importlib.util
+        spec = importlib.util.spec_from_file_location("r2_cooled_producer", PROJECT / "scripts/run-r2-checkpoint-recovery.py")
+        recovery = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(recovery)
+        with VideoFrames(normalized) as frames:
+            cohorts = (len(frames) + 95) // 96 + 1
+        options = argparse.Namespace(extraction=output, max_new_chunks=3, cycles=cohorts, maximum_temperature_c=60)
+        code = recovery.main(options, lock_held=True)
+        if code:
+            raise RuntimeError("Cooled pose cohort stopped before full completion; checkpoints retained")
+        return
+    import torch
+    torch.set_num_threads(8)
     if stage == "detect":
         from gem.common.detectors import YOLOXONNX, detect_track
         with VideoFrames(normalized) as frames:
@@ -102,20 +133,14 @@ def worker(stage, output):
             intrinsics = motion_intrinsics(frames.width, frames.height)
             values, release = extract_body_features(frames, tracks["boxes_xys"], intrinsics, model, batch_size=1, device="cuda")
         save_tensor(output / "features.pt", {"values": values, "feature_version": release})
-    elif stage == "pose2d":
-        from gem.common.pose2d import load_native77_detector
-        tracks = tensor_load(output / "tracks.pt")
-        model = load_native77_detector(config["observations"]["checkpoint"], release_id=config["observations"]["release_id"], device="cuda", batch_size=1)
-        with VideoFrames(normalized) as frames:
-            points = model.predict(frames, tracks["boxes_xys"])
-        save_tensor(output / "keypoints2d.pt", points)
     elif stage == "camera":
-        from gem.inference.body_video import motion_intrinsics
         from gem.inference.camera_motion import camera_motion
         tracks = tensor_load(output / "tracks.pt")
         keypoints = tensor_load(output / "keypoints2d.pt")
         with VideoFrames(normalized) as frames:
-            intrinsics = motion_intrinsics(frames.width, frames.height)
+            # Identical diagonal-focal construction to official motion_intrinsics.
+            focal = float(np.hypot(frames.width, frames.height))
+            intrinsics = torch.tensor([[focal, 0, frames.width / 2], [0, focal, frames.height / 2], [0, 0, 1]])
             camera = camera_motion(frames, intrinsics.numpy(), tracks["boxes_xyxy"], mode="static", keypoints=keypoints.numpy())
         save_tensor(output / "camera.pt", {**camera, "K_fullimg": intrinsics})
     elif stage == "motion":
@@ -167,7 +192,14 @@ def run(args):
             for relative, digest in frozen["source_code_sha256"].items():
                 if sha256(PROJECT / relative) != digest:
                     raise ValueError(f"Frozen source changed: {relative}")
+            for asset, digest in frozen["asset_sha256"].items():
+                if sha256(asset) != digest:
+                    raise ValueError(f"Frozen model/asset changed: {asset}")
+            gpu = subprocess.check_output(["nvidia-smi", "--query-gpu=name,driver_version", "--format=csv,noheader"], text=True).strip()
+            if gpu != frozen["gpu_driver"]:
+                raise ValueError("GPU/driver differs from the frozen suite")
             identity["frozen_suite_sha256"] = sha256(args.frozen_suite)
+            identity["frozen_suite_path"] = str(args.frozen_suite.resolve())
             with (STORAGE / "runs/heldout-use-ledger.jsonl").open("a") as ledger:
                 ledger.write(json.dumps({"role": "heldout", "used": True, "run": str(output), "input_sha256": identity["input_sha256"], "suite_sha256": identity["frozen_suite_sha256"], "time_unix": time.time()}) + "\n")
                 ledger.flush(); os.fsync(ledger.fileno())
@@ -179,13 +211,16 @@ def run(args):
             write_json(identity_path, identity)
             snapshot = output / "source-snapshot"
             snapshot.mkdir()
-            relative_files = [Path("scripts") / name for name in ("activate-r2.sh", "run-r2-demo.sh", "extract-r2-video.py", "r2_common.py", "r2_smpl.py", "run-r2-physical.py", "render-r2-demo.py", "run-r1-reproduction.py")]
+            relative_files = [Path("scripts") / name for name in ("activate-r2.sh", "activate-r1.sh", "run-r2-demo.sh", "extract-r2-video.py", "r2_common.py", "r2_smpl.py", "r2_timeline.py", "r2_geometry.py", "run-r2-physical.py", "render-r2-demo.py", "run-r1-reproduction.py", "cache-r2-pose2d.py", "run-r2-checkpoint-recovery.py", "evaluate-r2-body.py")]
             relative_files += [Path("configs") / name for name in ("r2-resources.json", "constraints-r2.txt", "r1-evaluation.json", "r1-dds.xml")]
             for relative in relative_files:
                 destination = snapshot / relative
                 destination.parent.mkdir(parents=True, exist_ok=True)
                 shutil.copy2(PROJECT / relative, destination)
             write_json(snapshot / "sha256.json", {str(relative): sha256(PROJECT / relative) for relative in relative_files})
+        for relative, digest in json.loads((output / "source-snapshot/sha256.json").read_text()).items():
+            if sha256(PROJECT / relative) != digest:
+                raise ValueError(f"Cached extraction source changed: {relative}; use a new run")
         profiles = []
         try:
             for stage in STAGES:
@@ -200,7 +235,8 @@ def run(args):
                 else:
                     profile = run_profiled([sys.executable, str(Path(__file__).resolve()), "--output", str(output), "--worker", stage], output, stage)
                     profiles.append({"stage": stage, **profile})
-                    write_json(completed, {"status": "passed", "scope": stage, "helper_sha256": sha256(PROJECT / "scripts/r2_smpl.py") if stage == "convert" else None, "sha256": {name: sha256(output / name) for name in OUTPUTS[stage]}})
+                    if not completed.exists():
+                        write_json(completed, {"status": "passed", "scope": stage, "helper_sha256": sha256(PROJECT / "scripts/r2_smpl.py") if stage == "convert" else None, "sha256": {name: sha256(output / name) for name in OUTPUTS[stage]}})
                 if args.until == stage:
                     break
             write_json(output / "extraction-summary.json", {"status": "passed" if args.until == "convert" else "awaiting_verification", "scope": "Video extraction/conversion only; no robot execution yet", "last_stage": args.until, "profiles_this_invocation": profiles, "heldout_used": args.role == "heldout", "cloud_cost_usd": 0})
@@ -225,8 +261,8 @@ if __name__ == "__main__":
             worker(args.worker, args.output.resolve())
             succeeded = True
         finally:
-            import torch
-            if torch.cuda.is_initialized():
+            torch = sys.modules.get("torch")
+            if torch is not None and torch.cuda.is_initialized():
                 write_json(args.output.resolve() / (args.worker + "-cuda.json"), {"status": "passed" if succeeded else "failed", "peak_allocated_bytes": torch.cuda.max_memory_allocated(), "peak_reserved_bytes": torch.cuda.max_memory_reserved(), "device": torch.cuda.get_device_name(), "scope": "Framework peak; system/desktop footprint is sampled separately"})
     elif args.input:
         run(args)

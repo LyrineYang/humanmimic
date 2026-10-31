@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "role": "debug",
+  "annotation_basis": "Original source contact sheets only, before extracted 3D or robot execution",
+  "left_right_convention": "Anatomical side as observed in the uploaded input; unknown source mirror is not undone",
+  "video_mirrored": "unknown",
+  "source_content_trimmed": false,
+  "time_shift_fitted": false,
+  "source_url": "https://www.youtube.com/watch?v=vTx_ldn6MCA",
+  "source_sha256": "976e7f2ad9f690053e3cfe9e60fe7054816c2e1b0abef97ccf4c72f03431f384",
+  "events": [
+    {
+      "id": "left-arm-out",
+      "description": "Raise left arm to the side before circles",
+      "feature": "left_wrist_outward_shoulder_units",
+      "extremum": "max",
+      "threshold": 0.6,
+      "window_seconds": [
+        0.5,
+        1.3
+      ],
+      "source_event_seconds": 0.88
+    },
+    {
+      "id": "right-arm-out",
+      "description": "Right arm remains extended while making circles",
+      "feature": "right_wrist_outward_shoulder_units",
+      "extremum": "max",
+      "threshold": 0.6,
+      "window_seconds": [
+        1.4,
+        2.2
+      ],
+      "source_event_seconds": 1.76
+    },
+    {
+      "id": "left-arm-still-out",
+      "description": "Left arm still extended in latter part of circles",
+      "feature": "left_wrist_outward_shoulder_units",
+      "extremum": "max",
+      "threshold": 0.6,
+      "window_seconds": [
+        10.3,
+        11.2
+      ],
+      "source_event_seconds": 10.68
+    },
+    {
+      "id": "right-arm-down",
+      "description": "Lower right arm after circles",
+      "feature": "right_wrist_outward_shoulder_units",
+      "extremum": "min",
+      "threshold": 0.2,
+      "window_seconds": [
+        15.6,
+        16.4
+      ],
+      "source_event_seconds": 16.0
+    }
+  ],
+  "notes": [
+    "Events check major raise/hold/lower phases. Fine small-radius arm circles remain part of full descriptor/visual reporting, not certified by these coarse events alone."
+  ]
+}

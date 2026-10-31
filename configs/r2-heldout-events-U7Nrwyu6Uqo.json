@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "role": "heldout",
+  "source_url": "https://www.youtube.com/watch?v=U7Nrwyu6Uqo",
+  "source_sha256": "8738b575dcd0464ee3dbae8f91293ed87ddaa7978136ce5cbca174eb6a51ae30",
+  "annotation_basis": "Original full-source contact sheets and selected high-resolution source stills only; no extracted keypoints/3D or robot results examined",
+  "left_right_convention": "Anatomical side as observed in this uploaded input; no attempt to undo original mirroring",
+  "video_mirrored": "unknown",
+  "source_content_trimmed": false,
+  "time_shift_fitted": false,
+  "notes": [
+    "Source side view faces image left; apparent near/front planted leg is subject left; far/right leg steps back. Events check backward foot direction and upright recoveries."
+  ],
+  "events": [
+    {
+      "id": "rear-step-1",
+      "description": "Right foot steps backward relative to hips",
+      "feature": "right_ankle_forward_hip_units",
+      "extremum": "min",
+      "threshold": -0.2,
+      "window_seconds": [
+        0.5,
+        1.2
+      ],
+      "source_event_seconds": 0.8
+    },
+    {
+      "id": "stand-2",
+      "description": "Return to upright front knee",
+      "feature": "left_knee_flexion_rad",
+      "extremum": "min",
+      "threshold": 0.3,
+      "window_seconds": [
+        1.6,
+        2.2
+      ],
+      "source_event_seconds": 1.9
+    },
+    {
+      "id": "rear-step-3",
+      "description": "Right foot steps backward relative to hips",
+      "feature": "right_ankle_forward_hip_units",
+      "extremum": "min",
+      "threshold": -0.2,
+      "window_seconds": [
+        2.7,
+        3.5
+      ],
+      "source_event_seconds": 3.1
+    },
+    {
+      "id": "stand-4",
+      "description": "Return to upright front knee",
+      "feature": "left_knee_flexion_rad",
+      "extremum": "min",
+      "threshold": 0.3,
+      "window_seconds": [
+        3.9,
+        4.4
+      ],
+      "source_event_seconds": 4.1
+    },
+    {
+      "id": "rear-step-5",
+      "description": "Right foot steps backward relative to hips",
+      "feature": "right_ankle_forward_hip_units",
+      "extremum": "min",
+      "threshold": -0.2,
+      "window_seconds": [
+        5.0,
+        5.8
+      ],
+      "source_event_seconds": 5.47
+    },
+    {
+      "id": "stand-6",
+      "description": "Return to upright front knee",
+      "feature": "left_knee_flexion_rad",
+      "extremum": "min",
+      "threshold": 0.3,
+      "window_seconds": [
+        6.3,
+        6.9
+      ],
+      "source_event_seconds": 6.6
+    }
+  ]
+}

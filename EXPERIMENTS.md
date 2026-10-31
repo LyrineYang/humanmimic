@@ -214,3 +214,23 @@ next_action: null
 - 最终完整demo passed：demo-native-aligned-02/comparison.mp4展示原片、2D覆盖/3D骨架和真实机器人，1600x480/699帧25fps；五个视频全量解码与首中尾画面检查通过，无剪辑/拟合偏移；填补和非三维真值标注保留。旧空机器人失败demo、旧80ms派生录像、可选psutil缺失的未启动渲染失败均保留。断开旧长终端发生在物理结束后，boot_id未变，不将其解释成新主机重启；后续离线任务用detached PID/boot_id/startticks及文件日志跟踪，已完成。
 - 实测预算更新：七个非2D姿态阶段合计1438.08s，最后326帧冷却姿态597.73s（含导入、非完整无中断基准）；同长度外推+离线渲染约50–70分钟/条、10x30s约8.3–11.7h，仅规划，不含调试重启。最大框架保留BodyPose3,737,124,864B、姿态3,642,753,024B；全部串行阶段在8GB卡完成，不能外推实时并行。D占用19.22GiB/100GiB规划，C/D空闲19.25/272.05GiB，新增云费用0。源池新增3条舞蹈全片解码/20帧检查符合基本条件，无新增模型推理。
 - 全部证据：runs/r2-preflight-youtube-QqvZAUEOrAQ-20261031-01/REPORT.md、results.json、各专项audit；Git摘要evidence/r2-preflight-20261101.json与r2-resource-estimate-20261101.json。这里只完成首条调试，5+5整批、GPU图形窗口仍awaiting_verification，相机needs_input，保留推理未使用；继续整批实现与调试，不结束活跃Goal。
+
+## 2026-11-01 R2 默认检查点集成与冷导入精简
+
+- 修改前预期 `runs/r2-setup-20261030-01/batch-integration-expectation-20261101.json`：不改模型/FP32/batch1/crop/增广/控制/门槛，默认入口使用已验证数值生产器；只有调度、持久化和不必要导入改变。保留旧冻结首片，不复用旧目录写新版本。
+- 配置解析等价 `passed`：只使用官方load_mapping及相同相对路径解析，结果与首片resolved配置完全相同，冷加载1.6888s且无Torch/transformers导入。完整838帧静态相机使用相同已有视频/框/2D点重算，R_w2c、cam_angvel、diagnostics、K_fullimg逐字段完全相同；实际阶段141.81→30.87s，RSS约615.5MB，无模型GPU推理。首次验证harness因缺scripts路径在执行前失败，单独记录并修复验证入口；不是缓存/模型失败。
+- 默认pose2d调度集成：主入口持有extraction.lock，worker仅调用同一官方生产器locked_run，有限ceil(frames/96)+1组，组内最多3x32帧，组间释放模型并休息≥30秒/低于55°C，开块<60°C，120秒热等待退出。生产器新增heldout冻结SHA/来源/源码/使用ledger检查；原数值predict路径未改，旧首片producer快照不改。CPU工具检查完成即停、热等待超时、有限组数、父锁单实例及合成heldout无ledger/改manifest拒绝均passed，没有实际保留数据或GPU模型。
+- 真实新运行仍awaiting_verification：完整深蹲源0EpP3pYUYTk、258帧24fps→323帧30fps；提前按原片标注7个下蹲/站起事件，运行 `runs/r2-debug-squat-20261101-01/` detached PID115096、boot_id/startticks与日志保存，未重复提交。prepare10.2245s、detect144.5275s、features192.5158s已完成；姿态首96帧检查点通过，权重清理后约32秒/54°C再继续。随后物理/事件/全片demo尚待运行，不将检查点算作完整交付。
+- 整批产物审计工具 `passed`（工具验证）：按运行快照解析阶段输出而非当前源码，核对原始输入SHA、全部8阶段输出SHA/源码快照、完整控制/真实状态身份和五段录像全解码、源时序及可用帧；视觉检查必须绑定comparison SHA，缺失则awaiting_verification。首片真实产物独立审计passed，空证据目录正确保持awaiting_verification。证据 `runs/r2-audit-tool-check-20261101-01/`。
+- 精确帧映射辅助工具独立验证passed，尚未修改当前运行版本。按FFmpeg官方fps的精确有理数近邻舍入计算选帧，保留整数PTS/timebase；同滤镜图每个输出raw hash/size与所选输入帧核对。24fps原调试258→323帧和合成VFR22→60帧全部通过。MP4文件SHA不同，经全部323帧解码hash/时间网格核对完全一致；没有改源视频或将前一源帧误称实际选中帧，没有永久保存RGB。证据 `runs/r2-timeline-check-20261101-01/`，官方算法链接随工具保存。决定keep辅助工具，待当前提取结束再集成新版本。
+- 来源分组初稿 `configs/r2-suite-draft.json`：5调试/5保留，保留覆盖舞蹈/躯干/下肢三类；三条舞蹈同创作者/场景相关性明确记录，不宣称独立场景泛化。Cupid原黑尾作为debug挑战保留；Whiplash元数据明确mirrored，记录true；其他镜像未知，不自动翻转。其余3条调试事件在任何3D/机器人结果前由源画面标注。尚未冻结、未用保留推理，云费用0，服务器未连接。
+
+## 2026-11-01 第二片完整通过、观察器修复与整批准备
+
+- 默认冷却姿态实现真实验证passed：深蹲全323帧完成，pose2d471.9569s、camera33.4426s、motion35.6985s、postprocess72.9309s，含独立D进程冷启动；全八阶段完成，原始258帧24fps源和全部中间结果保留。没有发生新boot变化；不能将此一轮外推为主机根因已解决。
+- 初次物理failed：源参考消费192/539后，Python观察器读D盘正在写入的controller-input.csv返回ENODATA。原生控制未报跌倒，原始physical/、body-audit/、demo/全部保留。修改前预期live-csv-read-repair-expectation.json：只容忍明确瞬时读错误并记录计数，不伪造消费、不改变时限/控制/门槛。真实已停止CSV和故障注入检查passed：四种瞬时errno返回None、未知EIO传播、未结束的行999不遮盖完整行100；首次测试夹具错误按真实大文件stat定位小BytesIO而失败，修正夹具大小后重验，未启动物理。
+- 同缓存新physical-attempt-02 passed：539/539源样本完整消费，无跌倒、最低根高0.459148m，7/7原片预标注事件通过；本次无瞬时读错误，策略/源参考SHA与原试次相同，新源码版本另存。demo-attempt-02/comparison.mp4270帧25fps，全部五个视频全解码、完整映射和首中尾人工画面检查passed；固定run-audit.json与REPORT.md/results.json保存。源码修复keep；不替换或抹去首次failed结论。
+- 20项评估扩展预期与验证passed：setup/body-descriptor-extension-expectation-20261101.json；新增4项躯干角度/2项前后脚距符号，解析旋转/平移/尺度/环绕/退化输入测试通过；首片1397实际样本原14项全部人/机器人序列逐元素相同，旧六事件报告完全相同，新6项有限。新报告首片body-audit-extended-20261101/，旧报告不改；不是保留性能，不设新RMSE阈值。
+- 精确选帧集成CPU检查passed：新目录r2-integrated-prepare-check-20261101-01验证源整数PTS/timebase与滤镜raw PTS逐帧一致，实际输出323帧与hash证明匹配；原先独立24fps/VFR检查和全部323个解码帧等价仍保留。新入口不保留RGB大数组、不裁源内容。
+- 整批工具准备passed：freeze检查源SHA/来源分组/事件特征/调试审计/未使用ledger，冻结后记录源码/模型/原生二进制/GPU驱动/子模块diff；串行执行器跳过已有terminal审计并拒绝重复任务，失败和部分物理不自动覆盖；独立汇总在4/5完整且其余已完成时才通过，4成功+1未运行仍awaiting_verification、3/5失败、未冻结不能通过、错误来源使批次无效。合成边界验证不计保留使用。所有5条保留事件只按原片提前标注，仍未运行保留模型；freeze-readiness仅剩三条未完成调试。
+- 当前debug2/5passed，heldout0/5used，R2及Goal未完成。后续串行继续另三条调试再冻结保留，云费用0，服务器未连接。Git小型证据evidence/r2-debug-progress-20261101.json，所有原始产物仍D。

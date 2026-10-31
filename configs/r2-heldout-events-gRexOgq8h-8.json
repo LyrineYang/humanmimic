@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "role": "heldout",
+  "source_url": "https://www.youtube.com/watch?v=gRexOgq8h-8",
+  "source_sha256": "1878e2c87f8308035e4ba2302c012e78fd29710694698ff7de66e296892c2998",
+  "annotation_basis": "Original full-source contact sheets and selected high-resolution source stills only; no extracted keypoints/3D or robot results examined",
+  "left_right_convention": "Anatomical side as observed in this uploaded input; no attempt to undo original mirroring",
+  "video_mirrored": "unknown",
+  "source_content_trimmed": false,
+  "time_shift_fitted": false,
+  "notes": [
+    "Complete31.13s upload retained; camera/studio correlated with two other test dances, different choreography.",
+    "The9.8s raised-leg side is ambiguous in source side view; not used as a sided event. Full descriptor/visual series still retained."
+  ],
+  "events": [
+    {
+      "id": "first-crouch",
+      "description": "First clear wide crouch",
+      "feature": "left_knee_flexion_rad",
+      "extremum": "max",
+      "threshold": 0.7,
+      "window_seconds": [
+        2.8,
+        3.8
+      ],
+      "source_event_seconds": 3.27
+    },
+    {
+      "id": "overhead-arms",
+      "description": "Both hands overhead, right wrist",
+      "feature": "right_wrist_height_shoulder_units",
+      "extremum": "max",
+      "threshold": 0.25,
+      "window_seconds": [
+        7.6,
+        8.7
+      ],
+      "source_event_seconds": 8.17
+    },
+    {
+      "id": "right-hand-high",
+      "description": "Right wrist raised",
+      "feature": "right_wrist_height_shoulder_units",
+      "extremum": "max",
+      "threshold": 0.25,
+      "window_seconds": [
+        14.1,
+        15.3
+      ],
+      "source_event_seconds": 14.7
+    },
+    {
+      "id": "both-arms-high",
+      "description": "Both arms above head, left wrist",
+      "feature": "left_wrist_height_shoulder_units",
+      "extremum": "max",
+      "threshold": 0.25,
+      "window_seconds": [
+        22.3,
+        23.5
+      ],
+      "source_event_seconds": 22.9
+    },
+    {
+      "id": "late-wide-crouch",
+      "description": "Late wide knee bend",
+      "feature": "left_knee_flexion_rad",
+      "extremum": "max",
+      "threshold": 0.7,
+      "window_seconds": [
+        25.6,
+        26.8
+      ],
+      "source_event_seconds": 26.17
+    },
+    {
+      "id": "final-raised-hands",
+      "description": "Raised hands near final phrase, right wrist",
+      "feature": "right_wrist_height_shoulder_units",
+      "extremum": "max",
+      "threshold": 0.25,
+      "window_seconds": [
+        28.9,
+        30.0
+      ],
+      "source_event_seconds": 29.43
+    }
+  ]
+}
