@@ -2,7 +2,7 @@
 
 目标是在仿真中完成参考动作执行、实际视频复刻和实时相机遥操作，再验证场景约束动作修正。共用 G1、MuJoCo 和 SONIC，实时与录制视频共用 GEM-X。
 
-当前资源方案为 RTX 4060 笔记本、WSL、32GB 系统内存，Modal 已有额度作为离线任务的补充。硬件是否足够由目标机器上的预检决定。
+当前执行方案为 RTX 4060 笔记本、WSL、32GB 系统内存，R2 使用D盘独立conda并串行运行。计费云资源当前未获授权，硬件是否足够以目标机器的实测为准。
 
 ## 如何启动
 
@@ -170,3 +170,41 @@ bash scripts/run-r2-demo.sh /absolute/input.mp4 my-run-id https://www.youtube.co
 入口依次执行分阶段提取与缓存、官方SONIC坐标转换、复用R1的真实MuJoCo闭环，再生成完整时间轴的原片—2D/3D提取—实际状态三路MP4。结果在D根的 `runs/my-run-id/`；失败与所有中间结果保留，仿真停止后的画面明确标记，缓存复演不当作新的提取或物理验收。新run id用于新尝试，既有物理结果不会被自动覆盖。
 
 环境配置见 `configs/environment-r2.yml`、`configs/constraints-r2.txt`，资源规则见 `configs/r2-resources.json`；固定GEM-X是Git子模块，独立环境不升级R1。当前已有的实际检查摘要见 [evidence/r2-setup-20261031.json](evidence/r2-setup-20261031.json)。
+
+已安装版本导出为 [conda精确包清单](configs/conda-r2-linux-64.explicit.txt) 与 [pip锁定清单](configs/requirements-r2.lock.txt)。pip清单从仓库根目录使用，GEM-X取固定子模块；这些是本机版本快照，尚未进行新机器重装验收。
+
+外部中断后可用下列入口恢复调试视频。它先核对原片、冻结源码/配置和已完成缓存；拒绝重复进程或已有失败/未完成物理结果。执行时等待空闲显存至少6144MiB持续15秒，默认最多观察1小时，保留每次尝试，不停止其他应用。
+
+```bash
+python3 scripts/resume-r2-demo.py --run /mnt/d/humanoid-demo-r2/runs/my-run-id --check-only
+python3 scripts/resume-r2-demo.py --run /mnt/d/humanoid-demo-r2/runs/my-run-id
+```
+
+首片预检遭遇Windows非正常重启，另提供调试用姿态检查点入口；它复用官方FP32、batch1和翻转增广，实际整段/分帧数值相同后才保存每32帧结果。现有已证实的块逐一核对哈希，只有全部原始归一化帧完成才生成主入口可读取的pose2d完成缓存；辅助生产器和原冻结源码分别留存身份。非正常关机损坏的元数据须先保留、隔离并重算相应块，不能当作成功数据。
+
+```bash
+source scripts/activate-r2.sh
+python scripts/run-r2-checkpoint-recovery.py \
+  --extraction /mnt/d/humanoid-demo-r2/runs/my-run-id/extraction
+```
+
+该恢复入口每次最多新增3个32帧块，开算前等待温度低于60°C，并对元数据执行fsync/rename；仅完成部分或等待资源时返回3，完整姿态完成才返回0。它不改变模型、视频内容或控制频率，也不能保证解决尚未查明的主机重启原因。当前全链路状态以PLAN为准。
+
+身体/时序评估使用记录的实际qpos进行离线FK，并核对原生控制器录下的SMPL逐帧身份与时钟；不使用协议中全零的joint_pos占位字段作为机器人目标。输出各肢体角度误差、完整覆盖率和关键事件时间差，不拟合平移来美化对照。关键事件JSON需按原片预先标注并在保留测试前冻结；未提供时状态保持awaiting_verification。当前仅工具检查通过，R2实际结果待验证。
+
+```bash
+source scripts/activate-r1.sh
+python scripts/evaluate-r2-body.py \
+  --extraction /mnt/d/humanoid-demo-r2/runs/my-run-id/extraction \
+  --physical /mnt/d/humanoid-demo-r2/runs/my-run-id/physical \
+  --events /absolute/source-events.json \
+  --output /mnt/d/humanoid-demo-r2/runs/my-run-id/body-audit-01
+```
+
+普通视频来源先用 `inspect-r2-sources.py` 做CPU全帧解码、来源哈希和等比例时间轴预览，再人工筛选单人/固定相机/全身脚部条件；全局画面变化与黑场仅作启发式提示，不自动宣称合格，不运行人体动作模型。已下载视频的标题/尾屏和不合格来源仍保留。
+
+```bash
+source scripts/activate-r1.sh
+python scripts/inspect-r2-sources.py /absolute/video.mp4 \
+  --output /mnt/d/humanoid-demo-r2/runs/source-review-NEW --samples 20
+```

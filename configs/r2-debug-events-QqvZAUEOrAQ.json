@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "role": "debug",
+  "source_url": "https://www.youtube.com/watch?v=QqvZAUEOrAQ",
+  "source_sha256": "047574246202c1e6f80b7e7ed46ac15c5968debe37fc06730adf9e41dab13213",
+  "annotation_basis": "Original video frames only, before examining extracted 3D or robot execution; approximate action times from visible poses",
+  "left_right_convention": "Anatomical side of the subject as observed in the input; no reconstruction of an unknown unmirrored source",
+  "video_mirrored": "unknown",
+  "source_content_trimmed": false,
+  "time_shift_fitted": false,
+  "events": [
+    {
+      "id": "left-hand-above-head",
+      "description": "Left wrist rises above the shoulder near 7.2 seconds",
+      "feature": "left_wrist_height_shoulder_units",
+      "extremum": "max",
+      "threshold": 0.25,
+      "window_seconds": [6.6, 7.8],
+      "source_event_seconds": 7.2
+    },
+    {
+      "id": "first-deep-knee-bend",
+      "description": "Visible squat with bent knees near 9.9 seconds",
+      "feature": "left_knee_flexion_rad",
+      "extremum": "max",
+      "threshold": 0.7,
+      "window_seconds": [9.4, 10.4],
+      "source_event_seconds": 9.9
+    },
+    {
+      "id": "both-hands-overhead-right",
+      "description": "Both arms go overhead; check the right wrist near 14.4 seconds",
+      "feature": "right_wrist_height_shoulder_units",
+      "extremum": "max",
+      "threshold": 0.25,
+      "window_seconds": [13.9, 14.9],
+      "source_event_seconds": 14.4
+    },
+    {
+      "id": "second-deep-knee-bend",
+      "description": "Second visible crouch near 16.2 seconds",
+      "feature": "left_knee_flexion_rad",
+      "extremum": "max",
+      "threshold": 0.7,
+      "window_seconds": [15.7, 16.8],
+      "source_event_seconds": 16.2
+    },
+    {
+      "id": "right-hand-high-left-behind-head",
+      "description": "Right wrist high while the other hand stays behind the head near 18.9 seconds",
+      "feature": "right_wrist_height_shoulder_units",
+      "extremum": "max",
+      "threshold": 0.25,
+      "window_seconds": [18.4, 19.5],
+      "source_event_seconds": 18.9
+    },
+    {
+      "id": "final-overhead-pose-left",
+      "description": "Both arms overhead near the final visible pose; check the left wrist",
+      "feature": "left_wrist_height_shoulder_units",
+      "extremum": "max",
+      "threshold": 0.25,
+      "window_seconds": [26.5, 27.4],
+      "source_event_seconds": 27.0
+    }
+  ]
+}

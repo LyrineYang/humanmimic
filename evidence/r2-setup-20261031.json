@@ -2,7 +2,7 @@
   "schema_version": 1,
   "date": "2026-10-31",
   "status": "awaiting_verification",
-  "scope": "R2环境、资产和接口准备已通过；首条真实视频全链路在运行，非R2整批完成",
+  "scope": "环境、资产、接口及工具分项通过；本机异常重启下首片姿态已核验416/838帧，完整3D/物理/demo/整批未通过",
   "goal_prompt": "STARTUP_PROMPT.md 当前R2 Goal",
   "storage_root": "/mnt/d/humanoid-demo-r2",
   "storage_planning_gib": 100,
@@ -213,17 +213,322 @@
     "cloud_cost_usd": 0
   },
   "first_video_preflight": {
-    "status": "running",
+    "status": "awaiting_verification",
     "run": "runs/r2-preflight-youtube-QqvZAUEOrAQ-20261031-01",
     "source_url": "https://www.youtube.com/watch?v=QqvZAUEOrAQ",
     "source_role": "debug",
     "complete_source_seconds": 27.933333333333334,
     "source_content_trimmed": false,
     "raw_source_frames": 838,
-    "physical_and_demo_status": "awaiting_verification"
+    "physical_and_demo_status": "awaiting_verification",
+    "execution_state": "bounded cooled checkpoint recovery after repeated abnormal host reboot",
+    "completed_stages": {
+      "prepare": {
+        "status": "passed",
+        "command": [
+          "/mnt/d/humanoid-demo-r2/envs/humanoid-r2/bin/python",
+          "/home/lyrine/projects/humanoid-demo/scripts/extract-r2-video.py",
+          "--output",
+          "/mnt/d/humanoid-demo-r2/runs/r2-preflight-youtube-QqvZAUEOrAQ-20261031-01/extraction",
+          "--worker",
+          "prepare"
+        ],
+        "pid": 27613,
+        "exit_code": 0,
+        "wall_seconds": 141.58857459900037,
+        "peak_process_tree_rss_bytes": 2190143488,
+        "peak_system_gpu_used_mib": 1368.0,
+        "host_free_gib_before": {
+          "/mnt/c": 26.141071319580078,
+          "/mnt/d": 267.21237564086914
+        },
+        "host_free_gib_after": {
+          "/mnt/c": 26.137420654296875,
+          "/mnt/d": 267.2065315246582
+        },
+        "sampling_seconds": 1,
+        "gpu_peak_is_system_total_including_desktop": true
+      },
+      "detect": {
+        "status": "passed",
+        "command": [
+          "/mnt/d/humanoid-demo-r2/envs/humanoid-r2/bin/python",
+          "/home/lyrine/projects/humanoid-demo/scripts/extract-r2-video.py",
+          "--output",
+          "/mnt/d/humanoid-demo-r2/runs/r2-preflight-youtube-QqvZAUEOrAQ-20261031-01/extraction",
+          "--worker",
+          "detect"
+        ],
+        "pid": 28484,
+        "exit_code": 0,
+        "wall_seconds": 465.5798244030002,
+        "peak_process_tree_rss_bytes": 1769156608,
+        "peak_system_gpu_used_mib": 1364.0,
+        "host_free_gib_before": {
+          "/mnt/c": 26.137420654296875,
+          "/mnt/d": 267.20652770996094
+        },
+        "host_free_gib_after": {
+          "/mnt/c": 26.126468658447266,
+          "/mnt/d": 266.38439559936523
+        },
+        "sampling_seconds": 1,
+        "gpu_peak_is_system_total_including_desktop": true
+      },
+      "features": {
+        "status": "passed",
+        "command": [
+          "/mnt/d/humanoid-demo-r2/envs/humanoid-r2/bin/python",
+          "/home/lyrine/projects/humanoid-demo/scripts/extract-r2-video.py",
+          "--output",
+          "/mnt/d/humanoid-demo-r2/runs/r2-preflight-youtube-QqvZAUEOrAQ-20261031-01/extraction",
+          "--worker",
+          "features"
+        ],
+        "pid": 30621,
+        "exit_code": 0,
+        "wall_seconds": 243.36961404500016,
+        "peak_process_tree_rss_bytes": 4395110400,
+        "peak_system_gpu_used_mib": 5041.0,
+        "host_free_gib_before": {
+          "/mnt/c": 26.126468658447266,
+          "/mnt/d": 266.38439178466797
+        },
+        "host_free_gib_after": {
+          "/mnt/c": 26.123977661132812,
+          "/mnt/d": 267.19344329833984
+        },
+        "sampling_seconds": 1,
+        "gpu_peak_is_system_total_including_desktop": true
+      }
+    },
+    "features_cuda": {
+      "status": "passed",
+      "peak_allocated_bytes": 3675342848,
+      "peak_reserved_bytes": 3737124864,
+      "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "scope": "Framework peak; system/desktop footprint is sampled separately"
+    },
+    "interruption_evidence": "runs/r2-preflight-youtube-QqvZAUEOrAQ-20261031-01/interruption-20261031-2147.json",
+    "resume_entrypoint": "scripts/resume-r2-demo.py",
+    "resume_gpu_free_mib_required": 5120,
+    "resume_observation": "runs/r2-preflight-youtube-QqvZAUEOrAQ-20261031-01/resume-observation-20261101-0120.json",
+    "pose2d_verified_frames": 416,
+    "pose2d_expected_frames": 838,
+    "exact_partition_equivalence": {
+      "status": "passed",
+      "scope": "Real released model on two source frames, exact official batch1 whole/partitioned equality",
+      "frame_indices": [
+        209,
+        419
+      ],
+      "exact_tensor_equality": true,
+      "maximum_abs_difference": 0.0,
+      "identity_sha256": "9e92f2dcfbb7b64ca86d3156e4ac0d7a541483d0fa26bb5a7d0a3b8b13725834",
+      "predictions_sha256": "28548678cb995333a1489cdb4f1fb857ef08f4205441b7e630ffcad547b68616"
+    },
+    "checkpoint_recovery_evidence": "runs/r2-preflight-youtube-QqvZAUEOrAQ-20261031-01/interruption-checkpoint-audit-20261101-0157.json",
+    "peak_pose2d_framework_allocated_bytes": 3540864000,
+    "peak_pose2d_framework_reserved_bytes": 3642753024,
+    "host_abnormal_restart_root_cause": "not established"
   },
   "heldout_used": false,
   "batch_acceptance": "not_started",
   "new_cloud_cost_usd": 0,
-  "r1_preserved": true
+  "r1_preserved": true,
+  "recovery_guards": {
+    "status": "passed",
+    "scope": "Resume guards only; no model or physical run",
+    "completed_caches_verified": [
+      "detect",
+      "features",
+      "prepare"
+    ],
+    "active_duplicate_rejected": true,
+    "changed_frozen_source_rejected": true,
+    "guard_sha256": "b0b929262e687f3f3839224f2db8829371a23144a667f43160d3eedbff708b89",
+    "no_inference_submitted": true
+  },
+  "environment_locks": {
+    "status": "passed",
+    "scope": "Observed environment export and build-local path normalization; clean reinstall not performed",
+    "source_pip_freeze": "/mnt/d/humanoid-demo-r2/runs/requirements-r2-20261031.lock.txt",
+    "raw_sha256": "134d35b95f3287f429c85edeb206f0af394dbd2864044b35a9c3648f9c563675",
+    "gemx_install": "-e ./vendor/GEM-X[video]",
+    "gemx_revision": "20555befe2fbbe5b2015e1fff7ff214dc18ea9d6",
+    "normalized_local_build_packages": {
+      "packaging": "26.3",
+      "psutil": "7.2.2"
+    },
+    "files": {
+      "requirements-r2.lock.txt": "6b1dcad06a106bb9febb8dfb444fd6219e99de062f616e43ca58895f82a17c96",
+      "conda-r2-linux-64.explicit.txt": "516054062516cbb73607984e0328cd6b24d3cc470a4397eb99b6849845f43a47"
+    },
+    "no_packages_installed": true
+  },
+  "body_evaluator": {
+    "status": "passed",
+    "scope": "Tool validation only; actual R2 body/clock/key-event results awaiting_verification",
+    "analytic_and_recorded_r1_fk": {
+      "status": "passed",
+      "scope": "Synthetic geometry/timing fixtures plus offline FK of accepted R1 measured states; not an R2 physical acceptance",
+      "analytic_geometry_passed": true,
+      "feature_count": 14,
+      "known_event_delay_seconds": 0.19999999999999996,
+      "missing_or_partial_events_not_passed": true,
+      "exact_native_sequence_verified": {
+        "status": "passed",
+        "scope": "Ordered reference identity and native controller clock; no fitted alignment",
+        "recorded_frames": 106,
+        "verified_source_frames": 101,
+        "expected_source_frames": 101,
+        "full_source_consumed": true,
+        "maximum_recorded_joint_error_m": 4.999237135372425e-10,
+        "maximum_recorded_quaternion_error": 0.0,
+        "source_zero_monotonic": 100.1,
+        "clock_offset_median_seconds": 5.551115123125783e-15,
+        "clock_offset_p95_abs_seconds": 1.199040866595169e-14,
+        "clock_offset_max_abs_seconds": 1.2545520178264269e-14,
+        "time_shift_fitted": false,
+        "recording": "/mnt/d/humanoid-demo-r2/runs/r2-evaluator-check-20261031-01/fixture-physical/reference/recorded_motion/20000101/streamed_000000/smpl_joint.csv"
+      },
+      "rejected_corruption_cases": [
+        "skipped_prefix",
+        "quaternion_changed",
+        "native_index_gap"
+      ],
+      "partial_reference_not_full": true,
+      "recorded_actual_r1_fk_samples": 9,
+      "recorded_actual_feature_finite": true,
+      "r1_fk_provenance": {
+        "scene": "/home/lyrine/projects/humanoid-demo/vendor/GR00T-WholeBodyControl/gear_sonic/data/robot_model/model_data/g1/scene_43dof.xml",
+        "scene_sha256": "274e7b3755dc1eedcf210af54d1c97749f31457d77ae2c499ec234e804065b21",
+        "actual_state_sha256": "729c5afe1412ca2f28dc46c1197c6e0879c0b1a961850ecc9315ac400ca2649f",
+        "maximum_nearest_sample_gap_seconds": 0.0,
+        "maximum_allowed_gap_seconds": 0.015,
+        "recorded_state_fk_only": true
+      },
+      "evaluator_sha256": "8363c6004a9cca6dcae27b0d5d75f0c798c3f0dabef0967e31fc65e18d4e0101",
+      "r2_target_hardware_acceptance": "awaiting_verification",
+      "heldout_used": false,
+      "cloud_cost_usd": 0
+    },
+    "cli_evidence": {
+      "status": "passed",
+      "scope": "Evaluator CLI integration and missing/corrupt evidence handling; synthetic references with reused actual R1 qpos, no new physics",
+      "full_body_reporting_exercised": true,
+      "feature_count": 14,
+      "missing_events_not_passed": "awaiting_verification",
+      "absent_physical_evidence_not_passed": "awaiting_verification",
+      "corrupt_reference_rejected": "failed",
+      "source_sha256": "67b63139515b42bcbe4292c834b4a73e5bb0cc8f69444b6cfb57c83f9dcdcb95",
+      "r2_physics_still": "awaiting_verification"
+    },
+    "r2_actual_acceptance": "awaiting_verification"
+  },
+  "source_screening": {
+    "status": "passed",
+    "scope": "Full-source decode/provenance and visual screening only; no motion acceptance",
+    "evidence": "runs/r2-source-review-20261031-03/visual-review.json",
+    "eligible_candidates": 4,
+    "ineligible": 3,
+    "heldout_inference_used": false
+  },
+  "host_stability": {
+    "status": "awaiting_verification",
+    "windows_event_ids": [
+      41,
+      6008
+    ],
+    "verified_windows_abnormal_restarts": true,
+    "linux_oom_kill_evidence": false,
+    "checkpoint_audit": {
+      "status": "awaiting_verification",
+      "classification": "repeated_abnormal_host_restart",
+      "completed_frames_verified": 416,
+      "expected_frames": 838,
+      "verified_chunk_ranges": [
+        [
+          0,
+          32
+        ],
+        [
+          32,
+          64
+        ],
+        [
+          64,
+          96
+        ],
+        [
+          96,
+          128
+        ],
+        [
+          128,
+          160
+        ],
+        [
+          160,
+          192
+        ],
+        [
+          192,
+          224
+        ],
+        [
+          224,
+          256
+        ],
+        [
+          256,
+          288
+        ],
+        [
+          288,
+          320
+        ],
+        [
+          320,
+          352
+        ],
+        [
+          352,
+          384
+        ],
+        [
+          384,
+          416
+        ]
+      ],
+      "maximum_recorded_system_gpu_mib": 4362.0,
+      "maximum_sampled_temperature_c": 87.0,
+      "all_verified_tensor_hashes_match": true,
+      "power_loss_damaged_metadata_preserved": [
+        {
+          "path": "/mnt/d/humanoid-demo-r2/runs/r2-preflight-youtube-QqvZAUEOrAQ-20261031-01/extraction/pose2d-checkpoints/chunk-000416-000448-attempt-01.json",
+          "sha256_of_damaged_file": "a9696dcbc2bef81a08d6b1a798091d2b1a49654218d3ebdb12f9b255cbb1476f",
+          "reason": "Expecting value: line 1 column 1 (char 0)"
+        },
+        {
+          "path": "/mnt/d/humanoid-demo-r2/runs/r2-preflight-youtube-QqvZAUEOrAQ-20261031-01/extraction/pose2d-checkpoints/chunk-000448-000480-attempt-01.json",
+          "sha256_of_damaged_file": "a9696dcbc2bef81a08d6b1a798091d2b1a49654218d3ebdb12f9b255cbb1476f",
+          "reason": "Expecting value: line 1 column 1 (char 0)"
+        }
+      ],
+      "old_worker_pid": 15402,
+      "old_worker_exists": false,
+      "new_boot_id": "fa0233fb-701c-42d8-81da-0d007d2efe7d",
+      "cause": "unproven; no model-OOM evidence",
+      "next_expectation": "Bounded maximum 3 new 32-frame chunks with <=60C before compute, fsync metadata, exact original algorithm; no driver/system changes",
+      "cloud_cost_usd": 0
+    },
+    "driver_or_system_settings_changed": false
+  },
+  "future_server": {
+    "user_preference": "Continue local first; user will connect server when ready",
+    "connection_provided": false,
+    "server_tasks_started": false,
+    "paid_resources_started": false
+  }
 }
