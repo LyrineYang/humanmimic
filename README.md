@@ -156,24 +156,28 @@ python scripts/resume-r1-suite.py --suite runs/r1-suite-acceptance-20261029-03
 - [OpenAI Goal 编写指南](https://developers.openai.com/cookbook/examples/codex/using_goals_in_codex#how-to-write-a-goal)
 
 
-## R2 本机视频链路（当前预检中）
+## R2 本机视频链路
 
-当前D盘独立conda/CUDA、固定GEM-X资产与SOMA/SMPL接口已检查通过；首条完整YouTube原片正在预检，物理/三路demo与5调试+5保留整批尚未验收。当前执行Goal统一保存在 [STARTUP_PROMPT.md](STARTUP_PROMPT.md)，状态与验收见 [PLAN.md](PLAN.md)。
+当前D盘独立conda/CUDA、固定GEM-X资产与SOMA/SMPL接口已检查通过；两条调试片已通过完整提取、物理和对照视频验收，5调试+5保留整批仍在运行。当前执行Goal统一保存在 [STARTUP_PROMPT.md](STARTUP_PROMPT.md)，状态与验收见 [PLAN.md](PLAN.md)。
 
 独立前缀、模型、下载缓存、临时文件与新结果根为 `/mnt/d/humanoid-demo-r2`，源码仍在WSL Linux目录。C盘10GiB为系统运行余量，不是额外下载额度；100GiB为D上的项目容量规划。源视频完整保留，不自动截到60秒；当前先用原始上传即不超过60秒的视频，超限输入拒绝而不静默剪辑。
 
 ```bash
 source scripts/activate-r2.sh
-bash scripts/run-r2-demo.sh /absolute/input.mp4 my-run-id https://www.youtube.com/watch?v=VIDEO_ID
+python scripts/run-r2-video.py --input /absolute/input.mp4 --run-id my-run-id \
+  --source-url 'https://www.youtube.com/watch?v=VIDEO_ID' \
+  --events /absolute/source-only-events.json
 ```
 
-入口依次执行分阶段提取与缓存、官方SONIC坐标转换、复用R1的真实MuJoCo闭环，再生成完整时间轴的原片—2D/3D提取—实际状态三路MP4。结果在D根的 `runs/my-run-id/`；失败与所有中间结果保留，仿真停止后的画面明确标记，缓存复演不当作新的提取或物理验收。新run id用于新尝试，既有物理结果不会被自动覆盖。
+入口依次执行分阶段提取与缓存、官方SONIC坐标转换、复用R1的真实MuJoCo闭环，再生成完整时间轴的原片—2D/3D提取—实际状态三路MP4及REPORT.md。结果在D根的 `runs/my-run-id/`；失败与所有中间结果保留，仿真停止后的画面明确标记，缓存复演不当作新的提取或物理验收。可先加 `--check-only` 检查输入与已有任务；有活跃流水线时拒绝重复计算，已审计结果可直接读取。`--events` 可省略，但没有按原片预标注的事件就不能通过完整验收。保留集输入必须走冻结批次入口，不能从单片命令绕过使用记录。新run id用于新尝试，既有物理结果不会被自动覆盖。
 
 环境配置见 `configs/environment-r2.yml`、`configs/constraints-r2.txt`，资源规则见 `configs/r2-resources.json`；固定GEM-X是Git子模块，独立环境不升级R1。当前已有的实际检查摘要见 [evidence/r2-setup-20261031.json](evidence/r2-setup-20261031.json)。
 
 已安装版本导出为 [conda精确包清单](configs/conda-r2-linux-64.explicit.txt) 与 [pip锁定清单](configs/requirements-r2.lock.txt)。pip清单从仓库根目录使用，GEM-X取固定子模块；这些是本机版本快照，尚未进行新机器重装验收。
 
-外部中断后可用下列入口恢复调试视频。它先核对原片、冻结源码/配置和已完成缓存；拒绝重复进程或已有失败/未完成物理结果。执行时等待空闲显存至少6144MiB持续15秒，默认最多观察1小时，保留每次尝试，不停止其他应用。
+当前按2026-11-01用户要求优先吞吐：使用原生FP32/batch1姿态生产器，不做人为温度等待、逐帧休息或组间冷却，只记录温度并持久化每32帧检查点；不改硬件温度、驱动、风扇、功耗或时钟。若本机再次关机/重启，按 `configs/r2-execution-policy.json` 停止本机重试，待用户接入服务器迁移。普通恢复仍核对源文件、源码与全部缓存；已有实际物理失败保留，不自动重跑。
+
+以下是早期预检恢复工具，保留用于检查历史证据。当前实际执行使用上面的单片入口或后面的串行批次入口；不要在已有活跃任务旁重复运行。
 
 ```bash
 python3 scripts/resume-r2-demo.py --run /mnt/d/humanoid-demo-r2/runs/my-run-id --check-only
@@ -188,9 +192,9 @@ python scripts/run-r2-checkpoint-recovery.py \
   --extraction /mnt/d/humanoid-demo-r2/runs/my-run-id/extraction
 ```
 
-该恢复入口默认每次最多新增3个32帧块，开算前等待温度低于60°C，并对元数据执行fsync/rename。可加 `--cycles 4` 连续执行最多4组：组间释放模型显存、至少休息30秒且等温度低于55°C，超过120秒未满足就退出等待。仅完成部分或等待资源时返回3，完整姿态完成才返回0。它不改变模型、视频内容或控制频率，也不能保证解决尚未查明的主机重启原因。当前全链路状态以PLAN为准。
+早期入口默认3个32帧块、60°C起算和55°C组间冷却；其等待策略已被当前吞吐方案取代。历史输出和失败原因保留，不把资源等待退出归为模型数值失败。当前全链路状态以PLAN为准。
 
-身体/时序评估使用记录的实际qpos进行离线FK，并核对原生控制器录下的SMPL逐帧身份与时钟；不使用协议中全零的joint_pos占位字段作为机器人目标。输出各肢体角度误差、完整覆盖率和关键事件时间差，不拟合平移来美化对照。关键事件JSON需按原片预先标注并在保留测试前冻结；未提供时状态保持awaiting_verification。当前仅工具检查通过，R2实际结果待验证。
+身体/时序评估使用记录的实际qpos进行离线FK，并核对原生控制器录下的SMPL逐帧身份与时钟；不使用协议中全零的joint_pos占位字段作为机器人目标。输出各肢体角度误差、完整覆盖率和关键事件时间差，不拟合平移来美化对照。关键事件JSON需按原片预先标注并在保留测试前冻结；未提供时状态保持awaiting_verification。当前首片6/6、深蹲7/7事件通过，其他结果以PLAN与各片报告为准。
 
 ```bash
 source scripts/activate-r1.sh
@@ -217,7 +221,7 @@ python scripts/inspect-r2-sources.py /absolute/video.mp4 \
 - [可随Git同步的首片摘要](evidence/r2-preflight-20261101.json)、[实测资源/预算](evidence/r2-resource-estimate-20261101.json)。
 - 对照保留完整时间轴、2D覆盖及对应3D骨架、真实记录状态离线渲染；无拟合时间偏移。八项身体角度误差约0.163–0.391rad只作报告，不能称为人体真值误差或R1关节跟踪误差。
 
-物理录像单独恢复使用R1环境中的 `python scripts/run-r2-physical.py --reference <已完成提取目录>/sonic-reference.npz --output <已有物理目录> --render-only`。此入口只对已停止运行的实际状态按原生消费时钟重评/渲染，不启动控制器；已有录像必须先带哈希归档，不会自动覆盖。首片原始失败、旧派生录像及源码版本分别保留。默认整批入口的冷却检查点集成正在继续，状态以PLAN为准。
+物理录像单独恢复使用R1环境中的 `python scripts/run-r2-physical.py --reference <已完成提取目录>/sonic-reference.npz --output <已有物理目录> --render-only`。此入口只对已停止运行的实际状态按原生消费时钟重评/渲染，不启动控制器；已有录像必须先带哈希归档，不会自动覆盖。首片原始失败、旧派生录像及源码版本分别保留。默认单片/整批入口已集成原速姿态检查点，状态以PLAN为准。
 
 R2当前已完成两条调试：首片舞蹈及[完整深蹲对照](runs/r2-debug-squat-20261101-01/demo-attempt-02/comparison.mp4)，7/7下蹲/站起事件通过。[两片进度及失败试次索引](evidence/r2-debug-progress-20261101.json)。5+5来源/事件在configs/r2-suite-draft.json，仍未冻结或使用保留推理。
 

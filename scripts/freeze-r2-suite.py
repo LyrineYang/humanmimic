@@ -1,6 +1,7 @@
 """Validate the reviewed R2 split, then freeze it before any heldout inference."""
 
 import argparse
+import copy
 import hashlib
 import json
 from pathlib import Path
@@ -13,7 +14,7 @@ CODE = (
     "activate-r1.sh", "activate-r2.sh", "run-r2-demo.sh", "extract-r2-video.py",
     "r2_common.py", "r2_smpl.py", "r2_timeline.py", "r2_geometry.py", "cache-r2-pose2d.py",
     "run-r2-checkpoint-recovery.py", "run-r2-physical.py", "run-r1-reproduction.py",
-    "evaluate-r2-body.py", "render-r2-demo.py", "audit-r2-run.py", "freeze-r2-suite.py", "summarize-r2-suite.py", "run-r2-suite.py", "run-r2-throughput-recovery.py",
+    "evaluate-r2-body.py", "render-r2-demo.py", "audit-r2-run.py", "freeze-r2-suite.py", "summarize-r2-suite.py", "run-r2-suite.py", "run-r2-throughput-recovery.py", "run-r2-video.py",
 )
 CONFIGS = ("r2-resources.json", "r2-execution-policy.json", "r1-evaluation.json", "r1-dds.xml", "constraints-r2.txt",
            "requirements-r2.lock.txt", "conda-r2-linux-64.explicit.txt")
@@ -23,6 +24,8 @@ def inspect(draft):
     blockers, event_files, sources = [], [], []
     if draft.get("status") != "draft":
         raise ValueError("Use the reviewed draft; do not refreeze used test results")
+    if draft.get("heldout_inference_used") or any(item.get("model_inference_used") for item in draft["heldout"]):
+        blockers.append("Draft declares a proposed heldout source already used")
     for role in ("debug", "heldout"):
         items = draft[role]
         if len(items) != 5 or len({item["action_class"] for item in items}) < 3:
@@ -71,7 +74,7 @@ def inspect(draft):
         report = json.loads(Path(path).read_text())
         if report["status"] not in ("passed", "failed"):
             blockers.append(f"Debug run incomplete: {item['id']}")
-        if report.get("extraction", {}).get("source_sha256") != item["source_sha256"]:
+        if report.get("source_sha256", report.get("extraction", {}).get("source_sha256")) != item["source_sha256"]:
             blockers.append(f"Debug audit lacks matching source identity: {item['id']}")
     heldout = {item["source_sha256"] for item in draft["heldout"]}
     ledger = STORAGE / "runs/heldout-use-ledger.jsonl"
@@ -112,9 +115,19 @@ def freeze(draft_path, output, check_only):
     binary = SONIC / "gear_sonic_deploy/target/release/g1_deploy_onnx_ref"
     driver = subprocess.check_output(["nvidia-smi", "--query-gpu=name,driver_version", "--format=csv,noheader"], text=True).strip()
     vendor_diff = {str(path.relative_to(PROJECT)): hashlib.sha256(subprocess.check_output(["git", "-C", str(path), "diff", "--no-ext-diff", "--binary", "HEAD", "--"])).hexdigest() for path in (GEMX, SONIC)}
-    frozen = {**draft, "status": "frozen", "frozen_unix": time.time(), "draft_sha256": sha256(draft_path), "source_code_sha256": hashes, "asset_sha256": assets, "binary_sha256": sha256(binary), "gpu_driver": driver, "gemx_revision": subprocess.check_output(["git", "-C", str(GEMX), "rev-parse", "HEAD"], text=True).strip(), "sonic_revision": subprocess.check_output(["git", "-C", str(SONIC), "rev-parse", "HEAD"], text=True).strip(), "vendor_diff_sha256": vendor_diff, "heldout_used_at_freeze": False, "no_fitted_time_shift": True, "source_content_trimmed": False}
+    frozen = frozen_usage_snapshot(draft)
+    frozen.update(status="frozen", frozen_unix=time.time(), draft_sha256=sha256(draft_path), source_code_sha256=hashes, asset_sha256=assets, binary_sha256=sha256(binary), gpu_driver=driver, gemx_revision=subprocess.check_output(["git", "-C", str(GEMX), "rev-parse", "HEAD"], text=True).strip(), sonic_revision=subprocess.check_output(["git", "-C", str(SONIC), "rev-parse", "HEAD"], text=True).strip(), vendor_diff_sha256=vendor_diff, heldout_used_at_freeze=False, no_fitted_time_shift=True, source_content_trimmed=False, debug_audit_sha256={item["audit_json"]: sha256(item["audit_json"]) for item in draft["debug"]}, usage_ledger_relative="runs/heldout-use-ledger.jsonl")
     write_json(output, frozen)
     result.update(frozen_suite=str(output), frozen_suite_sha256=sha256(output))
+    return result
+
+
+def frozen_usage_snapshot(draft):
+    """Immutable manifest flags describe freeze time, never current test use."""
+    result = copy.deepcopy(draft)
+    result["heldout_inference_used_at_freeze"] = result.pop("heldout_inference_used", False)
+    for item in result["heldout"]:
+        item["model_inference_used_at_freeze"] = item.pop("model_inference_used", False)
     return result
 
 

@@ -9,13 +9,15 @@ from pathlib import Path
 import subprocess
 import time
 
-from r2_common import PROJECT, STORAGE, sha256, storage_check, write_json
+from r2_common import GEMX, PROJECT, SONIC, STORAGE, sha256, storage_check, write_json
 
 
 def active_tasks():
     found = []
-    scripts = {b"extract-r2-video.py", b"run-r2-physical.py", b"cache-r2-pose2d.py", b"cache-r2-paced-pose2d.py", b"run-r2-throughput-recovery.py", b"run-r2-checkpoint-recovery.py", b"render-r2-demo.py", b"run-r2-demo.sh"}
+    scripts = {b"extract-r2-video.py", b"run-r2-physical.py", b"cache-r2-pose2d.py", b"cache-r2-paced-pose2d.py", b"run-r2-throughput-recovery.py", b"run-r2-checkpoint-recovery.py", b"render-r2-demo.py", b"run-r2-demo.sh", b"run-r2-suite.py", b"run-r2-video.py", b"prepare-r2-startup-diagnostic.py"}
     for path in Path("/proc").glob("[0-9]*/cmdline"):
+        if int(path.parent.name) == os.getpid():
+            continue
         try:
             args = path.read_bytes().split(b"\0")
         except OSError:
@@ -86,6 +88,13 @@ def check_frozen(manifest, manifest_path):
     gpu = subprocess.check_output(["nvidia-smi", "--query-gpu=name,driver_version", "--format=csv,noheader"], text=True).strip()
     if gpu != manifest["gpu_driver"]:
         raise ValueError("GPU or driver differs from the frozen environment")
+    binary = SONIC / "gear_sonic_deploy/target/release/g1_deploy_onnx_ref"
+    if sha256(binary) != manifest["binary_sha256"]:
+        raise ValueError("Native controller binary differs from the frozen suite")
+    for path, field in ((GEMX, "gemx_revision"), (SONIC, "sonic_revision")):
+        revision = subprocess.check_output(["git", "-C", str(path), "rev-parse", "HEAD"], text=True).strip()
+        if revision != manifest[field]:
+            raise ValueError(f"Upstream revision differs from the frozen suite: {field}")
     for relative, digest in manifest["vendor_diff_sha256"].items():
         diff = subprocess.check_output(["git", "-C", str(PROJECT / relative), "diff", "--no-ext-diff", "--binary", "HEAD", "--"])
         if hashlib.sha256(diff).hexdigest() != digest:
@@ -143,7 +152,10 @@ def run_video(item, role, manifest, manifest_path):
     if not body.exists():
         if role == "heldout":
             check_frozen(manifest, manifest_path)
-        step(run, "body", "r1", "evaluate-r2-body.py", ["--extraction", extraction, "--physical", physical, "--events", PROJECT / item["events_path"], "--output", body])
+        body_args = ["--extraction", extraction, "--physical", physical, "--output", body]
+        if item.get("events_path"):
+            body_args += ["--events", PROJECT / item["events_path"]]
+        step(run, "body", "r1", "evaluate-r2-body.py", body_args)
     if not demo.exists():
         if role == "heldout":
             check_frozen(manifest, manifest_path)

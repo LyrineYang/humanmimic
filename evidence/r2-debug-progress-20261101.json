@@ -1,7 +1,7 @@
 {
   "status": "awaiting_verification",
   "scope": "R2 batch progress; not suite acceptance",
-  "debug_completed": 2,
+  "debug_completed": 3,
   "debug_required": 5,
   "heldout_used": 0,
   "heldout_required": 5,
@@ -31,6 +31,20 @@
         }
       ],
       "audit": "runs/r2-debug-squat-20261101-01/run-audit.json"
+    },
+    {
+      "id": "6uqztDO_7kQ",
+      "status": "failed",
+      "extraction": "passed, all eight stages, 344 normalized frames",
+      "source_reference_frames": 574,
+      "source_reference_frames_consumed": 22,
+      "events": "0/6, actual source coverage incomplete",
+      "reason": "Real physical fall after0.413 seconds of source; unstable during initial50-frame warmup",
+      "minimum_root_height_m": 0.19295254574065468,
+      "audit": "runs/r2-debug-6uqztDO_7kQ-20261101-01/run-audit.json",
+      "media_review": "runs/r2-debug-6uqztDO_7kQ-20261101-01/run-audit-media-review-20261101.json",
+      "demo": "runs/r2-debug-6uqztDO_7kQ-20261101-01/demo/comparison.mp4",
+      "report": "runs/r2-debug-6uqztDO_7kQ-20261101-01/REPORT.md"
     }
   ],
   "source_manifest": "configs/r2-suite-draft.json",
@@ -61,7 +75,6 @@
     "run": "runs/r2-debug-throughput-orchestration-20261101-01",
     "sources_remaining": [
       "vTx_ldn6MCA",
-      "6uqztDO_7kQ",
       "2e_7XBmpw14"
     ],
     "adopted_active_pose_task": "runs/r2-debug-vTx_ldn6MCA-20261101-01/throughput-recovery-01-task.json",
@@ -75,5 +88,29 @@
     "checkpoint_frames": 32,
     "on_local_reboot": "server handoff; no further local retry",
     "acceptance_changed": false
-  }
+  },
+  "debug_passed": 2,
+  "debug_failed": 1,
+  "debug_awaiting_verification": 2,
+  "startup_diagnostic": {
+    "status": "awaiting_verification",
+    "scope": "Fixed reference prefix ablation only, not canonical suite acceptance",
+    "run": "runs/r2-startup-transition-diagnostic-20261101-01",
+    "task_pid": 136971,
+    "after_existing_queues": true,
+    "source_samples_unchanged": 574,
+    "prefix_frames_50hz": 100,
+    "geometry_check": "passed",
+    "physical_check": "awaiting_verification"
+  },
+  "tool_checks": {
+    "single_video_entry": "passed, cached read/no duplicate/reserved heldout guards",
+    "frozen_runtime": "passed, binary and upstream revision identity",
+    "failure_media_report": "passed, truthful partial actual/full comparison; successful gate unchanged"
+  },
+  "host_free_gib": {
+    "/mnt/c": 19.15255355834961,
+    "/mnt/d": 271.98745346069336
+  },
+  "updated_unix": 1793485133.6344194
 }

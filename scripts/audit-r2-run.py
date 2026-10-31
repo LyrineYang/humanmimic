@@ -6,6 +6,7 @@ import json
 import math
 from pathlib import Path
 import subprocess
+import time
 
 from r2_common import sha256, storage_check, write_json
 
@@ -64,6 +65,8 @@ def audit(run):
         metrics = json.loads((physical / "physical-metrics.json").read_text())
         body = json.loads((body_dir / "body-evaluation.json").read_text())
         result.update(physical_status=metrics["status"], body_status=body["status"])
+        events = body.get("key_events", {}).get("events", [])
+        result.update(source_original_frames=source["source"]["frame_count"], normalized_frames=source["normalized"]["frame_count"], control_frames=conversion["control_frames"], key_events_passed=sum(event["status"] == "passed" for event in events), key_events_total=len(events), artifact_layout={"physical": physical.name, "body": body_dir.name, "demo": demo.name})
         if metrics["status"] == "failed" or body["status"] == "failed":
             result["status"] = "failed"
         if metrics["status"] == "passed":
@@ -86,9 +89,15 @@ def audit(run):
             raise ValueError("Demo does not contain all complete expected panels/frames")
         if demo_info["source_content_trimmed"] or demo_info["time_shift_fitted"] or rendered["time_shift_fitted"]:
             raise ValueError("Unexpected trimming or fitted time shift")
-        if count != len(mapping) or count != rendered["frames"]:
-            raise ValueError("Media mapping length differs from complete timeline")
-        all_actual = all(row["robot_frame_available"] for row in mapping) and all(rendered["valid_actual_state"])
+        actual_count = rendered["frames"]
+        if count != len(mapping) or not 0 < actual_count <= count or actual_count != len(rendered["valid_actual_state"]):
+            raise ValueError("Media mapping length differs from recorded/complete timelines")
+        available = [bool(row["robot_frame_available"]) for row in mapping]
+        expected_available = [True] * actual_count + [False] * (count - actual_count)
+        if available != expected_available:
+            raise ValueError("Demo actual-state availability differs from recorded physics")
+        all_actual = actual_count == count and all(available) and all(rendered["valid_actual_state"])
+        result["actual_video_frames"] = actual_count
         result["all_robot_frames_available"] = all_actual
         if metrics["status"] == "passed" and not all_actual:
             raise ValueError("Passed physics has missing actual-state video frames")
@@ -96,7 +105,7 @@ def audit(run):
             if row["demo_frame"] != i or abs(row["source_time_s"] - i / fps) > 1e-8:
                 raise ValueError("Demo source time grid changed")
         result["videos"] = [media(demo / name, count, fps) for name in demo_info["files"]]
-        result["videos"].append(media(physical / "actual-execution.mp4", count, fps))
+        result["videos"].append(media(physical / "actual-execution.mp4", actual_count, fps))
         result["media_status"] = "passed"
         visual_path = run / "visual-audit.json"
         visual = json.loads(visual_path.read_text()) if visual_path.exists() else {"status": "awaiting_verification", "reason": "Review complete comparison first/middle/last frames"}
@@ -114,6 +123,31 @@ def audit(run):
     return result
 
 
+def write_report(report, audit_path):
+    """Readable result package; preserve prior narrative versions on updates."""
+    run = Path(report["run"])
+    layout = report.get("artifact_layout", {})
+    physical = run / layout.get("physical", "physical")
+    body = run / layout.get("body", "body-audit")
+    demo = run / layout.get("demo", "demo")
+    lines = ["# R2 单视频结果", "", f"状态：**{report['status']}**。此为单片结果，不替代5调试/5保留整批验收。", "",
+             f"来源SHA256：{report.get('source_sha256', '尚无完整输入证据')}；角色：{report.get('role', '未确认')}。",
+             f"原始帧：{report.get('source_original_frames', '未确认')}；30Hz提取帧：{report.get('normalized_frames', '未完成')}；50Hz控制参考：{report.get('control_frames', '未完成')}。",
+             f"物理：{report.get('physical_status', 'awaiting_verification')}；身体/事件：{report.get('body_status', 'awaiting_verification')}；视频：{report.get('media_status', 'awaiting_verification')}；视觉核验：{report.get('visual_status', 'awaiting_verification')}。",
+             f"关键事件：{report.get('key_events_passed', 0)}/{report.get('key_events_total', 0)}通过。身体误差相对单目提取参考报告，不是人体三维真值或R1关节跟踪误差。", ""]
+    artifacts = [("完整三路对照", demo / "comparison.mp4"), ("完整原片", run / "extraction/source-original.mp4"), ("全部提取/转换缓存", run / "extraction"), ("真实执行状态", physical / "actual-state.npz"), ("物理与原生时钟指标", physical / "physical-metrics.json"), ("身体误差/关键事件", body / "body-evaluation.json"), ("全部身体时间序列", body / "body-descriptors.npz"), ("输入/提取/控制/实际帧映射", demo / "frame-mapping.json"), ("独立审计", audit_path)]
+    for label, path in artifacts:
+        lines.append(f"- [{label}]({path})" if path.exists() else f"- {label}：尚未生成，见失败/缺失证据。")
+    for key in ("audit_error", "missing_evidence"):
+        if key in report:
+            lines += ["", f"{key}：{report[key]}"]
+    lines += ["", "源时间轴保留；失败/中断日志和各次invocation记录均在本目录，不以成功片段替换失败。新增云费用0。"]
+    output = run / "REPORT.md"
+    if output.exists():
+        output.rename(run / f"REPORT-before-{time.time_ns()}.md")
+    output.write_text("\n".join(lines) + "\n")
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--run", type=Path, required=True)
@@ -125,5 +159,7 @@ if __name__ == "__main__":
         parser.error("Choose a new audit output path")
     report = audit(args.run.resolve())
     write_json(args.output, report)
+    if report["status"] in ("passed", "failed") or report.get("media_status") == "passed":
+        write_report(report, args.output.resolve())
     print(json.dumps({key: report[key] for key in ("status", "scope", "run")}, indent=2))
     raise SystemExit({"passed": 0, "failed": 1, "awaiting_verification": 2}[report["status"]])

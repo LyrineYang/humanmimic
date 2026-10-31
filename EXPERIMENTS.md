@@ -257,3 +257,14 @@ next_action: null
 - 同一臂环绕缓存原速恢复已启动PID127785/startticks1142422；辅助入口run-r2-throughput-recovery.py只替换metadata持久化，原数值生产器SHA仍ef1c785c6b3d9cd49f05f32c95cc398b3d87997ae9acfb290eef380210fc4cd2，真实资源值不伪造。后续串行父队列PID128105/startticks1159726先等待已存在任务而不重提，然后继续其余提取/物理/三路demo和另两条调试；仅原温度等待失败审计会带SHA归档后按用户新策略恢复，不自动替换真实物理/模型失败。原两片passed和全部失败/主动中断证据保留。
 
 - 新策略第一项真实结果passed（完整2D姿态）：臂环绕509/509帧通过，原native两帧proof和各块身份保持一致；416帧时实际温度72°C/系统GPU4759MiB，未新增重启。只是完整观察量缓存，不提前计完整视频/物理通过。协调器的resource-only匹配最初查外层error而详情在worker log，因而跳过已恢复源；保存了活跃协调器实际源码，修正后以单独串行follow-up等待主队列结束再完成臂环绕3D/物理/demo，正在执行的踏步/Cupid不中断。两片已通过、原冷却失败、两轮间歇失败和所有原始缓存均保留。
+
+
+## 2026-11-01 原速队列、踏步失败与完整结果包
+
+- 预期：保持原生FP32/batch1/flip、完整源时间轴、50Hz参考和所有物理/事件门槛；仅移除人为温度等待。先完成剩余调试，保留所有失败，再冻结保留集。报告/API修复与固定起始衔接诊断各自在setup/diagnostic expectation.json中先记录预期。
+- 运行结果：臂环绕509/509姿态原速检查点 `passed`；踏步八阶段提取/转换 `passed`，341原帧、344提取帧、574参考。真实物理 `failed`，22/574源样本后跌倒，源覆盖0.412781s、最低根高0.192953m，真实状态SHA ab3ef4ebc77429a5784b06a921b09967abceb6443036e8b883c3ec2530df38d6。弹力带在源期间关闭，无状态覆写；没有主机重启、OOM或观察CSV中断证据。6事件因覆盖不完整均不通过，不能归为完整动作提取失败。原初审failed未改。
+- 媒体/交付：踏步完整287帧对照含原片、2D覆盖、3D骨架，实际录像只有11帧，后段明确标记停止。5个MP4完整解码passed，人工核验0/10/143/274帧passed；物理/整片仍failed。新增REPORT.md与run-audit-media-review-20261101.json，原run-audit.json及全部实际状态未覆盖。审计修复分别检查完整对照和真实短录像的长度，伪造尾部可用标记或物理passed但实际缺帧仍拒绝；旧深蹲完整270帧/7事件复核passed。
+- 实现：新增单视频原速入口，缓存结果只读、活跃队列防重复、保留源必须走冻结入口；缺预标注事件不能算通过。冻结状态改为明确的at_freeze快照，保留调试审计SHA；真实运行检查原生binary SHA及两个固定上游revision/diff。局部CLI、正/负身份、媒体回归passed，只是工具验证，无新保留模型调用。
+- 调试分析：源开始比策略启动晚1.08185s；正式源开始前机器人高度已从0.9645降至0.6036m并倾斜，随后跌倒。踏步首参考右膝屈曲1.82777rad，固定首姿态50帧预热可能造成站立→高单腿的突变，尚未确认根因。独立诊断准备固定100帧/2秒骨方向SLERP+smoothstep前缀，保留首四元数/上半身与腿骨长，全部574原始运动样本逐值不变，最大骨长误差5.96e-8m；CPU几何边界检查passed，真实执行awaiting_verification。单次诊断PID136971在Cupid+臂环绕队列结束后运行，绝不覆盖原失败或纳入canonical通过计数。
+- 活跃任务：Cupid检测1470.001s passed，features继续；主队列PID128105、臂后续PID129032均在同一允许boot上。调试现2passed/1failed/2待验收，保留0/5；运行预算不变，云费用0。本机再次关机就按用户要求停止本机重试，待接入服务器迁移。
+- 证据：踏步runs/r2-debug-6uqztDO_7kQ-20261101-01/{REPORT.md,startup-fall-diagnosis-20261101.json,run-audit-media-review-20261101.json,visual-failure-review-20261101.jpg}；setup/{single-video-entry-check,frozen-runtime-guard-check,report-media-regression}-20261101.json；runs/r2-startup-transition-diagnostic-20261101-01/{expectation,geometry-check,preparation,task}.json。keep实现/证据，诊断真实结果未出前不修改主物理/转换源码；5调试完成后再冻结保留。
