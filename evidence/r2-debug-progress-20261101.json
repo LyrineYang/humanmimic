@@ -36,5 +36,35 @@
   "source_manifest": "configs/r2-suite-draft.json",
   "frozen_suite": false,
   "heldout_event_annotations": "source-only, saved before inference; still not frozen",
-  "cloud_cost_usd": 0
+  "cloud_cost_usd": 0,
+  "extraction_diagnostics": {
+    "scope": "Descriptive tracking/2D confidence, not calibrated accuracy or new gates",
+    "first_dance": {
+      "normalized_frames": 838,
+      "raw_detection_frames": 800,
+      "dominant_track_observed_frames": 398,
+      "box_filled_frames": 440,
+      "last_dominant_track_observation": 418,
+      "late_other_id_fragment_active_frames": 401,
+      "longest_held_box_seconds": 13.966666666666667,
+      "smpl24_keypoint_fraction_confidence_above_025": 0.9561953062848051,
+      "diagnostic": "runs/r2-preflight-youtube-QqvZAUEOrAQ-20261031-01/extraction-diagnostics-annotated-20261101.json"
+    },
+    "squat": {
+      "normalized_frames": 323,
+      "dominant_track_observed_frames": 323,
+      "box_filled_frames": 0,
+      "smpl24_keypoint_fraction_confidence_above_025": 1.0
+    }
+  },
+  "active_debug_batch": {
+    "run": "runs/r2-debug-orchestration-20261101-01",
+    "source_commit": "840bb87",
+    "sources_remaining": [
+      "vTx_ldn6MCA",
+      "6uqztDO_7kQ",
+      "2e_7XBmpw14"
+    ],
+    "heldout_started": false
+  }
 }

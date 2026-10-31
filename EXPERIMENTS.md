@@ -234,3 +234,10 @@ next_action: null
 - 精确选帧集成CPU检查passed：新目录r2-integrated-prepare-check-20261101-01验证源整数PTS/timebase与滤镜raw PTS逐帧一致，实际输出323帧与hash证明匹配；原先独立24fps/VFR检查和全部323个解码帧等价仍保留。新入口不保留RGB大数组、不裁源内容。
 - 整批工具准备passed：freeze检查源SHA/来源分组/事件特征/调试审计/未使用ledger，冻结后记录源码/模型/原生二进制/GPU驱动/子模块diff；串行执行器跳过已有terminal审计并拒绝重复任务，失败和部分物理不自动覆盖；独立汇总在4/5完整且其余已完成时才通过，4成功+1未运行仍awaiting_verification、3/5失败、未冻结不能通过、错误来源使批次无效。合成边界验证不计保留使用。所有5条保留事件只按原片提前标注，仍未运行保留模型；freeze-readiness仅剩三条未完成调试。
 - 当前debug2/5passed，heldout0/5used，R2及Goal未完成。后续串行继续另三条调试再冻结保留，云费用0，服务器未连接。Git小型证据evidence/r2-debug-progress-20261101.json，所有原始产物仍D。
+
+## 2026-11-01 剩余调试串行执行与提取覆盖诊断
+
+- 整批续跑已启动：`runs/r2-debug-orchestration-20261101-01/`，PID122594、boot_id/startticks记录在task.json；来源/配置/源码840bb87已推送GitHub。跳过两个既有passed审计，臂环绕完整原片424帧25fps→509帧30fps，精确整数PTS/raw哈希prepare12.3637s和CPU检测277.8107s通过，features进行中；下一条踏步，再Cupid。只运行debug，保留仍未使用。
+- 修改前预期（诊断本身不改模型）：用两片已保存2D/框缓存描述覆盖率、缺口、置信度，仅CPU、不创建新质量门槛。首片primary观测398/838、补框440、末419帧从13.97s起沿用旧框；深蹲323/323全部primary观测。SMPL24映射关键点置信度>0.25比例分别95.62%及100%，不是校准准确率或3D真值。原始检测与模型输出文件SHA不变；诊断文件在两片extraction-diagnostics-20261101.json。
+- 进一步纯CPU重放首片stored raw boxes/scores→官方ByteTracker，主轨迹observed mask逐位完全一致passed。raw检测800/838帧有框；ID0活动398帧[19,418]，ID3活动401帧[405,818]；官方最大累计面积规则只选ID0，后续因此持有旧框。不是后半段全无原始检测，也不能单凭补框推断姿态错；原6个事件及实际物理通过结论限于既有门槛。证据tracking-fragment-audit-20261101.json、extraction-diagnostics-annotated-20261101.json。记录为当前官方跟踪覆盖局限，不在正在运行的固定版本中调整阈值/改轨迹关联。
+- 决定keep原运行及诊断，继续余下调试，完成后按原5+5/至少4保留门槛验收。云费用0，未连接服务器或真机，没有训练/驱动修改。
