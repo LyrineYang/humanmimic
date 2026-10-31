@@ -207,6 +207,8 @@ python scripts/evaluate-r2-body.py \
 
 普通视频来源先用 `inspect-r2-sources.py` 做CPU全帧解码、来源哈希和等比例时间轴预览，再人工筛选单人/固定相机/全身脚部条件；全局画面变化与黑场仅作启发式提示，不自动宣称合格，不运行人体动作模型。已下载视频的标题/尾屏和不合格来源仍保留。
 
+`python scripts/diagnose-r2-extraction.py --extraction /absolute/extraction --output /absolute/new-diagnostic.json` 只读检测/2D缓存，区分原始人物检测、选中主轨迹和填充框，并报告原始热图置信度。输出须在D专用结果根内；这些数值不是准确率或新的验收阈值。新串行运行会自动生成该报告，旧结果可独立补充，完整对照仍显示填充帧。
+
 ```bash
 source scripts/activate-r1.sh
 python scripts/inspect-r2-sources.py /absolute/video.mp4 \

@@ -277,3 +277,18 @@ next_action: null
 - 调度修复预期先记录：默认ORT CPU检测持续使用近32线程，长片检测成为瓶颈。新benchmark-r2-detection.py在前序所有队列与启动衔接诊断结束后，以固定8/1线程对完整344帧踏步调试片做一次同模型/解码/阈值/NMS/官方跟踪与裁剪对照。全部raw_boxes/raw_scores、track/frame IDs、observed/valid_span、主框/平滑裁剪框、其他人物框和填充标签逐值相同才通过；任意差异failed。候选另存D目录，原缓存哈希前后核对，尚未修改现行提取源码或采用该线程设置。
 - 当前只是源码/串行调度准备：PID138951/startticks1502463/boot fa0233fb-701c-42d8-81da-0d007d2efe7d等待PID136971，等价/性能awaiting_verification，无新增GPU推理或保留使用。期望/源码快照/任务日志在runs/r2-detection-throughput-check-20261101-01/。若速度有提升，报告两轮导入/缓存热状态不同，不能把worker总耗时当作纯模型速度对比。
 - 冻结只读预检正确返回awaiting_verification，当前缺Cupid最终调试审计；臂环绕资源失败仍由既定后续队列处理，不能把这次预检当作可以提前进入保留集。云费用0。
+
+
+## 2026-11-01 全调试提取覆盖诊断及长片原速姿态
+
+- 预期：先在setup/extraction-diagnostics-expectation-20261101.json记录，只读已完成缓存并核验SHA，重现首片既有数字；描述检测/轨迹/原始热图置信度，不修改输入、模型、裁剪或验收规则。
+- 缓存诊断计算passed：新diagnose-r2-extraction.py读取全部5条调试检测缓存，首片原始800/838、主轨迹398/838、映射24点置信度>0.25比例0.9561953062848051与旧诊断逐值一致；深蹲主轨迹323/323、臂环绕508/509（填1）、踏步344/344（无填框）、Cupid1723/1771（末48帧填框）。Cupid当次2D尚未完成，明确标pose_confidence_status awaiting_verification；不拿局部缓存补全统计。置信度是模型raw heatmap maximum，非校准概率或人体真值。
+- 工具实现/验证：未来串行入口在完整提取后生成extraction-diagnostics.json，结果报告链接最新诊断，helper入冻结CODE。五份实测摘要在各run/extraction-diagnostics-20261101-02.json，setup/extraction-diagnostics-check-20261101.json记录首片等价和五缓存覆盖；这是CPU只读分析，没有额外GPU模型或保留推理。踏步REPORT补链接，actual-state SHA ab3ef4ebc77429a5784b06a921b09967abceb6443036e8b883c3ec2530df38d6及failed原结论均未变。
+- 最长片真实运行passed（仅2D）：Cupid1771/1771原生姿态、56个分块全部完成，wrapper690.229s、完整子进程invocation767.738s（两者包含的启动区间不同，不能当纯模型速度）。原生FP32/batch1/flip及32帧持久化未变，无冷却/逐帧休眠、无新增重启；框架峰值allocated3,540,864,000B/reserved3,642,753,024B。随后camera45.292s、motion47.016s、postprocess87.883s均passed，convert尚在运行。完整实际仿真/事件/demo仍awaiting_verification，调试2passed/1failed/2待验收、保留0/5不变，云费用0。
+
+
+## 2026-11-01 原速预算更新与长片完整消费
+
+- Cupid全部8阶段提取/转换passed；原始1771帧、归一化1771帧、2952个50Hz源参考。原生记录2952/2952源样本，参考joints最大身份差4.99994e-10m，源时钟P95绝对偏差49微秒，无拟合平移。run-events源完成true/failure null，一次瞬时ENODATA由已验证CSV观察修复容忍，未停止实际控制。实际录像仍在渲染、身体事件及整片审计awaiting_verification，不能先计通过。
+- 资源实测/预算复核passed（只测量）：踏步11.467s与Cupid59.033s的8阶段worker合计19.494/50.908min，完整提取协调合计20.967/54.760min；插值30s提取34.134min，加物理/身体/全媒体及导入波动，更新单30s全链路40–50min、10条平均30s约6.7–8.3h、剩余5条既定长度保留约2.5–4h。两片缓存热状态/温度/启动开销不同，属于规划外推，不是纯模型基准或通过承诺，也不作为超时重提依据。
+- 旧冷却估算保留并注明已被原速方案替代；尚未执行/采用的CPU线程加速没有计入。100GiB规划和磁盘保护线不变，新增云费用0，无保留推理。原始逐阶段profile与resource-throughput-review-20261101.json在Cupid运行目录，可同步摘要evidence/r2-resource-estimate-20261101.json。

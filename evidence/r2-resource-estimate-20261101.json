@@ -85,7 +85,8 @@
     ],
     "batch_estimate_is_extrapolation": true,
     "excludes": "setup, debugging, reboots, re-execution, longer source durations",
-    "supersedes": "2026-10-30 stable batch estimate 1.5–5h; current cold imports and cooling are slower; optimize only after equivalence checks"
+    "supersedes": "2026-10-30 stable batch estimate 1.5–5h; current cold imports and cooling are slower; optimize only after equivalence checks",
+    "historical_policy": "Superseded by throughput_update_20261101; retained as the actual earlier cooled/checkpoint estimate"
   },
   "measured_framework_peak_bytes": {
     "bodypose_allocated": 3675342848,
@@ -117,5 +118,177 @@
   ],
   "cloud_cost_usd": 0,
   "paid_execution_authorized": false,
-  "heldout_used": false
+  "heldout_used": false,
+  "throughput_update_20261101": {
+    "status": "passed",
+    "scope": "Measured native-throughput extraction resources and planning extrapolation; not physical/suite acceptance",
+    "hardware": "WSL2 / RTX4060 Laptop 8188MiB / driver617.42",
+    "measurements": [
+      {
+        "run": "r2-debug-6uqztDO_7kQ-20261101-01",
+        "source_seconds": 11.466666666666667,
+        "normalized_frames": 344,
+        "all_eight_extraction_stages": "passed",
+        "physics_status": "failed",
+        "stages": [
+          {
+            "stage": "prepare",
+            "wall_seconds": 13.59707956100101,
+            "peak_system_gpu_used_mib": 1238.0,
+            "peak_process_tree_rss_bytes": 73191424,
+            "profile": "/mnt/d/humanoid-demo-r2/runs/r2-debug-6uqztDO_7kQ-20261101-01/extraction/prepare-attempt-01.json"
+          },
+          {
+            "stage": "detect",
+            "wall_seconds": 356.67096719099936,
+            "peak_system_gpu_used_mib": 1238.0,
+            "peak_process_tree_rss_bytes": 1520181248,
+            "profile": "/mnt/d/humanoid-demo-r2/runs/r2-debug-6uqztDO_7kQ-20261101-01/extraction/detect-attempt-02.json"
+          },
+          {
+            "stage": "features",
+            "wall_seconds": 245.71632930299893,
+            "peak_system_gpu_used_mib": 4919.0,
+            "peak_process_tree_rss_bytes": 4298756096,
+            "profile": "/mnt/d/humanoid-demo-r2/runs/r2-debug-6uqztDO_7kQ-20261101-01/extraction/features-attempt-01.json"
+          },
+          {
+            "stage": "camera",
+            "wall_seconds": 40.52169106900146,
+            "peak_system_gpu_used_mib": 1238.0,
+            "peak_process_tree_rss_bytes": 657526784,
+            "profile": "/mnt/d/humanoid-demo-r2/runs/r2-debug-6uqztDO_7kQ-20261101-01/extraction/camera-attempt-01.json"
+          },
+          {
+            "stage": "motion",
+            "wall_seconds": 42.070367256999816,
+            "peak_system_gpu_used_mib": 1597.0,
+            "peak_process_tree_rss_bytes": 1656786944,
+            "profile": "/mnt/d/humanoid-demo-r2/runs/r2-debug-6uqztDO_7kQ-20261101-01/extraction/motion-attempt-01.json"
+          },
+          {
+            "stage": "postprocess",
+            "wall_seconds": 87.8064700879986,
+            "peak_system_gpu_used_mib": 1247.0,
+            "peak_process_tree_rss_bytes": 1048645632,
+            "profile": "/mnt/d/humanoid-demo-r2/runs/r2-debug-6uqztDO_7kQ-20261101-01/extraction/postprocess-attempt-01.json"
+          },
+          {
+            "stage": "convert",
+            "wall_seconds": 83.42204096800015,
+            "peak_system_gpu_used_mib": 1247.0,
+            "peak_process_tree_rss_bytes": 1692901376,
+            "profile": "/mnt/d/humanoid-demo-r2/runs/r2-debug-6uqztDO_7kQ-20261101-01/extraction/convert-attempt-01.json"
+          },
+          {
+            "stage": "pose2d",
+            "wall_seconds": 299.8371386528015,
+            "profile": "/mnt/d/humanoid-demo-r2/runs/r2-debug-6uqztDO_7kQ-20261101-01/native-pose-invocation-01.json",
+            "includes_full_interpreter_environment_and_wrapper_startup": true
+          }
+        ],
+        "eight_stage_worker_sum_seconds": 1169.6420840898008,
+        "full_extraction_orchestration_seconds": 1258.0228974819183
+      },
+      {
+        "run": "r2-debug-2e_7XBmpw14-20261101-01",
+        "source_seconds": 59.03333333333333,
+        "normalized_frames": 1771,
+        "all_eight_extraction_stages": "passed",
+        "physics_status": "awaiting_verification",
+        "stages": [
+          {
+            "stage": "prepare",
+            "wall_seconds": 19.416133214001093,
+            "peak_system_gpu_used_mib": 1238.0,
+            "peak_process_tree_rss_bytes": 672264192,
+            "profile": "/mnt/d/humanoid-demo-r2/runs/r2-debug-2e_7XBmpw14-20261101-01/extraction/prepare-attempt-01.json"
+          },
+          {
+            "stage": "detect",
+            "wall_seconds": 1470.0013711500014,
+            "peak_system_gpu_used_mib": 1240.0,
+            "peak_process_tree_rss_bytes": 1519665152,
+            "profile": "/mnt/d/humanoid-demo-r2/runs/r2-debug-2e_7XBmpw14-20261101-01/extraction/detect-attempt-01.json"
+          },
+          {
+            "stage": "features",
+            "wall_seconds": 529.0092865019997,
+            "peak_system_gpu_used_mib": 4931.0,
+            "peak_process_tree_rss_bytes": 4370276352,
+            "profile": "/mnt/d/humanoid-demo-r2/runs/r2-debug-2e_7XBmpw14-20261101-01/extraction/features-attempt-01.json"
+          },
+          {
+            "stage": "camera",
+            "wall_seconds": 45.29214748100094,
+            "peak_system_gpu_used_mib": 1238.0,
+            "peak_process_tree_rss_bytes": 610611200,
+            "profile": "/mnt/d/humanoid-demo-r2/runs/r2-debug-2e_7XBmpw14-20261101-01/extraction/camera-attempt-01.json"
+          },
+          {
+            "stage": "motion",
+            "wall_seconds": 47.019676411000546,
+            "peak_system_gpu_used_mib": 1685.0,
+            "peak_process_tree_rss_bytes": 1612705792,
+            "profile": "/mnt/d/humanoid-demo-r2/runs/r2-debug-2e_7XBmpw14-20261101-01/extraction/motion-attempt-01.json"
+          },
+          {
+            "stage": "postprocess",
+            "wall_seconds": 87.88251957800094,
+            "peak_system_gpu_used_mib": 1238.0,
+            "peak_process_tree_rss_bytes": 1053184000,
+            "profile": "/mnt/d/humanoid-demo-r2/runs/r2-debug-2e_7XBmpw14-20261101-01/extraction/postprocess-attempt-01.json"
+          },
+          {
+            "stage": "convert",
+            "wall_seconds": 88.13264622099996,
+            "peak_system_gpu_used_mib": 1238.0,
+            "peak_process_tree_rss_bytes": 1735045120,
+            "profile": "/mnt/d/humanoid-demo-r2/runs/r2-debug-2e_7XBmpw14-20261101-01/extraction/convert-attempt-01.json"
+          },
+          {
+            "stage": "pose2d",
+            "wall_seconds": 767.7375013828278,
+            "profile": "/mnt/d/humanoid-demo-r2/runs/r2-debug-2e_7XBmpw14-20261101-01/native-pose-invocation-01.json",
+            "includes_full_interpreter_environment_and_wrapper_startup": true
+          }
+        ],
+        "eight_stage_worker_sum_seconds": 3054.4912819398323,
+        "full_extraction_orchestration_seconds": 3285.5952804088593
+      }
+    ],
+    "two_duration_interpolation_30s_extraction_minutes": 34.133717818431165,
+    "interpolation_method": "Affine interpolation in complete normalized frame count between11.467s and59.033s debug clips; cold import/cache/thermal variation means this is a planning aid, not a throughput guarantee",
+    "physics_body_media_allowance_minutes": [
+      4,
+      10
+    ],
+    "one_30s_full_video_planning_minutes": [
+      40,
+      50
+    ],
+    "ten_30s_videos_planning_hours": [
+      6.7,
+      8.3
+    ],
+    "remaining_five_heldout_planning_hours": [
+      2.5,
+      4.0
+    ],
+    "excludes": [
+      "setup/development",
+      "reboots/server migration",
+      "additional corrective debug trials",
+      "changed CPU thread scheduling not yet validated/enabled"
+    ],
+    "software_temperature_waits": false,
+    "cpu_thread_optimization_enabled": false,
+    "latest_host_free_gib": {
+      "/mnt/c": 19.14183807373047,
+      "/mnt/d": 271.88608169555664
+    },
+    "storage_planning_limit_gib": 100,
+    "heldout_used": false,
+    "cloud_cost_usd": 0
+  }
 }

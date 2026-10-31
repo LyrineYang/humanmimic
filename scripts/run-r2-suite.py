@@ -143,6 +143,11 @@ def run_video(item, role, manifest, manifest_path):
         if outcome["status"] == "failed" and not Path(item["audit_json"]).exists():
             write_json(item["audit_json"], outcome)
         return {"id": item["id"], "status": outcome["status"], "reason": "Extraction invocation failed; original stage evidence preserved"}
+    diagnostics = run / "extraction-diagnostics.json"
+    if not diagnostics.exists():
+        if role == "heldout":
+            check_frozen(manifest, manifest_path)
+        step(run, "diagnostics", "r2", "diagnose-r2-extraction.py", ["--extraction", extraction, "--output", diagnostics])
     if not physical.exists():
         if role == "heldout":
             check_frozen(manifest, manifest_path)

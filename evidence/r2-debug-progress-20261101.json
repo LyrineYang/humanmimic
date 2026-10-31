@@ -69,6 +69,30 @@
       "dominant_track_observed_frames": 323,
       "box_filled_frames": 0,
       "smpl24_keypoint_fraction_confidence_above_025": 1.0
+    },
+    "arm": {
+      "frames": 509,
+      "raw_detection_frames": 508,
+      "dominant_track_observed_frames": 508,
+      "filled_primary_frames": 1,
+      "pose_confidence_status": "passed",
+      "diagnostic": "/mnt/d/humanoid-demo-r2/runs/r2-debug-vTx_ldn6MCA-20261101-01/extraction-diagnostics-20261101-02.json"
+    },
+    "marching": {
+      "frames": 344,
+      "raw_detection_frames": 344,
+      "dominant_track_observed_frames": 344,
+      "filled_primary_frames": 0,
+      "pose_confidence_status": "passed",
+      "diagnostic": "/mnt/d/humanoid-demo-r2/runs/r2-debug-6uqztDO_7kQ-20261101-01/extraction-diagnostics-20261101-02.json"
+    },
+    "cupid": {
+      "frames": 1771,
+      "raw_detection_frames": 1723,
+      "dominant_track_observed_frames": 1723,
+      "filled_primary_frames": 48,
+      "pose_confidence_status": "awaiting_verification",
+      "diagnostic": "/mnt/d/humanoid-demo-r2/runs/r2-debug-2e_7XBmpw14-20261101-01/extraction-diagnostics-20261101-02.json"
     }
   },
   "active_debug_batch": {

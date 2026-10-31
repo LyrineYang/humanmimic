@@ -130,12 +130,14 @@ def write_report(report, audit_path):
     physical = run / layout.get("physical", "physical")
     body = run / layout.get("body", "body-audit")
     demo = run / layout.get("demo", "demo")
+    diagnostic = max(run.glob("extraction-diagnostics*.json"), key=lambda path: path.stat().st_mtime_ns, default=run / "extraction-diagnostics.json")
     lines = ["# R2 单视频结果", "", f"状态：**{report['status']}**。此为单片结果，不替代5调试/5保留整批验收。", "",
              f"来源SHA256：{report.get('source_sha256', '尚无完整输入证据')}；角色：{report.get('role', '未确认')}。",
              f"原始帧：{report.get('source_original_frames', '未确认')}；30Hz提取帧：{report.get('normalized_frames', '未完成')}；50Hz控制参考：{report.get('control_frames', '未完成')}。",
              f"物理：{report.get('physical_status', 'awaiting_verification')}；身体/事件：{report.get('body_status', 'awaiting_verification')}；视频：{report.get('media_status', 'awaiting_verification')}；视觉核验：{report.get('visual_status', 'awaiting_verification')}。",
              f"关键事件：{report.get('key_events_passed', 0)}/{report.get('key_events_total', 0)}通过。身体误差相对单目提取参考报告，不是人体三维真值或R1关节跟踪误差。", ""]
     artifacts = [("完整三路对照", demo / "comparison.mp4"), ("完整原片", run / "extraction/source-original.mp4"), ("全部提取/转换缓存", run / "extraction"), ("真实执行状态", physical / "actual-state.npz"), ("物理与原生时钟指标", physical / "physical-metrics.json"), ("身体误差/关键事件", body / "body-evaluation.json"), ("全部身体时间序列", body / "body-descriptors.npz"), ("输入/提取/控制/实际帧映射", demo / "frame-mapping.json"), ("独立审计", audit_path)]
+    artifacts.insert(3, ("提取检测/跟踪覆盖与原始关键点置信度（仅描述）", diagnostic))
     for label, path in artifacts:
         lines.append(f"- [{label}]({path})" if path.exists() else f"- {label}：尚未生成，见失败/缺失证据。")
     for key in ("audit_error", "missing_evidence"):

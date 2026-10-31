@@ -11,7 +11,7 @@ import time
 from r2_common import GEMX, PROJECT, SONIC, STORAGE, sha256, storage_check, write_json
 
 CODE = (
-    "activate-r1.sh", "activate-r2.sh", "run-r2-demo.sh", "extract-r2-video.py",
+    "activate-r1.sh", "activate-r2.sh", "run-r2-demo.sh", "extract-r2-video.py", "diagnose-r2-extraction.py",
     "r2_common.py", "r2_smpl.py", "r2_timeline.py", "r2_geometry.py", "cache-r2-pose2d.py",
     "run-r2-checkpoint-recovery.py", "run-r2-physical.py", "run-r1-reproduction.py",
     "evaluate-r2-body.py", "render-r2-demo.py", "audit-r2-run.py", "freeze-r2-suite.py", "summarize-r2-suite.py", "run-r2-suite.py", "run-r2-throughput-recovery.py", "run-r2-video.py",
