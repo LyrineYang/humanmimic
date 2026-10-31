@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-01",
+  "status": "passed",
+  "scope": "Measured first-video resource review and revised planning estimate; not full-batch throughput acceptance",
+  "hardware": "WSL2 / RTX4060 Laptop 8188MiB / driver617.42",
+  "source_seconds": 27.933333333333334,
+  "source_frames": 838,
+  "measured_serial_stages": [
+    {
+      "stage": "prepare",
+      "wall_seconds": 141.58857459900037,
+      "peak_process_tree_rss_bytes": 2190143488,
+      "peak_system_gpu_used_mib": 1368.0,
+      "evidence": "runs/r2-preflight-youtube-QqvZAUEOrAQ-20261031-01/extraction/prepare-attempt-01.json"
+    },
+    {
+      "stage": "detect",
+      "wall_seconds": 465.5798244030002,
+      "peak_process_tree_rss_bytes": 1769156608,
+      "peak_system_gpu_used_mib": 1364.0,
+      "evidence": "runs/r2-preflight-youtube-QqvZAUEOrAQ-20261031-01/extraction/detect-attempt-01.json"
+    },
+    {
+      "stage": "features",
+      "wall_seconds": 243.36961404500016,
+      "peak_process_tree_rss_bytes": 4395110400,
+      "peak_system_gpu_used_mib": 5041.0,
+      "evidence": "runs/r2-preflight-youtube-QqvZAUEOrAQ-20261031-01/extraction/features-attempt-01.json"
+    },
+    {
+      "stage": "camera",
+      "wall_seconds": 141.81076491800013,
+      "peak_process_tree_rss_bytes": 833437696,
+      "peak_system_gpu_used_mib": 5440.0,
+      "evidence": "runs/r2-preflight-youtube-QqvZAUEOrAQ-20261031-01/extraction/camera-attempt-01.json"
+    },
+    {
+      "stage": "motion",
+      "wall_seconds": 137.80228401,
+      "peak_process_tree_rss_bytes": 1803530240,
+      "peak_system_gpu_used_mib": 1586.0,
+      "evidence": "runs/r2-preflight-youtube-QqvZAUEOrAQ-20261031-01/extraction/motion-attempt-01.json"
+    },
+    {
+      "stage": "postprocess",
+      "wall_seconds": 154.68877326200004,
+      "peak_process_tree_rss_bytes": 1171992576,
+      "peak_system_gpu_used_mib": 1220.0,
+      "evidence": "runs/r2-preflight-youtube-QqvZAUEOrAQ-20261031-01/extraction/postprocess-attempt-01.json"
+    },
+    {
+      "stage": "convert",
+      "wall_seconds": 153.2363407690002,
+      "peak_process_tree_rss_bytes": 1772789760,
+      "peak_system_gpu_used_mib": 1215.0,
+      "evidence": "runs/r2-preflight-youtube-QqvZAUEOrAQ-20261031-01/extraction/convert-attempt-01.json"
+    }
+  ],
+  "seven_stage_wall_seconds": 1438.076176006001,
+  "pose2d_measurement": {
+    "new_frames": 326,
+    "start_frame": 512,
+    "end_frame": 838,
+    "wall_seconds": 597.727826087,
+    "cohorts": 4,
+    "includes_model_load_and_cooling": true,
+    "whole_source_was_checkpointed_across_interrupted_attempts": true,
+    "not_a_clean_full_pose_benchmark": true
+  },
+  "planning_derivation": {
+    "same_length_full_pose_scaled_seconds": 1536.490546812595,
+    "seven_stages_plus_scaled_pose_minutes": 49.576112046976604,
+    "physics_and_offline_render_allowance_minutes": [
+      6,
+      12
+    ],
+    "one_30s_video_planning_minutes": [
+      50,
+      70
+    ],
+    "ten_30s_videos_planning_hours": [
+      8.3,
+      11.7
+    ],
+    "batch_estimate_is_extrapolation": true,
+    "excludes": "setup, debugging, reboots, re-execution, longer source durations",
+    "supersedes": "2026-10-30 stable batch estimate 1.5–5h; current cold imports and cooling are slower; optimize only after equivalence checks"
+  },
+  "measured_framework_peak_bytes": {
+    "bodypose_allocated": 3675342848,
+    "bodypose_reserved": 3737124864,
+    "pose2d_allocated": 3541103616,
+    "pose2d_reserved": 3642753024,
+    "motion_allocated": 246300160,
+    "motion_reserved": 270532608
+  },
+  "gpu_conclusion": "All serial extraction models and actual SONIC physics completed locally within 8GB. System GPU includes desktop/other processes. This does not verify concurrent or real-time R3 operation. Unexpected host reboot root cause remains unproven.",
+  "storage": {
+    "status": "passed",
+    "scope": "Observed D-root allocated footprint; 100GiB is a planning ceiling, not an OS reservation",
+    "allocated_bytes": 20634460160,
+    "allocated_gib": 19.21733856201172,
+    "planning_limit_gib": 100,
+    "within_planning_limit": true,
+    "host_free_gib": {
+      "/mnt/c": 19.248851776123047,
+      "/mnt/d": 272.05470275878906
+    },
+    "symlink_targets_not_followed": true,
+    "hardlinks_counted_once_by_du": true
+  },
+  "storage_planning_unchanged_gib": 100,
+  "storage_capacity_estimate_gib": [
+    40,
+    80
+  ],
+  "cloud_cost_usd": 0,
+  "paid_execution_authorized": false,
+  "heldout_used": false
+}

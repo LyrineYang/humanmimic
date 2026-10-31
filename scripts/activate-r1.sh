@@ -10,7 +10,20 @@ if [[ ! -f "$_r1_project_root/.local/miniforge3/etc/profile.d/conda.sh" ]]; then
     return 1
 fi
 source "$_r1_project_root/.local/miniforge3/etc/profile.d/conda.sh"
-conda activate "$_r1_project_root/.local/miniforge3/envs/humanoid-r1" || return
+# Conda's CUDA hooks read optional variables without defaults. Preserve the
+# caller's strict mode while letting the external activation hooks run normally.
+_r1_restore_nounset=false
+[[ "$-" != *u* ]] || _r1_restore_nounset=true
+set +u
+_r1_activation_status=0
+conda activate "$_r1_project_root/.local/miniforge3/envs/humanoid-r1" || _r1_activation_status=$?
+if [[ "$_r1_restore_nounset" == true ]]; then set -u; fi
+unset _r1_restore_nounset
+if [[ "$_r1_activation_status" -ne 0 ]]; then
+    unset _r1_activation_status _r1_project_root
+    return 1
+fi
+unset _r1_activation_status
 export CYCLONEDDS_HOME="$_r1_project_root/.local/unitree-dds"
 export MUJOCO_GL=egl
 export PYTHONNOUSERSITE=1

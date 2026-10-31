@@ -204,3 +204,13 @@ next_action: null
 - 冷却/持久化包装首次有界运行 `passed`（仅短批次执行）：416→512帧新增三块，正常返回3并释放GPU，没有主机重启；全片仍awaiting_verification。框架峰值仍3,540,864,000B/3,642,753,024B，记录的新增块均使用原官方数值生产器；新代码只处理调度和metadata写入，完整源码身份与旧块证据保留。`pose2d-cool-bounded-attempt-01.*`、对应durable-recovery记录。
 - 扩展冷却分组前预期：最多4组×3个块，组间释放GPU权重、至少休息30s且温度<55°C，120s不满足就返回3，不重写未完成为passed。CPU模拟producer/clock验证 `passed`：完成立即停止、休息累计时长、过热等待超时、最多4组边界；未初始化CUDA，不当作硬件运行结果。`runs/r2-setup-20261030-01/cooling-cohort-check-20261101.json`。
 - 分组续算真实观察：首组512→608帧，组间framework分配降为9,756,672B、系统空闲6608MiB，约75s后温度54°C，再进入下一组；这是权重释放/冷却的实证，尚非完整姿态通过。`pose2d-cooled-cohorts-attempt-01.*`及durable-recovery-1793470318448003548.json。源模型/FP32/增广/50Hz控制/验收不变。提交8ee55cb已推到原私有仓库R2分支，未上传模型、视频或原始日志，没有创建PR或改动main。
+
+## 2026-11-01 R2 首片完整预检通过与原生时钟修正
+
+- 预期沿用原片838帧/无剪辑、官方FP32 batch1/翻转增广、相同策略与物理判据；完整结果才标记通过。冷却分组续算512→838完成，27块全部SHA/形状/有限值及拼接审计通过；原keypoints2d SHA180ccc108a698836740d54cbe0686257238426c5f61e3ed2eaa6b668419bb7ae。camera/motion/postprocess/convert依次完成，转换抽帧与官方函数最大差约2.06e-7m，所有中间数据保留。决定keep。
+- 首次物理失败保留：strict-shell调用conda hook时读取未定义NVCC_PREPEND_FLAGS；activate-r1只在conda activate内临时关闭nounset并恢复调用方状态，正常/strict激活环境一致检查passed。30秒初始化截止时模拟器刚就绪，原physical/失败不覆写；在新physical-attempt-02仅将初始化等待延长120秒，策略/控制/稳定性门槛不变。
+- 真实完整物理 passed：1397/1397源样本消费，无跌倒，最低根高0.521982m；重力/接触/自由根部/控制启用，源期间无弹力带，无qpos/qvel覆写。实际状态SHA f89b0b88b5025b2a721e54c5babf0d67b63d48dfda49c54002e821b45cfebce8。6个提前按源片标注的事件方向/顺序全部passed，相对提取的峰值时间差[0,.24,.14,.04,-.08,-.14]s；14个几何描述量均有限、覆盖1.0，八角度RMSE约.163–.391rad只报告，非人体真值或R1关节跟踪门槛。
+- 原生时钟审计发现首个mode2比实际开始消费参考早4tick/80ms。修改前预期native-clock-correction-expectation-20261101.json：只按原生逐帧SMPL/四元数身份求精确源起点，不做拟合，不重跑物理、不改实际轨迹；旧录像/指标/编码日志带哈希归档。1397行身份最大位置差5e-10m，原生时钟P95绝对漂移30微秒；按原生时钟重评物理仍passed、重渲染699帧全部实际状态有效，actual-state哈希不变。执行版本与离线渲染版本分别在source-provenance-audit.json保存并验证。决定keep。
+- 最终完整demo passed：demo-native-aligned-02/comparison.mp4展示原片、2D覆盖/3D骨架和真实机器人，1600x480/699帧25fps；五个视频全量解码与首中尾画面检查通过，无剪辑/拟合偏移；填补和非三维真值标注保留。旧空机器人失败demo、旧80ms派生录像、可选psutil缺失的未启动渲染失败均保留。断开旧长终端发生在物理结束后，boot_id未变，不将其解释成新主机重启；后续离线任务用detached PID/boot_id/startticks及文件日志跟踪，已完成。
+- 实测预算更新：七个非2D姿态阶段合计1438.08s，最后326帧冷却姿态597.73s（含导入、非完整无中断基准）；同长度外推+离线渲染约50–70分钟/条、10x30s约8.3–11.7h，仅规划，不含调试重启。最大框架保留BodyPose3,737,124,864B、姿态3,642,753,024B；全部串行阶段在8GB卡完成，不能外推实时并行。D占用19.22GiB/100GiB规划，C/D空闲19.25/272.05GiB，新增云费用0。源池新增3条舞蹈全片解码/20帧检查符合基本条件，无新增模型推理。
+- 全部证据：runs/r2-preflight-youtube-QqvZAUEOrAQ-20261031-01/REPORT.md、results.json、各专项audit；Git摘要evidence/r2-preflight-20261101.json与r2-resource-estimate-20261101.json。这里只完成首条调试，5+5整批、GPU图形窗口仍awaiting_verification，相机needs_input，保留推理未使用；继续整批实现与调试，不结束活跃Goal。

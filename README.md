@@ -208,3 +208,13 @@ source scripts/activate-r1.sh
 python scripts/inspect-r2-sources.py /absolute/video.mp4 \
   --output /mnt/d/humanoid-demo-r2/runs/source-review-NEW --samples 20
 ```
+
+## R2 首片结果与当前边界
+
+2026-11-01已在本机4060完成第一条普通YouTube舞蹈完整链路：27.933秒/838帧、1397个50Hz源参考，真实物理无跌倒，6/6预标注事件方向和顺序通过。这是调试首片，5+5整批和R2尚未完成，保留测试推理未使用。
+
+- [完整三路视频](runs/r2-preflight-youtube-QqvZAUEOrAQ-20261031-01/demo-native-aligned-02/comparison.mp4)、[首片报告](runs/r2-preflight-youtube-QqvZAUEOrAQ-20261031-01/REPORT.md)。本地大产物不会随Git克隆下载。
+- [可随Git同步的首片摘要](evidence/r2-preflight-20261101.json)、[实测资源/预算](evidence/r2-resource-estimate-20261101.json)。
+- 对照保留完整时间轴、2D覆盖及对应3D骨架、真实记录状态离线渲染；无拟合时间偏移。八项身体角度误差约0.163–0.391rad只作报告，不能称为人体真值误差或R1关节跟踪误差。
+
+物理录像单独恢复使用R1环境中的 `python scripts/run-r2-physical.py --reference <已完成提取目录>/sonic-reference.npz --output <已有物理目录> --render-only`。此入口只对已停止运行的实际状态按原生消费时钟重评/渲染，不启动控制器；已有录像必须先带哈希归档，不会自动覆盖。首片原始失败、旧派生录像及源码版本分别保留。默认整批入口的冷却检查点集成正在继续，状态以PLAN为准。
