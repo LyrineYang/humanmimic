@@ -28,8 +28,18 @@
       "source_content_trimmed": false,
       "events_path": "configs/r2-debug-events-QqvZAUEOrAQ.json",
       "notes": "Source contains embedded bars and brief original leading/trailing black frames, all retained; already used debug",
-      "run_id": "r2-preflight-youtube-QqvZAUEOrAQ-20261031-01",
-      "audit_json": "/mnt/d/humanoid-demo-r2/runs/r2-preflight-youtube-QqvZAUEOrAQ-20261031-01/run-audit-20261101.json"
+      "run_id": "r2-debug-init-QqvZAUEOrAQ-20261101-01",
+      "audit_json": "/mnt/d/humanoid-demo-r2/runs/r2-debug-init-QqvZAUEOrAQ-20261101-01/run-audit.json",
+      "previous_attempts": [
+        {
+          "run_id": "r2-preflight-youtube-QqvZAUEOrAQ-20261031-01",
+          "audit_json": "/mnt/d/humanoid-demo-r2/runs/r2-preflight-youtube-QqvZAUEOrAQ-20261031-01/run-audit-20261101.json",
+          "audit_sha256": "59f71ed0bde2c2a2578454942ba77915cc7e57ed1bb311cbf2550c2e480f217e",
+          "status": "passed",
+          "reason": "Uniform initialization regression; all original attempts retained"
+        }
+      ],
+      "extraction_reused_from": "/mnt/d/humanoid-demo-r2/runs/r2-preflight-youtube-QqvZAUEOrAQ-20261031-01/extraction"
     },
     {
       "id": "0EpP3pYUYTk",
@@ -45,8 +55,18 @@
       "video_mirrored": "unknown",
       "source_content_trimmed": false,
       "events_path": "configs/r2-debug-events-0EpP3pYUYTk.json",
-      "run_id": "r2-debug-squat-20261101-01",
-      "audit_json": "/mnt/d/humanoid-demo-r2/runs/r2-debug-squat-20261101-01/run-audit.json"
+      "run_id": "r2-debug-init-0EpP3pYUYTk-20261101-01",
+      "audit_json": "/mnt/d/humanoid-demo-r2/runs/r2-debug-init-0EpP3pYUYTk-20261101-01/run-audit.json",
+      "previous_attempts": [
+        {
+          "run_id": "r2-debug-squat-20261101-01",
+          "audit_json": "/mnt/d/humanoid-demo-r2/runs/r2-debug-squat-20261101-01/run-audit.json",
+          "audit_sha256": "396d1d0f0b2926240baec738819a8506b3aeafa1a0faed50b395c5969fe59f94",
+          "status": "passed",
+          "reason": "Uniform initialization regression; all original attempts retained"
+        }
+      ],
+      "extraction_reused_from": "/mnt/d/humanoid-demo-r2/runs/r2-debug-squat-20261101-01/extraction"
     },
     {
       "id": "vTx_ldn6MCA",
@@ -62,8 +82,18 @@
       "video_mirrored": "unknown",
       "source_content_trimmed": false,
       "events_path": "configs/r2-debug-events-vTx_ldn6MCA.json",
-      "run_id": "r2-debug-vTx_ldn6MCA-20261101-01",
-      "audit_json": "/mnt/d/humanoid-demo-r2/runs/r2-debug-vTx_ldn6MCA-20261101-01/run-audit.json"
+      "run_id": "r2-debug-init-vTx_ldn6MCA-20261101-01",
+      "audit_json": "/mnt/d/humanoid-demo-r2/runs/r2-debug-init-vTx_ldn6MCA-20261101-01/run-audit.json",
+      "previous_attempts": [
+        {
+          "run_id": "r2-debug-vTx_ldn6MCA-20261101-01",
+          "audit_json": "/mnt/d/humanoid-demo-r2/runs/r2-debug-vTx_ldn6MCA-20261101-01/run-audit.json",
+          "audit_sha256": "cd3d42049c116cb279fe752a105b28a0dedcd3a0f4929f36978d1b6587bb752d",
+          "status": "failed",
+          "reason": "Uniform initialization regression; all original attempts retained"
+        }
+      ],
+      "extraction_reused_from": "/mnt/d/humanoid-demo-r2/runs/r2-debug-vTx_ldn6MCA-20261101-01/extraction"
     },
     {
       "id": "6uqztDO_7kQ",
@@ -79,8 +109,18 @@
       "video_mirrored": "unknown",
       "source_content_trimmed": false,
       "events_path": "configs/r2-debug-events-6uqztDO_7kQ.json",
-      "run_id": "r2-debug-6uqztDO_7kQ-20261101-01",
-      "audit_json": "/mnt/d/humanoid-demo-r2/runs/r2-debug-6uqztDO_7kQ-20261101-01/run-audit.json"
+      "run_id": "r2-debug-init-6uqztDO_7kQ-20261101-01",
+      "audit_json": "/mnt/d/humanoid-demo-r2/runs/r2-debug-init-6uqztDO_7kQ-20261101-01/run-audit.json",
+      "previous_attempts": [
+        {
+          "run_id": "r2-debug-6uqztDO_7kQ-20261101-01",
+          "audit_json": "/mnt/d/humanoid-demo-r2/runs/r2-debug-6uqztDO_7kQ-20261101-01/run-audit.json",
+          "audit_sha256": "d45be3843b24ac3c343bdc91e4fb7808300eb3aada5a2069ece1009fdacb2a0f",
+          "status": "failed",
+          "reason": "Uniform initialization regression; all original attempts retained"
+        }
+      ],
+      "extraction_reused_from": "/mnt/d/humanoid-demo-r2/runs/r2-debug-6uqztDO_7kQ-20261101-01/extraction"
     },
     {
       "id": "2e_7XBmpw14",
@@ -97,8 +137,18 @@
       "source_content_trimmed": false,
       "events_path": "configs/r2-debug-events-2e_7XBmpw14.json",
       "notes": "Last approximately48 source frames black, retained as an explicit debug missing-visibility challenge; not heldout",
-      "run_id": "r2-debug-2e_7XBmpw14-20261101-01",
-      "audit_json": "/mnt/d/humanoid-demo-r2/runs/r2-debug-2e_7XBmpw14-20261101-01/run-audit.json"
+      "run_id": "r2-debug-init-2e_7XBmpw14-20261101-01",
+      "audit_json": "/mnt/d/humanoid-demo-r2/runs/r2-debug-init-2e_7XBmpw14-20261101-01/run-audit.json",
+      "previous_attempts": [
+        {
+          "run_id": "r2-debug-2e_7XBmpw14-20261101-01",
+          "audit_json": "/mnt/d/humanoid-demo-r2/runs/r2-debug-2e_7XBmpw14-20261101-01/run-audit.json",
+          "audit_sha256": "0600d27906fe624507708237f4c08ef00f15ddfe36be8f30ff7a8c824c47f031",
+          "status": "passed",
+          "reason": "Uniform initialization regression; all original attempts retained"
+        }
+      ],
+      "extraction_reused_from": "/mnt/d/humanoid-demo-r2/runs/r2-debug-2e_7XBmpw14-20261101-01/extraction"
     }
   ],
   "heldout": [

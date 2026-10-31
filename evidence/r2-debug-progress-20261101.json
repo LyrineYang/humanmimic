@@ -1,7 +1,7 @@
 {
   "status": "awaiting_verification",
   "scope": "R2 batch progress; not suite acceptance",
-  "debug_completed": 4,
+  "debug_completed": 5,
   "debug_required": 5,
   "heldout_used": 0,
   "heldout_required": 5,
@@ -64,6 +64,20 @@
       "audit": "runs/r2-debug-2e_7XBmpw14-20261101-01/run-audit.json",
       "report": "runs/r2-debug-2e_7XBmpw14-20261101-01/REPORT.md",
       "demo": "runs/r2-debug-2e_7XBmpw14-20261101-01/demo/comparison.mp4"
+    },
+    {
+      "id": "vTx_ldn6MCA",
+      "status": "failed",
+      "physical_status": "passed",
+      "control_frames": 849,
+      "source_frames_consumed": 849,
+      "fell": false,
+      "minimum_root_height_m": 0.7811798285083379,
+      "events": "3/4",
+      "failure": "Final right wrist outward min0.312801 > frozen-source threshold0.2",
+      "audit": "runs/r2-debug-vTx_ldn6MCA-20261101-01/run-audit.json",
+      "visual_audit": "runs/r2-debug-vTx_ldn6MCA-20261101-01/run-audit-visual-20261101.json",
+      "demo": "runs/r2-debug-vTx_ldn6MCA-20261101-01/demo/comparison.mp4"
     }
   ],
   "source_manifest": "configs/r2-suite-draft.json",
@@ -116,15 +130,10 @@
     }
   },
   "active_debug_batch": {
-    "run": "runs/r2-debug-throughput-orchestration-20261101-01",
-    "sources_remaining": [
-      "vTx_ldn6MCA"
-    ],
-    "adopted_active_pose_task": "runs/r2-debug-vTx_ldn6MCA-20261101-01/throughput-recovery-01-task.json",
-    "heldout_started": false,
-    "main_queue_ended": true,
-    "serial_followup": "runs/r2-debug-arm-finish-20261101-01",
-    "followup_pid": 129032
+    "run": "runs/r2-initialization-regression-20261101-01",
+    "pid": 149562,
+    "mode": "cached extraction, new actual control/metrics/full demo",
+    "heldout_started": false
   },
   "execution_policy": {
     "priority": "throughput",
@@ -136,10 +145,10 @@
     "acceptance_changed": false
   },
   "debug_passed": 3,
-  "debug_failed": 1,
-  "debug_awaiting_verification": 1,
+  "debug_failed": 2,
+  "debug_awaiting_verification": 0,
   "startup_diagnostic": {
-    "status": "awaiting_verification",
+    "status": "passed, debug physical ablation only",
     "scope": "Fixed reference prefix ablation only, not canonical suite acceptance",
     "run": "runs/r2-startup-transition-diagnostic-20261101-01",
     "task_pid": 136971,
@@ -147,7 +156,8 @@
     "source_samples_unchanged": 574,
     "prefix_frames_50hz": 100,
     "geometry_check": "passed",
-    "physical_check": "awaiting_verification"
+    "physical_check": "passed,574original source samples,no fall",
+    "minimum_root_height_m": 0.6969662006766907
   },
   "tool_checks": {
     "single_video_entry": "passed, cached read/no duplicate/reserved heldout guards",
@@ -158,12 +168,21 @@
     "/mnt/c": 19.15255355834961,
     "/mnt/d": 271.98745346069336
   },
-  "updated_unix": 1793488056.8932412,
+  "updated_unix": 1793490577.736288,
   "pending_final_audits": {},
   "rendering_candidate": {
     "status": "passed, three-state timing/geometry/visual check only",
     "run": "runs/r2-render-throughput-check-20261101-01",
     "median_speed_ratio": 2.023036039578067,
     "enabled": false
+  },
+  "uniform_initialization_regression": {
+    "status": "awaiting_verification",
+    "run": "runs/r2-initialization-regression-20261101-01",
+    "pid": 149562,
+    "source_frames_unchanged": true,
+    "all_five_debug_retested": true,
+    "completed": 0,
+    "note": "Old3/5 outcomes above retained; current draft points to five fresh cached-control trials, heldout unchanged"
   }
 }

@@ -14,6 +14,7 @@ def summarize(manifest, manifest_hash):
         for item in manifest[role]:
             row = {key: item[key] for key in ("id", "source_url", "source_sha256", "action_class")}
             row.update(status="awaiting_verification", audit=item.get("audit_json"), run_id=item.get("run_id"))
+            row["previous_attempts"] = item.get("previous_attempts", [])
             if row["audit"] and Path(row["audit"]).is_file():
                 audit = json.loads(Path(row["audit"]).read_text())
                 row["status"] = audit["status"]
@@ -53,6 +54,10 @@ if __name__ == "__main__":
         for row in rows:
             audit = f"[审计]({row['audit']})" if row["audit"] else "未运行"
             lines.append(f"| {role} | [{row['id']}]({row['source_url']}) | {row['action_class']} | {row['status']} | {audit} |")
+    for rows in report["groups"].values():
+        for row in rows:
+            for previous in row["previous_attempts"]:
+                lines += ["", f"历史尝试 {row['id']} / {previous['run_id']}：{previous['status']}，[原审计]({previous['audit_json']})。仅当前冻结试次计入本轮分母，历史成功/失败均保留。"]
     lines += ["", "结果包含所有来源及失败，源视频保持完整；单目提取不是人体三维真值。视频/实际状态/事件细节保存在每条审计对应的运行目录。R3/R4及整个项目不因R2结论而完成。"]
     (args.output / "REPORT.md").write_text("\n".join(lines) + "\n")
     print(json.dumps({key: report[key] for key in ("status", "debug_terminal", "heldout_terminal", "heldout_passed")}, indent=2))

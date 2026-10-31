@@ -1,7 +1,6 @@
 """Audit complete R2 artifacts and media; never launch inference or control."""
 
 import argparse
-import ast
 import json
 import math
 from pathlib import Path
@@ -9,6 +8,7 @@ import subprocess
 import time
 
 from r2_common import sha256, storage_check, write_json
+from r2_cache import verify_cached_extraction
 
 
 def media(path, expected_frames, fps):
@@ -42,24 +42,14 @@ def audit(run):
         if sha256(extraction / "source-original.mp4") != identity["input_sha256"]:
             raise ValueError("Original source identity changed")
         result.update(source_sha256=identity["input_sha256"], role=identity["role"], frozen_suite_sha256=identity.get("frozen_suite_sha256"))
-        snapshot = extraction / "source-snapshot"
-        snapshot_hashes = json.loads((snapshot / "sha256.json").read_text())
-        for relative, digest in snapshot_hashes.items():
-            if sha256(snapshot / relative) != digest:
-                raise ValueError(f"Execution source snapshot changed: {relative}")
-        tree = ast.parse((snapshot / "scripts/extract-r2-video.py").read_text())
-        definitions = {target.id: node.value for node in tree.body if isinstance(node, ast.Assign) for target in node.targets if isinstance(target, ast.Name)}
-        stages, outputs = (ast.literal_eval(definitions[name]) for name in ("STAGES", "OUTPUTS"))
-        checked = []
-        for stage in stages:
-            complete = json.loads((extraction / f"{stage}-complete.json").read_text())
-            if complete["status"] != "passed" or set(complete["sha256"]) != set(outputs[stage]):
-                raise ValueError(f"Incomplete stage evidence: {stage}")
-            for filename, digest in complete["sha256"].items():
-                if sha256(extraction / filename) != digest:
-                    raise ValueError(f"Changed {stage} artifact: {filename}")
-            checked.append(stage)
-        result["extraction"] = {"status": "passed", "verified_stages": checked, "source_sha256": identity["input_sha256"], "role": identity["role"]}
+        cached = verify_cached_extraction(extraction)
+        result["extraction"] = cached["summary"]
+        reuse_path = run / "cached-extraction-reuse.json"
+        if reuse_path.exists():
+            reuse = json.loads(reuse_path.read_text())
+            if identity["role"] != "debug" or reuse["fingerprint"] != cached["fingerprint"] or extraction.resolve() != Path(reuse["origin_extraction"]).resolve():
+                raise ValueError("Cached debug replay provenance changed")
+            result.update(extraction_reused=True, extraction_origin=reuse["origin_extraction"], new_motion_inference=False)
         conversion = json.loads((extraction / "conversion.json").read_text())
         source = json.loads((extraction / "source.json").read_text())
         metrics = json.loads((physical / "physical-metrics.json").read_text())
@@ -116,7 +106,7 @@ def audit(run):
         result["status"] = "failed" if "failed" in states else "passed" if all(s == "passed" for s in states) else "awaiting_verification"
     except FileNotFoundError as error:
         result["missing_evidence"] = str(error)
-        if any(extraction.glob("extraction-error-*.json")):
+        if result.get("extraction", {}).get("status") != "passed" and any(extraction.glob("extraction-error-*.json")):
             result["status"] = "failed"
     except (ValueError, KeyError, subprocess.CalledProcessError) as error:
         result.update(status="failed", audit_error=str(error))
@@ -136,6 +126,8 @@ def write_report(report, audit_path):
              f"原始帧：{report.get('source_original_frames', '未确认')}；30Hz提取帧：{report.get('normalized_frames', '未完成')}；50Hz控制参考：{report.get('control_frames', '未完成')}。",
              f"物理：{report.get('physical_status', 'awaiting_verification')}；身体/事件：{report.get('body_status', 'awaiting_verification')}；视频：{report.get('media_status', 'awaiting_verification')}；视觉核验：{report.get('visual_status', 'awaiting_verification')}。",
              f"关键事件：{report.get('key_events_passed', 0)}/{report.get('key_events_total', 0)}通过。身体误差相对单目提取参考报告，不是人体三维真值或R1关节跟踪误差。", ""]
+    if report.get("extraction_reused"):
+        lines += [f"模式：复用已验证的原视频提取缓存 `{report['extraction_origin']}`；本次重新执行实际物理控制/评估，不计作新的动作提取。", ""]
     artifacts = [("完整三路对照", demo / "comparison.mp4"), ("完整原片", run / "extraction/source-original.mp4"), ("全部提取/转换缓存", run / "extraction"), ("真实执行状态", physical / "actual-state.npz"), ("物理与原生时钟指标", physical / "physical-metrics.json"), ("身体误差/关键事件", body / "body-evaluation.json"), ("全部身体时间序列", body / "body-descriptors.npz"), ("输入/提取/控制/实际帧映射", demo / "frame-mapping.json"), ("独立审计", audit_path)]
     artifacts.insert(3, ("提取检测/跟踪覆盖与原始关键点置信度（仅描述）", diagnostic))
     for label, path in artifacts:

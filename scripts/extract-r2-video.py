@@ -49,6 +49,9 @@ def configuration():
     config["pose"]["batch_size"] = 1
     config["observations"]["batch_size"] = 1
     config["detector"]["device"] = "cpu"
+    from r2_detection import INTRA_THREADS, INTER_THREADS
+    config["detector"]["intra_op_num_threads"] = INTRA_THREADS
+    config["detector"]["inter_op_num_threads"] = INTER_THREADS
     config["camera"]["mode"] = "static"
     return config
 
@@ -119,9 +122,10 @@ def worker(stage, output):
     import torch
     torch.set_num_threads(8)
     if stage == "detect":
-        from gem.common.detectors import YOLOXONNX, detect_track
+        from gem.common.detectors import detect_track
+        from r2_detection import load_cpu_detector
         with VideoFrames(normalized) as frames:
-            detector = YOLOXONNX(config["detector"]["checkpoint"], device="cpu")
+            detector = load_cpu_detector(config["detector"]["checkpoint"])
             tracks = detect_track(frames, detector)
         save_tensor(output / "tracks.pt", asdict(tracks))
     elif stage == "features":
@@ -211,7 +215,7 @@ def run(args):
             write_json(identity_path, identity)
             snapshot = output / "source-snapshot"
             snapshot.mkdir()
-            relative_files = [Path("scripts") / name for name in ("activate-r2.sh", "activate-r1.sh", "run-r2-demo.sh", "extract-r2-video.py", "r2_common.py", "r2_smpl.py", "r2_timeline.py", "r2_geometry.py", "run-r2-physical.py", "render-r2-demo.py", "run-r1-reproduction.py", "cache-r2-pose2d.py", "run-r2-checkpoint-recovery.py", "evaluate-r2-body.py")]
+            relative_files = [Path("scripts") / name for name in ("activate-r2.sh", "activate-r1.sh", "run-r2-demo.sh", "extract-r2-video.py", "r2_common.py", "r2_smpl.py", "r2_timeline.py", "r2_geometry.py", "r2_initialization.py", "r2_detection.py", "run-r2-physical.py", "render-r2-demo.py", "run-r1-reproduction.py", "cache-r2-pose2d.py", "run-r2-checkpoint-recovery.py", "evaluate-r2-body.py")]
             relative_files += [Path("configs") / name for name in ("r2-resources.json", "constraints-r2.txt", "r1-evaluation.json", "r1-dds.xml")]
             for relative in relative_files:
                 destination = snapshot / relative

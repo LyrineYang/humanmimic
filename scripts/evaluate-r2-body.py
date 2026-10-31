@@ -89,8 +89,16 @@ def timing_audit(extraction, physical):
     warmup, future = manifest["warmup_frames"], manifest["future_context_padding_frames"]
     source = reference["smpl_joints"]
     quats = reference["body_quat"]
-    padded = np.concatenate((np.repeat(source[:1], warmup, axis=0), source, np.repeat(source[-1:], future, axis=0)))
-    padded_q = np.concatenate((np.repeat(quats[:1], warmup, axis=0), quats, np.repeat(quats[-1:], future, axis=0)))
+    initialization = manifest.get("reference_initialization")
+    if initialization is not None:
+        from r2_initialization import HOLD, PREFIX, metadata, padded_fields
+        if initialization != metadata() or warmup != HOLD + PREFIX:
+            raise ValueError("Undeclared or changed reference initialization")
+        fields = padded_fields(reference, future)
+        padded, padded_q = fields["smpl_joints"], fields["body_quat"]
+    else:
+        padded = np.concatenate((np.repeat(source[:1], warmup, axis=0), source, np.repeat(source[-1:], future, axis=0)))
+        padded_q = np.concatenate((np.repeat(quats[:1], warmup, axis=0), quats, np.repeat(quats[-1:], future, axis=0)))
     if len(recorded) > len(padded):
         raise ValueError("Recorded sequence exceeds the full transmitted cache")
     error = float(np.max(np.abs(recorded - padded[:len(recorded)])))

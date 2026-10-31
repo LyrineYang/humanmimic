@@ -308,3 +308,16 @@ next_action: null
 - 三路comparison1476帧/25fps/59.04s，source/extraction/robot/comparison及实际状态录像共5个MP4全帧解码passed，所有实际机器人帧可用。人工核验25/737/1463帧：原片、2D、3D与真实机器人对齐清晰，原片最后48帧黑尾完整保留，填框标记可见；visual-audit绑定最终comparison SHA58a851a72563c594cf561627c0e331033c2a2859e0bace944931d41c49a1a631。
 - 证据runs/r2-debug-2e_7XBmpw14-20261101-01/{REPORT.md,run-audit.json,visual-audit.json,demo/comparison.mp4}。初审awaiting文件保留，最终审计另存canonical；没有改写原实际轨迹或源参考。当前调试3passed/1failed/1待验收，保留0/5；整批仍awaiting_verification。代码/小摘要已持续提交，不上传大模型、受限资产或凭据，云费用0。
 - 主队列PID128105已退出，旧调度failed包含踏步实际失败及已被单独恢复接管的旧臂资源失败，不重启。后续PID129032正在完成臂环绕转换/物理/demo，camera/motion/postprocess缓存已完整；随后自动运行同原控制脚本的踏步起始衔接诊断PID136971，再执行完整CPU检测线程对照PID138951。暂不修改这几个活跃对照依赖的原物理/提取/渲染源码。
+
+
+## 2026-11-01 五片旧调试完成、统一初始化生产修复与回归启动
+
+- 原五片最终3passed/2failed：臂环绕849/849源参考完整、无跌倒、最低根高0.7811798285m，但最后right-arm-down的机器人外展比例min0.3128013638高于原阈值0.2；提取参考min0.1225301288，3/4事件，整片failed。425帧全对照/5媒体解码及首中尾视觉passed，actual-state SHAa8e7bf79fc70600066194464838b6dccb796feeeb1f3fb503efc6c20121e52eb，原canonicalfailed和补充run-audit-visual-20261101.json均保留。没有通过更改阈值使之passed。
+- 起始衔接消融物理passed：同硬件/二进制/策略/模拟器，用固定100帧/2秒中立腿→首姿态前缀，完整原574源参考执行，无跌倒，最低根高0.6969662007m，实际SHAa5eb9ef308756f624b67e43b4ed16ff004b10b30e0b752f4e9d71cbf05a43f1f。原初始50帧静置仍保留；没有改变任何原源样本/间隔/事件/物理门槛或实际状态。它只是debug消融，不替代新生产全链路。
+- 生产实现：r2_initialization.py定义50帧中立静置+100帧smoothstep骨方向过渡，全部原视频参考随后原值发送，future仍51。run-r2-physical记录reference_initialization及helperSHA，evaluator按明确150前缀核对所有原生样本后，以第150帧作为视频0，不搜索/拟合时间平移；缺该metadata的旧50帧试次保留原逻辑。全量March包与已成功诊断reference-wire.bin逐字节相同（SHA7ed200e4df8e8da58c38fe19f964d893c5780d88b3d27db82a0abdb11bae73ed），五source全部字段在150后相同，三条旧clock报告逐字典相同；真实诊断source ticks与固定slice逐值相同。CPU协议/旧兼容/源保留checks passed，仍需生产五片实跑。
+- source-only重新核查原6个踏步事件0/6，提取本身在预标注侧别/窗口中未达阈值，故物理变稳定不等于该片方向正确。保留原标签/阈值/窗口，记录侧向歧义尚未解决，不按模型结果互换左右或改窗口。
+- 提速验证：CPU ORT8/1完整344帧、1381叶数组/轨迹/裁剪等0差，原缓存不变；候选worker251.203s对原356.671s，纯decode/detect/track212.931s，导入/缓存热状态不同，不能当纯模型速度比。生产r2_detection工厂另以0/172/343帧框/分数逐值相同、线程8/1及原工厂恢复验证passed；已应用新worker配置，FP32/阈值/NMS/权重不变。
+- 对照读帧优化：生产read_video_frame按相同索引顺序read/grab，避免重复GOPseek。1476个原片25fps选定帧、1476实际帧、11个失败实际帧及EOF逐一BGR SHA相同，原MP4不变。仅机器人读帧39.937→1.715s约23.29倍（解码组件，不是pipeline），生产forward函数全选帧proof也passed。离线实际RGB关闭阴影/反射，已用三个同qpos/相机分割图相同+人工视觉验证；只改画面，无物理步进/状态写回。新actual-render-mapping记录该设置，分辨率/fps/时钟不改。
+- 缓存复演实现：r2_cache抽取原审计的8阶段/原片/源快照SHA检查，五旧摘要与旧审计逐项相同。run-r2-cached-suite为全部5debug建独立新run和来源指纹，明确不计新ML推理；旧源缓存和实际状态不覆盖。新run_video只允许debug显式复用，不允许替代heldout首次推理；最终summary保留previous_attempts。准备/协议/pixels/CPU工厂checks后启动PID149562/startticks1906410，同一boot；每源核对源缓存、代码、GPU/二进制/策略/评估一致。
+- configs/r2-suite-draft.json仅更新debug试次位置并保留previous_attempts，5个heldout、源SHA/事件与划分完全不变，保留尚0/5使用；首新Qq控制1397/1397、无跌倒、6/6事件passed，完整demo生成中。当前为五片统一回归awaiting_verification，不把旧3passed或消融passed算成R2结项。云费用0，100GiB计划不变。
+- 证据：runs/r2-initialization-regression-20261101-01/{expectation,protocol-clock-check,cache-verifier-check,task,runtime-identity,code-identity}.json与原/派生manifest；r2-detection-throughput-check-20261101-01/{comparison,production-factory-check}.json；r2-demo-read-check-20261101-01/{comparison,forward-comparison}.json；源码前后快照与所有原试次均保留。

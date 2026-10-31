@@ -10,11 +10,12 @@ import subprocess
 import time
 
 from r2_common import GEMX, PROJECT, SONIC, STORAGE, sha256, storage_check, write_json
+from r2_cache import verify_cached_extraction
 
 
 def active_tasks():
     found = []
-    scripts = {b"extract-r2-video.py", b"run-r2-physical.py", b"cache-r2-pose2d.py", b"cache-r2-paced-pose2d.py", b"run-r2-throughput-recovery.py", b"run-r2-checkpoint-recovery.py", b"render-r2-demo.py", b"run-r2-demo.sh", b"run-r2-suite.py", b"run-r2-video.py", b"prepare-r2-startup-diagnostic.py", b"benchmark-r2-detection.py"}
+    scripts = {b"extract-r2-video.py", b"run-r2-physical.py", b"cache-r2-pose2d.py", b"cache-r2-paced-pose2d.py", b"run-r2-throughput-recovery.py", b"run-r2-checkpoint-recovery.py", b"render-r2-demo.py", b"run-r2-demo.sh", b"run-r2-suite.py", b"run-r2-video.py", b"prepare-r2-startup-diagnostic.py", b"benchmark-r2-detection.py", b"run-r2-cached-suite.py"}
     for path in Path("/proc").glob("[0-9]*/cmdline"):
         if int(path.parent.name) == os.getpid():
             continue
@@ -121,6 +122,14 @@ def run_video(item, role, manifest, manifest_path):
                 return {"id": item["id"], "status": prior["status"], "previous_terminal_run_preserved": True}
     run.mkdir(exist_ok=True)
     extraction, physical, body, demo = (run / name for name in ("extraction", "physical", "body-audit", "demo"))
+    reuse_path = run / "cached-extraction-reuse.json"
+    reuse = json.loads(reuse_path.read_text()) if reuse_path.exists() else None
+    if reuse:
+        if role != "debug":
+            raise ValueError("Cached control regression cannot replace frozen heldout inference")
+        verified = verify_cached_extraction(extraction)
+        if verified["summary"]["role"] != "debug" or verified["summary"]["source_sha256"] != item["source_sha256"] or verified["fingerprint"] != reuse["fingerprint"] or extraction.resolve() != Path(reuse["origin_extraction"]).resolve():
+            raise ValueError("Declared debug cache identity changed")
     extraction_args = ["--input", item["source_path"], "--source-url", item["source_url"], "--role", role, "--output", extraction]
     if role == "heldout":
         extraction_args += ["--frozen-suite", manifest_path]
@@ -135,7 +144,7 @@ def run_video(item, role, manifest, manifest_path):
             return {"id": item["id"], "status": "awaiting_verification", "reason": "Native pose recovery incomplete; inspect logs/checkpoints"}
     # Re-enter the master even for a completed extraction: it verifies every
     # cached hash and source snapshot before any reference is sent to control.
-    extraction_code = step(run, "extraction", "r2", "extract-r2-video.py", extraction_args)
+    extraction_code = 0 if reuse else step(run, "extraction", "r2", "extract-r2-video.py", extraction_args)
     if extraction_code:
         failed_audit = run / f"run-audit-extraction-{time.time_ns()}.json"
         step(run, "audit-incomplete", "r2", "audit-r2-run.py", ["--run", run, "--output", failed_audit])

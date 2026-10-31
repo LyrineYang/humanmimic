@@ -14,6 +14,18 @@ from r2_common import write_json, storage_check
 PARENTS = (-1, 0, 0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 9, 9, 12, 13, 14, 16, 17, 18, 19, 20, 21)
 
 
+def read_video_frame(capture, index):
+    """Keep the existing indexed frames while avoiding redundant GOP seeks."""
+    position = int(capture.get(cv2.CAP_PROP_POS_FRAMES))
+    if position < index and index - position <= 4:
+        for _ in range(index - position):
+            if not capture.grab():
+                return False, None
+    elif position != index:
+        capture.set(cv2.CAP_PROP_POS_FRAMES, index)
+    return capture.read()
+
+
 def fit(frame, width, height):
     output = np.zeros((height, width, 3), dtype=np.uint8)
     scale = min(width / frame.shape[1], height / frame.shape[0])
@@ -66,8 +78,7 @@ def main(args):
         for frame_index in range(count):
             t = frame_index / fps
             index = min(round(t * 30), len(points) - 1)
-            capture.set(cv2.CAP_PROP_POS_FRAMES, index)
-            ok, frame = capture.read()
+            ok, frame = read_video_frame(capture, index)
             if not ok:
                 raise ValueError(f"Source frame {index} cannot be decoded")
             original = fit(frame, 320, height)
@@ -99,8 +110,7 @@ def main(args):
             robot_panel = np.zeros((height, 640, 3), dtype=np.uint8)
             valid_robot = False
             if robot is not None and robot.isOpened():
-                robot.set(cv2.CAP_PROP_POS_FRAMES, frame_index)
-                robot_ok, robot_frame = robot.read()
+                robot_ok, robot_frame = read_video_frame(robot, frame_index)
                 if robot_ok:
                     robot_panel = fit(robot_frame, 640, height)
                     valid_robot = True

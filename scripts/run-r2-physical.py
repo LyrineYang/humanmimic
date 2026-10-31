@@ -25,6 +25,7 @@ import zmq
 import msgpack
 
 from r2_common import PROJECT, SONIC, STORAGE, sha256, storage_check, write_json
+from r2_initialization import HOLD, PREFIX, metadata as initialization_metadata, padded_fields
 
 spec = importlib.util.spec_from_file_location("r1_reproduction", PROJECT / "scripts/run-r1-reproduction.py")
 r1 = importlib.util.module_from_spec(spec)
@@ -126,6 +127,8 @@ def render_measured_video(physical, reference, control_stamps, source_times):
                         mujoco.mj_forward(model, data)
                         camera.lookat[:] = [data.qpos[0], data.qpos[1], .65]
                         renderer.update_scene(data, camera=camera)
+                        renderer.scene.flags[mujoco.mjtRndFlag.mjRND_SHADOW] = False
+                        renderer.scene.flags[mujoco.mjtRndFlag.mjRND_REFLECTION] = False
                         frame = cv2.cvtColor(renderer.render(), cv2.COLOR_RGB2BGR)
                     else:
                         frame = np.zeros((height, width, 3), np.uint8)
@@ -140,7 +143,7 @@ def render_measured_video(physical, reference, control_stamps, source_times):
             code = encoder.wait(timeout=30)
             if code:
                 raise RuntimeError("Actual-state video encoding failed")
-    write_json(physical / "actual-render-mapping.json", {"status": "passed" if valid.all() else "failed", "scope": "Offline actual-state replay on source time; no new physical execution", "renderer_script_sha256": sha256(__file__), "physical_execution_script_sha256": json.loads((physical / "execution-manifest.json").read_text())["r2_script_sha256"], "fps": fps, "frames": len(frame_times), "source_times_seconds": frame_times.tolist(), "native_control_monotonic": queries.tolist(), "recorded_actual_state_indices": indices.tolist(), "nearest_sample_gaps_seconds": gaps.tolist(), "valid_actual_state": valid.tolist(), "source_zero_monotonic": float(control_stamps[0]), "time_shift_fitted": False, "actual_state_sha256": sha256(physical / "actual-state.npz")})
+    write_json(physical / "actual-render-mapping.json", {"status": "passed" if valid.all() else "failed", "scope": "Offline actual-state replay on source time; no new physical execution", "renderer_script_sha256": sha256(__file__), "physical_execution_script_sha256": json.loads((physical / "execution-manifest.json").read_text())["r2_script_sha256"], "fps": fps, "offline_shadows_and_reflections": False, "frames": len(frame_times), "source_times_seconds": frame_times.tolist(), "native_control_monotonic": queries.tolist(), "recorded_actual_state_indices": indices.tolist(), "nearest_sample_gaps_seconds": gaps.tolist(), "valid_actual_state": valid.tolist(), "source_zero_monotonic": float(control_stamps[0]), "time_shift_fitted": False, "actual_state_sha256": sha256(physical / "actual-state.npz")})
 
 
 def run(args):
@@ -156,12 +159,8 @@ def run(args):
     output.mkdir(parents=True, exist_ok=False)
     reference = np.load(args.reference)
     count = len(reference["timestamps"])
-    warmup, future = 50, 51
-    fields = {}
-    for name in ("smpl_joints", "smpl_pose", "joint_pos", "joint_vel", "body_quat"):
-        values = np.asarray(reference[name], dtype=np.float32)
-        fields[name] = np.concatenate((np.repeat(values[:1], warmup, axis=0), values, np.repeat(values[-1:], future, axis=0)))
-    fields["frame_index"] = np.arange(count + warmup + future, dtype=np.int64)
+    warmup, future = HOLD + PREFIX, 51
+    fields = padded_fields(reference, future)
     wire = pack_chunk(fields)
     (output / "reference-wire.bin").write_bytes(wire)
     shutil.copy2(args.reference, output / "source-reference.npz")
@@ -206,7 +205,7 @@ def run(args):
             shutil.copy2(original, model / original.name)
     binary = SONIC / "gear_sonic_deploy/target/release/g1_deploy_onnx_ref"
     command = [str(binary), "lo", str(model / "model_decoder.onnx"), str(motions), "--obs-config", str(model / "observation_config.yaml"), "--encoder-file", str(model / "model_encoder.onnx"), "--input-type", "zmq", "--zmq-host", "localhost", "--zmq-port", str(pose_port), "--output-type", "zmq", "--zmq-out-port", str(debug_port), "--disable-crc-check", "--enable-csv-logs", "--logs-dir", str(output / "controller-csv"), "--record-input-file", str(output / "controller-input.csv"), "--enable-motion-recording", "--target-motion-logfile", str(output / "controller-reference.csv")]
-    identity = {"status": "awaiting_verification", "expectation": "Consume every complete source sample through the released SMPL encoder, no falls/state overwrites; warmup and future context are recorded separately", "reference_sha256": sha256(args.reference), "source_frames_50hz": count, "warmup_frames": warmup, "future_context_padding_frames": future, "simulator_startup_timeout_seconds": args.simulator_startup_timeout, "controller": command, "controller_cwd": str(output), "model_root": str(model), "immutable_model_hashes_equal_r1": model_hashes, "binary_sha256": sha256(binary), "r1_simulator_sha256": sha256(PROJECT / "scripts/run-r1-reproduction.py"), "r2_script_sha256": sha256(__file__), "gpu": subprocess.check_output(["nvidia-smi", "--query-gpu=name,driver_version", "--format=csv,noheader"], text=True).strip(), "wire_sha256": sha256(output / "reference-wire.bin"), "timing": "full offline cache sent as Protocol-v3 chunk; native controller clock consumes 50Hz, no sender clock fit", "source_content_trimmed": False, "cloud_cost_usd": 0}
+    identity = {"status": "awaiting_verification", "expectation": "Consume every complete source sample through the released SMPL encoder, no falls/state overwrites; warmup and future context are recorded separately", "reference_sha256": sha256(args.reference), "source_frames_50hz": count, "warmup_frames": warmup, "reference_initialization": initialization_metadata(), "initialization_helper_sha256": sha256(PROJECT / "scripts/r2_initialization.py"), "future_context_padding_frames": future, "simulator_startup_timeout_seconds": args.simulator_startup_timeout, "controller": command, "controller_cwd": str(output), "model_root": str(model), "immutable_model_hashes_equal_r1": model_hashes, "binary_sha256": sha256(binary), "r1_simulator_sha256": sha256(PROJECT / "scripts/run-r1-reproduction.py"), "r2_script_sha256": sha256(__file__), "gpu": subprocess.check_output(["nvidia-smi", "--query-gpu=name,driver_version", "--format=csv,noheader"], text=True).strip(), "wire_sha256": sha256(output / "reference-wire.bin"), "timing": "full offline cache sent as Protocol-v3 chunk; native controller clock consumes 50Hz, no sender clock fit", "source_content_trimmed": False, "cloud_cost_usd": 0}
     write_json(output / "execution-manifest.json", identity)
     started = time.monotonic()
     sim = controller = None
