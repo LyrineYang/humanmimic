@@ -407,6 +407,16 @@ next_action: null
 - GitHub交付核验passed：内容提交`0c78c58a591e78ea350e583dca0d364fd4543956`非强制快进main，同时保留codex/homepage-usability；原96179bf交接完整进入main。连接器回读README正文逐字一致，10份本轮文件及3份交接文件共13个blob一致；仓库仍private、ID不变、Issues启用。About改为用途优先的英文简介；独立网站未部署。原始回读与核验在run目录，`evidence/homepage-usability-20261101.json`状态更新为passed。
 
 
+## 2026-11-01 本地网页：上手使用与insight并重
+
+- 用户要求沿用新版GitHub主页定位完善网页，并询问新分支为何没有合并。先记录`runs/website-usability-20261101-01/expectation.json`：上轮a8a58e6已经在远端main，无额外merge commit是快进合并的结果；本地main原落后25提交，本轮已快进同步并删除完全合入的codex/homepage-usability本地/远端分支，提交完整保留。另一个交接会话随后切到codex/linux-handoff并启用独立/tmp工作树；保留其活跃工作，本轮网页只保存本地main。
+- 实现：英文页面按用途→实际输出→可切换上手命令/输出说明→pipeline→insight摘要→完整结果→研究方向展开。沿用PI/Anthropic参考的暖纸/衬线/细线视觉和原创示意图；展示完整31秒既有结果的静态帧，无伪视频播放。明确manual setup、准备环境、源机器迁移暂停、developer preview和R4未实现。
+- 交互验收passed：Chrome156在1440/1024/768/390/320五宽度无整页横向溢出，图片全部decode；两段命令真实复制内容一致，键盘箭头/Home/End切换、skip link、runtime折叠与结果展开/三组筛选正确，控制台无错误。无JS三段说明和十行结果仍可访问；剪贴板拒绝时选择文字并提示手动复制。首轮验证仅因Windows复制CRLF与LF比较、UNC上溯package配置失败，分别按系统换行规范化与stdin语法检查修正验证方式；网页行为未因此放宽。
+- 内容/保全核验passed：7本地资源链接、11锚点、16仓库文档链接、2段shell语法和真实CLI参数；全部10源身份/事件/状态逐项匹配接受证据。77个既有scripts/configs/evidence SHA、原DDS补丁和demo帧未改。更新网页预览截图及其provenance，未改实验数据或推理/控制代码。
+- 预览交付：HTTP本地200与普通Chrome直接HTML文件均通过；另将仅7份网页/图像文件复制到允许的桌面预览目录并逐字节核对，离线加载CSS/图片/交互通过。Codex浏览器工具不接受本环境file URL，已请求在文件面板打开预览，未将工具排队当作已显示。截图/原始检查位于run目录，摘要`evidence/website-usability-20261101.json`。
+- 本轮仅本地网页准备passed；没有注册/部署网站、推送预览或启动新Goal，无新模型/控制/动画回放/现场相机试次，新增云费用0。服务器验收awaiting_verification，R3 needs_input、R4未实现；原Linux迁移交接与历史保留。
+
+
 ## 2026-11-01 交接历史歧义修复、改名链接与分支同步
 
 - 用户要求修复旧启动段落仍推进R2、旧连接/部署状态和耗时估计的歧义，并同步仓库改名后的origin/克隆/网站链接；随后明确按上次已提交拉取版本处理并合并分支。先读PLAN、核对当前Git与GitHub稳定ID1436901913，确认规范仓库LyrineYang/humanmimic仍private；源origin已正确，保留并核验该地址，不创建新仓库或修改可见性。
@@ -415,3 +425,7 @@ next_action: null
 - 文档/一致性检查passed：122个本地链接及所需锚点无缺失，12个网站仓库目标有效；99个原源码/配置/证据等受保护文件SHA未改，原vendor DDS差异保留。旧文档原Git对象/SHA逐项核对，旧evidence、冻结清单、资产/实际路径不全局替换；历史HANDOFF哈希继续指向原文，新文档另存新修订证据evidence/handoff-sync-20261101.json。
 - 发布目标为main和codex/linux-handoff同一提交，以正常合并/快进和原子推送实现，不删除历史分支或强推。精确提交及远端一致性在push后另存publication.json；服务器按该提交拉取，不把用户提供的/home/junqiy/projects/humanmimic路径当本会话已直接验证的环境。
 - 本轮仅文档/版本修复，没有新模型、无界面控制、现场相机、服务器运行验收或新Goal；R1/R2原工程结果保留，R3仍needs_input、R4尚未实现，新增云费用0。
+
+
+- 交接同步期间，原网站WIP完成为main本地提交f69b0d6（Prepare a local website preview for usage and insights），因此在交接修复febd799基础上正常合并该提交。四处冲突保留双方实验追加、当前简化启动提示和新网站/设计文档；无丢弃提交或强推。此前发布为febd799的验证仍是当时有效快照，最终版本以此次合并后的统一SHA为准。
+- 合并后检查passed：122个本地链接、17个网站仓库链接，无缺失锚点；95个核心/历史文件保持原内容，4个展示文件（CSS、JS、预览图及其provenance）逐字节来自已提交f69b0d6，并非交接修复改写运行证据。新网站HTML保留该提交内容及新仓库URL；追加证据evidence/handoff-merge-20261101.json，旧交接修复证据不回写。

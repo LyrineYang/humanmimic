@@ -1,0 +1,24 @@
+{
+  "status": "passed",
+  "scope": "Merge of committed website usability update with handoff correction; no runtime migration",
+  "handoff_fix_commit": "febd7997823f431f3be2ed55ae1aa66406af1209",
+  "website_commit": "f69b0d663ae8e83a4971dd06256479bb7b294dcc",
+  "earlier_handoff_checks": "evidence/handoff-sync-20261101.json",
+  "core_and_historical_files_preserved": 95,
+  "upstream_website_files_preserved_from_committed_update": [
+    "docs/assets/provenance.json",
+    "docs/assets/website-preview.jpg",
+    "website/script.js",
+    "website/styles.css"
+  ],
+  "latest_website_markup_preserved": true,
+  "both_experiment_and_startup_additions_preserved": true,
+  "local_links_checked": 122,
+  "website_repository_links_checked": 17,
+  "missing_links": [],
+  "new_model_or_server_runtime_started": false,
+  "publication_refs": [
+    "refs/heads/main",
+    "refs/heads/codex/linux-handoff"
+  ]
+}

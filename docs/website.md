@@ -1,85 +1,92 @@
-# Website design and publication handoff
+# Website design and local preview
 
 [Home](../README.md) / Website
 
-**Status: local prototype prepared; no hosted website has been deployed.** The GitHub README is the current project homepage. The site in [website/](../website/) carries the same narrative, evidence and visual language into a responsive page for later publication.
+**Status: local preview; no hosted website deployed.** The site combines practical onboarding with insights from execution. It uses the same capabilities, limitations and evidence as the GitHub homepage.
 
-![Desktop preview of the local HumanMimic website prototype.](assets/website-preview.jpg)
+![Desktop preview of the HumanMimic website.](assets/website-preview.jpg)
+
+## Visitor journey
+
+1. **Understand the purpose.** Video to humanoid motion, with a clear Get started action and a real-output link.
+2. **See the output.** An actual comparison frame, attribution, and explanations of the video, intermediate data and report.
+3. **Get started.** Source, input inspection and output recipes; environment preparation and troubleshooting are adjacent.
+4. **Understand the pipeline.** Perception, reference, frozen control and physical execution, with inspectable boundaries.
+5. **Explore insights.** Short observations with implications and links to deeper notes.
+6. **Inspect results.** R1/R2 summaries and an expandable table of all ten video outcomes, including failures.
+7. **Follow the open question.** Proposed scene adaptation, explicitly separate from implemented capabilities.
+8. **Take a next step.** Start a run on a prepared target, read usage guidance, or contribute a fix or idea.
+
+The page does not run inference, upload clips or install a runtime. The copy controls copy literal commands. Manual setup and current migration readiness remain visible in the onboarding section. A static comparison frame is labeled as such; it has no pretend play control.
 
 ## Visual direction
 
-A quiet research publication with the clarity of a product page: warm paper, dark ink, large serif headlines, small monospaced labels, fine rules and original motion diagrams. Real experiment imagery provides the visual anchor; schematic illustrations are explicitly labeled.
+Warm paper, dark ink, large serif headings, small monospaced labels, fine rules and a restrained terracotta accent. Original line drawings introduce the subject; real output makes the capability concrete. Generous spacing and concise editorial rows support both scanning and deeper reading.
 
 The user-selected references were reviewed on November 1, 2026:
 
-| Reference | Observed direction | Adaptation for HumanMimic |
-| :--- | :--- | :--- |
-| [Physical Intelligence](https://www.pi.website/) | Sparse navigation, typography-led identity, compact research entries and generous empty space | Research-first information order, small metadata, concise links to evidence |
-| [Anthropic](https://www.anthropic.com/) | Warm neutral background, strong editorial hierarchy and clear grouping of research/product material | Serif display text, restrained surfaces and deliberate separation of demonstrated results from future work |
+| Reference | Direction used for HumanMimic |
+| :--- | :--- |
+| [Physical Intelligence](https://www.pi.website/) | Sparse navigation, restrained metadata, clear article entries and room around the content |
+| [Anthropic](https://www.anthropic.com/) | Warm neutral surfaces and strong typographic hierarchy across product and research content |
 
-These are aesthetic references, not affiliations. No company logos, proprietary fonts, copy or illustrations were reused. The motion-study and pipeline SVGs are original repository assets.
-
-## Tokens
-
-The implementation lives in [styles.css](../website/styles.css). Keep these values shared with future components:
+These are aesthetic references, not affiliations. Company logos, copy, proprietary fonts and illustrations are not reused. The motion-study and pipeline SVGs are original repository assets.
 
 | Token | Value | Use |
 | :--- | :--- | :--- |
 | Paper | `#f6f3eb` | Main background |
-| Ink | `#272923` | Headlines, body text and primary links |
+| Ink | `#272923` | Text and primary actions |
 | Muted | `#64665b` | Supporting text |
-| Rule | `#cfccbf` | Dividers and boundaries |
-| Terracotta | `#a15033` | Motion, emphasis and proposed-work cues |
-| Sage | `#e9ecdf` | Method section |
-| White | `#fffdf8` | Evidence frame |
-| Display | Georgia → Times New Roman → serif | Large headings |
+| Rule | `#cfccbf` | Dividers |
+| Terracotta | `#a15033` | Emphasis and selected controls |
+| Sage | `#e9ecdf` | Getting started section |
+| White | `#fffdf8` | Commands and demo caption |
+| Display | Georgia → Times New Roman → serif | Headlines |
 | Body | Arial → Helvetica → sans-serif | Reading text |
-| Metadata | Courier New → monospace | Stages, dates, identifiers |
+| Metadata | Courier New → monospace | Steps, dates and commands |
 | Content width | `1248px` maximum | Desktop composition |
 
-System fonts avoid new downloads or font-license dependencies. Whitespace and type hierarchy carry the identity; avoid adding gradients, glass effects, dashboard chrome or ornamental motion to the research narrative.
+Fonts are local system fonts. There are no font downloads, analytics, backend requests or runtime dependencies.
 
-## Page structure
+## Preview locally
 
-1. **Purpose.** A short description and an original schematic motion study.
-2. **Evidence at a glance.** R1 10/10, R2 held-out 4/5, verified 8 GB platform—with scope beside the numbers.
-3. **Demonstration.** One actual comparison frame, source attribution and a link to the full evidence index.
-4. **Method.** The production pipeline, state feedback and an explicitly proposed R4 branch.
-5. **Research question.** Reference editing, geometric screening and bounded physical verification.
-6. **Complete results.** All ten R2 source outcomes, with optional debug/held-out filters and visible failures.
-7. **Insights.** Short entry points to evidence-backed technical notes.
-8. **Reproduce.** Repository and preparation guide.
+Open [website/index.html](../website/index.html) directly in a browser for an offline preview, keeping the repository directory structure intact. Clipboard access depends on the browser; if unavailable, the copy button selects the command for manual copying.
 
-The prototype uses semantic HTML, visible focus styles, a skip link, responsive layouts, reduced-motion support, image descriptions and a keyboard-operable result filter. Without JavaScript, every result stays visible. Wide technical diagrams/tables scroll within their own regions on small screens.
-
-## Preview and editing
-
-Serve the repository root, not just `website/`, so shared SVG and evidence paths resolve:
+For an HTTP preview, run from the repository root:
 
 ```bash
 python3 -m http.server 8000 --bind 127.0.0.1
 ```
 
-Visit `http://127.0.0.1:8000/website/` on the same machine. Remote access requires supported forwarding. There is no build, backend, analytics or external font service. Navigation to research documents currently points to the private GitHub repository and therefore requires repository access.
+Open `http://127.0.0.1:8000/website/` on the same machine. Remote machines need supported forwarding. Serve the repository root so shared `docs/assets/` references resolve. Stop the server with Ctrl+C after previewing.
+
+Documentation links point to the private GitHub repository and require access. The preview does not alter that audience.
+
+## Implementation and interaction
 
 | File | Responsibility |
 | :--- | :--- |
-| [index.html](../website/index.html) | Narrative, evidence table and navigation |
-| [styles.css](../website/styles.css) | Design tokens, typography and responsive composition |
-| [script.js](../website/script.js) | Optional result filtering and accessible count updates |
-| [Shared SVG assets](assets/) | Header, motion study and pipeline |
-| [Preview provenance](assets/provenance.json) | Source identity and static-frame extraction |
+| [index.html](../website/index.html) | Content, recipes, actual-output preview, results and navigation |
+| [styles.css](../website/styles.css) | Tokens, typography, surfaces and responsive layout |
+| [script.js](../website/script.js) | Recipe tabs, command copy/fallback, result filters and status announcements |
+| [Shared assets](assets/) | Original SVGs and attributed output frame |
+| [Asset provenance](assets/provenance.json) | Frame identity and current preview capture |
 
-The HTML evidence table is a static snapshot of [R2 acceptance](../evidence/r2-acceptance-20261101.json), not an automatic live feed. Update the table, counters, date, README and results document together when a new acceptance snapshot is approved. Do not edit historical evidence to fit presentation copy.
+Recipe tabs support arrow keys and Home/End, with correct selection/focus state. Copy controls report success only after clipboard writing succeeds and otherwise select the text. Result filters update a polite live count. Native details controls expose runtime requirements and the full results table.
 
-## Before a later hosted release
+Without JavaScript, all three recipes remain readable, the full table can still be expanded, and unavailable copy/filter controls stay hidden. The page includes a skip link, visible keyboard focus, image descriptions and reduced-motion support. Wide code, diagrams and tables scroll inside their containers instead of widening the page.
 
-Choose the audience and destination explicitly; the current repository remains private. Retain source attribution and determine which demonstration media may be served publicly. Full MP4s currently live on the workstation; this prototype uses only a small static preview and does not advertise a working video player.
+## Evidence and maintenance
 
-For static hosting, prepare a staging directory containing `website/` plus the referenced `docs/assets/` paths, preserving relative structure, or rewrite the asset references as part of packaging. Do not serve the repository root as the production document root: it includes internal execution plans and ignored local artifacts. Move documentation to accessible pages if the audience will not have private-repository access. Set canonical/social metadata only after the final URL is known.
+The HTML results are a static snapshot of [R2 acceptance](../evidence/r2-acceptance-20261101.json), not a live service. Keep every row, event count and outcome aligned with that snapshot. Preserve failures and used-test-data disclosures. Update the date, counters, README and results document only when a new accepted snapshot exists.
 
-Then verify the packaged artifact at desktop and mobile widths, test every navigation/filter control, and confirm actual deployment separately. The repository prototype and its visual review do not imply a published website.
+Local layout and interaction validation is recorded under `runs/website-usability-20261101-01/`; its compact summary is [website preview verification](../evidence/website-usability-20261101.json). This verifies the presentation, not a new model, controller, camera or server deployment.
 
+## Later hosting
+
+Choose the audience and destination before publication. Full recordings remain on the workstation; the preview includes a small attributed still. Confirm media rights and make documentation accessible to the intended audience before a public release.
+
+Package only `website/` and the referenced `docs/assets/`, preserving the relative structure or rewriting asset paths. Do not use the repository root as a production document root: it contains internal plans and ignored local artifacts. Set canonical and social metadata after the final URL is known. Verify the packaged site and actual deployment separately.
 
 ## Repository links after rename
 
