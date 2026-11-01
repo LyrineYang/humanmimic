@@ -373,3 +373,13 @@ next_action: null
 - 原速策略保持FP32/batch1/flip、32帧持久化，无软件温度等待/逐帧休息/强制冷却；GPU约80°C时继续计算，本轮未新增重启。五条保留至初审/媒体就绪约158分钟，最终视觉/报告另记；D实占19.884GiB、C余19.09GiB、D余271.38GiB，新增云费用0。
 - 最终结果runs/r2-suite-acceptance-20261101-01/{REPORT.md,suite-summary.json,artifact-review.json,source-results.csv,completion-review.json}；原始storage-cost-review/frozen-identity-review在队列目录。报告生成的一处引号错误已修正，只有报告构建受影响；运行/数值证据未改。小型预览原样复制到evidence/r2-kpop-demo-preview-20261101.jpg并附来源，模型/原片/大视频不入Git。可同步摘要evidence/r2-acceptance-20261101.json。
 - 分项：源码/环境、无界面实际控制、真实状态离线回放passed；GPU图形窗口awaiting_verification，现场相机needs_input。这是R2的工程验收，不宣称人体3D真值、编舞完全一致、R3实时或R4已完成；整个项目未完成。
+
+
+## 2026-11-01 英文GitHub项目主页与后续网页准备
+
+- 先记录可检验预期：`runs/project-homepage-20261101/expectation.json`；已读PLAN和用户引用两条聊天，采用最新R1 10/10、R2 heldout4/5而非延续聊天中的旧R2状态。用户明确改为完善已有私有仓库，不新建/公开仓库。
+- 实现：HumanMimic英文README、insights、研究设计、架构、完整结果和复跑说明；保留原README为明确标注历史的operations.zh-CN.md。原创SVG首页与pipeline区分已实现闭环和未实现R4；展示帧来自已有完整MP4的15.56s，记录来源和SHA，没有新仿真或更改实验数据。
+- 网页准备：参考用户指定PI/Anthropic的克制编辑式排版，完成暖纸/衬线/细线视觉、全10源结果表和筛选；仅本地HTML/CSS/JS，无部署、外部字体或模型调用。设计和后续发布说明在docs/website.md。
+- 本地检查passed：90个新文档路径初检、章节锚点、SVG/JS解析；Chrome四宽度1440/768/390/320无页面横向溢出，图片完整、筛选数量正确、无JS仍显示全10行、键盘跳转入口与缩小动态效果可用。首轮图片检查在lazy-load完成前断言失败，等待decode后重验通过，不修改或隐藏缺失资源。
+- 内容审计passed：所有十条源/事件/状态与原接受JSON一致，十段完整comparison SHA及全部必要本地产物路径重新检查；scripts/configs/既有evidence/子模块指针未变，既有人为DDS补丁保留。源码解析和展示验证仅指本轮资料；未新增动画/无界面控制/现场相机验收，R3仍needs_input、R4未实现。
+- GitHub Markdown渲染API操作被自动审批拒绝（额外非公开内容传输），未绕过；改用本地marked和Chrome渲染，明确其不是GitHub真实CSS。检查/截图在runs/project-homepage-20261101/，小型摘要evidence/presentation-20261101.json。当前本地准备passed、GitHub默认分支发布awaiting_verification，云费用0。

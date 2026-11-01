@@ -1,0 +1,30 @@
+{
+  "source_url": "https://www.youtube.com/watch?v=gRexOgq8h-8",
+  "source_run": "r2-heldout-gRexOgq8h-8-20261101-01",
+  "source_comparison_sha256": "9dbe15c44f885c207dbc9dde61644e42e76bdc2a2eebd3d668b45578a2b363af",
+  "demo_frame": {
+    "file": "demo-frame.jpg",
+    "comparison_time_seconds": 15.56,
+    "operation": "ffmpeg single-frame extraction; no cropping or retiming",
+    "sha256": "fcd70c06b40645a1bfac98e6f87c92850dd4fab47588bac4db14ef4073250296"
+  },
+  "vectors": {
+    "files": [
+      "hero.svg",
+      "motion-study.svg",
+      "pipeline.svg"
+    ],
+    "origin": "Original code-native SVG artwork created for this repository",
+    "meaning": "Schematic illustrations; pipeline dashed branch is proposed, not implemented"
+  },
+  "not_a_new_physical_run": true,
+  "website_preview": {
+    "file": "website-preview.jpg",
+    "origin": "Headless Chrome screenshot of the local website prototype",
+    "viewport": [
+      1440,
+      1000
+    ],
+    "sha256": "85d0356557c44e06a7b4bb6bfe9b45b6bca8fa3ca7528e2a6771b9485dcc4260"
+  }
+}

@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 430" role="img" aria-labelledby="title desc">
+<title id="title">HumanMimic — From human motion to physical behavior</title><desc id="desc">A simulation research project for video imitation and scene adaptation. Original schematic illustration.</desc>
+<rect width="1200" height="430" fill="#f6f3eb"/>
+<path d="M42 51H1158M42 378H1158" stroke="#cfcabc"/>
+<g fill="#272923"><text x="45" y="31" font-family="monospace" font-size="12" letter-spacing="2">HUMANMIMIC / RESEARCH IN SIMULATION</text>
+<text x="45" y="134" font-family="Georgia,serif" font-size="61" letter-spacing="-2">From human motion</text><text x="45" y="203" font-family="Georgia,serif" font-size="61" letter-spacing="-2">to physical behavior.</text>
+<text x="48" y="257" font-family="Arial,sans-serif" font-size="19" fill="#68675d">Observe. Translate. Execute. Verify.</text>
+<text x="48" y="328" font-family="monospace" font-size="12" letter-spacing="1.5">GEM-X → SONIC → G1 / MUJOCO</text>
+<text x="45" y="405" font-family="monospace" font-size="11" letter-spacing="1.4">VIDEO IMITATION · FROZEN CONTROL · MEASURABLE EXECUTION</text></g>
+<g transform="translate(685 -8) scale(.78)"><g fill="none" stroke-linecap="round" stroke-linejoin="round">
+<circle cx="315" cy="235" r="174" fill="#e8d6c8" stroke="none"/>
+<path d="M58 391H561M80 418H540M120 447H502M198 366L158 448M321 366V448M442 366L481 448" stroke="#cbc5b9" stroke-width="1"/>
+<path d="M102 164C159 71 301 59 391 102S493 191 520 278" stroke="#af5d3e" stroke-width="1.5" stroke-dasharray="4 8"/>
+<path d="M514 267L520 278L527 266" stroke="#af5d3e" stroke-width="1.5"/>
+<g stroke="#9f9a8e" stroke-width="2" opacity=".6">
+<circle cx="183" cy="147" r="20"/><path d="M183 167L183 249M145 187L183 177L219 188M145 187L111 159L117 125M219 188L250 157L246 119M158 246L208 246M183 249L158 246L155 309L140 369M183 249L208 246L221 307L241 367"/>
+<path d="M174 180L145 170L120 137M212 184L238 142L219 101M157 249L141 302L117 357M205 249L234 302L263 358" stroke-dasharray="4 7"/>
+</g>
+<g stroke="#272923" stroke-width="3.5">
+<rect x="364" y="122" width="37" height="32" rx="10" fill="#f6f3eb"/>
+<path d="M373 138H392" stroke-width="2"/>
+<path d="M383 154V170M356 174L407 174L400 237L363 237Z" fill="#f6f3eb"/>
+<path d="M356 180L319 150L313 105M408 180L444 148L436 102M371 237L362 253L353 307L342 369M392 237L404 253L418 308L435 368"/>
+<path d="M329 376H352M425 376H447M370 189H392M367 203H395M369 217H392" stroke-width="2"/>
+</g>
+<g fill="#f6f3eb" stroke="#af5d3e" stroke-width="2.5">
+<circle cx="356" cy="180" r="6"/><circle cx="408" cy="180" r="6"/><circle cx="319" cy="150" r="6"/><circle cx="444" cy="148" r="6"/><circle cx="353" cy="307" r="6"/><circle cx="418" cy="308" r="6"/><circle cx="362" cy="253" r="6"/><circle cx="404" cy="253" r="6"/>
+</g>
+<path d="M248 231H309M299 223L310 231L299 239" stroke="#af5d3e" stroke-width="2"/>
+</g>
+<g font-family="monospace" font-size="11" letter-spacing="1.5" fill="#68675d">
+<text x="128" y="401">OBSERVED</text><text x="350" y="401">EXECUTED</text>
+<text x="76" y="474">MOTION STUDY 01</text><text x="405" y="474">SCHEMATIC</text>
+</g></g></svg>

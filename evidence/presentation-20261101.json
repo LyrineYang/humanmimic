@@ -1,0 +1,28 @@
+{
+  "status": "passed",
+  "scope": "English project presentation and local-only website prototype; no new robotics acceptance",
+  "date": "2026-11-01 Asia/Shanghai",
+  "base_research_commit": "59c6dedb8d4ab145cbd6bafac691a0faf74cbdbf",
+  "repository": "https://github.com/LyrineYang/humanoid-demo",
+  "visibility": "private",
+  "checks": {
+    "static-check": "passed",
+    "content-audit": "passed",
+    "browser-check": "passed"
+  },
+  "browser_viewports_px": [
+    1440,
+    768,
+    390,
+    320
+  ],
+  "no_javascript_results": 10,
+  "readme_rendering": "Local marked renderer with approximate GitHub layout; not GitHub live CSS",
+  "runtime_source_config_and_existing_evidence_unchanged": true,
+  "full_r2_comparison_hashes_checked": 10,
+  "website_deployment": "not_deployed",
+  "github_publication": "awaiting_verification",
+  "cloud_cost_usd": 0,
+  "new_simulation_runs": 0,
+  "raw_checks": "runs/project-homepage-20261101/"
+}
