@@ -403,3 +403,5 @@ next_action: null
 - 本地检查passed：136个本地链接、18个章节锚点、10段shell仅语法检查、13个命令参数对照源码AST；SVG解析、git diff检查通过。Chrome本地marked近似GitHub样式，5页在1100/390宽度图片完整、无整页横向溢出，README上手锚点/折叠及README→Usage→Troubleshooting跳转passed；实际查看桌面/手机截图。不是GitHub线上视觉验收，未调用Markdown渲染API。首轮Windows Node的UNC上溯包配置失败，在忽略的验证目录补局部package.json后复验passed。
 - 保全核验passed：80个既有scripts/configs/evidence/website文件SHA与原DDS补丁逐字节不变；新记录未更改原实验证据，网站原型保留。仅文档与静态展示检查，无新模型/控制/录像回放/相机运行，无新Goal或云费用；服务器验收仍awaiting_verification，R3 needs_input、R4未实现。
 - 连接器读取稳定仓库ID1436901913确认原私有仓库已更名`LyrineYang/humanmimic`，不是创建新仓库；Issues已启用，克隆与反馈链接使用当前地址。私有main发布awaiting_verification；本地摘要`evidence/homepage-usability-20261101.json`，原始检查与截图在run目录。
+
+- GitHub交付核验passed：内容提交`0c78c58a591e78ea350e583dca0d364fd4543956`非强制快进main，同时保留codex/homepage-usability；原96179bf交接完整进入main。连接器回读README正文逐字一致，10份本轮文件及3份交接文件共13个blob一致；仓库仍private、ID不变、Issues启用。About改为用途优先的英文简介；独立网站未部署。原始回读与核验在run目录，`evidence/homepage-usability-20261101.json`状态更新为passed。
