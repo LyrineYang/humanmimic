@@ -383,3 +383,5 @@ next_action: null
 - 本地检查passed：90个新文档路径初检、章节锚点、SVG/JS解析；Chrome四宽度1440/768/390/320无页面横向溢出，图片完整、筛选数量正确、无JS仍显示全10行、键盘跳转入口与缩小动态效果可用。首轮图片检查在lazy-load完成前断言失败，等待decode后重验通过，不修改或隐藏缺失资源。
 - 内容审计passed：所有十条源/事件/状态与原接受JSON一致，十段完整comparison SHA及全部必要本地产物路径重新检查；scripts/configs/既有evidence/子模块指针未变，既有人为DDS补丁保留。源码解析和展示验证仅指本轮资料；未新增动画/无界面控制/现场相机验收，R3仍needs_input、R4未实现。
 - GitHub Markdown渲染API操作被自动审批拒绝（额外非公开内容传输），未绕过；改用本地marked和Chrome渲染，明确其不是GitHub真实CSS。检查/截图在runs/project-homepage-20261101/，小型摘要evidence/presentation-20261101.json。当前本地准备passed、GitHub默认分支发布awaiting_verification，云费用0。
+
+- GitHub交付核验passed：内容提交`ff1c621ab4ea805b574dd0d81e38b2603bcce886`已快进默认main（原710f10e），包含已验收R2历史及本轮展示；原codex/r2-video-pipeline保留。连接器回读默认README及全体docs/website共18个blob与本地逐一一致，visibility仍private；About英文简介和5个主题已更新。独立网站未部署；本轮无新增实验/云费用。

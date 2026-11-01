@@ -21,8 +21,10 @@
   "runtime_source_config_and_existing_evidence_unchanged": true,
   "full_r2_comparison_hashes_checked": 10,
   "website_deployment": "not_deployed",
-  "github_publication": "awaiting_verification",
+  "github_publication": "passed",
   "cloud_cost_usd": 0,
   "new_simulation_runs": 0,
-  "raw_checks": "runs/project-homepage-20261101/"
+  "raw_checks": "runs/project-homepage-20261101/",
+  "published_content_commit": "ff1c621ab4ea805b574dd0d81e38b2603bcce886",
+  "remote_files_verified": 18
 }
