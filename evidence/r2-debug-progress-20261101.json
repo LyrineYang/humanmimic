@@ -1,6 +1,6 @@
 {
-  "status": "awaiting_verification",
-  "scope": "R2 batch progress; not suite acceptance",
+  "status": "passed",
+  "scope": "Final R2 engineering acceptance snapshot; debug3/5 and heldout4/5, all sources reported",
   "debug_completed": 5,
   "debug_required": 5,
   "heldout_used": 5,
@@ -129,10 +129,10 @@
     "failure_media_report": "passed, truthful partial actual/full comparison; successful gate unchanged"
   },
   "host_free_gib": {
-    "/mnt/c": 19.12005615234375,
-    "/mnt/d": 271.6494483947754
+    "/mnt/c": 19.085899353027344,
+    "/mnt/d": 271.3846740722656
   },
-  "updated_unix": 1793499776.898158,
+  "updated_unix": 1793502340.4756365,
   "pending_final_audits": {},
   "rendering_candidate": {
     "status": "passed, three-state timing/geometry/visual check only",
@@ -234,16 +234,20 @@
     "pid": 157620,
     "process_start_ticks": 2109756,
     "boot_id": "fa0233fb-701c-42d8-81da-0d007d2efe7d",
-    "active_source": "GP4YqDYMmcI",
-    "status": "awaiting_verification",
+    "active_source": null,
+    "status": "finished",
     "used_sources": 5,
-    "completed": 4,
+    "completed": 5,
     "ledger": "/mnt/d/humanoid-demo-r2/runs/heldout-use-ledger.jsonl",
-    "manifest_sha256": "c3403dc4581ed61880e66f3c4cbbaa84961c1455621c0e5f170c10c0006378d1"
+    "manifest_sha256": "c3403dc4581ed61880e66f3c4cbbaa84961c1455621c0e5f170c10c0006378d1",
+    "source_passed": 4,
+    "source_failed": 1,
+    "suite_status": "passed",
+    "coordinator_initial_status": "failed"
   },
-  "heldout_completed": 4,
+  "heldout_completed": 5,
   "heldout_passed": 4,
-  "heldout_failed": 0,
+  "heldout_failed": 1,
   "completed_heldout": [
     {
       "id": "ROZy7jawHf4",
@@ -292,6 +296,22 @@
       "audit": "runs/r2-heldout-dIfUVvoVXRM-20261101-01/run-audit.json",
       "demo": "runs/r2-heldout-dIfUVvoVXRM-20261101-01/demo/comparison.mp4",
       "actual_state_sha256": "0e1af38404063adc26fab8691b5697555b789a85f1612e38584479c6656d900c"
+    },
+    {
+      "id": "GP4YqDYMmcI",
+      "status": "failed",
+      "physical": "passed",
+      "events": "5/6",
+      "control_frames": 1364,
+      "minimum_root_height_m": 0.7254505786303751,
+      "demo_frames": 682,
+      "audit": "/mnt/d/humanoid-demo-r2/runs/r2-heldout-GP4YqDYMmcI-20261101-01/run-audit.json",
+      "final_media_audit": "/mnt/d/humanoid-demo-r2/runs/r2-heldout-GP4YqDYMmcI-20261101-01/run-audit-visual-20261101.json",
+      "demo": "/mnt/d/humanoid-demo-r2/runs/r2-heldout-GP4YqDYMmcI-20261101-01/demo/comparison.mp4",
+      "actual_state_sha256": "c8ad11bff962a24b7e6b4042c9b5a40a09d46abf070865b8ebef761cd8dbf872",
+      "failure": "Frozen wide-crouch left knee max below0.7 in extracted0.481388 and actual0.414427; no confirmed3D root cause"
     }
-  ]
+  ],
+  "final_acceptance": "evidence/r2-acceptance-20261101.json",
+  "final_report": "runs/r2-suite-acceptance-20261101-01/REPORT.md"
 }

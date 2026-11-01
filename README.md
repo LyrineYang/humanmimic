@@ -158,7 +158,14 @@ python scripts/resume-r1-suite.py --suite runs/r1-suite-acceptance-20261029-03
 
 ## R2 本机视频链路
 
-当前D盘独立conda/CUDA、固定GEM-X资产与SOMA/SMPL接口已检查通过；三条调试片已通过完整提取、物理和对照视频验收，5调试+5保留整批仍在运行。当前执行Goal统一保存在 [STARTUP_PROMPT.md](STARTUP_PROMPT.md)，状态与验收见 [PLAN.md](PLAN.md)。
+当前D盘独立conda/CUDA、固定GEM-X资产与SOMA/SMPL接口已检查通过；固定5调试+5保留整批已按原门槛passed：调试3passed/2failed，保留4passed/1failed；全部物理稳定、50个完整媒体全解码与最终视觉核验通过。当前执行Goal统一保存在 [STARTUP_PROMPT.md](STARTUP_PROMPT.md)，状态与验收见 [PLAN.md](PLAN.md)。
+
+
+[R2整批报告与全部完整demo](runs/r2-suite-acceptance-20261101-01/REPORT.md)、[可随Git克隆的验收摘要](evidence/r2-acceptance-20261101.json)。原片、2D覆盖、3D骨架、实际机器人和全部中间数据留D盘；大型MP4不会随Git克隆下载。
+
+![K-pop原片到实际仿真的首中尾链路预览](evidence/r2-kpop-demo-preview-20261101.jpg)
+
+预览来自[原作者YouTube视频](https://www.youtube.com/watch?v=gRexOgq8h-8)，完整31秒对照保留在本地结果目录。最后一条GP4YqDYMmcI因冻结屈膝事件5/6而failed，完整失败视频和数值保留；未改标签/阈值以求通过。单目提取不是3D真值，姿态/相位差仍可见。
 
 独立前缀、模型、下载缓存、临时文件与新结果根为 `/mnt/d/humanoid-demo-r2`，源码仍在WSL Linux目录。C盘10GiB为系统运行余量，不是额外下载额度；100GiB为D上的项目容量规划。源视频完整保留，不自动截到60秒；当前先用原始上传即不超过60秒的视频，超限输入拒绝而不静默剪辑。
 
@@ -215,9 +222,9 @@ python scripts/inspect-r2-sources.py /absolute/video.mp4 \
   --output /mnt/d/humanoid-demo-r2/runs/source-review-NEW --samples 20
 ```
 
-## R2 首片结果与当前边界
+## R2 结果与当前边界
 
-2026-11-01已在本机4060完成第一条普通YouTube舞蹈完整链路：27.933秒/838帧、1397个50Hz源参考，真实物理无跌倒，6/6预标注事件方向和顺序通过。这是调试首片；当前统一初始化五片回归已结束、原5条保留开始推理，5+5整批和R2尚未完成。
+2026-11-01已在本机4060完成第一条普通YouTube舞蹈完整链路：27.933秒/838帧、1397个50Hz源参考，真实物理无跌倒，6/6预标注事件方向和顺序通过。这是调试首片历史；当前固定5+5已全部结束，保留4/5完整passed，R2工程门槛通过。
 
 - [完整三路视频](runs/r2-preflight-youtube-QqvZAUEOrAQ-20261031-01/demo-native-aligned-02/comparison.mp4)、[首片报告](runs/r2-preflight-youtube-QqvZAUEOrAQ-20261031-01/REPORT.md)。本地大产物不会随Git克隆下载。
 - [可随Git同步的首片摘要](evidence/r2-preflight-20261101.json)、[实测资源/预算](evidence/r2-resource-estimate-20261101.json)。
@@ -227,7 +234,7 @@ python scripts/inspect-r2-sources.py /absolute/video.mp4 \
 
 R2统一初始化五片回归：5/5物理稳定、3/5整片passed、2/5事件failed。当前完整新对照为[首片舞蹈](runs/r2-debug-init-QqvZAUEOrAQ-20261101-01/demo/comparison.mp4)（6/6事件）、[59秒Cupid](runs/r2-debug-init-2e_7XBmpw14-20261101-01/demo/comparison.mp4)（5/5）及[深蹲](runs/r2-debug-init-0EpP3pYUYTk-20261101-01/demo/comparison.mp4)（7/7）；[臂环绕失败](runs/r2-debug-init-vTx_ldn6MCA-20261101-01/demo/comparison.mp4)（3/4）和[踏步失败](runs/r2-debug-init-6uqztDO_7kQ-20261101-01/demo/comparison.mp4)（0/6）也完整保留，均未更改阈值。原提取缓存经哈希核验复用，实际物理/事件/五路媒体均重新执行，旧试次保留。
 
-[当前进度及失败试次索引](evidence/r2-debug-progress-20261101.json)。原5+5来源及事件已在[冻结清单](configs/r2-suite-frozen-20261101.json)固定，首条保留全新推理已经开始。所有5条保留均须出结果，至少4/5完整通过才满足R2工程门槛；实际使用记录在D盘runs/heldout-use-ledger.jsonl，不再把已推理的样本称作未见。
+[当前进度及失败试次索引](evidence/r2-debug-progress-20261101.json)。原5+5来源及事件已在[冻结清单](configs/r2-suite-frozen-20261101.json)固定，全部5条保留全新推理已结束，4passed/1failed，达到原至少4/5工程门槛；实际使用记录在D盘runs/heldout-use-ledger.jsonl，不再把已推理的样本称作未见。
 
 批次入口使用完整源，跳过已审计终态，按视频和模型阶段串行：
 

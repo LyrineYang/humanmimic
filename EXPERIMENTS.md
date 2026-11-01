@@ -362,3 +362,14 @@ next_action: null
 - 完整894帧/25fps对照，所有实际机器人帧可用，5MP4全解码passed；人工查看25/446/881帧，原片、2D、3D与真实机器人可见且源时钟一致，幅度/相位/画面朝向差异保留，视觉核验不宣称编舞完全一致或人体真值准确。comparison SHA59b06a3c9bf95f658b3bdf6a2b1030a5d08dcf4c5112ef7a74aa3f79d517ea0d，canonical run-audit.json正式passed并绑定原冻结清单。
 - GPU计算时曾观察到约79–80°C/93–98%利用率继续运行；原生FP32/batch1/flip、32帧检查点不变，无人工冷却、软件温度中断或新增本机重启。完整证据runs/r2-heldout-dIfUVvoVXRM-20261101-01/{REPORT.md,run-audit.json,visual-audit.json,demo/comparison.mp4}，云费用0。
 - 第五条GP4YqDYMmcI已自动开始，全5条保留现均标记使用；当前4/5完成并passed。虽然已达至少4条通过的数量，原验收要求全部五片都有结果，故R2整批仍awaiting_verification，继续最后一片后才结项。
+
+
+## 2026-11-01 R2完整5+5工程验收通过及收尾
+
+- 预期在r2-heldout-orchestration-20261101-01/final-review-expectation.json先记录；原5调试+5保留和≥4/5门槛未改。冻结汇总器最终passed：debug5终态（3passed/2failed）、heldout5终态（4passed/1failed），全部来源/历史失败进入报告，未因已达4条提前结项。
+- 最后GP4YqDYMmcI完整818帧→1364/1364参考真实执行，物理passed、无跌倒、最低根高0.725450579m；wide-crouch预标注left-knee阈值0.7rad，参考max0.481388、机器人0.414427，5/6事件，整片failed。682帧完整对照、5媒体全解码/首中尾及22.92秒失败时点视觉核验passed。单目侧别/深度/标注根因尚未独立确认，不把参考数值当人体真值；原canonical failed初审与run-audit-visual-20261101.json补审均保留，未改标注/阈值/推理或重跑。
+- 最终产物审计passed：当前10个完整结果包、50个MP4全解码证据与当前文件SHA重新绑定、全源/实际帧完整，10/10当前物理稳定，共12095源参考（保留5784）；旧实际跌倒/中断和成功全部保留。原调度退出failed代表含1个失败源；原冻结整批规则≥4/5则passed，原日志不改写。
+- 冻结身份passed：42代码/配置/事件、15模型资产、5原调试审计哈希、原生二进制、GPU/驱动及上游版本/补丁全部匹配。无保留来源互换或据结果调参，所有5条已标记使用；后续不能再称未见。当前无模型/控制进程。
+- 原速策略保持FP32/batch1/flip、32帧持久化，无软件温度等待/逐帧休息/强制冷却；GPU约80°C时继续计算，本轮未新增重启。五条保留至初审/媒体就绪约158分钟，最终视觉/报告另记；D实占19.884GiB、C余19.09GiB、D余271.38GiB，新增云费用0。
+- 最终结果runs/r2-suite-acceptance-20261101-01/{REPORT.md,suite-summary.json,artifact-review.json,source-results.csv,completion-review.json}；原始storage-cost-review/frozen-identity-review在队列目录。报告生成的一处引号错误已修正，只有报告构建受影响；运行/数值证据未改。小型预览原样复制到evidence/r2-kpop-demo-preview-20261101.jpg并附来源，模型/原片/大视频不入Git。可同步摘要evidence/r2-acceptance-20261101.json。
+- 分项：源码/环境、无界面实际控制、真实状态离线回放passed；GPU图形窗口awaiting_verification，现场相机needs_input。这是R2的工程验收，不宣称人体3D真值、编舞完全一致、R3实时或R4已完成；整个项目未完成。
