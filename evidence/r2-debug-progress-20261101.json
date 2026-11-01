@@ -3,10 +3,158 @@
   "scope": "R2 batch progress; not suite acceptance",
   "debug_completed": 5,
   "debug_required": 5,
-  "heldout_used": 0,
+  "heldout_used": 1,
   "heldout_required": 5,
   "heldout_required_passes": 4,
   "completed_debug": [
+    {
+      "id": "QqvZAUEOrAQ",
+      "status": "passed",
+      "physical": "passed",
+      "events": "6/6",
+      "audit": "/mnt/d/humanoid-demo-r2/runs/r2-debug-init-QqvZAUEOrAQ-20261101-01/run-audit.json"
+    },
+    {
+      "id": "0EpP3pYUYTk",
+      "status": "passed",
+      "physical": "passed",
+      "events": "7/7",
+      "audit": "/mnt/d/humanoid-demo-r2/runs/r2-debug-init-0EpP3pYUYTk-20261101-01/run-audit.json"
+    },
+    {
+      "id": "vTx_ldn6MCA",
+      "status": "failed",
+      "physical": "passed",
+      "events": "3/4",
+      "audit": "/mnt/d/humanoid-demo-r2/runs/r2-debug-init-vTx_ldn6MCA-20261101-01/run-audit-visual-20261101.json"
+    },
+    {
+      "id": "6uqztDO_7kQ",
+      "status": "failed",
+      "physical": "passed",
+      "events": "0/6",
+      "audit": "/mnt/d/humanoid-demo-r2/runs/r2-debug-init-6uqztDO_7kQ-20261101-01/run-audit-visual-20261101.json"
+    },
+    {
+      "id": "2e_7XBmpw14",
+      "status": "passed",
+      "physical": "passed",
+      "events": "5/5",
+      "audit": "/mnt/d/humanoid-demo-r2/runs/r2-debug-init-2e_7XBmpw14-20261101-01/run-audit.json"
+    }
+  ],
+  "source_manifest": "configs/r2-suite-frozen-20261101.json",
+  "frozen_suite": true,
+  "heldout_event_annotations": "Source-only labels frozen before first inference; never revised against heldout outputs",
+  "cloud_cost_usd": 0,
+  "extraction_diagnostics": {
+    "scope": "Descriptive tracking/2D confidence, not calibrated accuracy or new gates",
+    "first_dance": {
+      "normalized_frames": 838,
+      "raw_detection_frames": 800,
+      "dominant_track_observed_frames": 398,
+      "box_filled_frames": 440,
+      "last_dominant_track_observation": 418,
+      "late_other_id_fragment_active_frames": 401,
+      "longest_held_box_seconds": 13.966666666666667,
+      "smpl24_keypoint_fraction_confidence_above_025": 0.9561953062848051,
+      "diagnostic": "runs/r2-preflight-youtube-QqvZAUEOrAQ-20261031-01/extraction-diagnostics-annotated-20261101.json"
+    },
+    "squat": {
+      "normalized_frames": 323,
+      "dominant_track_observed_frames": 323,
+      "box_filled_frames": 0,
+      "smpl24_keypoint_fraction_confidence_above_025": 1.0
+    },
+    "arm": {
+      "frames": 509,
+      "raw_detection_frames": 508,
+      "dominant_track_observed_frames": 508,
+      "filled_primary_frames": 1,
+      "pose_confidence_status": "passed",
+      "diagnostic": "/mnt/d/humanoid-demo-r2/runs/r2-debug-vTx_ldn6MCA-20261101-01/extraction-diagnostics-20261101-02.json"
+    },
+    "marching": {
+      "frames": 344,
+      "raw_detection_frames": 344,
+      "dominant_track_observed_frames": 344,
+      "filled_primary_frames": 0,
+      "pose_confidence_status": "passed",
+      "diagnostic": "/mnt/d/humanoid-demo-r2/runs/r2-debug-6uqztDO_7kQ-20261101-01/extraction-diagnostics-20261101-02.json"
+    },
+    "cupid": {
+      "frames": 1771,
+      "raw_detection_frames": 1723,
+      "dominant_track_observed_frames": 1723,
+      "filled_primary_frames": 48,
+      "pose_confidence_status": "passed",
+      "diagnostic": "/mnt/d/humanoid-demo-r2/runs/r2-debug-2e_7XBmpw14-20261101-01/extraction-diagnostics-20261101-03.json",
+      "mapped_smpl24_fraction_confidence_above_025": 0.9728966685488425
+    }
+  },
+  "active_debug_batch": {
+    "run": "runs/r2-initialization-regression-20261101-01",
+    "pid": 149562,
+    "mode": "cached extraction, new actual control/metrics/full demo",
+    "heldout_started": true,
+    "status": "finished"
+  },
+  "execution_policy": {
+    "priority": "throughput",
+    "source": "configs/r2-execution-policy.json",
+    "software_temperature_gates": false,
+    "per_frame_idle_seconds": 0,
+    "checkpoint_frames": 32,
+    "on_local_reboot": "server handoff; no further local retry",
+    "acceptance_changed": false
+  },
+  "debug_passed": 3,
+  "debug_failed": 2,
+  "debug_awaiting_verification": 0,
+  "startup_diagnostic": {
+    "status": "passed, debug physical ablation only",
+    "scope": "Fixed reference prefix ablation only, not canonical suite acceptance",
+    "run": "runs/r2-startup-transition-diagnostic-20261101-01",
+    "task_pid": 136971,
+    "after_existing_queues": true,
+    "source_samples_unchanged": 574,
+    "prefix_frames_50hz": 100,
+    "geometry_check": "passed",
+    "physical_check": "passed,574original source samples,no fall",
+    "minimum_root_height_m": 0.6969662006766907
+  },
+  "tool_checks": {
+    "single_video_entry": "passed, cached read/no duplicate/reserved heldout guards",
+    "frozen_runtime": "passed, binary and upstream revision identity",
+    "failure_media_report": "passed, truthful partial actual/full comparison; successful gate unchanged"
+  },
+  "host_free_gib": {
+    "/mnt/c": 19.12005615234375,
+    "/mnt/d": 271.6494483947754
+  },
+  "updated_unix": 1793492731.317192,
+  "pending_final_audits": {},
+  "rendering_candidate": {
+    "status": "passed, three-state timing/geometry/visual check only",
+    "run": "runs/r2-render-throughput-check-20261101-01",
+    "median_speed_ratio": 2.023036039578067,
+    "enabled": true,
+    "scope": "Validated rendering-only change; all five full new debug renders audited"
+  },
+  "uniform_initialization_regression": {
+    "status": "passed, regression review completed; source acceptance3/5",
+    "run": "runs/r2-initialization-regression-20261101-01",
+    "pid": 149562,
+    "source_frames_unchanged": true,
+    "all_five_debug_retested": true,
+    "completed": 5,
+    "note": "All original source samples retained; old attempts preserved; all five full demos decoded and visually reviewed",
+    "physics_passed": 5,
+    "source_passed": 3,
+    "source_failed": 2,
+    "reviewed_results": "runs/r2-initialization-regression-20261101-01/reviewed-results.json"
+  },
+  "previous_debug_before_uniform_initialization": [
     {
       "id": "QqvZAUEOrAQ",
       "status": "passed",
@@ -80,109 +228,17 @@
       "demo": "runs/r2-debug-vTx_ldn6MCA-20261101-01/demo/comparison.mp4"
     }
   ],
-  "source_manifest": "configs/r2-suite-draft.json",
-  "frozen_suite": false,
-  "heldout_event_annotations": "source-only, saved before inference; still not frozen",
-  "cloud_cost_usd": 0,
-  "extraction_diagnostics": {
-    "scope": "Descriptive tracking/2D confidence, not calibrated accuracy or new gates",
-    "first_dance": {
-      "normalized_frames": 838,
-      "raw_detection_frames": 800,
-      "dominant_track_observed_frames": 398,
-      "box_filled_frames": 440,
-      "last_dominant_track_observation": 418,
-      "late_other_id_fragment_active_frames": 401,
-      "longest_held_box_seconds": 13.966666666666667,
-      "smpl24_keypoint_fraction_confidence_above_025": 0.9561953062848051,
-      "diagnostic": "runs/r2-preflight-youtube-QqvZAUEOrAQ-20261031-01/extraction-diagnostics-annotated-20261101.json"
-    },
-    "squat": {
-      "normalized_frames": 323,
-      "dominant_track_observed_frames": 323,
-      "box_filled_frames": 0,
-      "smpl24_keypoint_fraction_confidence_above_025": 1.0
-    },
-    "arm": {
-      "frames": 509,
-      "raw_detection_frames": 508,
-      "dominant_track_observed_frames": 508,
-      "filled_primary_frames": 1,
-      "pose_confidence_status": "passed",
-      "diagnostic": "/mnt/d/humanoid-demo-r2/runs/r2-debug-vTx_ldn6MCA-20261101-01/extraction-diagnostics-20261101-02.json"
-    },
-    "marching": {
-      "frames": 344,
-      "raw_detection_frames": 344,
-      "dominant_track_observed_frames": 344,
-      "filled_primary_frames": 0,
-      "pose_confidence_status": "passed",
-      "diagnostic": "/mnt/d/humanoid-demo-r2/runs/r2-debug-6uqztDO_7kQ-20261101-01/extraction-diagnostics-20261101-02.json"
-    },
-    "cupid": {
-      "frames": 1771,
-      "raw_detection_frames": 1723,
-      "dominant_track_observed_frames": 1723,
-      "filled_primary_frames": 48,
-      "pose_confidence_status": "passed",
-      "diagnostic": "/mnt/d/humanoid-demo-r2/runs/r2-debug-2e_7XBmpw14-20261101-01/extraction-diagnostics-20261101-03.json",
-      "mapped_smpl24_fraction_confidence_above_025": 0.9728966685488425
-    }
-  },
-  "active_debug_batch": {
-    "run": "runs/r2-initialization-regression-20261101-01",
-    "pid": 149562,
-    "mode": "cached extraction, new actual control/metrics/full demo",
-    "heldout_started": false
-  },
-  "execution_policy": {
-    "priority": "throughput",
-    "source": "configs/r2-execution-policy.json",
-    "software_temperature_gates": false,
-    "per_frame_idle_seconds": 0,
-    "checkpoint_frames": 32,
-    "on_local_reboot": "server handoff; no further local retry",
-    "acceptance_changed": false
-  },
-  "debug_passed": 3,
-  "debug_failed": 2,
-  "debug_awaiting_verification": 0,
-  "startup_diagnostic": {
-    "status": "passed, debug physical ablation only",
-    "scope": "Fixed reference prefix ablation only, not canonical suite acceptance",
-    "run": "runs/r2-startup-transition-diagnostic-20261101-01",
-    "task_pid": 136971,
-    "after_existing_queues": true,
-    "source_samples_unchanged": 574,
-    "prefix_frames_50hz": 100,
-    "geometry_check": "passed",
-    "physical_check": "passed,574original source samples,no fall",
-    "minimum_root_height_m": 0.6969662006766907
-  },
-  "tool_checks": {
-    "single_video_entry": "passed, cached read/no duplicate/reserved heldout guards",
-    "frozen_runtime": "passed, binary and upstream revision identity",
-    "failure_media_report": "passed, truthful partial actual/full comparison; successful gate unchanged"
-  },
-  "host_free_gib": {
-    "/mnt/c": 19.15255355834961,
-    "/mnt/d": 271.98745346069336
-  },
-  "updated_unix": 1793490577.736288,
-  "pending_final_audits": {},
-  "rendering_candidate": {
-    "status": "passed, three-state timing/geometry/visual check only",
-    "run": "runs/r2-render-throughput-check-20261101-01",
-    "median_speed_ratio": 2.023036039578067,
-    "enabled": false
-  },
-  "uniform_initialization_regression": {
+  "debug_physics_passed": 5,
+  "active_heldout_batch": {
+    "run": "runs/r2-heldout-orchestration-20261101-01",
+    "pid": 157620,
+    "process_start_ticks": 2109756,
+    "boot_id": "fa0233fb-701c-42d8-81da-0d007d2efe7d",
+    "active_source": "ROZy7jawHf4",
     "status": "awaiting_verification",
-    "run": "runs/r2-initialization-regression-20261101-01",
-    "pid": 149562,
-    "source_frames_unchanged": true,
-    "all_five_debug_retested": true,
+    "used_sources": 1,
     "completed": 0,
-    "note": "Old3/5 outcomes above retained; current draft points to five fresh cached-control trials, heldout unchanged"
+    "ledger": "/mnt/d/humanoid-demo-r2/runs/heldout-use-ledger.jsonl",
+    "manifest_sha256": "c3403dc4581ed61880e66f3c4cbbaa84961c1455621c0e5f170c10c0006378d1"
   }
 }

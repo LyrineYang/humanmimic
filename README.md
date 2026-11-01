@@ -217,7 +217,7 @@ python scripts/inspect-r2-sources.py /absolute/video.mp4 \
 
 ## R2 首片结果与当前边界
 
-2026-11-01已在本机4060完成第一条普通YouTube舞蹈完整链路：27.933秒/838帧、1397个50Hz源参考，真实物理无跌倒，6/6预标注事件方向和顺序通过。这是调试首片，5+5整批和R2尚未完成，保留测试推理未使用。
+2026-11-01已在本机4060完成第一条普通YouTube舞蹈完整链路：27.933秒/838帧、1397个50Hz源参考，真实物理无跌倒，6/6预标注事件方向和顺序通过。这是调试首片；当前统一初始化五片回归已结束、原5条保留开始推理，5+5整批和R2尚未完成。
 
 - [完整三路视频](runs/r2-preflight-youtube-QqvZAUEOrAQ-20261031-01/demo-native-aligned-02/comparison.mp4)、[首片报告](runs/r2-preflight-youtube-QqvZAUEOrAQ-20261031-01/REPORT.md)。本地大产物不会随Git克隆下载。
 - [可随Git同步的首片摘要](evidence/r2-preflight-20261101.json)、[实测资源/预算](evidence/r2-resource-estimate-20261101.json)。
@@ -225,7 +225,9 @@ python scripts/inspect-r2-sources.py /absolute/video.mp4 \
 
 物理录像单独恢复使用R1环境中的 `python scripts/run-r2-physical.py --reference <已完成提取目录>/sonic-reference.npz --output <已有物理目录> --render-only`。此入口只对已停止运行的实际状态按原生消费时钟重评/渲染，不启动控制器；已有录像必须先带哈希归档，不会自动覆盖。首片原始失败、旧派生录像及源码版本分别保留。默认单片/整批入口已集成原速姿态检查点，状态以PLAN为准。
 
-R2当前三条调试passed：首片舞蹈、59秒[Cupid完整对照](runs/r2-debug-2e_7XBmpw14-20261101-01/demo/comparison.mp4)（2952源参考/5事件全通过，见同目录REPORT.md）及[完整深蹲对照](runs/r2-debug-squat-20261101-01/demo-attempt-02/comparison.mp4)，7/7下蹲/站起事件通过。[当前进度及失败试次索引](evidence/r2-debug-progress-20261101.json)。5+5来源/事件在configs/r2-suite-draft.json，仍未冻结或使用保留推理。
+R2统一初始化五片回归：5/5物理稳定、3/5整片passed、2/5事件failed。当前完整新对照为[首片舞蹈](runs/r2-debug-init-QqvZAUEOrAQ-20261101-01/demo/comparison.mp4)（6/6事件）、[59秒Cupid](runs/r2-debug-init-2e_7XBmpw14-20261101-01/demo/comparison.mp4)（5/5）及[深蹲](runs/r2-debug-init-0EpP3pYUYTk-20261101-01/demo/comparison.mp4)（7/7）；[臂环绕失败](runs/r2-debug-init-vTx_ldn6MCA-20261101-01/demo/comparison.mp4)（3/4）和[踏步失败](runs/r2-debug-init-6uqztDO_7kQ-20261101-01/demo/comparison.mp4)（0/6）也完整保留，均未更改阈值。原提取缓存经哈希核验复用，实际物理/事件/五路媒体均重新执行，旧试次保留。
+
+[当前进度及失败试次索引](evidence/r2-debug-progress-20261101.json)。原5+5来源及事件已在[冻结清单](configs/r2-suite-frozen-20261101.json)固定，首条保留全新推理已经开始。所有5条保留均须出结果，至少4/5完整通过才满足R2工程门槛；实际使用记录在D盘runs/heldout-use-ledger.jsonl，不再把已推理的样本称作未见。
 
 批次入口使用完整源，跳过已审计终态，按视频和模型阶段串行：
 

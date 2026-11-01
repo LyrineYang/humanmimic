@@ -321,3 +321,12 @@ next_action: null
 - 缓存复演实现：r2_cache抽取原审计的8阶段/原片/源快照SHA检查，五旧摘要与旧审计逐项相同。run-r2-cached-suite为全部5debug建独立新run和来源指纹，明确不计新ML推理；旧源缓存和实际状态不覆盖。新run_video只允许debug显式复用，不允许替代heldout首次推理；最终summary保留previous_attempts。准备/协议/pixels/CPU工厂checks后启动PID149562/startticks1906410，同一boot；每源核对源缓存、代码、GPU/二进制/策略/评估一致。
 - configs/r2-suite-draft.json仅更新debug试次位置并保留previous_attempts，5个heldout、源SHA/事件与划分完全不变，保留尚0/5使用；首新Qq控制1397/1397、无跌倒、6/6事件passed，完整demo生成中。当前为五片统一回归awaiting_verification，不把旧3passed或消融passed算成R2结项。云费用0，100GiB计划不变。
 - 证据：runs/r2-initialization-regression-20261101-01/{expectation,protocol-clock-check,cache-verifier-check,task,runtime-identity,code-identity}.json与原/派生manifest；r2-detection-throughput-check-20261101-01/{comparison,production-factory-check}.json；r2-demo-read-check-20261101-01/{comparison,forward-comparison}.json；源码前后快照与所有原试次均保留。
+
+
+## 2026-11-01 统一初始化五片回归完成、冻结原保留集并启动
+
+- 预期和身份：生产五片回归沿用各自完整原提取缓存，SHA核对后重新实际执行控制/事件/完整demo；50+100帧初始化后原6311源参考全部保持。protocol-clock-check及cache-verifier-check通过，所有源保持同一代码、硬件、权重、二进制和原事件规则。
+- 完成结果：5/5物理稳定，Qq1397源/6事件、深蹲539源/7事件、Cupid2952源/5事件整片passed；臂环绕849源、3/4事件failed，踏步574源/0/6事件failed（新最低根高0.724520m、无跌倒）。所有5片均有完整源/2D/3D/实际机器人对照，5MP4全解码和首中尾视觉通过。不能把物理改善算成事件通过，旧跌倒/中断/成功全部保留。证据runs/r2-initialization-regression-20261101-01/reviewed-results.json及五条新run审计。
+- 冻结检查passed：configs/r2-suite-frozen-20261101.json，SHA c3403dc4581ed61880e66f3c4cbbaa84961c1455621c0e5f170c10c0006378d1，42代码/配置/事件文件、15资产身份以及原生二进制/GPU驱动/上游版本与补丁。固定原5debug+5heldout及至少4/5门槛，冻结前台账无任何保留使用。提交42463b0保存实现与清单。
+- 2026-11-01 08:17 Asia/Shanghai启动原5条保留队列runs/r2-heldout-orchestration-20261101-01，PID157620/startticks2109756/boot fa0233fb-701c-42d8-81da-0d007d2efe7d；首片ROZy7jawHf4于unix1793492321.5185695登记使用（source SHA a3f05efb4b5abb965708a865f87ce8974cac54df2e57c7f3bed6a0d30398e335），当前1/5使用、0/5完成。检测已完成、特征推理进行中，未新增本机重启，不因导入/观察等待重提任务。原速FP32/batch1/flip、32帧检查点，无人工冷却等待；新增云费用0。
+- 冻结后的false标志只描述冻结时刻；当前使用以D盘runs/heldout-use-ledger.jsonl的distinct input_sha256计数。保留开始后不更改冻结实现/标签/阈值，不按结果重选样本。整批仍awaiting_verification。
