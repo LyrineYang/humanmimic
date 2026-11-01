@@ -1,89 +1,102 @@
 # Getting started
 
-[Home](../README.md) / Reproduce
+[Home](../README.md) / Setup · [Usage](usage.md) · [Troubleshooting](troubleshooting.md)
 
-The execution paths below were accepted on the existing WSL2 workstation. A fresh-machine rebuild has **not** been accepted. Clone the source to inspect the project; prepare the pinned environments and required assets before running the simulation commands.
+Choose the path that matches what you want to do. You can explore the project without a GPU; running motion extraction and physical simulation needs the prepared runtime described below.
 
-## Inspect the repository
+| I want to… | Start here |
+| :--- | :--- |
+| See what the output looks like | [Demo and results](results.md) — no installation |
+| Understand or modify the pipeline | [Clone the source](#get-the-source), then [architecture](architecture.md) |
+| Run a video on a prepared machine | [Usage: video to simulation](usage.md#video-to-simulation) |
+| Set up another workstation or server | [Prepare a runtime](#prepare-a-runtime) |
+| Fix a setup or execution problem | [Troubleshooting](troubleshooting.md) |
+
+## Get the source
+
+You need Git, Git LFS and access to this private repository. Use your existing GitHub authentication; no credentials belong in the project files.
 
 ```bash
-GIT_LFS_SKIP_SMUDGE=1 git clone --recurse-submodules https://github.com/LyrineYang/humanoid-demo.git
-cd humanoid-demo
+GIT_LFS_SKIP_SMUDGE=1 git clone --recurse-submodules https://github.com/LyrineYang/humanmimic.git
+cd humanmimic
 git submodule status
 ```
 
-This private repository requires access through your existing GitHub authentication. The command skips automatic LFS downloads; it does not provide policy weights, licensed body-model assets, videos, environments or `runs/` evidence packages.
+This fetches source while skipping large LFS objects. It does **not** install the runtime or obtain pretrained weights, body models, full source videos or previous run packages.
 
-| Directory | Contents |
+| Location | What you will find |
 | :--- | :--- |
-| `scripts/` | Setup checks, extraction, execution, evaluation and recovery |
-| `configs/` | Environment snapshots, frozen source lists, annotations and evaluation rules |
-| `evidence/` | Small acceptance summaries and provenance hashes tracked in Git |
-| `docs/` | English project narrative, diagrams and reproducibility guidance |
-| `website/` | Local static project-site prototype; no build step or hosted deployment |
-| `vendor/` | Pinned upstream source submodules |
-| `runs/`, `.local/` | Ignored local artifacts and runtime dependencies |
+| `scripts/` | Extraction, execution, evaluation and recovery entry points |
+| `configs/` | Dependency snapshots, source lists, annotations and evaluation rules |
+| `evidence/` | Compact results and artifact hashes; readable without GPU packages |
+| `docs/` | Setup, usage, troubleshooting, architecture and research notes |
+| `vendor/` | Pinned SONIC and GEM-X submodules |
+| `website/` | Static presentation prototype |
 
-## Verified execution environment
+## Prepare a runtime
 
-The accepted runs used an **RTX 4060 Laptop (8188 MiB)** under **WSL2**, driver **617.42**. R1 uses Python 3.10, MuJoCo 3.3.7, TensorRT 10.13.3.9, CUDA development tools 12.8.93 and ONNX Runtime C++ 1.22.0. The simulation renderer used Mesa llvmpipe; GPU window rendering remains unverified.
+**Setup is currently manual.** The accepted baseline ran on an RTX 4060 Laptop (8188 MiB) under WSL2. There is no portable installer or accepted fresh-machine rebuild yet. The original workstation's new GPU execution is now paused for server migration; the execution policy checks boot identity before even a video `--check-only` call. See the [Linux migration handoff](../HANDOFF.md) for current target readiness.
 
-| Environment | Definitions | Local layout |
+Preparation has four parts. A Python package install alone does not supply the native controller or model assets.
+
+| Part | What must be ready | Source of truth |
 | :--- | :--- | :--- |
-| R1 controller/simulation | [Conda](../configs/environment-r1.yml), [constraints](../configs/constraints-r1.txt), [pip snapshot](../configs/requirements-r1.lock.txt) | `.local/miniforge3/envs/humanoid-r1` plus native dependencies |
-| R2 motion extraction | [Conda](../configs/environment-r2.yml), [constraints](../configs/constraints-r2.txt), [exact Conda packages](../configs/conda-r2-linux-64.explicit.txt), [pip snapshot](../configs/requirements-r2.lock.txt) | `/mnt/d/humanoid-demo-r2/envs/humanoid-r2` |
+| **1. Source** | Pinned SONIC/GEM-X checkouts, real G1 LFS assets and the existing simulation DDS patch | [.gitmodules](../.gitmodules), [UPSTREAM.json](../UPSTREAM.json), [patch](../patches/sonic-loopback-dds.patch) |
+| **2. Control runtime** | R1 Conda environment, compiled SONIC C++ controller, TensorRT/ORT C++ libraries and matched CycloneDDS/Unitree SDK | [R1 environment](../configs/environment-r1.yml), [native dependencies](../configs/r1-native-dependencies.json), [workstation build notes](operations.zh-CN.md) |
+| **3. Perception runtime** | Separate R2 Conda environment and pinned GEM-X/SOMA dependencies | [R2 environment](../configs/environment-r2.yml), [constraints](../configs/constraints-r2.txt), [package snapshot](../configs/requirements-r2.lock.txt) |
+| **4. Assets and storage** | Policy/observation assets, perception/body-model weights, data volume, verified ownership and target-specific resource configuration | [Asset inventory](../HANDOFF.md#52-git克隆不会带来的内容), [R1 asset hashes](../configs/r1-suite.json), [R2 resource configuration](../configs/r2-resources.json) |
 
-R1 also requires the compiled C++ controller, matched policy/observation assets, SDK-compatible CycloneDDS libraries and the simulation-only [loopback DDS configuration](../configs/r1-dds.xml). The [upstream patch](../patches/sonic-loopback-dds.patch) is preserved; replacing DDS packages arbitrarily can break communication. Environment snapshots are evidence of installed versions, not a portable installer.
+The baseline uses two environments because perception and control have different dependency requirements:
 
-R2's activation script supports `R2_STORAGE_ROOT`, but resource checks still assume the current WSL storage layout. A different Linux server requires an explicit portability and compatibility pass. Start with the [Linux / R4 handoff](../HANDOFF.md) for asset locations, the potential V100/TensorRT incompatibility and target-machine verification. Do not interpret the reported four V100 cards as a verified target for the current TensorRT build.
+| | Controller / simulation | Motion extraction |
+| :--- | :--- | :--- |
+| Activation | `source scripts/activate-r1.sh` | `source scripts/activate-r2.sh` |
+| Baseline Python | 3.10 | 3.12 |
+| Main dependencies | MuJoCo 3.3.7, TensorRT 10.13.3.9, ORT C++ 1.22.0 | GEM-X, PyTorch 2.10.0+cu128, SOMA 0.3.3 |
+| Baseline prefix | `.local/miniforge3/envs/humanoid-r1` | `/mnt/d/humanoid-demo-r2/envs/humanoid-r2` |
 
-## R1 on the prepared workstation
+[R1 pip snapshot](../configs/requirements-r1.lock.txt) · [R2 exact Conda packages](../configs/conda-r2-linux-64.explicit.txt)
 
-From the repository root, use a new output directory for every new attempt:
+Keep the environments separate. The snapshots describe the accepted installation; they are not a complete cross-platform installation recipe. The current R2 resource checks reference `/mnt/c` and `/mnt/d`, storage ownership and the authorized boot identity. Setting `R2_STORAGE_ROOT` by itself is not a server port. Adapt and validate those assumptions through the migration process rather than creating empty marker files or disabling checks.
+
+### Verify the prepared target
+
+After its environment and execution authorization are ready, activate R1 and run the existing environment check into a new directory:
 
 ```bash
 source scripts/activate-r1.sh
 python scripts/check-r1-environment.py --output runs/r1-environment-NEW
-python scripts/run-r1-reproduction.py --output runs/r1-reproduction-NEW
-python scripts/summarize-r1.py --run runs/r1-reproduction-NEW
 ```
 
-These commands check the environment and run one reference-motion reproduction. They do not repeat the full five-motion, two-trial acceptance suite. The fixed suite is defined in [r1-suite.json](../configs/r1-suite.json); preserve its inputs and evaluation rules when rerunning it. Read [PLAN.md](../PLAN.md) and inspect existing task/log state before starting work.
+This check performs CUDA computation, model loading and a short basic physics/rendering check. It is **not** a read-only inventory command and does not certify SONIC tracking. Do not use it to restart GPU work on the paused source workstation. The subsequent [reference-motion recipe](usage.md#reference-motion-to-simulation) exercises the controller; only then proceed to a new video.
 
-## R2 on the prepared workstation
+### Resource expectations
 
-Choose a single-person, fixed-camera, full-body video with visible feet and a level floor. The current pipeline accepts complete short sources up to its configured 60-second limit; it does not silently trim longer videos. Predeclare source-based motion events before evaluation. See [an example annotation](../configs/r2-debug-events-QqvZAUEOrAQ.json) for the source hash and `debug` role contract.
+- The verified workflow is **offline** and uses perception stages sequentially before control. An 8 GB GPU result is not a promise for arbitrary hardware, video length or concurrent camera operation.
+- The existing data-volume plan reserves approximately **100 GiB** for preparation and experiments, with configured free-space floors of **10 GiB on C** and **20 GiB on D**. A server needs its own storage mapping.
+- Full processing is much slower than the source clip. The accepted five-video held-out queue took about **158 minutes** on the original setup; this is context, not a per-video timeout or latency guarantee.
+- Current videos use software-rendered actual-state playback. GPU window rendering and live-camera operation remain unverified.
 
-```bash
-source scripts/activate-r2.sh
-python scripts/run-r2-video.py \
-  --input /absolute/path/to/input.mp4 \
-  --run-id video-demo-NEW \
-  --source-url 'https://example.com/original-source' \
-  --events /absolute/path/to/source-events.json \
-  --check-only
-```
+## Make your first run
 
-Inspect the scheduling/input report first; remove `--check-only` to execute. The events file must match the input's SHA256 and declare the `debug` role. Omitting annotations permits exploration but cannot satisfy full acceptance. Reserved held-out sources must use the frozen suite entry point, and all five original held-out sources are already marked used.
+Use a short, single-person, fixed-camera video with the full body and feet visible on a level floor. The current limit is 60 seconds; longer sources are rejected rather than silently cut.
 
-The pipeline writes complete stage caches, references, physical states, event/body metrics and a synchronized comparison under `$R2_STORAGE_ROOT/runs/video-demo-NEW/`. Existing terminal results are preserved. Failures remain failures even when the comparison MP4 renders successfully.
+Follow [Video to simulation](usage.md#video-to-simulation) for the command, preflight fields and output directory. Start without event annotations for exploration; add predeclared motion events before a measured evaluation. All five original held-out videos are already used and reserved for their suite workflow.
 
-The main command uses the matched R1 environment for physical execution. Do not replace controller weights or move to a different machine and reuse an earlier acceptance label. [Results and local artifact index](results.md)
+## Assets and attribution
 
-## Preview the future project site
+SONIC and GEM-X retain their upstream licenses. Obtain pretrained policy, perception and SOMA/SMPL assets from authorized sources and keep their terms. Model files and credentials do not belong in Git. Source videos belong to their creators; full originals and run recordings are not bundled as a dataset.
 
-No npm installation or GPU is required. From the repository root:
+This private repository does not yet have a project-wide open-source license. Integration code and small previews do not imply permission to redistribute third-party assets.
+
+## Optional: preview the project website
+
+From the repository root, without GPU packages:
 
 ```bash
 python3 -m http.server 8000 --bind 127.0.0.1
 ```
 
-Open `http://127.0.0.1:8000/website/` on that same machine. A remote host needs an explicit tunnel or supported port forwarding; another computer's loopback is not the preview. The prototype reads only repository assets and uses no analytics, remote fonts or application backend. [Design and publication handoff](website.md)
+Open `http://127.0.0.1:8000/website/` on the same machine. Remote access needs supported forwarding. This is a local static prototype, not the execution UI. [Website design and publication notes](website.md)
 
-## Assets and attribution
-
-SONIC and GEM-X remain pinned submodules with their upstream licenses. Obtain pretrained policy, perception and SOMA/SMPL assets from the corresponding authorized sources and retain their terms; do not commit model files or credentials. Source videos belong to their creators and are not bundled as a dataset. The small existing preview links to its original source in [results](results.md).
-
-No repository-wide license has been selected for this private research project. Do not infer permission to redistribute third-party assets from the presence of integration code or a screenshot. Broader public release needs an explicit asset and licensing decision.
-
-Detailed historical workstation notes remain available in [operations.zh-CN.md](operations.zh-CN.md). They are an archived copy of the earlier README; the current plan and English guides take precedence where historical status differs.
+The [historical operations guide](operations.zh-CN.md) preserves earlier workstation commands. Current readiness and migration instructions take precedence over its historical status.

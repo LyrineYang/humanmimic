@@ -1,0 +1,45 @@
+{
+  "date": "2026-11-01",
+  "scope": "Usability-first English GitHub homepage, retaining insights and research depth",
+  "local_documentation_status": "passed",
+  "publication_status": "awaiting_verification",
+  "repository": "LyrineYang/humanmimic",
+  "repository_id": 1436901913,
+  "visibility": "private",
+  "runtime_changes": false,
+  "new_simulation_runs": 0,
+  "cloud_cost_usd": 0,
+  "static_checks": {
+    "status": "passed",
+    "local_links_checked": 136,
+    "section_links_checked": 18,
+    "shell_blocks_syntax_checked": 10,
+    "cli_flags_checked_against_source": 13,
+    "protected_files_unchanged": 80,
+    "submodule_patch_unchanged": true,
+    "errors": []
+  },
+  "browser_checks": {
+    "status": "passed",
+    "renderer": "Local marked + approximate GitHub CSS; not live GitHub rendering",
+    "browser": "156.0.8078.74",
+    "pages": 5,
+    "widths": [
+      1100,
+      390
+    ],
+    "navigation": "README → Usage → Troubleshooting passed",
+    "images_loaded": true,
+    "no_page_overflow": true
+  },
+  "runtime_acceptance": {
+    "source_documentation": "passed",
+    "new_headless_control": "not_run",
+    "new_recorded_state_playback": "not_run",
+    "server_migration": "awaiting_verification",
+    "live_camera": "needs_input",
+    "scene_adaptation": "not_implemented"
+  },
+  "evidence_directory": "runs/homepage-usability-20261101-01/",
+  "preserved_handoff_commit": "96179bf65c7b42f85816b2cca64924cb8f7b9941"
+}

@@ -394,3 +394,12 @@ next_action: null
 - 只读观察：当前无项目模型/控制任务，无活跃Goal；WSL boot da152f79-87d4-4995-876b-7bb6b59456c8不同于R2验收boot，不能据此确认Windows重启原因，按旧策略不恢复本机推理。已安装Torch编译元数据R1不含sm70、R2含sm70；没有启动CUDA内核/模型/物理。官方TensorRT文档核实Volta支持止于10.4，现用10.13.3不能直接用V100；新server版本需独立验证，未改现有环境/驱动。
 - 本地文档/一致性检查passed：74个本地文档链接无缺失，十条来源/事件/状态逐项匹配已接受JSON；75个现有scripts/configs/evidence哈希未改，原vendor DDS差异逐字节保留，原R2冻结SHA不变。交接摘要evidence/linux-handoff-20261101.json，原始inventory/checks/references在run目录。
 - 分项：本轮仅源码/文档和只读元数据准备passed；服务器安装、无界面控制和回放均awaiting_verification，现场相机needs_input，R4未实现。没有新Goal、服务器连接、计费资源或新增云费用；未复制凭据/账号配置/受限资产入Git。
+
+
+## 2026-11-01 GitHub主页可用性与研究深度平衡
+
+- 用户将展示定位调整为优秀开源项目的可用形态与insight/探索并存；先记录`runs/homepage-usability-20261101-01/expectation.json`，从包含Linux交接的96179bf继续，保留原R1–R4路线、现有人工补丁与本机暂停推理决定。
+- 文档实现：README前置用途、功能、真实示例、三步上手与输出目录；区分浏览结果、新机器准备、已有环境运行。保留两条核心insight、pipeline、完整结果和研究设计入口。补充英文usage、troubleshooting、CONTRIBUTING，缩短SVG页首；内部计划/交接折叠为深入入口。未将手动依赖/资产准备写成一键安装。
+- 本地检查passed：136个本地链接、18个章节锚点、10段shell仅语法检查、13个命令参数对照源码AST；SVG解析、git diff检查通过。Chrome本地marked近似GitHub样式，5页在1100/390宽度图片完整、无整页横向溢出，README上手锚点/折叠及README→Usage→Troubleshooting跳转passed；实际查看桌面/手机截图。不是GitHub线上视觉验收，未调用Markdown渲染API。首轮Windows Node的UNC上溯包配置失败，在忽略的验证目录补局部package.json后复验passed。
+- 保全核验passed：80个既有scripts/configs/evidence/website文件SHA与原DDS补丁逐字节不变；新记录未更改原实验证据，网站原型保留。仅文档与静态展示检查，无新模型/控制/录像回放/相机运行，无新Goal或云费用；服务器验收仍awaiting_verification，R3 needs_input、R4未实现。
+- 连接器读取稳定仓库ID1436901913确认原私有仓库已更名`LyrineYang/humanmimic`，不是创建新仓库；Issues已启用，克隆与反馈链接使用当前地址。私有main发布awaiting_verification；本地摘要`evidence/homepage-usability-20261101.json`，原始检查与截图在run目录。

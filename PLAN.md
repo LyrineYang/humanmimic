@@ -65,6 +65,8 @@
 
 用户要求英文GitHub主页、insights/研究思路、简单pipeline图及后续网页准备，并明确选择直接完善现有私有仓库，不新建仓库或公开资产。展示名采用HumanMimic，仓库路径保持不变。本轮仅文档、矢量素材和本地静态网页原型；R1–R4验收、数据划分、预算和运行代码不变。预期与检查证据保存于`runs/project-homepage-20261101/`，英文文档/本地视觉与功能检查passed（1440/768/390/320宽度、筛选与无JS退化），完整10段视频哈希重新核对；GitHub默认分支发布passed，连接器回读README与17份文档/网页素材共18个blob逐一匹配，仓库仍private；独立网站未部署。
 
+2026-11-01 用户进一步调整主页定位：采用“开发者可用性 + insight/探索”的中间形态，功能/上手/输出/帮助前置，研究内容保留为深入阅读。README、准备指南、usage、troubleshooting和贡献入口已重排；本轮本地文档验收passed（136个本地链接/18个锚点、10段shell语法、13个实际CLI参数、5页桌面/手机预览），私有main更新awaiting_verification，证据`runs/homepage-usability-20261101-01/`。不改变研究验收、迁移决策、代码或资源授权。读取仓库稳定ID确认原仓库已更名为`LyrineYang/humanmimic`（ID1436901913，仍private），本轮克隆/反馈入口同步新地址，未创建或公开仓库。
+
 ## 当前状态
 
 更新于 2026-11-01，Asia/Shanghai。

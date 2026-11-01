@@ -93,3 +93,8 @@ Goal 属于执行它的对话。它不是 Markdown 文件的后台进程，也�
 ## 2026-11-01 项目主页交付范围
 
 用户选择完善现有私有GitHub仓库。英文README、insights、研究设计、架构/结果/复跑文档、SVG pipeline及本地静态网站原型归入本轮；不部署独立网站。PLAN与EXPERIMENTS继续记录原研究进度。R1/R2已通过原工程门槛，R3现场相机needs_input，R4未实现；不得把展示准备当作实验验收。当前聊天未激活新的Goal，既有R2 Goal内容保留为历史复跑依据。
+
+
+## 2026-11-01 GitHub主页可用性修订
+
+用户偏好优秀开源项目的使用体验与研究insight并存。主页先说明功能/输入/上手/输出/帮助，再给方法、insights和研究路线；保持英文、已有私有仓库和诚实的developer preview定位，不将未验证的跨机器安装写成一键可用。新增usage/troubleshooting/贡献指南，原Linux交接及暂停本机GPU重试决定保留。本轮只做文档与静态呈现验证，没有新的Goal或仿真授权变更。
