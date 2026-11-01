@@ -3,7 +3,7 @@
   "scope": "R2 batch progress; not suite acceptance",
   "debug_completed": 5,
   "debug_required": 5,
-  "heldout_used": 3,
+  "heldout_used": 4,
   "heldout_required": 5,
   "heldout_required_passes": 4,
   "completed_debug": [
@@ -132,7 +132,7 @@
     "/mnt/c": 19.12005615234375,
     "/mnt/d": 271.6494483947754
   },
-  "updated_unix": 1793495141.0571315,
+  "updated_unix": 1793497393.5123968,
   "pending_final_audits": {},
   "rendering_candidate": {
     "status": "passed, three-state timing/geometry/visual check only",
@@ -234,15 +234,15 @@
     "pid": 157620,
     "process_start_ticks": 2109756,
     "boot_id": "fa0233fb-701c-42d8-81da-0d007d2efe7d",
-    "active_source": "gRexOgq8h-8",
+    "active_source": "dIfUVvoVXRM",
     "status": "awaiting_verification",
-    "used_sources": 3,
-    "completed": 2,
+    "used_sources": 4,
+    "completed": 3,
     "ledger": "/mnt/d/humanoid-demo-r2/runs/heldout-use-ledger.jsonl",
     "manifest_sha256": "c3403dc4581ed61880e66f3c4cbbaa84961c1455621c0e5f170c10c0006378d1"
   },
-  "heldout_completed": 2,
-  "heldout_passed": 2,
+  "heldout_completed": 3,
+  "heldout_passed": 3,
   "heldout_failed": 0,
   "completed_heldout": [
     {
@@ -268,6 +268,18 @@
       "audit": "runs/r2-heldout-U7Nrwyu6Uqo-20261101-01/run-audit.json",
       "demo": "runs/r2-heldout-U7Nrwyu6Uqo-20261101-01/demo/comparison.mp4",
       "actual_state_sha256": "893ec1159a8d6445c54756cc548ab6fa441da4c607277c86d172509460f475a5"
+    },
+    {
+      "id": "gRexOgq8h-8",
+      "status": "passed",
+      "physical": "passed",
+      "events": "6/6",
+      "control_frames": 1557,
+      "minimum_root_height_m": 0.6506392561854754,
+      "demo_frames": 779,
+      "audit": "runs/r2-heldout-gRexOgq8h-8-20261101-01/run-audit.json",
+      "demo": "runs/r2-heldout-gRexOgq8h-8-20261101-01/demo/comparison.mp4",
+      "actual_state_sha256": "765f92587ec0d505ad2358cd28f30d6fc68f1b5c6510e0f9f8b627bc9213d7fd"
     }
   ]
 }

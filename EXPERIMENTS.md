@@ -346,3 +346,11 @@ next_action: null
 - 完整187帧/25fps对照及5MP4全帧解码passed；人工查看25/93/174帧，原片、2D、3D与真实机器人均清晰、时间戳一致；机器人仍有可见相位/幅度差，未在视频中掩盖。visual-audit绑定comparison SHA0d97b3f159b9327d1b2f373167cabd0e919d66159c538d96f09e69561fa9c971；canonical run-audit.json passed并绑定原冻结清单SHA。
 - 原速姿态224/224与7检查点全部完成；检测172.13s、特征207.68s、姿态wrapper235.93s、相机37.79s、运动41.72s、后处理84.62s、转换83.63s，范围见各原始profile。没有人为冷却或本机重启；云费用0。证据runs/r2-heldout-U7Nrwyu6Uqo-20261101-01/{REPORT.md,run-audit.json,visual-audit.json,demo/comparison.mp4}。
 - 当前3/5保留已用、2/5完成并passed；第三片gRexOgq8h-8全新推理已自动启动，原5来源/事件/≥4/5门槛不变。后三条舞蹈同创作者场景，属于相关来源的工程检查，不据此声称独立广泛泛化；全部5片仍须出结果。整批awaiting_verification。
+
+
+## 2026-11-01 第三条冻结保留K-pop完整通过
+
+- gRexOgq8h-8完整31.133s/934源帧，8阶段提取/转换passed；1557/1557源参考实际完整执行，无跌倒，最低根高0.6506392562m。原生时钟P95abs35.2微秒、全源身份核对通过，无拟合时间平移。6/6预标注下蹲/举臂等舞蹈事件方向和顺序passed；身体误差仅相对提取参考，单目结果不是人体真值。
+- 对照779帧/25fps，所有实际机器人帧可用，5MP4完整解码passed。人工查看25/389/766帧：完整原片、2D覆盖、估计3D骨架与真实机器人均清晰，脚部/抬手可见，源时钟一致；实际仍有幅度/相位差，未掩盖或拟合移位。visual-audit绑定comparison SHA9dbe15c44f885c207dbc9dde61644e42e76bdc2a2eebd3d668b45578a2b363af，canonical run-audit.json正式passed并绑定原冻结清单SHA。
+- 特征阶段曾实测GPU80°C/90%利用率继续计算；没有旧软件温度门槛/逐帧休息，没有新增重启。原生FP32/batch1/flip与32帧检查点不变。resource-review.json从原profile和checkpoint直接提取耗时/显存/检查点温度范围；温度范围只针对完成块的采样，不冒称全程峰值。新增云费用0。
+- 证据runs/r2-heldout-gRexOgq8h-8-20261101-01/{REPORT.md,run-audit.json,visual-audit.json,demo/comparison.mp4,resource-review.json}；当前4/5保留已用、3/5完成并passed，第四条dIfUVvoVXRM已经开始。后三舞蹈来源相关，保留工程门槛及限制说明；须全部5片出结果，当前整批仍awaiting_verification。
