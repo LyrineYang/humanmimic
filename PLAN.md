@@ -69,6 +69,10 @@
 
 更新于 2026-11-01，Asia/Shanghai。
 
+- 新增Linux迁移/R4交接：用户准备迁移既有Linux服务器，已整理[HANDOFF.md](HANDOFF.md)，包含历史决定、两套conda/SDK/资产、原R1/R2验收、已使用保留集、路径/硬件适配和原R4的10开发+至少20测试/四方法/至少3个改进布局门槛。本轮只做文档与只读元数据检查，不启动新Goal、服务器或R4实现；文档验收见runs/linux-handoff-20261101-01/。
+- 交接时无活跃模型/控制任务；当前WSL boot da152f79-87d4-4995-876b-7bb6b59456c8已不同于原R2验收boot，不据此断定Windows重启原因。遵守原策略，不恢复本机GPU重试；原4060验收证据保留。服务器仍awaiting_verification：若目标为文档提到的V100，TensorRT10.13.3不支持Volta，R1当前Torch构建不含sm70，需独立兼容性适配与目标硬件复验，不能复制环境即宣称通过。
+
+
 - R2最终工程验收passed：runs/r2-suite-acceptance-20261101-01/{REPORT.md,suite-summary.json,artifact-review.json,source-results.csv,completion-review.json}，可随Git同步摘要evidence/r2-acceptance-20261101.json。调试5/5完成（3passed/2failed），保留5/5完成（4passed/1failed）；原≥4/5门槛/来源/事件未改，全部50媒体全解码和最终视觉通过。
 - 最后保留GP4YqDYMmcI：818帧→1364/1364完整实际消费、无跌倒、最低根高0.725451m，但wide-crouch事件预定left-knee阈值0.7rad，提取max0.481388、机器人0.414427，5/6事件、整片failed；682帧完整对照和最终媒体补审通过。该失败已在提取参考中出现，单目侧别/深度/标注原因未独立确认，不据此更改阈值或标签。原canonical失败初审和最终视觉补审均保留。
 - 收尾身份/资源passed：42代码/配置/事件、15资产、原5调试审计、控制器/GPU/驱动/上游补丁一致；当前10次物理稳定，共12095原源参考（保留5784）。D实占19.884GiB，C余19.09GiB、D余271.38GiB，云费用0；模型/控制进程已结束、boot未变。源码/环境、无界面实际控制和真实状态离线回放passed；GPU图形窗口awaiting_verification、现场相机needs_input。此结果仅完成R2。
@@ -181,6 +185,8 @@
 2026-10-26 历史环境检查期间曾因网络问题等待、辅助脚本写入审批超时；随后同一远端回合改用直接命令，取得所需输出。初次受限调用的 CIM/WSL 状态查询报权限错误，后续调用成功；最后 Linux 合并命令返回 128 来自 Git 目录检查失败，不能误报为 WSL 或 GPU 失败。当时仿真部署与运行仍为 `awaiting_verification`。
 
 ## 下一步
+
+当前新增优先事项是Linux服务器预检和迁移，接续入口为HANDOFF.md；以下本机R1/R2运行路径用于迁移参考，不据旧PID/boot恢复本机推理。R4沿用原路线，可在目标服务器基线成立后独立于R3相机开展。
 
 用户要求的R1固定五动作双次验收已完成并通过，原始证据与前序失败/中断记录全部保留。整个R1–R4项目尚未完成，云计费授权不变。
 

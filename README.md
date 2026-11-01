@@ -91,6 +91,7 @@ cd humanoid-demo
 | Read | Purpose |
 | :--- | :--- |
 | [Getting started](docs/getting-started.md) | Verified environment, assets and execution entry points |
+| [Linux / R4 handoff (Chinese)](HANDOFF.md) | Context, assets, server compatibility, migration checks and the R4 execution plan |
 | [Architecture](docs/architecture.md) | Data flow, controller feedback and source map |
 | [Results](docs/results.md) | Complete R1/R2 outcomes, failures and local media index |
 | [Insights](docs/insights.md) | Observations, interpretations and their limits |

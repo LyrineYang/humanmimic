@@ -35,7 +35,7 @@ The accepted runs used an **RTX 4060 Laptop (8188 MiB)** under **WSL2**, driver 
 
 R1 also requires the compiled C++ controller, matched policy/observation assets, SDK-compatible CycloneDDS libraries and the simulation-only [loopback DDS configuration](../configs/r1-dds.xml). The [upstream patch](../patches/sonic-loopback-dds.patch) is preserved; replacing DDS packages arbitrarily can break communication. Environment snapshots are evidence of installed versions, not a portable installer.
 
-R2's activation script supports `R2_STORAGE_ROOT`, but resource checks still assume the current WSL storage layout. A different Linux server requires an explicit portability and compatibility pass. Do not interpret the reported four V100 cards as a verified target for the current TensorRT build.
+R2's activation script supports `R2_STORAGE_ROOT`, but resource checks still assume the current WSL storage layout. A different Linux server requires an explicit portability and compatibility pass. Start with the [Linux / R4 handoff](../HANDOFF.md) for asset locations, the potential V100/TensorRT incompatibility and target-machine verification. Do not interpret the reported four V100 cards as a verified target for the current TensorRT build.
 
 ## R1 on the prepared workstation
 

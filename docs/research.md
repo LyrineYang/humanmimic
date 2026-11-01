@@ -62,3 +62,6 @@ R1 provides a verified physical execution path; R2 adds full video provenance an
 The reported availability of four V100 32 GB cards is future capacity, not an established execution result. Their host, software compatibility and storage have not been accepted. The verified results here remain from the 4060. No distributed run, new model training or paid deployment is implied by this design.
 
 Contact-rich tasks, scene reconstruction from video, controller distillation, world-model acceleration and full foundation-policy training are deferred. A related-work review must precede any novelty claim; this document describes a testable project direction rather than a publication claim.
+
+
+For implementation milestones, existing assets and Linux migration prerequisites, see the [operational handoff (Chinese)](../HANDOFF.md). The server environment and R4 implementation remain unverified; these notes do not change the acceptance criteria above.

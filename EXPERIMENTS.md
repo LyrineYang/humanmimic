@@ -385,3 +385,12 @@ next_action: null
 - GitHub Markdown渲染API操作被自动审批拒绝（额外非公开内容传输），未绕过；改用本地marked和Chrome渲染，明确其不是GitHub真实CSS。检查/截图在runs/project-homepage-20261101/，小型摘要evidence/presentation-20261101.json。当前本地准备passed、GitHub默认分支发布awaiting_verification，云费用0。
 
 - GitHub交付核验passed：内容提交`ff1c621ab4ea805b574dd0d81e38b2603bcce886`已快进默认main（原710f10e），包含已验收R2历史及本轮展示；原codex/r2-video-pipeline保留。连接器回读默认README及全体docs/website共18个blob与本地逐一一致，visibility仍private；About英文简介和5个主题已更新。独立网站未部署；本轮无新增实验/云费用。
+
+
+## 2026-11-01 Linux服务器迁移与R4交接文档
+
+- 用户要求介绍R4并整理可交接的上下文，已先读PLAN现状/验收与已有英文研究设计，不另起R4路线；可检验预期、源HEAD/分支、旧补丁与受保护文件SHA在runs/linux-handoff-20261101-01/。源HEAD9808b03，交接分支codex/linux-handoff。
+- 文档准备passed：根HANDOFF.md覆盖用户偏好/授权、R1/R2结果与全部失败、已使用测试台账、两套conda/SDK和非Git资产、WSL绝对路径/owner/boot/硬件冻结适配、V100兼容风险、迁移回归与原R4里程碑/10开发+至少20冻结测试/四方法/至少3个改进布局/完整录像。README、准备指南、研究文档、PLAN及启动提示加入入口，保持现有英文展示。
+- 只读观察：当前无项目模型/控制任务，无活跃Goal；WSL boot da152f79-87d4-4995-876b-7bb6b59456c8不同于R2验收boot，不能据此确认Windows重启原因，按旧策略不恢复本机推理。已安装Torch编译元数据R1不含sm70、R2含sm70；没有启动CUDA内核/模型/物理。官方TensorRT文档核实Volta支持止于10.4，现用10.13.3不能直接用V100；新server版本需独立验证，未改现有环境/驱动。
+- 本地文档/一致性检查passed：74个本地文档链接无缺失，十条来源/事件/状态逐项匹配已接受JSON；75个现有scripts/configs/evidence哈希未改，原vendor DDS差异逐字节保留，原R2冻结SHA不变。交接摘要evidence/linux-handoff-20261101.json，原始inventory/checks/references在run目录。
+- 分项：本轮仅源码/文档和只读元数据准备passed；服务器安装、无界面控制和回放均awaiting_verification，现场相机needs_input，R4未实现。没有新Goal、服务器连接、计费资源或新增云费用；未复制凭据/账号配置/受限资产入Git。

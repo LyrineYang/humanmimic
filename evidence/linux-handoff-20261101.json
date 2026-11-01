@@ -1,0 +1,52 @@
+{
+  "status": "passed",
+  "scope": "Documentation handoff only; target Linux/V100 migration and R4 remain unverified",
+  "reviewed_at": "2026-11-01T17:37:24.015115+08:00",
+  "handoff": "HANDOFF.md",
+  "handoff_sha256": "283290a4c326a76255c6b6c12e44c63f8ec5aabe129f2dff69e438a4f72acf6c",
+  "source_snapshot": {
+    "created_at": "2026-11-01T17:27:58.616824+08:00",
+    "source_head": "9808b0393a778eae4b7308abd11224359acf8abc",
+    "source_branch": "codex/project-homepage",
+    "git_status": "m vendor/GR00T-WholeBodyControl",
+    "submodules": "20555befe2fbbe5b2015e1fff7ff214dc18ea9d6 vendor/GEM-X (heads/main)\n 45c03facbf848e0c743091b7d9c17952096ff908 vendor/GR00T-WholeBodyControl (45c03fa)",
+    "old_accepted_boot": "fa0233fb-701c-42d8-81da-0d007d2efe7d",
+    "current_wsl_boot": "da152f79-87d4-4995-876b-7bb6b59456c8",
+    "server_connected": false,
+    "runtime_tasks_active": false,
+    "goal_active": false,
+    "local_allocated_bytes": 16704856064,
+    "root_models_allocated_bytes": 955768832,
+    "r2_allocated_bytes_historical_final_acceptance": 21350461440,
+    "r1_compiled_arch_flags": "sm_75 sm_80 sm_86 sm_90 sm_100 sm_120 compute_120",
+    "r2_compiled_arch_flags": "sm_70 sm_75 sm_80 sm_86 sm_90 sm_100 sm_120",
+    "no_gpu_kernel_or_model_started": true
+  },
+  "checks": {
+    "status": "passed",
+    "scope": "Handoff documentation and read-only source/library metadata only; not server/runtime acceptance",
+    "protected_file_hashes_unchanged": 75,
+    "vendor_diff_preserved": true,
+    "local_links_checked": 74,
+    "missing_links": [],
+    "r2_frozen_manifest_sha256": "c3403dc4581ed61880e66f3c4cbbaa84961c1455621c0e5f170c10c0006378d1",
+    "ten_source_rows_match_acceptance": true,
+    "r4_acceptance_changed": false,
+    "server_runtime_status": "awaiting_verification",
+    "r4_implementation_status": "not_implemented",
+    "headless_server_status": "awaiting_verification",
+    "live_camera_status": "needs_input",
+    "model_gpu_or_physics_run_started": false,
+    "cloud_cost_usd": 0
+  },
+  "official_references": {
+    "checked_date": "2026-11-01",
+    "tensorrt_volta": "https://docs.nvidia.com/deeplearning/tensorrt/10.x.x/getting-started/release-notes-10/10.4.0.html",
+    "tensorrt_engine_compatibility": "https://docs.nvidia.com/deeplearning/tensorrt/10.x.x/getting-started/support-matrix.html",
+    "conda_explicit": "https://docs.conda.io/projects/conda/en/stable/user-guide/tasks/manage-environments.html",
+    "pytorch_volta_future_upgrade": "https://dev-discuss.pytorch.org/t/dropping-volta-support-from-cuda-12-8-binaries-for-release-2-11/3290"
+  },
+  "no_new_goal_or_server_job": true,
+  "existing_gpu_pipeline_not_resumed": true,
+  "large_assets_or_credentials_committed": false
+}
