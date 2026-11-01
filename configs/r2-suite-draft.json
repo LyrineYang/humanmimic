@@ -83,7 +83,7 @@
       "source_content_trimmed": false,
       "events_path": "configs/r2-debug-events-vTx_ldn6MCA.json",
       "run_id": "r2-debug-init-vTx_ldn6MCA-20261101-01",
-      "audit_json": "/mnt/d/humanoid-demo-r2/runs/r2-debug-init-vTx_ldn6MCA-20261101-01/run-audit.json",
+      "audit_json": "/mnt/d/humanoid-demo-r2/runs/r2-debug-init-vTx_ldn6MCA-20261101-01/run-audit-visual-20261101.json",
       "previous_attempts": [
         {
           "run_id": "r2-debug-vTx_ldn6MCA-20261101-01",
@@ -110,7 +110,7 @@
       "source_content_trimmed": false,
       "events_path": "configs/r2-debug-events-6uqztDO_7kQ.json",
       "run_id": "r2-debug-init-6uqztDO_7kQ-20261101-01",
-      "audit_json": "/mnt/d/humanoid-demo-r2/runs/r2-debug-init-6uqztDO_7kQ-20261101-01/run-audit.json",
+      "audit_json": "/mnt/d/humanoid-demo-r2/runs/r2-debug-init-6uqztDO_7kQ-20261101-01/run-audit-visual-20261101.json",
       "previous_attempts": [
         {
           "run_id": "r2-debug-6uqztDO_7kQ-20261101-01",
