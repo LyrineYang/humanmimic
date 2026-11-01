@@ -1,0 +1,117 @@
+{
+  "date": "2026-11-01",
+  "scope": "Usability and insights balanced in a local English project website preview",
+  "status": "passed",
+  "hosted_deployment": "not_requested",
+  "website_changes_pushed": false,
+  "new_simulation_runs": 0,
+  "cloud_cost_usd": 0,
+  "content_checks": {
+    "status": "passed",
+    "local_assets_and_links": 7,
+    "internal_anchors": 11,
+    "github_document_links": 16,
+    "shell_commands_syntax_checked": 2,
+    "cli_flags_match_source": true,
+    "result_rows_match_acceptance": 10,
+    "protected_files_unchanged": 77,
+    "vendor_patch_unchanged": true,
+    "demo_frame_unchanged": true,
+    "unique_html_ids": 27,
+    "visitor_order_verified": true
+  },
+  "browser_checks": {
+    "status": "passed",
+    "browser": "156.0.8078.74",
+    "results": [
+      {
+        "width": 1440,
+        "status": "passed",
+        "no_page_overflow": true,
+        "images": "decoded",
+        "tabs": "click, arrows, Home/End passed",
+        "clipboard": "both commands match",
+        "results": "all/heldout/debug counts passed",
+        "keyboard": "skip link and tabs passed",
+        "console_errors": [],
+        "failed_requests": []
+      },
+      {
+        "width": 1024,
+        "status": "passed",
+        "no_page_overflow": true,
+        "images": "decoded",
+        "tabs": "click, arrows, Home/End passed",
+        "clipboard": "both commands match",
+        "results": "all/heldout/debug counts passed",
+        "keyboard": "skip link and tabs passed",
+        "console_errors": [],
+        "failed_requests": []
+      },
+      {
+        "width": 768,
+        "status": "passed",
+        "no_page_overflow": true,
+        "images": "decoded",
+        "tabs": "click, arrows, Home/End passed",
+        "clipboard": "both commands match",
+        "results": "all/heldout/debug counts passed",
+        "keyboard": "skip link and tabs passed",
+        "console_errors": [],
+        "failed_requests": []
+      },
+      {
+        "width": 390,
+        "status": "passed",
+        "no_page_overflow": true,
+        "images": "decoded",
+        "tabs": "click, arrows, Home/End passed",
+        "clipboard": "both commands match",
+        "results": "all/heldout/debug counts passed",
+        "keyboard": "skip link and tabs passed",
+        "console_errors": [],
+        "failed_requests": []
+      },
+      {
+        "width": 320,
+        "status": "passed",
+        "no_page_overflow": true,
+        "images": "decoded",
+        "tabs": "click, arrows, Home/End passed",
+        "clipboard": "both commands match",
+        "results": "all/heldout/debug counts passed",
+        "keyboard": "skip link and tabs passed",
+        "console_errors": [],
+        "failed_requests": []
+      }
+    ],
+    "no_javascript": "all 3 recipes and all 10 rows accessible",
+    "clipboard_denied": "selection fallback passed",
+    "motion": "reduced motion respected"
+  },
+  "offline_preview": {
+    "status": "passed",
+    "url": "file:///C:/Users/Oscar/.codex/visualizations/2026/11/01/01a195c0-30d5-7c03-af94-7af713681ad4/humanmimic-preview/website/index.html",
+    "local_images": "decoded",
+    "css": "loaded",
+    "javascript": "recipe switching passed",
+    "console_errors": []
+  },
+  "evidence_directory": "runs/website-usability-20261101-01",
+  "branch_cleanup": {
+    "previous_homepage_commit": "a8a58e6c6b7aaac36ad530a2b6682ef778e936fe",
+    "previous_work_already_in_remote_main": true,
+    "local_main_fast_forwarded": true,
+    "completed_homepage_usability_branch_deleted_local_and_remote": true,
+    "other_active_handoff_worktree_preserved": true
+  },
+  "runtime_acceptance": {
+    "documentation_and_presentation": "passed",
+    "new_headless_control": "not_run",
+    "new_recorded_state_replay": "not_run",
+    "linux_server": "awaiting_verification",
+    "live_camera": "needs_input",
+    "scene_adaptation": "not_implemented"
+  },
+  "preview_handoff": "Direct file URL unsupported by Codex browser tool; local file panel requested. Packaged file verified in Chrome."
+}

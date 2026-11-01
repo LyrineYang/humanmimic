@@ -405,3 +405,13 @@ next_action: null
 - 连接器读取稳定仓库ID1436901913确认原私有仓库已更名`LyrineYang/humanmimic`，不是创建新仓库；Issues已启用，克隆与反馈链接使用当前地址。私有main发布awaiting_verification；本地摘要`evidence/homepage-usability-20261101.json`，原始检查与截图在run目录。
 
 - GitHub交付核验passed：内容提交`0c78c58a591e78ea350e583dca0d364fd4543956`非强制快进main，同时保留codex/homepage-usability；原96179bf交接完整进入main。连接器回读README正文逐字一致，10份本轮文件及3份交接文件共13个blob一致；仓库仍private、ID不变、Issues启用。About改为用途优先的英文简介；独立网站未部署。原始回读与核验在run目录，`evidence/homepage-usability-20261101.json`状态更新为passed。
+
+
+## 2026-11-01 本地网页：上手使用与insight并重
+
+- 用户要求沿用新版GitHub主页定位完善网页，并询问新分支为何没有合并。先记录`runs/website-usability-20261101-01/expectation.json`：上轮a8a58e6已经在远端main，无额外merge commit是快进合并的结果；本地main原落后25提交，本轮已快进同步并删除完全合入的codex/homepage-usability本地/远端分支，提交完整保留。另一个交接会话随后切到codex/linux-handoff并启用独立/tmp工作树；保留其活跃工作，本轮网页只保存本地main。
+- 实现：英文页面按用途→实际输出→可切换上手命令/输出说明→pipeline→insight摘要→完整结果→研究方向展开。沿用PI/Anthropic参考的暖纸/衬线/细线视觉和原创示意图；展示完整31秒既有结果的静态帧，无伪视频播放。明确manual setup、准备环境、源机器迁移暂停、developer preview和R4未实现。
+- 交互验收passed：Chrome156在1440/1024/768/390/320五宽度无整页横向溢出，图片全部decode；两段命令真实复制内容一致，键盘箭头/Home/End切换、skip link、runtime折叠与结果展开/三组筛选正确，控制台无错误。无JS三段说明和十行结果仍可访问；剪贴板拒绝时选择文字并提示手动复制。首轮验证仅因Windows复制CRLF与LF比较、UNC上溯package配置失败，分别按系统换行规范化与stdin语法检查修正验证方式；网页行为未因此放宽。
+- 内容/保全核验passed：7本地资源链接、11锚点、16仓库文档链接、2段shell语法和真实CLI参数；全部10源身份/事件/状态逐项匹配接受证据。77个既有scripts/configs/evidence SHA、原DDS补丁和demo帧未改。更新网页预览截图及其provenance，未改实验数据或推理/控制代码。
+- 预览交付：HTTP本地200与普通Chrome直接HTML文件均通过；另将仅7份网页/图像文件复制到允许的桌面预览目录并逐字节核对，离线加载CSS/图片/交互通过。Codex浏览器工具不接受本环境file URL，已请求在文件面板打开预览，未将工具排队当作已显示。截图/原始检查位于run目录，摘要`evidence/website-usability-20261101.json`。
+- 本轮仅本地网页准备passed；没有注册/部署网站、推送预览或启动新Goal，无新模型/控制/动画回放/现场相机试次，新增云费用0。服务器验收awaiting_verification，R3 needs_input、R4未实现；原Linux迁移交接与历史保留。

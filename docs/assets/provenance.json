@@ -20,11 +20,13 @@
   "not_a_new_physical_run": true,
   "website_preview": {
     "file": "website-preview.jpg",
-    "origin": "Headless Chrome screenshot of the local website prototype",
+    "origin": "Headless Chrome screenshot of the local usability-first website preview",
     "viewport": [
       1440,
       1000
     ],
-    "sha256": "85d0356557c44e06a7b4bb6bfe9b45b6bca8fa3ca7528e2a6771b9485dcc4260"
+    "sha256": "6dccbc71f9a671e349c1ac3e7468a49fc064468a551065083f4c68e6235047a2",
+    "captured_date": "2026-11-01",
+    "verification_directory": "runs/website-usability-20261101-01/"
   }
 }
