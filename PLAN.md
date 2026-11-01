@@ -73,7 +73,7 @@
 
 更新于 2026-11-01，Asia/Shanghai。
 
-- 交接版本同步修订：现行STARTUP_PROMPT只保留已完成R1/R2后的服务器迁移/R4接续指令；旧启动/连接/资源/交接原文按固定Git提交归档到docs/archive/README.md。规范仓库为LyrineYang/humanmimic，origin及克隆/网站链接按此核对；main与codex/linux-handoff发布为同一交接提交。历史evidence/configs/冻结SHA、源WSL与D盘实际运行路径不改，服务器副本需要拉取并自行核对HEAD，不以文档同步冒充服务器运行验收。检查在runs/handoff-sync-20261101-01/。
+- 交接版本同步修订：现行STARTUP_PROMPT只保留已完成R1/R2后的服务器迁移/R4接续指令；旧启动/连接/资源/交接原文按固定Git提交归档到docs/archive/README.md。规范仓库为LyrineYang/humanmimic，origin及克隆/网站链接按此核对；main与codex/linux-handoff发布为同一交接提交。历史evidence/configs/冻结SHA、源WSL与D盘实际运行路径不改，服务器副本需要拉取并自行核对HEAD，不以文档同步冒充服务器运行验收。检查在runs/handoff-sync-20261101-01/。网站本地预览提交f69b0d6也已正常合并；上方网页迭代中的“不推送”仅指当时范围，现按本次交接授权随代码同步发布，独立网站仍未部署。
 
 - 新增Linux迁移/R4交接：用户准备迁移既有Linux服务器，已整理[HANDOFF.md](HANDOFF.md)，包含历史决定、两套conda/SDK/资产、原R1/R2验收、已使用保留集、路径/硬件适配和原R4的10开发+至少20测试/四方法/至少3个改进布局门槛。本轮只做文档与只读元数据检查，不启动新Goal、服务器或R4实现；文档验收见runs/linux-handoff-20261101-01/。
 - 交接时无活跃模型/控制任务；当前WSL boot da152f79-87d4-4995-876b-7bb6b59456c8已不同于原R2验收boot，不据此断定Windows重启原因。遵守原策略，不恢复本机GPU重试；原4060验收证据保留。服务器仍awaiting_verification：若目标为文档提到的V100，TensorRT10.13.3不支持Volta，R1当前Torch构建不含sm70，需独立兼容性适配与目标硬件复验，不能复制环境即宣称通过。
