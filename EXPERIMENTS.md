@@ -330,3 +330,11 @@ next_action: null
 - 冻结检查passed：configs/r2-suite-frozen-20261101.json，SHA c3403dc4581ed61880e66f3c4cbbaa84961c1455621c0e5f170c10c0006378d1，42代码/配置/事件文件、15资产身份以及原生二进制/GPU驱动/上游版本与补丁。固定原5debug+5heldout及至少4/5门槛，冻结前台账无任何保留使用。提交42463b0保存实现与清单。
 - 2026-11-01 08:17 Asia/Shanghai启动原5条保留队列runs/r2-heldout-orchestration-20261101-01，PID157620/startticks2109756/boot fa0233fb-701c-42d8-81da-0d007d2efe7d；首片ROZy7jawHf4于unix1793492321.5185695登记使用（source SHA a3f05efb4b5abb965708a865f87ce8974cac54df2e57c7f3bed6a0d30398e335），当前1/5使用、0/5完成。检测已完成、特征推理进行中，未新增本机重启，不因导入/观察等待重提任务。原速FP32/batch1/flip、32帧检查点，无人工冷却等待；新增云费用0。
 - 冻结后的false标志只描述冻结时刻；当前使用以D盘runs/heldout-use-ledger.jsonl的distinct input_sha256计数。保留开始后不更改冻结实现/标签/阈值，不按结果重选样本。整批仍awaiting_verification。
+
+
+## 2026-11-01 首条冻结保留完整通过
+
+- ROZy7jawHf4全新8阶段提取/转换passed，完整421源帧、421归一化帧、702/702原生50Hz源参考；实际物理无跌倒，最低根高0.7759068039m，源窗口全覆盖、弹力带关闭、自由根部/重力/接触/控制启用，实际状态没有覆写。预标注8个躯干左右交替事件方向/顺序8/8通过，不拟合时间平移、不改阈值。
+- 完整对照351帧/25fps，所有实际机器人帧可用；5媒体全帧解码passed。人工查看demo25/175/338帧，原片、2D、估计3D和真实机器人画面清晰/时间戳一致，visual-audit绑定最终comparison SHA9d2cd1b0b7561268b5b74e94cd85c9eada3abf8078bc5fa1ad22ad4cafea1852。canonical run-audit.json正式passed，并绑定冻结清单SHA c3403dc4581ed61880e66f3c4cbbaa84961c1455621c0e5f170c10c0006378d1。
+- 原速姿态421/421、14个检查点全部持久化，wrapper284.344s；包含启动的native invocation321.927s，两者范围不同；检测273.817s、特征237.091s、相机38.160s、运动41.71s、后处理84.27s、转换83.618s。GPU观测峰值约4.9GiB；样本温度71–76°C，无人为冷却/逐帧休眠，无新增本机重启。单短片含固定导入开销，不据此宣称所有30秒片相同速度。
+- 证据runs/r2-heldout-ROZy7jawHf4-20261101-01/REPORT.md、run-audit.json、visual-audit.json、demo/comparison.mp4；系统已自动开始第二条U7Nrwyu6Uqo。当前2/5保留已用、1/5完成并通过；剩余4条必须全部报告，R2整批仍awaiting_verification，新增云费用0。

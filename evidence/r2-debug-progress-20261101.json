@@ -3,7 +3,7 @@
   "scope": "R2 batch progress; not suite acceptance",
   "debug_completed": 5,
   "debug_required": 5,
-  "heldout_used": 1,
+  "heldout_used": 2,
   "heldout_required": 5,
   "heldout_required_passes": 4,
   "completed_debug": [
@@ -132,7 +132,7 @@
     "/mnt/c": 19.12005615234375,
     "/mnt/d": 271.6494483947754
   },
-  "updated_unix": 1793492731.317192,
+  "updated_unix": 1793493886.1783292,
   "pending_final_audits": {},
   "rendering_candidate": {
     "status": "passed, three-state timing/geometry/visual check only",
@@ -234,11 +234,28 @@
     "pid": 157620,
     "process_start_ticks": 2109756,
     "boot_id": "fa0233fb-701c-42d8-81da-0d007d2efe7d",
-    "active_source": "ROZy7jawHf4",
+    "active_source": "U7Nrwyu6Uqo",
     "status": "awaiting_verification",
-    "used_sources": 1,
-    "completed": 0,
+    "used_sources": 2,
+    "completed": 1,
     "ledger": "/mnt/d/humanoid-demo-r2/runs/heldout-use-ledger.jsonl",
     "manifest_sha256": "c3403dc4581ed61880e66f3c4cbbaa84961c1455621c0e5f170c10c0006378d1"
-  }
+  },
+  "heldout_completed": 1,
+  "heldout_passed": 1,
+  "heldout_failed": 0,
+  "completed_heldout": [
+    {
+      "id": "ROZy7jawHf4",
+      "status": "passed",
+      "physical": "passed",
+      "events": "8/8",
+      "control_frames": 702,
+      "minimum_root_height_m": 0.7759068038955022,
+      "demo_frames": 351,
+      "audit": "runs/r2-heldout-ROZy7jawHf4-20261101-01/run-audit.json",
+      "demo": "runs/r2-heldout-ROZy7jawHf4-20261101-01/demo/comparison.mp4",
+      "actual_state_sha256": "c8d993c60bbb535735149fac53f1d2ad66aa5c5b5b3ccef8f1e9e858bdb5f77e"
+    }
+  ]
 }
