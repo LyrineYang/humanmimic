@@ -22,6 +22,8 @@ cd humanmimic
 git submodule status
 ```
 
+For an existing checkout after the repository rename, follow the [handoff synchronization guide](../REMOTE_WORK.md). Compare the checkout commit with `main` and `codex/linux-handoff`; do not globally replace archived filesystem paths or rewrite frozen manifests.
+
 This fetches source while skipping large LFS objects. It does **not** install the runtime or obtain pretrained weights, body models, full source videos or previous run packages.
 
 | Location | What you will find |

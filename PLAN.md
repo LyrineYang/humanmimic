@@ -63,13 +63,15 @@
 
 ## 项目展示与文档（2026-11-01新增范围）
 
-用户要求英文GitHub主页、insights/研究思路、简单pipeline图及后续网页准备，并明确选择直接完善现有私有仓库，不新建仓库或公开资产。展示名采用HumanMimic，仓库路径保持不变。本轮仅文档、矢量素材和本地静态网页原型；R1–R4验收、数据划分、预算和运行代码不变。预期与检查证据保存于`runs/project-homepage-20261101/`，英文文档/本地视觉与功能检查passed（1440/768/390/320宽度、筛选与无JS退化），完整10段视频哈希重新核对；GitHub默认分支发布passed，连接器回读README与17份文档/网页素材共18个blob逐一匹配，仓库仍private；独立网站未部署。
+用户要求英文GitHub主页、insights/研究思路、简单pipeline图及后续网页准备，并明确选择直接完善现有私有仓库，不新建仓库或公开资产。首次展示时采用HumanMimic名称、仓库路径未变；后续更名为LyrineYang/humanmimic，见下方修订。本轮仅文档、矢量素材和本地静态网页原型；R1–R4验收、数据划分、预算和运行代码不变。预期与检查证据保存于`runs/project-homepage-20261101/`，英文文档/本地视觉与功能检查passed（1440/768/390/320宽度、筛选与无JS退化），完整10段视频哈希重新核对；GitHub默认分支发布passed，连接器回读README与17份文档/网页素材共18个blob逐一匹配，仓库仍private；独立网站未部署。
 
 2026-11-01 用户进一步调整主页定位：采用“开发者可用性 + insight/探索”的中间形态，功能/上手/输出/帮助前置，研究内容保留为深入阅读。README、准备指南、usage、troubleshooting和贡献入口已重排；本轮本地文档验收passed（136个本地链接/18个锚点、10段shell语法、13个实际CLI参数、5页桌面/手机预览），私有main更新passed（内容提交0c78c58，连接器回读README正文与13个文件blob一致，原Linux交接保留），证据`runs/homepage-usability-20261101-01/`。不改变研究验收、迁移决策、代码或资源授权。读取仓库稳定ID确认原仓库已更名为`LyrineYang/humanmimic`（ID1436901913，仍private），本轮克隆/反馈入口同步新地址，未创建或公开仓库。
 
 ## 当前状态
 
 更新于 2026-11-01，Asia/Shanghai。
+
+- 交接版本同步修订：现行STARTUP_PROMPT只保留已完成R1/R2后的服务器迁移/R4接续指令；旧启动/连接/资源/交接原文按固定Git提交归档到docs/archive/README.md。规范仓库为LyrineYang/humanmimic，origin及克隆/网站链接按此核对；main与codex/linux-handoff发布为同一交接提交。历史evidence/configs/冻结SHA、源WSL与D盘实际运行路径不改，服务器副本需要拉取并自行核对HEAD，不以文档同步冒充服务器运行验收。检查在runs/handoff-sync-20261101-01/。
 
 - 新增Linux迁移/R4交接：用户准备迁移既有Linux服务器，已整理[HANDOFF.md](HANDOFF.md)，包含历史决定、两套conda/SDK/资产、原R1/R2验收、已使用保留集、路径/硬件适配和原R4的10开发+至少20测试/四方法/至少3个改进布局门槛。本轮只做文档与只读元数据检查，不启动新Goal、服务器或R4实现；文档验收见runs/linux-handoff-20261101-01/。
 - 交接时无活跃模型/控制任务；当前WSL boot da152f79-87d4-4995-876b-7bb6b59456c8已不同于原R2验收boot，不据此断定Windows重启原因。遵守原策略，不恢复本机GPU重试；原4060验收证据保留。服务器仍awaiting_verification：若目标为文档提到的V100，TensorRT10.13.3不支持Volta，R1当前Torch构建不含sm70，需独立兼容性适配与目标硬件复验，不能复制环境即宣称通过。

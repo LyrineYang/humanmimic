@@ -1,44 +1,54 @@
-# Windows WSL 与跨设备协作
+# HumanMimic 代码同步与Linux交接
 
-本项目优先让Windows笔记本提供GPU和WSL环境，Mac通过Codex远程控制查看、指导和验收同一执行端。不要把“登录同一账号”“控制另一台主机”“迁移聊天和Git状态”混为一项操作。
+更新于2026-11-01。当前工作顺序是读取最新状态、核对提交、迁移并验证目标环境，再按HANDOFF推进R4。早期Mac→Windows连接失败、“目录不存在”和初次部署记录已归入[历史文档索引](docs/archive/README.md)，不是当前部署结论。
 
-2026-10-28 Git 同步核验：私有仓库 `https://github.com/LyrineYang/humanoid-demo` 已存在，WSL 的 gh 登录、fetch、R1 内容 push 及从 GitHub 新克隆已通过。本轮命令需临时移除指向不可用本地端口的代理变量；未更改持久代理或账号配置。Git 同步与聊天 handoff 分别验收，后者未重试。
+## 当前可核实的边界
 
-## Windows 应用能否操作 WSL
+- 规范仓库：`LyrineYang/humanmimic`，稳定ID1436901913，仍为private；旧名`humanoid-demo`留在历史证据中。
+- 原4060/WSL的R1/R2已完成工程验收；R3现场相机和R4另行验收，详见[PLAN](PLAN.md)、[HANDOFF](HANDOFF.md)。服务器有更晚记录时先核对，不按历史失败重做已完成工作。
+- 用户提供服务器工作副本路径`/home/junqiy/projects/humanmimic`。当前文档修复会话在源WSL执行，无法通过本地文件系统访问该服务器目录；远程Git版本一致与服务器实际运行验收分别报告。
+- 本次交接发布目标是`main`与`codex/linux-handoff`同一提交。保留所有原分支提交和已有修改，使用快进/正常合并，不强推覆盖历史。
 
-可以。Windows原生代理默认在PowerShell执行，也能按需调用 `wsl`。如果主要工作是Linux、CUDA和机器人仿真，建议在桌面应用Settings中把agent从Windows native切到WSL，并重启应用，然后打开WSL项目目录。
+## 已有副本同步到交接版本
 
-集成终端与agent的设置互相独立。仅把终端选成WSL，不能证明代理本身已在WSL执行。开始前让代理报告 `uname -a`、`pwd` 与 `nvidia-smi`。
+在**待同步的那台机器**、正确工作副本中执行；先检查并保留本地修改。以下只更新代码，不是环境安装或运行路径迁移脚本：
 
-添加WSL项目时，可在添加项目的文件选择器输入 `\\wsl$\`，选择Linux发行版和 `home/<user>/projects/humanoid-demo`。WSL代理搭配Linux文件系统；若坚持用Windows原生代理，官方建议项目保存在Windows盘并通过 `/mnt/<drive>/` 访问，两种布局不要混用。
+```bash
+pwd
+git status --short
+git remote set-url origin https://github.com/LyrineYang/humanmimic.git
+git fetch origin
+git merge --ff-only origin/codex/linux-handoff
+git rev-parse HEAD
+git ls-remote origin refs/heads/main refs/heads/codex/linux-handoff
+```
 
-来源：[Windows桌面应用与WSL](https://learn.chatgpt.com/docs/windows/windows-app#windows-subsystem-for-linux-wsl)。
+最后三个提交SHA必须相同，才能宣称拿到同一交接版本。若快进失败、目录有未保存修改或出现本地独有提交，保留现场并检查差异，不使用`reset --hard`、`clean`或强推来制造一致。需要进一步合并时记录合并理由与检查结果。
 
-## 用 Mac 控制 Windows 上的执行聊天
+新机器可从README的规范仓库克隆；需要交接分支时：
 
-1. Windows和Mac使用同一ChatGPT账号及同一workspace，保持应用更新。
-2. Windows应用进入Settings → Connections → Control this Mac or PC，完成启用和验证。
-3. Mac应用若有Control other devices入口，通过它添加并配对Windows主机。入口可用性随发布范围而变化；没有入口时不要假设同账号已自动连接。
-4. 连接后选择Windows主机上的WSL项目与聊天。该聊天使用主机的文件、工具、凭据和权限；Mac是控制端。
-5. 同一执行聊天只保留一条有序工作流。检查任务状态后再补充指令，不在两台机器上重复启动同一实验。
+```bash
+GIT_LFS_SKIP_SMUDGE=1 git clone --branch codex/linux-handoff --recurse-submodules \
+  https://github.com/LyrineYang/humanmimic.git
+cd humanmimic
+```
 
-主机休眠、断网或关闭应用会中断远程访问。需要桌面交互时，Windows还需处于可用的交互会话。来源：[远程连接](https://learn.chatgpt.com/docs/remote-connections)。
+私有仓库认证使用用户已有通道；不把token、SSH配置或账号缓存放进项目。此命令跳过大LFS下载，不能据此认定模型、原始结果或环境已迁移。
 
-## 当前 Mac 聊天如何继续到 Windows
+## 仓库改名与运行路径分别处理
 
-有两条路径：
+| 项目 | 本次处理 |
+| --- | --- |
+| GitHub origin、克隆命令、网站/文档仓库链接 | 使用`LyrineYang/humanmimic` |
+| 源WSL目录`/home/lyrine/projects/humanoid-demo` | 现有实际目录，保持原状 |
+| 原D盘根`/mnt/d/humanoid-demo-r2` | 原始资产/缓存/结果位置，保持原状 |
+| 用户服务器目录`/home/junqiy/projects/humanmimic` | 在目标机核对；不能由Git改名推断环境已适配 |
+| 历史runs、绝对symlink、冻结清单和SHA | 保留原字节/身份；通过新映射和新server运行记录接入 |
 
-- 远程接管Windows已有聊天：保持该聊天在Windows执行，Mac查看和发送指令。它不等于迁移当前Mac聊天。
-- Handoff当前聊天：先连接Windows主机，并在两端保存同一个Git仓库对应的项目；然后由用户在聊天底部选择目标运行位置并确认Hand off。应用转移聊天与Git状态，目标端建立或复用工作树。若工具从当前聊天发起，不能把自身交接出去，应由用户使用界面，或从另一个已获授权的聊天发起。
+不要对整个仓库全局替换名称。Git同步不复制`.local/`、模型、完整视频、缓存和全部`runs/`；按[HANDOFF资产表](HANDOFF.md#52-git克隆不会带来的内容)通过授权私有通道迁移，保留原文件和失败。
 
-2026-10-26 实测：Mac 已可访问远端主机 `zhen`，Windows 项目目录为 `C:\Users\Oscar\Desktop\humanoid-demo-remote`，但该目录尚不是 Git 仓库；`/home/lyrine/projects/humanoid-demo` 不存在。WSL2、Ubuntu 24.04.4 与 WSL 内 nvidia-smi 已通过检查，当前代理仍从 Windows PowerShell 发起命令。先建立对应的 Git 工作副本、登记同仓库项目，再确认 Handoff 目的地可选；代理切换 WSL 尚未执行。不要为了匹配主机而随意公开仓库或上传凭据。证据：`runs/preflight-20261026-remote/results.json`。来源：[聊天跨主机交接](https://learn.chatgpt.com/docs/remote-connections#hand-off-a-chat-between-hosts)。
+## 执行前的接手顺序
 
-## 同账号不等于同步所有本地内容
+读STARTUP_PROMPT→PLAN当前状态/验收→HANDOFF，核对目标机与活跃任务，再检查现有环境和结果。需要迁移的路径、SDK、boot保护和硬件身份单独形成server配置/版本；原冻结清单不是可任意改名的安装配置。所有新检查保存版本、输入SHA、日志、状态和录像，不能把缓存复演或旧主机通过当作服务器验收。
 
-2026-10-28 已实测当前代理直接在主机 zhen 的 Ubuntu/WSL2 内执行，工作目录 `/home/lyrine/projects/humanoid-demo` 是 Git 工作副本。`humanoid-r1` conda、CUDA/TensorRT/ONNX Runtime C++ 环境、默认 SONIC 权重和官方控制器已配置，通过一次 1375 帧 Macarena 闭环物理复现；激活命令为 `source scripts/activate-r1.sh`。WSL 本机大 UDP 包丢失通过项目内 DDS 小包分片与 lo 单播配置解决，未改系统网络。离屏录像使用 CPU 软件路径，图形窗口与现场相机未验收。此前“目录不存在、仅从 Windows 调用 WSL”是历史状态；本次副本未带入旧 `runs/` 证据。当前证据：`runs/r1-full-setup-20261028/results.json`、`runs/r1-reproduction-20261028-01/REPORT.md`。
-
-远程连接让你访问主机上的聊天和项目，不是把所有设备的磁盘、模型、环境和会话目录互相复制。代码用Git同步，运行结果保存到约定位置，现场资源由实际执行主机提供。
-
-Windows原生应用通常使用 `%USERPROFILE%\.codex`，WSL CLI默认使用Linux家目录下的 `~/.codex`；两者默认不共享配置、认证缓存和历史。官方提供本机共享Codex home的方法，但本项目不需要先手工同步这些内部目录。不要把Mac、Windows和WSL的整个 `.codex` 目录当项目文件同步。
-
-来源：[Windows与WSL的配置和会话](https://learn.chatgpt.com/docs/windows/windows-app#share-config-auth-and-sessions-with-wsl)。
+旧Codex跨设备界面操作仅作当时记录，见历史索引；本文件不把旧应用入口、连接失败或旧设备目录当当前接手前提。

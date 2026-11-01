@@ -2,24 +2,26 @@
 
 交接日期：2026-11-01，Asia/Shanghai。面向接手项目的人或代理，覆盖聊天中的执行约定、已验收事实、迁移限制和R4工作顺序。
 
+> 本次同步修订：R1/R2原机器工程验收已完成，下一步是核对服务器已有记录并处理迁移/R4；不从旧启动段落重做R2。规范仓库已更名为`LyrineYang/humanmimic`。交接发布版本以`main`与`codex/linux-handoff`的相同提交为准，按[REMOTE_WORK](REMOTE_WORK.md)核对。用户提供的服务器目录`/home/junqiy/projects/humanmimic`与源WSL目录分别处理，历史路径/冻结清单不全局替换。修订前交接原文及SHA见[历史索引](docs/archive/README.md)。
+
 这是交接快照；当前状态仍以[PLAN.md](PLAN.md)为准，历史证据以[EXPERIMENTS.md](EXPERIMENTS.md)及原始`runs/`为准，规则见[AGENTS.md](AGENTS.md)。不要把旧实验段落中的“正在运行”当成当前任务。
 
 ## 1. 接手先做什么
 
 1. 读本文件、PLAN当前状态/验收和AGENTS；需要具体证据再读EXPERIMENTS及各片报告。沿用既定路线。
 2. 核对Git提交、已有修改、目标机器、任务PID/启动时间/boot与日志；观察超时不等于失败，勿重复提交。
-3. 用户现在准备迁移到Linux服务器。本轮只完成交接资料，没有连接服务器、创建环境或启动R4。没有活跃Goal，也没有在运行的项目模型/控制任务。
-4. 当前WSL boot是`da152f79-87d4-4995-876b-7bb6b59456c8`，已不同于R2验收时的`fa0233fb-701c-42d8-81da-0d007d2efe7d`。这说明WSL启动身份变化，不能据此断定Windows关机原因。按用户“再次关机则转服务器”的约定，不恢复本机GPU重试，也不改旧boot保护绕过它。
+3. 用户现在准备迁移到Linux服务器。首次交接仅在源WSL整理资料，没有连接服务器、创建环境或启动R4；当时源会话无活跃Goal或模型/控制任务。目标机当前任务以其最新记录为准。
+4. 首次交接快照中的源WSL boot是`da152f79-87d4-4995-876b-7bb6b59456c8`，已不同于R2验收时的`fa0233fb-701c-42d8-81da-0d007d2efe7d`。这说明WSL启动身份变化，不能据此断定Windows关机原因。按用户“再次关机则转服务器”的约定，不恢复本机GPU重试，也不改旧boot保护绕过它。
 5. 拿到用户连接的既有服务器后先只读预检，验证兼容性，再建立独立环境与新运行目录。源机器的passed标签不自动转移到服务器。
 
-源快照：`9808b0393a778eae4b7308abd11224359acf8abc`，原分支`codex/project-homepage`；本交接在`codex/linux-handoff`分支整理。R2完成提交`59c6ded`，R2运行冻结提交`42463b0`，英文主页内容提交`ff1c621`。接手时再核对实际HEAD，不强制退回这些历史提交。
+历史源快照（首次交接编写时）：`9808b0393a778eae4b7308abd11224359acf8abc`，原分支`codex/project-homepage`；本交接在`codex/linux-handoff`分支整理。R2完成提交`59c6ded`，R2运行冻结提交`42463b0`，英文主页内容提交`ff1c621`。接手时再核对实际HEAD，不强制退回这些历史提交。
 
 服务器获取本交接分支的示例（只拉代码，先确认目录/权限和私有仓库认证；本轮未执行）：
 
 ```bash
-export SERVER_PROJECT="$HOME/projects/humanoid-demo"
+export SERVER_PROJECT="$HOME/projects/humanmimic"
 GIT_LFS_SKIP_SMUDGE=1 git clone --branch codex/linux-handoff --recurse-submodules \
-  https://github.com/LyrineYang/humanoid-demo.git "$SERVER_PROJECT"
+  https://github.com/LyrineYang/humanmimic.git "$SERVER_PROJECT"
 ```
 
 跳过LFS不等于资产已准备；后面列出的模型、真实LFS实体、环境和结果需另行私有迁移。若分支之后已合并，使用用户确认过的最新版本。
@@ -34,7 +36,7 @@ GIT_LFS_SKIP_SMUDGE=1 git clone --branch codex/linux-handoff --recurse-submodule
 - 优先吞吐，不人为低温等待、不逐帧休息、不强制组间冷却；保留真实温度记录和32帧持久化检查点。硬件温控保持原状；再次本机关机后转已有服务器，不反复本机试错。见[执行策略](configs/r2-execution-policy.json)。
 - 大环境、权重、缓存、临时文件和结果集中规划到数据盘。原100GiB是D盘容量规划，非独占配额，不创建占位大文件；源代码、Git和原R1环境仍在WSL/C。服务器需重新指定实际数据卷。
 - Demo要完整展示“原视频—2D覆盖—估计3D人体/骨架—实际仿真”。保留原片、所有数值中间结果、失败、时间映射和各路视频；不剪去失败段，不拟合时间偏移美化结果。原视频音频仍在原片，现有comparison为静音。
-- 网站展示名HumanMimic，仓库`LyrineYang/humanoid-demo`仍private。英文主页已发布到既有仓库默认分支；不新建仓库、公开模型/受限资产或擅自部署网站。
+- 网站展示名HumanMimic，当前仓库`LyrineYang/humanmimic`（稳定ID1436901913）仍private；旧名仅作为历史来源保留。英文主页已发布到既有仓库默认分支；不新建仓库、公开模型/受限资产或擅自部署网站。
 
 ## 3. 已完成与未完成：不要从头再做
 
@@ -95,7 +97,7 @@ GP4YqDYMmcI的canonical `run-audit.json`保留失败初审、visual待验字段�
 
 - SONIC：`45c03facbf848e0c743091b7d9c17952096ff908`，含上述DDS补丁。
 - GEM-X：`20555befe2fbbe5b2015e1fff7ff214dc18ea9d6`。
-- Git仓库：`https://github.com/LyrineYang/humanoid-demo`，需要既有私有仓库权限；不要把Git/HF token写进命令、文档或Git。
+- Git仓库：`https://github.com/LyrineYang/humanmimic`，需要既有私有仓库权限；不要把Git/HF token写进命令、文档或Git。
 
 | 组件 | R1 | R2 |
 | --- | --- | --- |
@@ -143,7 +145,7 @@ R2收尾D根实占19.884GiB；本轮只读测得WSL `.local/`额外约15.56GiB�
 布局是建议，先核对用户可写的数据盘再确定，不要求固定账户或`/srv`权限：
 
 ```text
-SERVER_PROJECT/                 Git源码（例如 ~/projects/humanoid-demo）
+SERVER_PROJECT/                 Git源码（例如 ~/projects/humanmimic）
   .local/                       新建的R1 conda/原生SDK入口
   models/sonic-default/          原始ONNX/配置，来源SHA不变
 SERVER_DATA/                    真实数据盘，路径由服务器确认

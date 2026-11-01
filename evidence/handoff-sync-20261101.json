@@ -1,0 +1,63 @@
+{
+  "status": "passed",
+  "scope": "Current documentation and renamed-repository links only; no runtime path migration",
+  "base_commit": "a8a58e6c6b7aaac36ad530a2b6682ef778e936fe",
+  "repository": {
+    "id": 1436901913,
+    "name": "LyrineYang/humanmimic",
+    "clone_url": "https://github.com/LyrineYang/humanmimic.git",
+    "visibility": "private"
+  },
+  "protected_files_unchanged": 99,
+  "historical_documents_preserved": {
+    "STARTUP_PROMPT.md": {
+      "sha256": "3408f3e77d7ff6303f593c907059fed8ea7cc083ca70f1ad1ba403d393de1f86",
+      "commit": "a8a58e6c6b7aaac36ad530a2b6682ef778e936fe",
+      "url": "https://github.com/LyrineYang/humanmimic/blob/a8a58e6c6b7aaac36ad530a2b6682ef778e936fe/STARTUP_PROMPT.md"
+    },
+    "REMOTE_WORK.md": {
+      "sha256": "ed9f76f7108bc6115a2f6a2c9af43838e75ffad3965c3fd438a8e9d7890be38b",
+      "commit": "a8a58e6c6b7aaac36ad530a2b6682ef778e936fe",
+      "url": "https://github.com/LyrineYang/humanmimic/blob/a8a58e6c6b7aaac36ad530a2b6682ef778e936fe/REMOTE_WORK.md"
+    },
+    "RESOURCES.md": {
+      "sha256": "8192919139ec8aa4e5cda5c460a4840ba5dbf98e23acb7c9e6d38789f8d5f64e",
+      "commit": "a8a58e6c6b7aaac36ad530a2b6682ef778e936fe",
+      "url": "https://github.com/LyrineYang/humanmimic/blob/a8a58e6c6b7aaac36ad530a2b6682ef778e936fe/RESOURCES.md"
+    },
+    "HANDOFF.md": {
+      "sha256": "283290a4c326a76255c6b6c12e44c63f8ec5aabe129f2dff69e438a4f72acf6c",
+      "commit": "a8a58e6c6b7aaac36ad530a2b6682ef778e936fe",
+      "url": "https://github.com/LyrineYang/humanmimic/blob/a8a58e6c6b7aaac36ad530a2b6682ef778e936fe/HANDOFF.md"
+    }
+  },
+  "existing_evidence_configs_scripts_unchanged": true,
+  "vendor_diff_preserved": true,
+  "local_links_checked": 122,
+  "missing_links": [],
+  "missing_anchors": [],
+  "website_repository_links_checked": 12,
+  "website_change_is_url_only": true,
+  "original_website_wip_excluded": true,
+  "server_checkout_directly_verified": false,
+  "new_gpu_physics_or_server_runtime_started": false,
+  "cloud_cost_usd": 0,
+  "reviewed_at": "2026-11-01T18:46:53.119448+08:00",
+  "current_document_sha256": {
+    "STARTUP_PROMPT.md": "6076963926fc405d878f1efa685b34c00a111fb35e7f89bad8bf9f55d56fa43f",
+    "REMOTE_WORK.md": "415d77653c0648a1a0423419100464493f9c98863e0707e2c06edbd583258a79",
+    "RESOURCES.md": "60a3376c57cd1676f15415253e774d73021dcb92d8f052761864011857f18a39",
+    "HANDOFF.md": "54cbe11043db12da4878b31496f5ae9881c48c00b25bc8c46df90466e16b3cc2",
+    "README.md": "eb7f05a5281bb25b241328fe6accde531ae9cbc09b60b8e4e9ced96af47f21bc",
+    "docs/getting-started.md": "230b295c5458155dfce6ee76513a7f741edd9b4cce2a76edecdaac6eaa74461f",
+    "docs/website.md": "ccd6493b8950bb06ecd94229b72a37f324513d4095503c354ce3a867a1402579",
+    "website/index.html": "40728f5cb3d6860ef891075d935f4c6962cce150e5545f5ec3a1b651239ec174",
+    "docs/archive/README.md": "49384bc984c08314baa7c86bcdb6095ac1f567126a74e0e9a96c197cba005158"
+  },
+  "target_publication_refs": [
+    "refs/heads/main",
+    "refs/heads/codex/linux-handoff"
+  ],
+  "publication_verification_note": "Exact published commit and remote ref equality are verified after push; raw proof belongs to runs/handoff-sync-20261101-01/publication.json",
+  "server_version_contract": "User will fetch the same published handoff commit; this session does not claim direct server checkout access"
+}

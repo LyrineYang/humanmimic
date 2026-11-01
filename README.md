@@ -40,6 +40,8 @@ GIT_LFS_SKIP_SMUDGE=1 git clone --recurse-submodules https://github.com/LyrineYa
 cd humanmimic
 ```
 
+Already have a checkout? Use the [repository and handoff synchronization guide](REMOTE_WORK.md). The renamed repository is `LyrineYang/humanmimic`; verify the commit before resuming work on another machine.
+
 The repository includes source, configuration, small demo images and results. Environments, pretrained weights, body-model assets and full videos are prepared separately.
 
 | Your starting point | Next step |

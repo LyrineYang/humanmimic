@@ -79,3 +79,8 @@ Choose the audience and destination explicitly; the current repository remains p
 For static hosting, prepare a staging directory containing `website/` plus the referenced `docs/assets/` paths, preserving relative structure, or rewrite the asset references as part of packaging. Do not serve the repository root as the production document root: it includes internal execution plans and ignored local artifacts. Move documentation to accessible pages if the audience will not have private-repository access. Set canonical/social metadata only after the final URL is known.
 
 Then verify the packaged artifact at desktop and mobile widths, test every navigation/filter control, and confirm actual deployment separately. The repository prototype and its visual review do not imply a published website.
+
+
+## Repository links after rename
+
+Current repository links in the prototype use `https://github.com/LyrineYang/humanmimic`, including document and evidence navigation. This updates navigation only; historical provenance files, source-video attribution and actual run paths retain their original values. See the [handoff synchronization guide](../REMOTE_WORK.md) for the current source version.

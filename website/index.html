@@ -16,7 +16,7 @@
     <a class="wordmark" href="#top" aria-label="HumanMimic home"><span class="mark" aria-hidden="true">h<span>m</span></span>HumanMimic</a>
     <nav aria-label="Main navigation">
       <a href="#demonstration">Demonstration</a><a href="#research">Research</a><a href="#results">Results</a>
-      <a class="repo-link" href="https://github.com/LyrineYang/humanoid-demo">Repository <span aria-hidden="true">↗</span></a>
+      <a class="repo-link" href="https://github.com/LyrineYang/humanmimic">Repository <span aria-hidden="true">↗</span></a>
     </nav>
   </header>
   <main id="main">
@@ -25,7 +25,7 @@
         <p class="eyebrow"><span class="status-dot" aria-hidden="true"></span> A research project in simulation</p>
         <h1 id="hero-title">From human motion<br>to physical <em>behavior.</em></h1>
         <p class="hero-intro">Teaching a humanoid to follow what it sees—and understanding what it can actually execute.</p>
-        <div class="hero-actions"><a class="button" href="#demonstration">Explore the system <span aria-hidden="true">↘</span></a><a class="text-link" href="https://github.com/LyrineYang/humanoid-demo/blob/main/docs/research.md">Read the research direction <span aria-hidden="true">↗</span></a></div>
+        <div class="hero-actions"><a class="button" href="#demonstration">Explore the system <span aria-hidden="true">↘</span></a><a class="text-link" href="https://github.com/LyrineYang/humanmimic/blob/main/docs/research.md">Read the research direction <span aria-hidden="true">↗</span></a></div>
       </div>
       <figure class="motion-study"><img src="../docs/assets/motion-study.svg" alt="Schematic motion study: a human pose becomes an articulated humanoid pose. Illustration, not experimental output." width="620" height="510"><figcaption>Human motion. Frozen control. Physical evidence.</figcaption></figure>
     </section>
@@ -41,7 +41,7 @@
       <div class="section-heading"><p class="eyebrow">01 / Observe → execute</p><h2 id="demo-title">One motion.<br>A traceable path.</h2><p>An ordinary video becomes an estimated body, a controller reference, and finally a measured physical trajectory.</p></div>
       <figure class="demo-figure">
         <img src="../docs/assets/demo-frame.jpg" alt="At 15.56 seconds: original dance footage, estimated 2D keypoints, estimated 3D skeleton and the G1 robot rendered from recorded simulation states." width="1280" height="384" loading="lazy">
-        <figcaption><span><b>R2 / Held-out sequence</b><br>Static frame at 15.56 s · Complete source: approximately 31 s</span><a href="https://github.com/LyrineYang/humanoid-demo/blob/main/docs/results.md">Explore the evidence <span aria-hidden="true">↗</span></a></figcaption>
+        <figcaption><span><b>R2 / Held-out sequence</b><br>Static frame at 15.56 s · Complete source: approximately 31 s</span><a href="https://github.com/LyrineYang/humanmimic/blob/main/docs/results.md">Explore the evidence <span aria-hidden="true">↗</span></a></figcaption>
       </figure>
       <div class="demo-notes"><p>The robot panel shows recorded actual MuJoCo states, rendered after a closed-loop controller run. Estimated bodies are not 3D ground truth.</p><p>Full source timelines and failures are retained on the execution machine. <a href="https://www.youtube.com/watch?v=gRexOgq8h-8">Original video and creator ↗</a></p></div>
     </section>
@@ -50,11 +50,11 @@
       <div class="section-heading"><p class="eyebrow">02 / The method</p><h2 id="method-title">A small stack.<br>An inspectable loop.</h2><p>Pretrained perception and control, connected by explicit representations, clocks and evidence.</p></div>
       <div class="pipeline-image" tabindex="0" role="region" aria-label="Pipeline diagram; scroll horizontally on small screens"><img src="../docs/assets/pipeline.svg" alt="Video → GEM-X → SOMA/SMPL reference → frozen SONIC → G1 with PD control in MuJoCo; actual-state feedback closes the loop. A dashed R4 branch proposes scene adaptation." width="1200" height="470" loading="lazy"></div>
       <ol class="method-notes"><li><span>01</span><h3>Preserve the source.</h3><p>Retain the full timeline, frame mapping and extraction intermediates.</p></li><li><span>02</span><h3>Let physics answer.</h3><p>Free root, gravity and contact. The policy drives joint targets; state is measured.</p></li><li><span>03</span><h3>Keep the failures.</h3><p>Event checks and physical stability are reported separately for every source.</p></li></ol>
-      <a class="text-link" href="https://github.com/LyrineYang/humanoid-demo/blob/main/docs/architecture.md">Follow the architecture and code <span aria-hidden="true">↗</span></a>
+      <a class="text-link" href="https://github.com/LyrineYang/humanmimic/blob/main/docs/architecture.md">Follow the architecture and code <span aria-hidden="true">↗</span></a>
     </div></section>
 
     <section class="section wrap research-section" id="research" aria-labelledby="research-title">
-      <div class="research-question"><p class="eyebrow">03 / The next question</p><h2 id="research-title">How much verification<br>does adaptation need?</h2><p class="large-copy">A motion can look possible and still be difficult to execute. We want to find useful edits with a small, fixed budget of physical trials.</p><p class="proposal-label">R4 · Proposed research · Not yet implemented</p><a class="text-link" href="https://github.com/LyrineYang/humanoid-demo/blob/main/docs/research.md">Hypotheses and experimental design <span aria-hidden="true">↗</span></a></div>
+      <div class="research-question"><p class="eyebrow">03 / The next question</p><h2 id="research-title">How much verification<br>does adaptation need?</h2><p class="large-copy">A motion can look possible and still be difficult to execute. We want to find useful edits with a small, fixed budget of physical trials.</p><p class="proposal-label">R4 · Proposed research · Not yet implemented</p><a class="text-link" href="https://github.com/LyrineYang/humanmimic/blob/main/docs/research.md">Hypotheses and experimental design <span aria-hidden="true">↗</span></a></div>
       <div class="research-steps"><article><span>01</span><div><h3>Change the reference.</h3><p>Begin with one reach, one target and one known static obstacle. Keep the controller frozen.</p></div></article><article><span>02</span><div><h3>Screen with geometry.</h3><p>Reject invalid candidates with joint limits, inverse kinematics and collision distances.</p></div></article><article><span>03</span><div><h3>Verify in closed loop.</h3><p>Spend a bounded number of simulations on survivors. Measure success, deviation and cost.</p></div></article></div>
     </section>
 
@@ -77,16 +77,16 @@
       </div>
       <p class="results-context">The held-out suite met its original 4/5 acceptance gate. All five held-out sources are now used data; three dance sources share a creator. These are constrained engineering results, not a broad generalization benchmark.</p>
       <div class="stage-notes"><p><span>R3 / Live camera</span><b>Awaiting on-site input</b>Freshness, recovery and latency have not been accepted.</p><p><span>R4 / Scene adaptation</span><b>Not implemented</b>Geometry and closed-loop selection remain a research proposal.</p></div>
-      <a class="text-link" href="https://github.com/LyrineYang/humanoid-demo/blob/main/docs/results.md">Full outcomes, limitations and artifact index <span aria-hidden="true">↗</span></a>
+      <a class="text-link" href="https://github.com/LyrineYang/humanmimic/blob/main/docs/results.md">Full outcomes, limitations and artifact index <span aria-hidden="true">↗</span></a>
     </div></section>
 
     <section class="section wrap" id="notes" aria-labelledby="notes-title">
       <div class="section-heading"><p class="eyebrow">05 / Field notes</p><h2 id="notes-title">Lessons from execution.</h2><p>What changed our understanding, and what the evidence does not yet tell us.</p></div>
-      <div class="notes-list"><a href="https://github.com/LyrineYang/humanoid-demo/blob/main/docs/insights.md#01--staying-upright-is-only-one-part-of-imitation"><span>Insight 01</span><h3>Stability is only one part of imitation.</h3><span aria-hidden="true">↗</span></a><a href="https://github.com/LyrineYang/humanoid-demo/blob/main/docs/insights.md#02--the-clock-belongs-in-the-control-experiment"><span>Insight 02</span><h3>The clock belongs in the experiment.</h3><span aria-hidden="true">↗</span></a><a href="https://github.com/LyrineYang/humanoid-demo/blob/main/docs/insights.md#04--memory-pressure-is-also-a-scheduling-problem"><span>Insight 03</span><h3>Small hardware changes the workflow.</h3><span aria-hidden="true">↗</span></a></div>
+      <div class="notes-list"><a href="https://github.com/LyrineYang/humanmimic/blob/main/docs/insights.md#01--staying-upright-is-only-one-part-of-imitation"><span>Insight 01</span><h3>Stability is only one part of imitation.</h3><span aria-hidden="true">↗</span></a><a href="https://github.com/LyrineYang/humanmimic/blob/main/docs/insights.md#02--the-clock-belongs-in-the-control-experiment"><span>Insight 02</span><h3>The clock belongs in the experiment.</h3><span aria-hidden="true">↗</span></a><a href="https://github.com/LyrineYang/humanmimic/blob/main/docs/insights.md#04--memory-pressure-is-also-a-scheduling-problem"><span>Insight 03</span><h3>Small hardware changes the workflow.</h3><span aria-hidden="true">↗</span></a></div>
     </section>
 
-    <section class="closing wrap"><p class="eyebrow">Continue exploring</p><h2>Start with the evidence.<br>Build from what works.</h2><div><a class="button" href="https://github.com/LyrineYang/humanoid-demo">Explore the repository <span aria-hidden="true">↗</span></a><a class="text-link" href="https://github.com/LyrineYang/humanoid-demo/blob/main/docs/getting-started.md">Reproduction guide <span aria-hidden="true">↗</span></a></div></section>
+    <section class="closing wrap"><p class="eyebrow">Continue exploring</p><h2>Start with the evidence.<br>Build from what works.</h2><div><a class="button" href="https://github.com/LyrineYang/humanmimic">Explore the repository <span aria-hidden="true">↗</span></a><a class="text-link" href="https://github.com/LyrineYang/humanmimic/blob/main/docs/getting-started.md">Reproduction guide <span aria-hidden="true">↗</span></a></div></section>
   </main>
-  <footer class="site-footer wrap"><a class="wordmark" href="#top">HumanMimic</a><p>Built with GEM-X, SONIC, G1 and MuJoCo.<br>Simulation only. Independent research project.</p><p>Local website prototype · November 2026<br><a href="https://github.com/LyrineYang/humanoid-demo/blob/main/docs/website.md">Design and publication notes ↗</a></p></footer>
+  <footer class="site-footer wrap"><a class="wordmark" href="#top">HumanMimic</a><p>Built with GEM-X, SONIC, G1 and MuJoCo.<br>Simulation only. Independent research project.</p><p>Local website prototype · November 2026<br><a href="https://github.com/LyrineYang/humanmimic/blob/main/docs/website.md">Design and publication notes ↗</a></p></footer>
 </body>
 </html>

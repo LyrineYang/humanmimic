@@ -405,3 +405,13 @@ next_action: null
 - 连接器读取稳定仓库ID1436901913确认原私有仓库已更名`LyrineYang/humanmimic`，不是创建新仓库；Issues已启用，克隆与反馈链接使用当前地址。私有main发布awaiting_verification；本地摘要`evidence/homepage-usability-20261101.json`，原始检查与截图在run目录。
 
 - GitHub交付核验passed：内容提交`0c78c58a591e78ea350e583dca0d364fd4543956`非强制快进main，同时保留codex/homepage-usability；原96179bf交接完整进入main。连接器回读README正文逐字一致，10份本轮文件及3份交接文件共13个blob一致；仓库仍private、ID不变、Issues启用。About改为用途优先的英文简介；独立网站未部署。原始回读与核验在run目录，`evidence/homepage-usability-20261101.json`状态更新为passed。
+
+
+## 2026-11-01 交接历史歧义修复、改名链接与分支同步
+
+- 用户要求修复旧启动段落仍推进R2、旧连接/部署状态和耗时估计的歧义，并同步仓库改名后的origin/克隆/网站链接；随后明确按上次已提交拉取版本处理并合并分支。先读PLAN、核对当前Git与GitHub稳定ID1436901913，确认规范仓库LyrineYang/humanmimic仍private；源origin已正确，保留并核验该地址，不创建新仓库或修改可见性。
+- 修改预期及基线在runs/handoff-sync-20261101-01/expectation.json。最新已发布main是a8a58e6，包含已有R2、交接和主页可用性提交；先将交接分支快进到该基线。源工作区出现未提交网站改动，改用干净独立工作树/codex/handoff-sync修复；没有暂存、还原或发布这些网站WIP。
+- 实现：STARTUP_PROMPT仅保留当前服务器迁移/R4接续，REMOTE_WORK提供改名后origin和快进同步/三SHA核对，RESOURCES前置已完成R1/R2与157.98分钟/19.884GiB实测并把旧估计明示为历史。docs/archive/README按不可变a8a58e6提交索引旧启动/远程/资源/交接原文与原SHA，历史内容不改写。README/准备指南/HANDOFF/网站入口统一规范地址，网站index仅替换12个URL，不改布局或运行路径。
+- 文档/一致性检查passed：122个本地链接及所需锚点无缺失，12个网站仓库目标有效；99个原源码/配置/证据等受保护文件SHA未改，原vendor DDS差异保留。旧文档原Git对象/SHA逐项核对，旧evidence、冻结清单、资产/实际路径不全局替换；历史HANDOFF哈希继续指向原文，新文档另存新修订证据evidence/handoff-sync-20261101.json。
+- 发布目标为main和codex/linux-handoff同一提交，以正常合并/快进和原子推送实现，不删除历史分支或强推。精确提交及远端一致性在push后另存publication.json；服务器按该提交拉取，不把用户提供的/home/junqiy/projects/humanmimic路径当本会话已直接验证的环境。
+- 本轮仅文档/版本修复，没有新模型、无界面控制、现场相机、服务器运行验收或新Goal；R1/R2原工程结果保留，R3仍needs_input、R4尚未实现，新增云费用0。
