@@ -82,7 +82,7 @@ Open `runs/my-first-example/REPORT.md` and `comparison.svg`. The run preserves g
 
 ### Customize a target
 
-Copy [r4-v100.json](../configs/targets/r4-v100.json) to ignored `configs/targets/my-server.local.json`, change storage/prefix/reserve paths, and pass that path as `--target`. Set `R4_ENV_PREFIX` for direct script activation, or pass `example --prefix`. The `r4-v100` profile authorizes the local example/research preparation; it does not authorize R2 execution, paid resources or training. Preserve the original `legacy-wsl` boot policy and storage marker. Do not fabricate a marker or change a boot ID to make an old run execute.
+Copy [r4-v100.json](../configs/targets/r4-v100.json) to ignored `configs/targets/my-server.local.json`, change storage/prefix/reserve paths, and pass that path as `--target`. Set `R4_ENV_PREFIX` for direct script activation, or pass `example --prefix` / `doctor --prefix`. Explicit profiles do not inherit old shell environment paths; the legacy WSL profile alone retains its historical `R2_STORAGE_ROOT` override. The `r4-v100` profile authorizes the local example/research preparation; it does not authorize R2 execution, paid resources or training. Preserve the original `legacy-wsl` boot policy and storage marker. Do not fabricate a marker or change a boot ID to make an old run execute.
 
 ### Separate video and LEAP setup
 

@@ -88,13 +88,15 @@ class RuntimeContracts(unittest.TestCase):
     def test_r2_real_readonly_cli(self):
         with tempfile.TemporaryDirectory() as temporary:
             source=Path(temporary)/'inspection-only.mp4'; source.write_bytes(b'input inspection does not decode a video')
-            result=subprocess.run([sys.executable,str(ROOT/'scripts/run-r2-video.py'),'--input',str(source),'--run-id','readonly-contract','--target','r4-v100','--check-only'],stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True)
+            result=subprocess.run([sys.executable,str(ROOT/'scripts/run-r2-video.py'),'--input',str(source),'--run-id','readonly-contract','--target','r4-v100','--check-only'],
+                                  env=dict(os.environ,R2_STORAGE_ROOT='/old-author-machine-data'),stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True)
             self.assertEqual(result.returncode,0,result.stderr)
             info=json.loads(result.stdout)
             self.assertEqual(info['execution_status'],'completed')
             self.assertEqual(info['authorization']['status'],'needs_input')
             self.assertTrue(info['missing_runtime_paths'])
             self.assertFalse(any('/mnt/c' in d['path'] for d in info['disk_reserves']))
+            self.assertNotIn('/old-author-machine-data',info['output'])
             self.assertFalse(Path(info['output']).exists())
 
     def test_exploration_and_strict_statuses(self):

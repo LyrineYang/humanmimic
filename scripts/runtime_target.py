@@ -21,13 +21,13 @@ def load_target(selection=None):
         raise ValueError('Unsupported target schema/kind')
     context = {'project': str(PROJECT)}
     context['data_root'] = str(Path(config['data_root'].format(**context)).expanduser().resolve())
-    context['r2_storage'] = os.environ.get('R2_STORAGE_ROOT') or config['r2_storage'].format(**context)
+    # Legacy callers retain their documented storage override. A newly selected
+    # target must not inherit the previous machine/environment's paths.
+    context['r2_storage'] = (os.environ.get('R2_STORAGE_ROOT') if config['kind'] == 'legacy_wsl' else None) or config['r2_storage'].format(**context)
     for key in ['r1_prefix', 'r2_prefix', 'r4_prefix']:
         config[key] = str(Path(config[key].format(**context)).expanduser().resolve())
     config.update(data_root=context['data_root'], r2_storage=str(Path(context['r2_storage']).resolve()), profile_path=str(path.resolve()))
     config['disk_reserves'] = [{'path': str(Path(item['path'].format(**context)).resolve()), 'minimum_free_gib': item['minimum_free_gib']} for item in config['disk_reserves']]
-    if os.environ.get('R4_ENV_PREFIX'):
-        config['r4_prefix'] = str(Path(os.environ['R4_ENV_PREFIX']).resolve())
     return config
 
 

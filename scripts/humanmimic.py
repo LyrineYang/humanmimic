@@ -15,6 +15,7 @@ def main():
     doctor = sub.add_parser('doctor', help='Read-only target diagnosis; no scientific packages needed')
     doctor.add_argument('--target',default='r4-v100')
     doctor.add_argument('--stage',choices=['r2','r4_example','r4_research'],default='r4_example')
+    doctor.add_argument('--prefix',type=Path,help='Explicit R4 prefix override; target selection ignores stale shell paths')
     bootstrap = sub.add_parser('bootstrap',help='Rebuild an empty Linux prefix from pinned archives', add_help=False)
     bootstrap.add_argument('arguments',nargs=argparse.REMAINDER)
     example = sub.add_parser('example',help='Generate an analytic observation bundle and fit it on one GPU')
@@ -32,7 +33,9 @@ def main():
         return bootstrap_main(sys.argv[2:])
     args=p.parse_args()
     if args.command=='doctor':
-        print(json.dumps(diagnose(load_target(args.target),args.stage),indent=2)); return 0
+        target=load_target(args.target)
+        if args.prefix: target['r4_prefix']=str(args.prefix.resolve())
+        print(json.dumps(diagnose(target,args.stage),indent=2)); return 0
     if args.command=='inspect':
         path=args.result/'result.json' if args.result.is_dir() else args.result
         result=json.loads(path.read_text())
