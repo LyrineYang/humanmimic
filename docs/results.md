@@ -2,7 +2,7 @@
 
 [Home](../README.md) / Evidence
 
-**Snapshot: November 1, 2026.** These are engineering acceptance results from one verified RTX 4060 Laptop environment. R1 uses fixed official/debug examples; R2 uses five debug and five held-out videos with narrow input conditions. Neither is a broad generalization benchmark.
+**Updated: November 2, 2026.** R1/R2 below preserve engineering acceptance from the original RTX 4060 Laptop environment. R4 component evidence comes from the V100 server. R1 uses fixed official/debug examples; R2 uses five debug and five held-out videos with narrow input conditions. Neither is a broad generalization benchmark.
 
 ## R1 — Reference tracking
 
@@ -86,8 +86,21 @@ Each R2 package also retains source, extraction and robot panels; source hashes 
 | R1/R2 headless closed-loop simulation | `passed` within the stated suite gates |
 | Recorded actual-state offline playback | `passed` |
 | GPU-accelerated graphical window | `awaiting_verification` |
-| R3 on-site camera, freshness, recovery and latency | `needs_input` |
-| R4 scene-constrained adaptation | `awaiting_verification` — not implemented |
-| Fresh-machine environment reconstruction | `awaiting_verification` |
+| R3 on-site camera, freshness, recovery and latency | Skipped for this stage; historically unverified |
+| R4 sensing, CUDA joint estimation, memory/control | Implemented; targeted V100 engineering checks passed |
+| R4 successful manipulation and local-geometry gains | `awaiting_verification`; complete video frontend and experimental comparison remain open |
+| Independent R4 Linux/V100 rebuild | Passed: clean committed checkout, hashed empty-prefix installation, CUDA first run and runtime regressions; see [delivery evidence](../evidence/runtime-portability-20261102.json) |
 
-The completed experiments used no newly billed cloud resources; that does not make local computation free. No real robot, new training run or server migration is included in these results. [Current plan](../PLAN.md) remains the execution authority.
+The completed experiments used no newly billed cloud resources; that does not make local computation free. No real robot or new training is included. The R4 runtime is independently prepared on the server; R1/R2 full pipeline migration is not established by it. [Current plan](../PLAN.md) remains the execution authority.
+
+The 2026-11-01 server inventory and research review are preparation evidence, not new robot results. See [server readiness](server-readiness.zh-CN.md) and [research](research.md); the accepted execution results above remain from the original workstation.
+
+## R4 — generated example and current component evidence
+
+The stable [setup](getting-started.md#prepare-a-runtime) and [example](usage.md#cuda-example-and-results) paths build a separate Linux/V100 prefix and generate observations without private assets. A completed example produces a coarse/estimated surface illustration, estimated state/covariance and independent analytic metrics. `execution_status`, `task_status` and `acceptance_status` are separate; an exit-0 run is not a successful grasp claim.
+
+The latest research review fixes exclude internal union faces from geometry metrics, remove continuous-force information from the binary baseline, and freeze independent per-frame poses for shape-only evaluation. [Review evidence](../evidence/r4-review-fixes-20261102.json) records 15 targeted, 15 P2 and 18 memory/control checks. [Earlier online evidence](../evidence/r4-memory-control-20261102.json) records an actual LEAP negative control: execution completed, task failed as expected. Neither establishes a geometry-induced operation gain, and pose uncertainty calibration remains unverified.
+
+The [runtime-portability delivery](../evidence/runtime-portability-20261102.json) records the independent rebuild from 57 hashed wheels, eight environment/CLI checks, six installer contracts, targeted 15/15 and P2 15/15 CUDA regressions, and a fresh six-check LEAP force-bridge run with NVIDIA EGL. The generated example has translation RMSE 0.0194 mm, surface RMSE 0.0260 mm and compliance error 0.0555 mm/N on its analytic fixture. Its pose interval does not cover the fixture error; these numbers do not establish calibrated uncertainty or operation accuracy. Ordinary inspection returns 0 and strict acceptance inspection returns 3 for the same saved result.
+
+Historical metrics above are not replaced by new environment runs. Raw installation, example, force-calibration video and audit outputs live in `runs/runtime-portability-20261102-01/`; [PLAN](../PLAN.md) is the current authority. Website links and HTML structure were checked; browser rendering and remote publication were not performed in this delivery.

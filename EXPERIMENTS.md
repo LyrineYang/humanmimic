@@ -431,3 +431,126 @@ next_action: null
 - 合并后检查passed：122个本地链接、17个网站仓库链接，无缺失锚点；95个核心/历史文件保持原内容，4个展示文件（CSS、JS、预览图及其provenance）逐字节来自已提交f69b0d6，并非交接修复改写运行证据。新网站HTML保留该提交内容及新仓库URL；追加证据evidence/handoff-merge-20261101.json，旧交接修复证据不回写。
 
 - 最终文档核对：合并后的STARTUP仍保留网站迭代当时“仅本地、不推送”的范围表述，与本次已授权交接推送产生歧义。补充其历史范围和现行发布状态，并同步PLAN当前状态；不改变原f69b0d6提交或旧证据。预期是现行启动与PLAN都明确网站代码随交接发布、独立网站未部署；文案与差异检查passed。
+
+## 2026-11-01 humanmimic 本机只读盘点与R4研究范围更新
+
+- 预期记录于 `runs/migration-research-20261101-01/expectation.json`。用户要求origin/链接改名、检查本机资源与迁移缺口、跳过本阶段R3，并将R4扩展至视频交互对象细粒度重建与灵巧操作研究；明确暂不安装依赖或启动实验。更新PLAN、启动提示与handoff的原因是用户范围变化，原静态箱体方案保留为可选历史基线。
+- 仓库准备passed：origin改为 `https://github.com/LyrineYang/humanmimic.git`，fetch后从9808b03快进至a8a58e6，纳入三个已上传文档提交；当前整理在codex/server-research分支，未提交或推送。原机未上传源码由用户核查，本轮没有断言全部已同步。当前链接已更新，原机路径和历史冻结不改。
+- 宿主只读盘点passed：4×V100-SXM2-32GB/SM7.0、驱动530.30.02、CUDA工具链11.8.89/12.1.66、28核56线程、约251.6GiB内存；/home余约680.3GiB，系统卷余约57.2GiB。GPU0有原有计算负载未干扰。普通沙箱GPU访问受限，经获准宿主查询确认硬件，不能把沙箱失败当驱动故障。
+- 缺口：Ubuntu18.04/glibc2.27、默认Python3.6.9、CMake3.21.3；本项目环境/模型和子模块未准备。原TRT10.13.3不支持Volta，旧Torch/原生扩展需独立兼容性验证；Docker宿主socket查询权限拒绝、FFmpeg缺libxcb-xfixes，分别failed。容器路径/GPU runtime、CUDA数值和控制链均未验证，未修复系统。
+- 研究材料完成：`docs/research-video-interaction.zh-CN.md`对照VideoMimic、WM-Craftnet及HOLD/MagicHOI/VideoManip/Do as I Do/C2Dex/OmniHOI/Hand2Robot/NeuralFeels/SPIDER等一手来源，区分重建、控制、开源范围和本机复现。提出固定预算下任务相关局部几何、多假设与视觉触觉反馈的可检验假设，重点要求规划估计几何、执行独立真值，隔离尺度/姿态/控制与几何的收益；不宣称已证实原创性。迁移细节在`docs/server-readiness.zh-CN.md`。
+- 检查：210个本地链接目标中188个存在，13个章节锚点通过；22个历史runs报告/录像链接在本机缺失，已确认全部原有并加原机位置说明，完整历史产物本地可用性仍failed，不伪造或删除历史链接。当前文档入口/锚点、JSON/HTML结构与git diff检查passed；没有浏览器视觉验收。81个既有脚本/配置/evidence/补丁等文件字节一致，子模块gitlink不变，原R2冻结SHA仍c3403dc4581ed61880e66f3c4cbbaa84961c1455621c0e5f170c10c0006378d1；网站仅改仓库URL。
+- 分项：本轮源码/文档准备和研究passed；本机源码运行解析/编译、模型前向、动画/实际状态回放、无界面物理和R4能力均awaiting_verification；R3本阶段跳过，未标passed。未安装依赖、下载模型、启动容器/实验/训练或调用付费API，新增计费支出0，无新录像。摘要`evidence/server-research-20261101.json`，原始host-inventory/document-checks/sources记录在run目录。
+
+## 2026-11-01—02 R4第一阶段方案、独立环境与下游运行准备
+
+- 范围变化：用户从只读盘点扩展为第一阶段可执行方案、本机独立环境/资产和运行准备，并希望补齐VideoManip下游未公开流程。先记录runs/r4-stage1-preparation-20261101-01/expectation.json及before.json，更新PLAN与启动提示；训练、正式保留集、付费API、真机和驱动修改不在本轮范围。详细方案docs/r4-stage1.zh-CN.md，固定右LEAP16DoF、抬升保持/精密放置、12开发/24保留、六方法三消融、预算与统计判据。
+- 网络修复passed：初始27891代理对PyPI/torch/conda返回403，7893握手正常不足以证明下载。用户明确可直接使用7893后，命令指定socks5h://127.0.0.1:7893，实际请求/安装成功；未修改全局代理或记录凭据。Miniforge官方安装器SHA已验证，首次沙箱写~/.conda注册失败后获准宿主安装成功；原失败日志保留。
+- 核心环境passed：相邻humanmimic-data/r4独立Python3.10.14、Torch2.5.1+cu118、MuJoCo3.2.7、CoACD1.0.5及锁定依赖；pip check正常。V100 SM70实际FP32矩阵与CPU双精度对照最大绝对差3.07624e-5、有限梯度正常；约11.1MiB峰值只是小矩阵探针，不是感知模型峰值。Conda精确包和Python版本清单入configs，安装报告留run目录，未改系统Python/驱动/旧环境。
+- 资产/接口passed：LEAP Menagerie固定b0655057a9df2abe39ea7fc989914ba6f248301c，21文件/许可/哈希；VideoManip固定9d0f286af35d73f4252d115d968e0a9c06542b9c，示例148帧全解码。首轮FK暴露URDF基座到掌心固定偏移遗漏，修正后64项对照最大位置差5.04e-8m、角度差9.81e-7rad；失败与修正记录均保留。导入器明确LEAP编号、源完整时间戳、旋转语义、坐标变换/单位/来源，拒绝默认Inspire混用和pickle。
+- 下游实现passed（准备范围）：参考契约、解析/凸网格场景、受限腕力/16关节控制、实际状态/接触/力记录、录像和开发评价入口。审查发现到达目标仍夹持可能被误算放置，先记录evaluation-review-expectation.json，再补静置窗口松手、同步实际位姿/腕四元数记录；17项定向测试passed，存在输出目录拒绝覆盖且原结果SHA不变。正向评价fixture只验证评分逻辑，不是物理成功。
+- 无界面物理和实际录像passed（运行基础）：最新physical-mesh-negative-03完成2000步/4秒/201控制采样、101帧V100 EGL录像；运行2.78秒。任务failed符合预期：无抓取，目标误差80mm/30°，最大穿透0.434mm，关节RMSE0.01442rad。未在循环写实际qpos；完整状态/视频/来源绑定保留。录像全解码和画面检查通过，不能将该负对照说成操作基线成功或局部精化有效。
+- 开发数据passed：四类12实例，均生成24视角/32768点的带噪合成RGB-D观测，全部288视频帧解码、有限值/单位法向/解析表面距离审计通过；0.5mm深度噪声，法向来自模拟深度差分，不是单目估计。24保留实例未生成、未使用。DexYCB只下载标定，具体序列/CAD及冻结实例清单仍awaiting_verification。
+- 未完成内容：MANO用户确认合法持有、路径稍后提供，needs_input；完整VideoManip子环境/权重及本地网格/位姿适配awaiting_verification，不能称只差MANO。粗模型、共享规划器、六精化方法、三消融、碰撞表面/惯量审计、成功操作和正式对照尚未实现或验证；这是独立下游基础，不宣称复现未公开训练流程。
+- 分项与保全：源码解析/核心环境、开发输入旋转录像、无界面物理负对照与当次实际录像passed；独立缓存重放awaiting_verification，现场相机本阶段不运行。82个既有受保护文件SHA不变，原R2冻结和人工修改保留。原R1/R2 passed不转移本机。
+- 收尾资源：数据8.863GiB，40GiB上限内，数据卷剩余约667.4GiB；新增计费0。初次计算用当时空闲GPU1，之后发现其他任务占用，最终复验/其余观测改用空闲GPU3，未干扰其他任务；收尾无R4后台进程。当前本地改动未提交/推送。原始结果runs/r4-stage1-preparation-20261101-01/REPORT.md，可同步摘要evidence/r4-stage1-preparation-20261101.json。
+
+## 2026-11-02 WM-CraftNet多模态重建与操作研究、CPU原型
+
+- 用户设置新的活跃Goal：今晚结合开源库/具体代码推进触力觉与多模态状态用于物体重建、操作优化的想法，交付实施计划和探究实验设计，MANO将直接发送。按无GPU/训练安排处理，只做源码/设计和轻量CPU诊断；先记录runs/r4-multimodal-design-20261102-01/{before,expectation,cpu-environment}.json，更新PLAN/启动提示，旧手型/T1/T2门槛不变。
+- 源码审计passed：固定WM-Craftnet a1e825acaf50ade298e30b0b13c6671627af3a1e、NeuralFeels 36398b861c05a66868490fa43dfb7742cf345386；18份文件核对Git blob，另4份MuJoCo3.2.7/TACTO/tiny-cuda-nn源码与固定ref正文匹配。逐函数检查输入、replay、RSSM、辅助头、部署传感和latent导出，不只复述论文。
+- 核心发现：原WSM低维输入包含5位阈值接触，实际reader对F6前三分量取范数/二值化并在失联时返回全零；连续力方向、载荷、valid/dt是可明确研究的新信号。h为512、decoder完整feature1536、当前actor投影32；发布配置pose/tactile/value/object四辅助头关闭，当前训练配置打开。只执行两个已审查配置函数，确认两条当前配置路径reward loss scale均为0；不据此推断未读取checkpoint的历史训练。真实infer接深度/触觉/WSM，而policy_server示例contact为零，入口不可混用。
+- 实现/实验设计passed：docs/r4-multimodal.zh-CN.md和configs/r4-multimodal-study.json覆盖显式物体状态、形状/位姿/顺应性可辨识、相关预测不重复当测量、观测与特权标签隔离、任务风险选点、代码修改位置、库/手型/数据/许可及V100分环境路径。E1固定轨迹V/VB/VF 324开发重放；E2几何更新×力反馈4组288开发/未来576保留；E3五种探触策略360开发；E4原生Sharpa冻结WSM读出；E5有授权后才训练。以上矩阵都未启动，原6几何对照另保留，不做全因子扩张。
+- 数据/新意：DexYCB不提供本研究所需同步机器人力触觉；FeelSight新增为光学触觉/形状位姿感知外部验证，不能冒充连续力或LEAP控制数据。既有NeuralFeels/主动触觉/TouchGuide限制原创性主张，不能将简单加触觉/SDF/主动探索称首创。提出可否证主问题：有直接力反馈后，几何精化是否仍带来独立操作收益，以及同预算任务风险选点是否优于全局不确定性。
+- CPU代码实现passed（限定原型）：新增r4_multimodal.py的严格传感包、局部线性形状/pose/compliance拟合、task-variance探触评分、静态摩擦下界；新增诊断与13项针对性测试，连同原17项共30 passed。没有WSM权重加载、完整SDF或控制器实现。
+- CPU原生传感验证passed：MuJoCo3.2.7 touch与3通道4×4 touch_grid在50g静置探针500步后均0.4905N；只验证法向静态传感，不是LEAP/剪切/真机标定。独立解析fixture有位姿锚+变载荷时可解；无锚/恒载荷返回unobservable，静态摩擦仅给下界，过力/不可达/零任务增益候选拒绝。首轮cpu-probe-01保留；审查后packet外参改用实际site FK并补零收益拒绝，重跑cpu-probe-02与30测试；原型精确拟合不能当研究精度结果。
+- 资源与分项：本轮0 GPU任务、0训练、0新增依赖/付费/真机/保留使用，无新视频；CPU诊断计算不足0.1秒（不含导入），不预测V100吞吐。开始时104个旧脚本/配置/测试/证据字节不变。源码/设计/CPU原型passed，LEAP传感桥、完整融合/操作、WSM推理与方法收益awaiting_verification；MANO未收到可读取文件，不阻塞研究方案。摘要evidence/r4-multimodal-design-20261102.json，原始报告runs/r4-multimodal-design-20261102-01/REPORT.md。本地未提交/推送，R4整体未完成。
+
+## 2026-11-02 P1/P2源码实施与GPU运行准备（未执行验收）
+
+- 用户要求按已定路线实现P1/P2，明确不要CPU检查；本轮预期先写入`runs/r4-p1p2-implementation-20261102-01/expectation.json`，没有因暂无计算资源把实现缩减为解析原型。
+- P1源码：可选LEAP四指端touch_grid与已知手部碰撞区域标定；xyz作用力、采集/接收时间、丢包/饱和、接触起始区间；物理入口`--sensors`生成公开观测和独立私有评价。采集manifest绑定对象/种子、观测、场景和实际状态，保留旧入口默认行为。
+- P2源码：CUDA FP64滑窗联合SE3、局部RBF法向网格和有效顺应性；同一分箱跨时刻变载荷门控，位姿/形状规范分离，不含先验的数据Fisher、零空间冻结、协方差/null projector输出。单独worker通过白名单JSON通信，拒绝项目数据读取/写入、网络和子进程；不导入MuJoCo/私有评价。Python audit是防意外泄漏的工程边界，不是防恶意原生代码的OS沙箱。
+- GPU代码准备：四指载荷/健康校准及录像入口、独立三维联合估计/缺失/退化/饱和/过期/真值改写检查、20种子覆盖率、公开RGB-D粗先验初始化、隔离重放、独立GPU几何/相对位姿评价、E1模态/遮挡/消融矩阵。共同视觉采样与4096总观测预算，固定先验ROI，失败保留在分母；完整324批次未执行。
+- 源码审阅后修正了多层手部表面分箱不能假装精确点、不能用不同分箱之间载荷差冒充时间激励、ROI不能按各方法最终状态重选、观测与真值必须绑定同一采集记录等问题。最终保留实现等待目标硬件检查；不是运行后调参得到的通过结果。
+- 分项状态：源码已写入/人工审阅；Python源码解析、CPU测试、GPU数值、动画回放、无界面物理/录像、现场相机均未执行。P1/P2运行验收全部`awaiting_verification`，不能继承此前30项CPU原型测试。MuJoCo动力学/插件仍为CPU，EGL/估计/数值评价用GPU；没有GPU物理、成功抓取、实拍分割或操作收益结论。
+- 新增安装0、训练0、计费0、真机0、保留使用0；无新GPU任务、录像或MANO资产。R1/R2与此前R4证据保留，未提交/推送。摘要`evidence/r4-p1p2-implementation-20261102.json`；原始准备记录`runs/r4-p1p2-implementation-20261102-01/REPORT.md`；命令与局限见`docs/r4-multimodal.zh-CN.md`第9节。
+
+## 2026-11-02 R4显式记忆、局部操作/探触与V100就绪验证
+
+- 范围与预期：用户要求详细解释多模态记忆→接触修正几何→任务相关探触、专项实验及VideoManip区别，同时继续实现/配置。先记录`runs/r4-memory-control-20261102-01/expectation.json`；PLAN/启动提示与研究协议同步，不重新选手型/路线。宿主只读观察GPU3当时仅3MiB/0%，随后用其UUID执行有界CUDA任务，不干扰其他GPU；没有CPU数值测试/源码解析/训练/计费/真机/保留使用。
+- 文档与实现：专项文档第0节增加贯穿例子、原生Mermaid、四个可否证insight、显式/学习记忆区分、接触形状/位姿/顺应性机制、VideoManip固定发布快照区别、E0–E5/M1与交付能力；第10节解释代码边界、命令、环境和局限。新增最多32帧显式记忆/每次8帧选择、CUDA已知LEAP FK/IK、局部几何/力反馈四组、任务代理探触、独立在线worker、E2/E3有界试次入口和CUDA配对统计。不是完整抓取合成、整手碰撞认证或已接通WSM。
+- P1 GPU门控集成passed：`p1-gpu-02`六项，真实LEAP四个远端指节载荷/符号、无接触、多接触、延迟、掉点和饱和；三指0.15696N、拇指0.48069N与已知重力一致，生成实际录像。初轮误把renderer字符串必须含NVIDIA作为条件，改查GL_VENDOR后复跑；原失败日志保留。完整手部加载标定仍awaiting_verification。
+- P2 CUDA分项passed：`p2-gpu-03`完整15项（含真值变更不影响输出、缺失/退化/饱和/过期、非法真值字段/未来包拒绝）。首轮顺应性误差0.000444523m/N超过0.0004原门槛；修复切平面曲率偏差后，独立解析样例位置RMSE0.01937mm、形状RMSE0.02601mm、顺应性误差0.05549mm/N，门槛未变。**位姿置信区间同例未覆盖误差，20种子覆盖率未做，校准不记passed。** 文件审计清理Torch自有临时目录后又跑`p2-guard-04`定向回归，读项目数据仍拒绝且stderr为空。
+- 新模块GPU检查passed：最终`memory-control-gpu-07`十八项，含持久/去重/身份/失联不确定性、批量FK与MuJoCo参考最大差7.15e-9m、IK、G/F开关/限幅/共同过力停止、触觉单元噪声不制造接触、未标定拒绝、任务Jacobian、零收益拒绝、已有载荷计入探触上界、全局基线不借用任务收益筛选。探触uniform用已探位置的最远覆盖近似；默认仍拒绝未标定顺应性界。初次正向探触fixture协方差太小，本应拒绝；更换明确的中等协方差测试例，未降低增益门槛。一次输入文件名错误及原日志保留。
+- 完整在线连接passed、任务failed：`online-negative-03`2000步/4秒/201控制时刻、4×50步联合更新、最多32帧记忆、101帧实际录像、循环墙钟104.85秒。更新确实使用0/0.1秒历史证据，公开输入/worker读文件拒绝/全部事件独立保存，stderr为空；没有触发探触。最终80mm/30°、无手物接触、100mm失败惩罚、0.434mm最大穿透和0.014418rad关节RMSE，符合旧固定负对照，不是成功操作或几何收益。首轮300秒超时保留，缓存手链/批量FK后02轮194.08秒；再修正触觉单元噪声正偏聚合，03轮最终回归通过。未增加墙钟预算，不能把非受控多修复耗时差当单算法加速结论。
+- 统计工具passed：`stats-gpu-01`五项CUDA虚构表检查，正确识别已知改善/无改善、执行失败固定100mm、重复/替换拒绝及不完整矩阵不作研究通过。虚构288行表不是288次实际试验；完整E1/M1/E2/E3均未运行。最后探触载荷/公平性修改只影响候选分支，由07模块回归覆盖；在线负对照不进入该分支，不把它称主动探触执行验收。
+- 环境与资源：复用独立Python3.10.14/Torch2.5.1cu118/MuJoCo3.2.7，新增激活/缓存/SM70配置，无新包。MuJoCo动力学/插件仍CPU，CUDA承担估计/规划/数值判定，EGL用GPU；不称GPU物理或实时。原始结果约111MiB，数据卷收尾约641GiB可用。所有记录中的本轮进程已结束，GPU空闲不保证延续；新增费用0、训练0、保留0。录像生成有证据，未额外动画回放/完整视觉审核，现场相机未运行。
+- 尚缺：成功抓放参考/共享抓取合成、完整手部和不确定性/探触力界标定、开发矩阵和保留确认；MANO路径needs_input，完整视频前端/DexYCB/原生WSM各自awaiting_verification。本地未提交/推送，原R1/R2和人工修改保留。摘要[evidence/r4-memory-control-20261102.json](evidence/r4-memory-control-20261102.json)，原始[REPORT](runs/r4-memory-control-20261102-01/REPORT.md)。
+
+## 2026-11-02 环境管理与项目产品性复审
+
+- 用户要求在已完成一次usability修复后，审核当前环境管理与“开发者可用性 + insight/探究”的中间形态。先读PLAN与原验收，写`runs/project-audit-20261102-01/expectation.json`，记录HEAD a8a58e6及80个既有修改/新增文件SHA；本轮为审计，不重写研究路线或修改运行代码。
+- 审计passed（范围限定）：上一轮README能力/上手/输出/帮助组织、insights的观测/局限/假设区分有效。当前仍是developer preview，空前缀重建、独立首跑与产品整体验收awaiting_verification。
+- 隔离要求failed：独立shell中R4激活选中了Python3.10.14，但注入PYTHONPATH与临时用户site-packages的无副作用sentinel分别仍可发现；用户包启用，旧LD_LIBRARY_PATH/Conda环境名仍保留。证明包搜索边界不完整，未实际替换Torch/NumPy或运行数值测试。证据`r4-activation-{ambient,usersite}.json`。
+- 可迁移入口failed：仅用AST提取并调用两个R2标准库函数，原boot检查和默认存储分别拒绝当前上下文；没有跑完整CLI/模型，也未绕过原机暂停保护。R1/R2默认激活因环境不存在退出1；R4已有核心栈不代表R1/R2迁移passed。
+- 产品缺口：setup仍写服务器未准备/无安装授权，results/website仍有R4未实现旧状态；探索首跑的顶层status/exit仍绑定研究验收；完整媒体在原机，尚无独立小示例首跑回归。仓库79个scripts文件中44个R4脚本和4个tests均未进入HEAD，无根级统一任务/包配置或CI；不否定既有GPU工具测试，也不将新增目录配置当作完整修复。项目许可/公开范围needs_input，仅为后续发布选择。
+- 环境观察：Ubuntu18.04、系统Python3.6.9，当前沙箱无`/dev/nvidia*`，nvidia-smi退出9，不能推断宿主驱动损坏或否定此前V100证据。初版审计helper使用Python3.7+ subprocess参数失败，改为3.6兼容后完成；原失败留`inventory-first-attempt.log`。
+- 后续建议已写具体验收：环境切换/目标profile→一个支持目标的空前缀重建→小示例与执行/验收分项状态→同步README/setup/results/website及常规回归；保留Conda分环境、研究协议和失败证据。本轮源码审阅/shell探针完成，Python源码解析仅两个R2文件；数值CPU、GPU、动画/回放、无界面物理、现场相机均未运行，无新录像。安装0、训练0、保留0、计费0、真机0、驱动改动0，未提交/推送。报告`runs/project-audit-20261102-01/REPORT.md`，摘要[evidence/project-audit-20261102.json](evidence/project-audit-20261102.json)，收尾保护核对`preservation-review.json`。收尾另检测到并发W&B依赖更新和R4研究模块修改，全部保留并单列记录，不算作本次审计执行或通过证据。
+
+
+## 2026-11-02 W&B依赖安装与离线日志验证
+
+- 预期：在本服务器现有R4核心环境安装W&B，保持全部已有包版本不变；不登录、不上传、不启动训练/仿真。执行前记录`runs/wandb-setup-20261102/expectation.json`与包版本清单。
+- passed：安装`wandb==0.17.9`及缺失依赖，共12个新增包；原74个包版本均未变。与UnionMimic已固定SDK版本一致，Python/Torch/CUDA/MuJoCo不升级。依赖声明及R4版本快照已追加。
+- passed：SDK导入、CLI版本/登录帮助、`pip check`；离线run写入3个数据点后关闭，再从实际`.wandb`文件回读，逐项核对step/value为(0,1)、(1,2)、(2,3)。没有GPU数值或物理检查；此项仅验收日志安装。
+- 网络：默认代理的两次解析尝试返回403，保留日志；改用本项目此前记录的7893代理后解析及安装成功，仅对安装命令设置，不修改全局网络配置。
+- awaiting_verification：账号认证、在线同步及训练/评估入口接入。用户稍后完成注册；凭据不写入仓库。R1/R2旧环境和既有研究结果不变。原始记录`runs/wandb-setup-20261102/`，摘要[evidence/wandb-setup-20261102.json](evidence/wandb-setup-20261102.json)。
+
+## 2026-11-02 server-research指定只读审查的代码修复
+
+- 预期与来源：用户要求处理审查聊天`01a19b46-55b5-7481-bfc0-d714ae890a8f`。按要求调用read_thread，带/不带host均为空，随后只读该任务本地记录；4项原文和修改前源码哈希存于`runs/r4-review-fixes-20261102-01/review-findings.txt`、`expectation.json`。沿用现有研究路线、门槛和预算，无CPU解析/数值替代、训练、保留、计费或真机。
+- EGL项passed（核实已有修复）：两个运行入口已改用GL_VENDOR判断NVIDIA；P1检查脚本与前轮V100六项通过时哈希相同，引用原证据，不重复未改动的物理检查。
+- 几何评价修复passed：并集采样保留源表面外法向，用尺度相关外移后的自由空间排除内部公共面；相接盒体/圆柱/旋转盒体各2048点中错误内部点由472/502/472降为0，最大外表面距离误差3.47e-18m，重复外表面保留。首轮修复后Float/Double索引赋值失败，使用同dtype的ones_like修正；`after-gpu-01.log`和failed manifest保留，门槛未改。
+- VB修复passed：记忆选择及拟合前转换为只含接触位、时间、手部外参与健康的输入；移除压缩力方向门控、载荷top-k和连续力历史，超预算时用固定索引选点。保持接触位/健康不变而翻转力方向、改变幅值，VB接触行数由旧8/0变为8/8，完整求解和记忆输出相同；VF仍对连续力敏感。V在记忆前剔除触觉，防止选帧间接泄漏。原始采集完整保留，不改写原观测流。
+- shape-only修复passed：优先冻结独立逐帧位姿测量，否则以固定粗模型和纯视觉单独估计逐帧位姿，再执行条件形状拟合；不读取joint位姿缓存或触觉。冻结结果相对各帧测量的矩阵元素最大差1.57e-13；无锚视觉路径state_updated为true，80步中40步用于独立位姿，计入共同梯度/墙钟预算。无独立位姿时明确返回independent_pose_unavailable，不回退静止初始位姿。输出保留位姿来源/不确定性；不声称固定估计位姿无误差。
+- GPU回归passed：同一V100 UUID `GPU-bf9af36c-d009-896b-f0ea-35f592684d20`，新增定向15/15、原P2完整15/15、记忆/控制18/18。原P2 joint误差仍为位置0.01937mm、形状0.02601mm、顺应性0.05549mm/N，位姿置信区间仍未覆盖同例误差，20种子校准awaiting_verification。原`before-gpu`7项中5项失败与全部失败日志保留；不以修复后的通过覆盖旧结果。
+- 评价入口集成passed：在CUDA私有评价进程重算前轮`online-negative-03`的4个已有估计时刻，0个缺失，末时刻世界表面均距6.885mm、P95 16.496mm。仅验证修复后评价链，不是新物理执行、方法对照、精密操作或收益通过；旧记录原样保留，新输出在`existing-negative-evaluation/`。
+- 交付与资源：同步多模态文档/实验配置、PLAN/HANDOFF；新增模态边界及GPU回归入口，源码版本、命令和结果分别留证。沿用Python3.10.14/Torch2.5.1+cu118/MuJoCo3.2.7，未安装依赖；工作区并行审计/W&B改动保留，不归作本轮成果。源码人工检查与CUDA导入完成，未另做CPU解析、动画回放、新无界面物理/录像或现场相机检查。本轮任务均已结束，新增费用0、保留0、训练0，未提交/推送；不确定性校准、成功抓放与局部精化操作收益仍awaiting_verification。详见[REPORT](runs/r4-review-fixes-20261102-01/REPORT.md)、[证据摘要](evidence/r4-review-fixes-20261102.json)。
+
+- 2026-11-02 W&B目标配置：用户提供entity （目标值仅保存在本机忽略文件中），本项目默认project设为`humanmimic`。新增非密钥配置`configs/wandb.env`并由R4激活脚本加载；shell语法与SDK实际读取的entity/project/日志目录检查passed。本机凭据未配置，未创建云端run或验证团队权限。原始结果`runs/wandb-setup-20261102/destination.json`。
+
+## 2026-11-02 W&B新格式API Key兼容修复
+
+- 原因：0.17.9在本地强制40字符，拒绝用户从网页生成的86字符Key；先前离线验收未覆盖认证格式。官方0.22.3发布说明明确支持长Key，且Python最低版本仍为3.8。
+- 执行：R4实际环境升级wandb到0.22.3，新增annotated-types/pydantic/pydantic-core/typing-inspection，其余原有包版本完全不变；更新核心声明、版本快照以及本轮新建的bootstrap锁/哈希清单，原始新wheel已复制到rebuild-wheelhouse并核验sha256。输入变更不覆盖旧重建运行清单，本轮未进行空前缀重建或GPU验收。
+- passed：用虚构86字符Key通过SDK实际write_key路径写入临时隔离netrc，核对完整回读与0600权限，结束后删除；离线run的三个step/value从实际二进制日志回读一致，CLI与pip check通过。用户真实Key没有用于测试/保存；提示其撤销聊天中披露的旧Key，在终端输入新Key。
+- awaiting_verification：真实账号认证、团队权限与云端同步；训练入口未改。预期/版本前后/安装报告/检查脚本位于`runs/wandb-key-fix-20261102/`，摘要[evidence/wandb-key-fix-20261102.json](evidence/wandb-key-fix-20261102.json)。
+
+## 2026-11-02 环境隔离、目标配置和独立重建（进行中）
+
+- 用户新Goal要求完整修复五项产品性问题，执行前记录`runs/runtime-portability-20261102-01/expectation.json`，保存当前文件哈希、HEAD和空间。路线为环境/目标→空前缀→无私人资产小示例→文档与回归；原研究手型/任务/预算/门槛不改，不训练、不用保留、不计费、不连接真机、不更改驱动。
+- 隔离实现：R4在子shell完成Conda hooks/路径准备后发布环境，屏蔽外部PYTHONPATH/用户包和旧动态库；CUDA replay/online子进程显式禁用user site。独立目标profile提供路径、磁盘储备与授权边界；原WSL boot保护仍生效，新目标R2 --check-only返回诊断而不伪装原机身份。
+- 空前缀安装passed：`bootstrap-01`从固定Miniforge 24.3.0-0安装包和53个原始wheel（约2.8GiB）构建`r4-rebuild-20261102`，未复制旧site-packages；新环境约6GiB、Python3.10.14/Torch2.5.1+cu118/MuJoCo3.2.7，pip check通过。初次只设代理环境变量的下载被403拒绝，显式--proxy 7893后完成，两个日志均保留。旧环境没有升级；bootstrap后续修正专用pip缓存及同前缀安装锁，最终代码另做干净副本验收。
+- 首跑passed（工程范围）：`example-01`在新环境/V100 UUID GPU-bf9af36c-d009-896b-f0ea-35f592684d20上生成8帧解析观测，独立CUDA进程拟合并交付REPORT/比较SVG/公开输入/私有评价/状态JSON。execution completed、解析task passed、research acceptance awaiting_verification；没有物理抓取、MANO、私人视频或训练权重。`core-gpu-01`CUDA矩阵及梯度检查通过，参考计算也在CUDA；可选LEAP资产检查另行报告。
+- 常规回归：`contracts-02`8项shell/CLI/状态契约passed（清洁/污染/真实Conda切换/重复激活、失败回滚、原机与新目标保护、R2只读、探索与严格状态、缓存媒体改写拒绝），源码解析单列通过；这些是标准库/启动边界检查，没有CPU数值估计。`docs-01`220本地链接/锚点和HTML结构passed，17个明确历史runs链接不当作本机媒体。新增定向GPU回归15项passed；完整P2尚在运行，收尾证据将追加，不提前标记全Goal完成。
+- README/setup/usage/results/help/贡献/网站已同步当前支持目标、原机历史和研究预览的界限；网站主要入口变为setup→example→结果，研究主线保留。账号目标配置留在ignored configs/wandb.env；文档仅保留配置状态，避免把本机账号配置写入提交。其他并发变更保留。
+
+## 2026-11-02 环境与可用性五项修复完成
+
+- 工程交付passed：隔离激活、独立profile、哈希档案空前缀重建、无需私人资产的CUDA首例、分项状态/普通与严格退出、统一文档和回归入口已进入本地可审阅提交299e12a/cc98a3b/70640ca，未推送。原始预期未改、研究门槛未降；最终[交付报告](runs/runtime-portability-20261102-01/REPORT.md)及[摘要](evidence/runtime-portability-20261102.json)记录全部证据与限制。
+- 独立验收passed：clean-checkout源码干净、两个子模块未初始化，clean-data独立data根无assets；从空前缀以Miniforge原始安装包+当前57个哈希wheel构建Python3.10.14/Torch2.5.1+cu118/MuJoCo3.2.7/W&B0.22.3。没有复制已安装包；初次53-wheel与并行W&B修复后57-wheel结果分开保留，当前锁已实测重建。六项安装器身份/锁/重复/损坏拒绝契约passed。
+- 环境/入口passed：干净副本8/8契约，包含真正创建并激活另一Conda环境后切换、污染/重复激活、失败环境不变、原WSL保护、新目标R2只读诊断、陈旧shell路径不覆盖profile及已缓存媒体变更拒绝；源码/shell解析单列通过。标准库契约检查不是CPU数值估计回退。
+- 目标V100回归passed：定向15/15、完整P2 15/15；最终57-wheel环境CUDA矩阵/梯度与P1六项passed，NVIDIA EGL录像完整解码通过。MuJoCo3.2.7动力学仍CPU执行，CUDA负责数值验收/估计，NVIDIA负责渲染；不称GPU物理。完整源码哈希与早期回归后EOF空行/安装器改动的覆盖解释写入报告，未重复无影响的数值试验。
+- 首例passed（仅解析工程门槛）：同一V100、固定8帧/200步，独立CUDA进程输出位置0.01937mm、表面0.02601mm、顺应性0.05549mm/N；位姿区间仍未覆盖误差。execution completed、task passed、review/acceptance awaiting_verification，普通查看实测0、严格查看实测3。公开观测/粗模型/估计/私有真值评价/REPORT/SVG齐全，无MANO、私人视频、权重或机器人资产依赖。
+- README/setup/usage/results/help/网站/贡献指南与PLAN/HANDOFF/启动提示同步；本地文档链接/HTML结构和内容核对通过。没有浏览器渲染/网站发布、新姿态动画或现场相机测试。LEAP新增的是指端校准，成功抓放、操作收益与不确定性校准仍awaiting_verification；R2服务器完整执行尚未迁移，R3跳过。
+- 收尾：本轮任务均已结束；新增费用0、训练0、保留0、真机0、驱动修改0。保留两套重建验收前缀及原始wheel，盘余约617GiB；原环境和其他数据未删除。并行REMOTE_WORK/RESOURCES修改保持未提交，本机账号配置仍ignored，未写入凭据。工程Goal可按上述证据完成，整个研究项目不标complete。
+
+## 2026-11-02 冗余原型清理与Git主线整合
+
+- 修改前预期、原分支图、远端状态及两处未提交文档的完整字节/patch保存于`runs/repository-cleanup-20261102-01/`。发现远端main已新增网页/交接提交d784d07，使用独立整合工作树，以最新已发布main为基础处理冲突；保留双方历史实验追加，网站CSS/JS/预览图及provenance逐字节取自已发布版本。
+- 代码清理passed：移除无当前调用者、已被CUDA链替代的`r4_multimodal.py`、`check-r4-multimodal-cpu.py`、`test_r4_multimodal.py`共341行。保留现行127个源码/配置/测试文件的原字节，环境锁未改；旧源码由archive/server-research-20261102保留，不删历史研究证据。不因脚本少用就删除仍有效的R1/R2恢复或CUDA研究入口。
+- 文档与合并passed：简化STARTUP为当前R4接续，合入原有仓库更名和服务器盘点，保留REMOTE_WORK/RESOURCES旧字节备份。新网页保留远端布局/交互结构，更新过时的环境和R4文案；全部10条历史R2表格与原版一致，命令shell解析通过。README/setup同步轻量clone，新增隔离/目录/锁文件职责说明。
+- 原“222”是上轮16页面中的本地链接/锚点数量，并非文档数。本轮check-docs覆盖全部根目录与docs递归Markdown并单列类型：23份Markdown+1页HTML，302处链接检查passed（新增证据链接后以最终结果为准），30处历史runs链接单列。没有新增普通说明文档；新增的docs/archive索引来自远端已有提交。
+- 8/8环境/入口契约与17项源码/合并静态审计passed；审计脚本首次误用宿主Python3.6解析现有walrus语法失败，随后按目标Python3.10执行通过，未修改原算法适配旧宿主Python。没有CPU数值、GPU/物理/动画或现场相机新试次，没有训练/保留/计费/驱动修改。网站新文案的浏览器渲染未验收。
+- 将未发布的4次研究提交和本次清理整合为一个本地main提交，已发布历史完整保留；原研究tip存档，不force push、不远端删除历史分支。最终提交及分支收尾另见本机run；[清理摘要](evidence/repository-cleanup-20261102.json)只说明工程整理，不提升研究验收状态。

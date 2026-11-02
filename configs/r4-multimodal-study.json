@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "status": "development design; not frozen for heldout execution",
+  "scope": "simulation-only multimodal object reconstruction and manipulation",
+  "current_authorization": {"source_review": true, "p1_p2_implementation": true, "memory_control_probe_implementation": true, "gpu_experiment_code": true, "light_cpu_diagnostics": false, "gpu_runs": true, "gpu_run_scope": "bounded local development readiness; no full matrix launched", "training": false, "formal_heldout": false, "paid_usd": 0},
+  "retained_protocol": "configs/r4-stage1.json",
+  "source_refs": {
+    "wm_craftnet": "a1e825acaf50ade298e30b0b13c6671627af3a1e",
+    "neuralfeels": "36398b861c05a66868490fa43dfb7742cf345386",
+    "mujoco": "3.2.7"
+  },
+  "input_tiers": {
+    "V": "same RGB-D/proprioception/action history; tactile removed before memory selection and fitting",
+    "VB": "V plus calibrated per-taxel contact bits and health; force vectors removed before memory/fitting; deterministic force-independent point selection",
+    "VF": "V plus measured normal/shear force taxels and known sensor geometry",
+    "VD": "V plus optical tactile depth patches; separate FeelSight/DIGIT study, not force-grid conversion"
+  },
+  "observation_contract": {
+    "units": {"length": "m", "force": "N", "time": "s"},
+    "transform": "T_world_sensor from calibrated hand kinematics; object pose remains an estimate",
+    "force_convention": "force acting on sensor body, xyz in sensor frame; touch_grid channels arrive z,x,y",
+    "missing_is_no_contact": false,
+    "default_max_age_s": 0.1,
+    "estimator_forbidden_inputs": ["ground_truth_object_pose", "ground_truth_mesh", "exact_simulator_contact_position", "exact_simulator_contact_normal", "simulator_friction", "simulator_stiffness", "future_observations"],
+    "predicted_depth_is_independent_measurement": false
+  },
+  "state": ["object_pose_SE3", "local_geometry_residual", "pose_shape_covariance", "contact_mode", "slip_probability", "friction_interval", "effective_contact_compliance", "optional_compatible_WSM_memory"],
+  "shape_only_pose_protocol": {"source_priority": ["complete per-frame independent pose measurements", "separate vision-only registration to the fixed coarse mesh"], "freeze": "each frame's estimated SE3, not the initial pose for all frames", "tactile_or_refined_shape_input": false, "unavailable_pose": "reject update; never silently freeze initial pose", "pose_steps_share_existing_budget": true, "pose_step_fraction_without_complete_measurements": 0.5, "covariance_scope": "conditional on fixed estimated poses"},
+  "development_instances": 12,
+  "heldout_instances_reserved": 24,
+  "heldout_used": false,
+  "execution_seeds": [1101, 1102, 1103],
+  "studies": {
+    "E0": {"purpose": "sensor semantics and identifiability", "execution": "CUDA numerical checks and GPU-gated MuJoCo/EGL distal-load integration; no CPU numerical fallback", "implemented": true, "distal_checks": "passed", "full_hand_loading_calibration": "awaiting_verification"},
+    "E1": {"purpose": "same-trajectory perception comparison", "input_tiers": ["V", "VB", "VF"], "visual_occlusion_fractions": [0.0, 0.5, 0.8], "records_per_object_seed": 1, "development_replays": 324, "implemented": true, "execution_status": "awaiting_verification", "entrypoint": "scripts/run-r4-e1-gpu.py"},
+    "M1": {"purpose": "persistent evidence selection under matched budgets", "modes": ["single", "recent", "diverse"], "primary_contrast": "diverse versus recent, both at most 8 frames", "capacity": 32, "window": 8, "implemented": true, "execution_status": "module and online integration passed; memory advantage awaiting_verification", "entrypoint": "scripts/run-r4-belief-gpu.py --memory"},
+    "E2": {"purpose": "geometry-update by force-feedback causal factorial", "groups": ["G0F0", "G1F0", "G0F1", "G1F1"], "tasks": ["lift_hold", "precision_place"], "development_rollouts": 288, "future_heldout_rollouts": 576, "implemented": true, "implementation_scope": "bounded local reference correction and trial runner; successful grasp initialization still missing", "execution_status": "awaiting_verification", "entrypoint": "scripts/run-r4-control-study-gpu.py --study E2"},
+    "E3": {"purpose": "equal-budget active touch", "strategies": ["no_probe", "random", "uniform", "global_uncertainty", "task_risk_reduction"], "tasks": ["lift_hold", "precision_place"], "development_rollouts": 360, "implemented": true, "execution_status": "awaiting_verification; default force-bound calibration gate abstains", "entrypoint": "scripts/run-r4-control-study-gpu.py --study E3"},
+    "E4": {"purpose": "frozen native Sharpa WSM representation probes and observation-history controls", "requires_native_22dof_inputs": true, "LEAP_zero_padding_allowed": false, "published_checkpoint_head_claim": "pose/tactile/value/shape disabled in released config; binary state dictionary not yet inspected", "implemented": false},
+    "E5": {"purpose": "future calibrated geometry/force/event heads and cross-hand adapters", "requires_separate_training_authorization": true, "implemented": false}
+  },
+  "probe_budget": {"contacts_max": 6, "total_time_s_max": 3.0, "predicted_force_n_max": 2.0, "counts_inside_existing_episode_s": 12.0, "total_wall_cap_per_method_object_s": 300, "calibrate_on_development_before_freeze": true},
+  "geometry_budget": {"selected_observations": 4096, "maximum_changed_vertices": 2048, "update_steps": 200, "planner_candidates": 64, "planner_rollouts": 128},
+  "statistical_plan": {
+    "unit": "object; average paired seeds before bootstrap",
+    "confidence": 0.95,
+    "primary_geometry_mediated_contrast": "penalized_position_error(G0F1)-penalized_position_error(G1F1)",
+    "secondary_feedback_contrast": "penalized_position_error(G1F0)-penalized_position_error(G1F1)",
+    "relative_error_reduction_target": 0.2,
+    "success_noninferiority_margin": 0.05,
+    "failure_penalty_m": 0.1,
+    "exploratory_multiple_comparisons": "report intervals and adjust with Holm before confirmatory claims"
+  },
+  "runtime_estimates": {"status": "one V100 online negative fixture measured: 4s simulation, 104.85s loop wall, four 50-step updates; not a real-time or full-matrix throughput claim", "clock": "simulation time; synchronous inference pauses physics", "planned_control_hz": 50, "planned_pose_tracking_hz": 10, "planned_geometry_hz": 2, "maximum_geometry_updates_per_episode": 4, "parallel_gpus": 1, "cpu_threads_max": 8, "additional_data_cap_gib_before_review": 5}
+}

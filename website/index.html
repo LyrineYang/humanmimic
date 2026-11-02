@@ -47,46 +47,46 @@
     </section>
 
     <section class="start-section" id="get-started" aria-labelledby="start-title"><div class="wrap start-grid">
-      <div class="start-copy"><p class="eyebrow">02 / Make it yours</p><h2 id="start-title">A clear place<br>to start.</h2><p class="section-intro">Explore the source today. Run your first video once the environment and assets are ready.</p>
-        <p class="setup-label">Manual setup · Linux / WSL baseline</p>
+      <div class="start-copy"><p class="eyebrow">02 / Make it yours</p><h2 id="start-title">A clear place<br>to start.</h2><p class="section-intro">Start with a generated CUDA example. Inspect estimated shape, pose and compliance without private videos or trained weights.</p>
+        <p class="setup-label">Reproducible setup · Linux / V100</p>
         <a class="button" href="https://github.com/LyrineYang/humanmimic/blob/main/docs/getting-started.md">Environment setup <span aria-hidden="true">↗</span></a>
         <div class="start-links"><a href="https://github.com/LyrineYang/humanmimic/blob/main/docs/usage.md">Usage guide ↗</a><a href="https://github.com/LyrineYang/humanmimic/blob/main/docs/troubleshooting.md">Troubleshooting ↗</a></div>
-        <details class="runtime-note"><summary>What needs to be ready?</summary><p>Prepare the separate perception and control environments, native controller, pretrained weights, body-model assets and verified storage. Cloning supplies source only.</p><p>The accepted setup used an 8 GB RTX 4060 Laptop under WSL2. A fresh-machine rebuild is not yet verified. The original workstation is paused for Linux-server migration; its boot guard also applies to the check command.</p><a href="https://github.com/LyrineYang/humanmimic/blob/main/HANDOFF.md">Current migration readiness ↗</a></details>
+        <details class="runtime-note"><summary>What needs to be ready?</summary><p>The supported example uses Linux x86_64, a V100, a compatible NVIDIA driver and 20 GiB free disk. Pinned archives rebuild a separate Conda prefix; activation excludes outside Python packages and stale library paths.</p><p>Full R1/R2 video imitation needs its own environments and licensed assets. R2 read-only target diagnosis works independently of the original WSL boot identity; actual execution keeps its original protection.</p><a href="../docs/getting-started.md">Setup and target profiles ↗</a></details>
       </div>
       <div class="recipes">
         <div class="recipe-tabs" role="tablist" aria-label="Getting started steps" hidden>
           <button id="tab-source" type="button" role="tab" aria-controls="recipe-source" aria-selected="true" data-recipe="source">1. Get source</button>
-          <button id="tab-check" type="button" role="tab" aria-controls="recipe-check" aria-selected="false" tabindex="-1" data-recipe="check">2. Check input</button>
+          <button id="tab-check" type="button" role="tab" aria-controls="recipe-check" aria-selected="false" tabindex="-1" data-recipe="check">2. Run example</button>
           <button id="tab-output" type="button" role="tab" aria-controls="recipe-output" aria-selected="false" tabindex="-1" data-recipe="output">3. Find output</button>
         </div>
         <section class="recipe-panel" id="recipe-source" aria-labelledby="source-title">
           <div class="recipe-heading"><span class="eyebrow">Terminal / Repository access required</span><button class="copy-button" type="button" data-copy="source-code" hidden>Copy command</button></div>
-          <h3 id="source-title">Start with the source.</h3><p>Git and Git LFS are required. Models, environments and full videos are prepared separately.</p>
-          <pre tabindex="0" aria-label="Clone command"><code id="source-code">GIT_LFS_SKIP_SMUDGE=1 git clone --recurse-submodules \
+          <h3 id="source-title">Start with the source.</h3><p>Git supplies the source. Follow environment setup to install the pinned runtime; the generated example needs no submodules or private assets.</p>
+          <pre tabindex="0" aria-label="Clone command"><code id="source-code">GIT_LFS_SKIP_SMUDGE=1 git clone \
   https://github.com/LyrineYang/humanmimic.git
 cd humanmimic</code></pre>
-          <p class="recipe-footnote">The repository is currently private. Use your existing GitHub access.</p>
+          <p class="recipe-footnote">The repository is private. Use existing access and a revision containing scripts/humanmimic.py; local changes may precede GitHub publication.</p>
         </section>
         <section class="recipe-panel" id="recipe-check" aria-labelledby="check-title">
           <div class="recipe-heading"><span class="eyebrow">Terminal / Prepared runtime</span><button class="copy-button" type="button" data-copy="check-code" hidden>Copy command</button></div>
-          <h3 id="check-title">Choose a simple first motion.</h3><p>Use a single-person video up to 60 seconds, with a fixed camera and the full body and feet visible.</p>
-          <pre tabindex="0" aria-label="Input check command"><code id="check-code">source scripts/activate-r2.sh
-python scripts/run-r2-video.py \
-  --input /absolute/path/to/clip.mp4 \
-  --run-id my-first-video \
-  --check-only</code></pre>
-          <p class="recipe-footnote">On a prepared, authorized target, check that <code>active_task_pids</code> is empty and <code>reserved_heldout_source</code> is false. Remove <code>--check-only</code> to run. This inspection alone does not verify runtime readiness.</p>
+          <h3 id="check-title">Run the generated example.</h3><p>After setup, select an available V100 UUID with nvidia-smi. The example generates its own observations.</p>
+          <pre tabindex="0" aria-label="CUDA example command"><code id="check-code">source scripts/activate-r4-research.sh
+python3 scripts/humanmimic.py doctor --target r4-v100
+python scripts/humanmimic.py example \
+  --gpu GPU-... --output runs/my-first-example</code></pre>
+          <p class="recipe-footnote">Replace GPU-... with a currently available UUID. No CPU estimator fallback. This is analytic reconstruction, not robot execution; see the usage guide for the separate video pipeline.</p>
         </section>
         <section class="recipe-panel" id="recipe-output" aria-labelledby="output-title">
           <div class="recipe-heading"><span class="eyebrow">Output / Your run directory</span></div>
-          <h3 id="output-title">Open the report first.</h3><p>A completed pipeline saves a comparison and the data behind it under <code>$R2_STORAGE_ROOT/runs/</code>.</p>
-          <pre tabindex="0" aria-label="Run output directory"><code>my-first-video/
+          <h3 id="output-title">Open the report first.</h3><p>The example saves its inputs, estimates and independent analytic metrics in the output directory you select.</p>
+          <pre tabindex="0" aria-label="Run output directory"><code>my-first-example/
 ├── REPORT.md
-├── demo/comparison.mp4
-├── extraction/
-├── physical/
-└── body-audit/</code></pre>
-          <p class="recipe-footnote">A demo can exist while acceptance is incomplete. Motion-event annotations and final visual review are needed for a fully verified result. <a href="https://github.com/LyrineYang/humanmimic/blob/main/docs/usage.md#find-and-interpret-the-output">Understand each artifact ↗</a></p>
+├── comparison.svg
+├── result.json
+├── public-observations/
+├── estimation/
+└── private-evaluation/</code></pre>
+          <p class="recipe-footnote">Read execution, task and research acceptance separately. A completed example is not a grasping claim. <a href="../docs/usage.md#cuda-example-and-results">Understand each artifact ↗</a></p>
         </section>
         <p class="copy-status" role="status" aria-live="polite"></p>
       </div>
@@ -94,7 +94,7 @@ python scripts/run-r2-video.py \
 
     <section class="section wrap" id="pipeline" aria-labelledby="pipeline-title">
       <div class="section-heading"><div><p class="eyebrow">03 / Under the surface</p><h2 id="pipeline-title">Connected stages.<br>Inspectable decisions.</h2></div><p>Perception runs offline, then releases its models before control begins. Each boundary leaves data you can examine.</p></div>
-      <div class="pipeline-image" tabindex="0" role="region" aria-label="Pipeline diagram; scroll horizontally on small screens"><img src="../docs/assets/pipeline.svg" alt="Video to GEM-X to SOMA/SMPL reference to frozen SONIC to G1 in MuJoCo. Actual-state feedback closes the control loop. The dashed scene-adaptation branch is proposed, not implemented." width="1200" height="470" loading="lazy"></div>
+      <div class="pipeline-image" tabindex="0" role="region" aria-label="Pipeline diagram; scroll horizontally on small screens"><img src="../docs/assets/pipeline.svg" alt="Video to GEM-X to SOMA/SMPL reference to frozen SONIC to G1 in MuJoCo. Actual-state feedback closes the control loop. The dashed known-scene branch is a historical baseline; current R4 studies contact-informed dexterous interaction." width="1200" height="470" loading="lazy"></div>
       <div class="pipeline-caption"><p>The controller drives joint targets. Gravity, contact and robot-state feedback determine what happens next.</p><a class="text-link" href="https://github.com/LyrineYang/humanmimic/blob/main/docs/architecture.md">Architecture &amp; source map ↗</a></div>
     </section>
 
@@ -130,10 +130,10 @@ python scripts/run-r2-video.py \
       <a class="text-link" href="https://github.com/LyrineYang/humanmimic/blob/main/docs/results.md">Complete results &amp; limitations ↗</a>
     </section>
 
-    <section class="next-section" id="exploration" aria-labelledby="next-title"><div class="wrap next-grid"><div><p class="eyebrow">06 / An open direction</p><h2 id="next-title">What if the scene<br><em>gets in the way?</em></h2><p class="section-intro">The next experiment asks whether small edits can help a demonstrated reach succeed around an obstacle—with the same frozen controller.</p><span class="proposal-label">Proposed / Not yet implemented</span><a class="text-link" href="https://github.com/LyrineYang/humanmimic/blob/main/docs/research.md">Explore the research plan ↗</a></div><ol class="next-steps"><li><span>01</span><div><h3>Edit the reference.</h3><p>One reach, a fixed target and one known obstacle.</p></div></li><li><span>02</span><div><h3>Screen with geometry.</h3><p>Joint limits, inverse kinematics and collision distances.</p></div></li><li><span>03</span><div><h3>Ask execution.</h3><p>Compare success, motion deviation and simulation cost.</p></div></li></ol></div></section>
+    <section class="next-section" id="exploration" aria-labelledby="next-title"><div class="wrap next-grid"><div><p class="eyebrow">06 / An open direction</p><h2 id="next-title">When does contact<br><em>improve geometry?</em></h2><p class="section-intro">Track uncertain object state, use contact to separate pose, shape and compliance errors, and test whether local refinement improves actual manipulation.</p><span class="proposal-label">Components implemented / Manipulation gains unverified</span><a class="text-link" href="https://github.com/LyrineYang/humanmimic/blob/main/docs/research.md">Explore the research plan ↗</a></div><ol class="next-steps"><li><span>01</span><div><h3>Remember evidence.</h3><p>Retain useful visual and contact observations over time.</p></div></li><li><span>02</span><div><h3>Refine local geometry.</h3><p>Explain contact using joint pose, shape and compliance estimates.</p></div></li><li><span>03</span><div><h3>Ask execution.</h3><p>Compare manipulation accuracy and success with the same action and compute budget.</p></div></li></ol></div></section>
 
     <section class="closing wrap"><div><p class="eyebrow">A place to use, understand and contribute</p><h2>Start with a motion.<br>Follow your curiosity.</h2></div><div class="closing-links"><a class="button" href="#get-started">Get started <span aria-hidden="true">↑</span></a><a class="text-link" href="https://github.com/LyrineYang/humanmimic/blob/main/CONTRIBUTING.md">Contribute a fix or an idea ↗</a></div></section>
   </main>
-  <footer class="site-footer wrap"><div><a class="wordmark" href="#top">HumanMimic</a><p>Video to humanoid motion.<br>Built with GEM-X, SONIC, G1 and MuJoCo.</p></div><div><p class="eyebrow">Explore</p><a href="https://github.com/LyrineYang/humanmimic/blob/main/docs/usage.md">Usage guide</a><a href="#pipeline">Pipeline</a><a href="#insights">Insights</a><a href="https://github.com/LyrineYang/humanmimic/blob/main/CONTRIBUTING.md">Contributing</a></div><div><p class="eyebrow">Project status</p><p>Developer preview · Simulation only<br>Live camera: awaiting on-site testing<br>Scene adaptation: proposed</p><p class="footer-meta">Private repository · Local preview<br>No project-wide open-source license yet.</p></div></footer>
+  <footer class="site-footer wrap"><div><a class="wordmark" href="#top">HumanMimic</a><p>Video to humanoid motion.<br>Built with GEM-X, SONIC, G1 and MuJoCo.</p></div><div><p class="eyebrow">Explore</p><a href="https://github.com/LyrineYang/humanmimic/blob/main/docs/usage.md">Usage guide</a><a href="#pipeline">Pipeline</a><a href="#insights">Insights</a><a href="https://github.com/LyrineYang/humanmimic/blob/main/CONTRIBUTING.md">Contributing</a></div><div><p class="eyebrow">Project status</p><p>Developer preview · Simulation only<br>Live camera: skipped this stage<br>R4: component checks passed; manipulation unverified</p><p class="footer-meta">Private repository · Local preview<br>No project-wide open-source license yet.</p></div></footer>
 </body>
 </html>

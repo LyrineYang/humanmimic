@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "status": "awaiting_verification",
+  "scope": "P1/P2 source implementation and GPU execution/experiment preparation",
+  "implementation_written": {
+    "leap_force_grid_bridge": true,
+    "public_observation_private_evaluation_split": true,
+    "isolated_public_json_estimator_process": true,
+    "cuda_sliding_window_pose_local_mesh_effective_compliance": true,
+    "observability_null_space_and_covariance_output": true,
+    "gpu_acceptance_and_coverage_entrypoints": true,
+    "e1_paired_replays_and_independent_gpu_evaluation": true
+  },
+  "verification": {
+    "review": "manual source/dataflow review only",
+    "python_parse_executed": false,
+    "cpu_tests_executed": false,
+    "gpu_runs_executed": false,
+    "new_video": null,
+    "full_leap_sensor_calibration": "awaiting_verification",
+    "joint_estimation_accuracy_and_coverage": "awaiting_verification",
+    "runtime_isolation_compatibility": "awaiting_verification",
+    "e1_matrix": "awaiting_verification",
+    "manipulation_precision_gain": "awaiting_verification"
+  },
+  "limits": [
+    "MuJoCo 3.2.7 dynamics and native sensor plugins are CPU; CUDA is required for estimator/numeric acceptance and NVIDIA EGL for P1 rendering.",
+    "Python audit read guards and separate processes prevent accidental data leakage in trusted code, not malicious native-code access.",
+    "Contact regions use known hand geometry and finite angular samples; exact object contact points/normals never enter estimator input.",
+    "Local mesh refinement preserves prior topology; it is not a full arbitrary-topology SDF.",
+    "Information covariance is uncalibrated; null directions are unbounded. Effective compliance is not a material modulus.",
+    "No successful grasp, E2 control improvement or complete VideoManip reproduction is claimed."
+  ],
+  "heldout_used": false,
+  "training": false,
+  "dependencies_installed": false,
+  "paid_usd": 0,
+  "raw_preparation": "runs/r4-p1p2-implementation-20261102-01/",
+  "configuration": "configs/r4-p1p2.json",
+  "instructions": "docs/r4-multimodal.zh-CN.md section 9"
+}

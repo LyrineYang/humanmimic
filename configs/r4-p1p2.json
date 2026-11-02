@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "status": "awaiting_verification",
+  "sensor": {
+    "size": [16, 12], "fov_deg": [180, 90], "gamma": 0,
+    "threshold_n": 0.05, "saturation_n": 5.0, "noise_std_n": 0.005,
+    "latency_s": 0.02, "dropout_probability": 0.0, "max_age_s": 0.1,
+    "seed": 1101, "surface_margin_m": 0.0005,
+    "sites": {
+      "if": {"body": "if_ds", "position_m": [0, -0.030, 0.014], "quaternion_wxyz": [1, 0, 0, 0]},
+      "mf": {"body": "mf_ds", "position_m": [0, -0.030, 0.014], "quaternion_wxyz": [1, 0, 0, 0]},
+      "rf": {"body": "rf_ds", "position_m": [0, -0.030, 0.014], "quaternion_wxyz": [1, 0, 0, 0]},
+      "th": {"body": "th_ds", "position_m": [0, -0.042, -0.014], "quaternion_wxyz": [1, 0, 0, 0]}
+    }
+  },
+  "estimator": {
+    "window_frames": 8, "maximum_points": 4096, "maximum_vertices": 2048,
+    "shape_modes": 24, "steps": 200, "learning_rate": 0.03,
+    "translation_scale_m": 0.005, "rotation_scale_rad": 0.1,
+    "shape_scale_m": 0.003,
+    "maximum_displacement_m": 0.005, "maximum_compliance_m_per_n": 0.005,
+    "kernel_radius_m": 0.015, "correspondence_radius_m": 0.02,
+    "neighbors": 8, "surface_sigma_m": 0.0005, "shape_prior_sigma_m": 0.003,
+    "compliance_prior_sigma_m_per_n": 0.002,
+    "minimum_force_span_n": 0.15, "minimum_force_samples": 3,
+    "maximum_support_radius_m": 0.008, "huber_delta": 2.0,
+    "information_relative_threshold": 0.000001, "information_absolute_threshold": 0.0001,
+    "maximum_wall_s": 300, "seed": 1101
+  },
+  "execution": {"device": "cuda", "cpu_fallback": false, "training": false, "heldout_allowed": false, "paid_usd": 0},
+  "acceptance": {"force_tolerance_n": 0.03, "pose_translation_tolerance_m": 0.002,
+    "shape_rmse_tolerance_m": 0.002, "compliance_tolerance_m_per_n": 0.0004,
+    "coverage_nominal": 0.95, "coverage_trials": 20, "coverage_minimum": 0.8}
+}

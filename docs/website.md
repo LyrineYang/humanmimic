@@ -4,20 +4,22 @@
 
 **Status: local preview; no hosted website deployed.** The site combines practical onboarding with insights from execution. It uses the same capabilities, limitations and evidence as the GitHub homepage.
 
-![Desktop preview of the HumanMimic website.](assets/website-preview.jpg)
+![Historical November 1 desktop preview; onboarding copy has since changed.](assets/website-preview.jpg)
+
+The image records the November 1 layout, not the current runtime wording. The November 2 integration preserves its CSS/JavaScript and updates onboarding to the verified CUDA example; browser rendering of this text revision remains unverified.
 
 ## Visitor journey
 
 1. **Understand the purpose.** Video to humanoid motion, with a clear Get started action and a real-output link.
 2. **See the output.** An actual comparison frame, attribution, and explanations of the video, intermediate data and report.
-3. **Get started.** Source, input inspection and output recipes; environment preparation and troubleshooting are adjacent.
+3. **Get started.** Source, generated CUDA example and output recipes; environment preparation and troubleshooting are adjacent.
 4. **Understand the pipeline.** Perception, reference, frozen control and physical execution, with inspectable boundaries.
 5. **Explore insights.** Short observations with implications and links to deeper notes.
 6. **Inspect results.** R1/R2 summaries and an expandable table of all ten video outcomes, including failures.
-7. **Follow the open question.** Proposed scene adaptation, explicitly separate from implemented capabilities.
+7. **Follow the open question.** Contact-informed geometry and dexterous manipulation, with implemented components separated from unverified operation gains.
 8. **Take a next step.** Start a run on a prepared target, read usage guidance, or contribute a fix or idea.
 
-The page does not run inference, upload clips or install a runtime. The copy controls copy literal commands. Manual setup and current migration readiness remain visible in the onboarding section. A static comparison frame is labeled as such; it has no pretend play control.
+The page does not run inference, upload clips or install a runtime. The copy controls copy literal commands. Pinned environment setup and current target readiness remain visible in the onboarding section. A static comparison frame is labeled as such; it has no pretend play control.
 
 ## Visual direction
 
@@ -78,7 +80,7 @@ Without JavaScript, all three recipes remain readable, the full table can still 
 
 ## Evidence and maintenance
 
-The HTML results are a static snapshot of [R2 acceptance](../evidence/r2-acceptance-20261101.json), not a live service. Keep every row, event count and outcome aligned with that snapshot. Preserve failures and used-test-data disclosures. Update the date, counters, README and results document only when a new accepted snapshot exists.
+The generated example is the first-run path; R1/R2 full video setup remains separate. The HTML results are a static snapshot of [R2 acceptance](../evidence/r2-acceptance-20261101.json), not a live service. Keep every row, event count and outcome aligned with that snapshot. Preserve failures and used-test-data disclosures. Update the date, counters, README and results document only when a new accepted snapshot exists.
 
 Local layout and interaction validation is recorded under `runs/website-usability-20261101-01/`; its compact summary is [website preview verification](../evidence/website-usability-20261101.json). This verifies the presentation, not a new model, controller, camera or server deployment.
 

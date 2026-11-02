@@ -1,0 +1,37 @@
+{
+  "date": "2026-11-02",
+  "timezone": "Asia/Shanghai",
+  "scope": "Environment management and developer usability after the existing usability repair; preserve research insights.",
+  "head": "a8a58e6c6b7aaac36ad530a2b6682ef778e936fe",
+  "audit_status": "passed",
+  "product_readiness": "awaiting_verification",
+  "assessment": "Evidence-backed developer preview; independent third-party setup and first-run delivery remain incomplete.",
+  "findings": [
+    {"id": "F1", "priority": "P1", "requirement_status": "failed", "summary": "R4 activation retains ambient PYTHONPATH/LD_LIBRARY_PATH and enables user site-packages; two isolated sentinel probes confirmed external module visibility."},
+    {"id": "F2", "priority": "P1", "requirement_status": "failed", "summary": "Video and check-only entrypoints retain the original workstation boot/storage policy; stdlib function probes rejected this target. Original workstation guards must be preserved."},
+    {"id": "F3", "priority": "P1", "requirement_status": "awaiting_verification", "summary": "Pinned snapshots and native asset records exist, but supported-target bootstrap and empty-prefix reconstruction are not accepted."},
+    {"id": "F4", "priority": "P2", "requirement_status": "failed", "summary": "Setup/results/website still describe prior server or R4 states while README and PLAN describe newer components."},
+    {"id": "F5", "priority": "P2", "requirement_status": "failed", "summary": "Exploratory R2 execution uses research acceptance as the top-level status and exit-code contract; missing events/review prevent acceptance even with generated artifacts."},
+    {"id": "F6", "priority": "P2", "requirement_status": "awaiting_verification", "summary": "No clone-to-small-example delivery regression; all 44 workspace R4 script files and four tests are absent from HEAD; no root packaging/task configuration or CI files found."},
+    {"id": "F7", "priority": "release_decision", "requirement_status": "needs_input", "summary": "Project-wide license/publication scope remains undecided; repository stays private and no license was selected."}
+  ],
+  "verification": {
+    "source_review": "passed",
+    "shell_and_stdlib_probes": "passed",
+    "source_parsing_scope": "Two R2 files parsed solely to extract read-only policy/storage functions; not a whole-project syntax check.",
+    "gpu_runtime": "awaiting_verification",
+    "gpu_visibility_observation": "No /dev/nvidia* in this sandbox; nvidia-smi exited 9. This does not diagnose the host driver or invalidate historical checks.",
+    "numeric_cpu_tests": "not_run",
+    "animation_or_recorded_state_replay": "not_run",
+    "headless_physics": "not_run",
+    "on_site_camera": "not_run",
+    "fresh_environment_rebuild": "not_run"
+  },
+  "cost_usd": 0,
+  "heldout_uses": 0,
+  "new_training_runs": 0,
+  "runtime_code_changes": false,
+  "concurrent_changes": "Closeout detected separate W&B dependency updates and R4 research-module edits; preserved and recorded in the raw preservation review. They are not implementation or validation performed by this audit.",
+  "raw_report": "runs/project-audit-20261102-01/REPORT.md",
+  "raw_evidence": ["before.json", "host-inventory.json", "probe-summary.json", "repository-inventory.json", "preservation-review.json"]
+}

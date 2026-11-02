@@ -7,11 +7,12 @@ from pathlib import Path
 import shutil
 import subprocess
 import time
+from runtime_target import load_target, disk_report
 
 PROJECT = Path(__file__).resolve().parents[1]
 GEMX = PROJECT / "vendor/GEM-X"
 SONIC = PROJECT / "vendor/GR00T-WholeBodyControl"
-STORAGE = Path(os.environ.get("R2_STORAGE_ROOT", "/mnt/d/humanoid-demo-r2"))
+STORAGE = Path(load_target()["r2_storage"])
 
 
 def write_json(path, value):
@@ -30,13 +31,15 @@ def sha256(path):
 
 
 def storage_check(output=None):
-    config = json.loads((PROJECT / "configs/r2-resources.json").read_text())
-    if not (STORAGE / ".humanoid-demo-r2-owner.json").is_file():
+    config = load_target()
+    marker = config.get("required_storage_marker")
+    if marker and not (STORAGE / marker).is_file():
         raise ValueError("Unrecognized R2 storage root")
     if output is not None and not Path(output).resolve().is_relative_to(STORAGE.resolve()):
-        raise ValueError("Large R2 outputs must be inside the dedicated D storage root")
-    free = {drive: shutil.disk_usage(drive).free / 1024**3 for drive in ("/mnt/c", "/mnt/d")}
-    if free["/mnt/c"] < config["min_c_free_gib"] or free["/mnt/d"] < config["min_d_free_gib"]:
+        raise ValueError("Large R2 outputs must be inside the target storage root")
+    disks = disk_report(config)
+    free = {item["path"]: item["free_gib"] for item in disks}
+    if any(item["status"] != "passed" for item in disks):
         raise ValueError(f"Host disk reserve below configured floor: {free}")
     return free
 

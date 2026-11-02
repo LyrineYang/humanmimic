@@ -2,7 +2,7 @@
 # Source this file; use --paths-only during installation.
 _R2_PROJECT_ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
 export R2_STORAGE_ROOT="${R2_STORAGE_ROOT:-/mnt/d/humanoid-demo-r2}"
-export R2_CONDA_PREFIX="$R2_STORAGE_ROOT/envs/humanoid-r2"
+export R2_CONDA_PREFIX="${R2_CONDA_PREFIX:-$R2_STORAGE_ROOT/envs/humanoid-r2}"
 export CONDA_PKGS_DIRS="$R2_STORAGE_ROOT/pkgs"
 export CONDA_ENVS_PATH="$R2_STORAGE_ROOT/envs"
 export CONDA_REGISTER_ENVS=false

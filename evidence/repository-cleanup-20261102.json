@@ -1,0 +1,72 @@
+{
+  "status": "passed",
+  "time_utc": "2026-11-02T11:12:13.928163+00:00",
+  "checks": {
+    "only_expected_code_changes": true,
+    "removed_prototype_files_absent": true,
+    "no_removed_module_imports": true,
+    "retained_code_and_configs_byte_identical": true,
+    "website/styles.css_preserves_remote": true,
+    "website/script.js_preserves_remote": true,
+    "docs/assets/website-preview.jpg_preserves_remote": true,
+    "docs/assets/provenance.json_preserves_remote": true,
+    "published_website_control_ids_preserved": true,
+    "all_original_result_rows_preserved": true,
+    "web_code_commands_parse": true,
+    "website_runtime_and_acceptance_current": true,
+    "runtime_contracts_passed": true,
+    "docs_passed": true,
+    "no_merge_markers": true,
+    "archive_tip_preserved": true,
+    "local_notes_backed_up": true
+  },
+  "unchanged_code_config_files": 127,
+  "removed_files": [
+    "scripts/r4_multimodal.py",
+    "scripts/check-r4-multimodal-cpu.py",
+    "tests/test_r4_multimodal.py"
+  ],
+  "removed_lines": 341,
+  "documentation": {
+    "status": "passed",
+    "files": 24,
+    "markdown_files": 23,
+    "html_pages": 1,
+    "local_links_checked": 304,
+    "historical_run_links_excluded": 30,
+    "errors": [],
+    "scope": "Local links, anchors, HTML unique ids and image text; not browser rendering or remote publication"
+  },
+  "contracts": {
+    "status": "passed",
+    "checks": {
+      "python_source_parsing": true,
+      "shell_source_parsing": true,
+      "runtime_contracts": true
+    },
+    "test_count": 8,
+    "failures": 0,
+    "errors": 0,
+    "python": "3.10.14 | packaged by conda-forge | (main, Mar 20 2024, 12:45:18) [GCC 12.3.0]",
+    "prefix": "/home/junqiy/projects/humanmimic-clean-data/r4/envs/r4-core",
+    "scope": "Standard-library shell/CLI/status contracts and source parsing; no numerical estimator, GPU or physics acceptance",
+    "time_utc": "2026-11-02T11:09:58.525953+00:00"
+  },
+  "scope": "Source and merge identity, standard-library CLI contracts, static website controls/results; no CPU numerical or new GPU experiment",
+  "browser_rendering": "awaiting_verification",
+  "training": false,
+  "heldout": false,
+  "paid_usd": 0,
+  "local_merge_only": true,
+  "base_published_main": "d784d07",
+  "archive_tag": "archive/server-research-20261102",
+  "archive_commit": "3c6d3f0264cb5efefbefcfce934af31386efb669",
+  "merge_strategy": "One local squash integration commit on published main; published ancestry retained",
+  "prior_unpublished_commits": [
+    "299e12a",
+    "cc98a3b",
+    "70640ca",
+    "3c6d3f0"
+  ],
+  "report": "runs/repository-cleanup-20261102-01/REPORT.md"
+}

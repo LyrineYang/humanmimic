@@ -1,0 +1,13 @@
+{
+  "environment": "r4-core",
+  "python": "3.10.14", "torch": "2.5.1+cu118", "mujoco": "3.2.7",
+  "target_compute_capability": "7.0", "cuda_runtime": "11.8",
+  "cpu_threads": 8, "gpu_count": 1, "cpu_estimator_fallback": false,
+  "activation": "scripts/activate-r4-research.sh",
+  "gpu_selection": "explicit UUID after checking current occupancy; never a persistent assumed-free index",
+  "data_root_default": "../humanmimic-data/r4",
+  "additional_dependencies_for_explicit_memory_control": [],
+  "learned_wsm": "separate future environment; no Sharpa checkpoint or Isaac Gym installed in r4-core",
+  "limits": {"maximum_episode_s": 12, "maximum_wall_s": 300, "maximum_gradient_steps": 200,
+             "heldout": false, "training": false, "paid_usd": 0}
+}

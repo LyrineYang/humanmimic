@@ -1,6 +1,6 @@
 # Historical workstation guide
 
-Archived README as of November 1, 2026. For current English documentation, see [Getting started](getting-started.md) and [Results](results.md). This preserves earlier operational notes; historical status statements are not current acceptance.
+Archived README as of November 1, 2026. For current English documentation, see [Getting started](getting-started.md) and [Results](results.md). This preserves earlier operational notes; historical status statements are not current acceptance. Historical `runs/` links below refer to artifacts on the original workstation, which are absent from this server clone.
 
 # 人形机器人动作复刻项目启动资料
 
@@ -16,7 +16,7 @@ Archived README as of November 1, 2026. For current English documentation, see [
 4. 在实际执行端读取 [PLAN.md](../PLAN.md)，使用 [STARTUP_PROMPT.md](../STARTUP_PROMPT.md)。需要持久执行时，再由用户激活其中的 `/goal`。
 5. 代理负责依赖、实现与验证。人负责一次性配对主机、开放项目和短时摄像头配合。
 
-私有项目仓库：[LyrineYang/humanoid-demo](https://github.com/LyrineYang/humanoid-demo)。源码与配置由 Git 同步，环境和运行资产按下文单独准备。
+私有项目仓库：[LyrineYang/humanmimic](https://github.com/LyrineYang/humanmimic)。源码与配置由 Git 同步，环境和运行资产按下文单独准备。
 
 ## R1 的 conda 环境
 

@@ -1,0 +1,226 @@
+{
+  "schema_version": 1,
+  "status": "passed",
+  "scope": "Five runtime-portability/usability findings; not complete R4 research acceptance",
+  "time_utc": "2026-11-02T10:53:35.548941+00:00",
+  "run_id": "runtime-portability-20261102-01",
+  "runtime_source_commit": "70640ca2da1d6255fd30e7322765f203e44ffb02",
+  "implementation_commits": [
+    "299e12a5945e66ad5a06bf4808a02c185a7a1b95",
+    "cc98a3b",
+    "70640ca2da1d6255fd30e7322765f203e44ffb02"
+  ],
+  "local_commits_only": true,
+  "clean_checkout": "/home/junqiy/projects/humanmimic-clean-checkout",
+  "fresh_prefix": "/home/junqiy/projects/humanmimic-clean-data/r4/envs/r4-core",
+  "installer_sha256": "23367676b610de826f50f7ddc91139a816d4b59bd4c69cc9b6082d9b2e7fe8a3",
+  "pip_lock_sha256": "d9e37f7ada67e344d07fa1267f94347a3298551cd490cb3abbfdbe682a162ec9",
+  "wheel_count": 57,
+  "core_versions": {
+    "wandb": "0.22.3",
+    "torch": "2.5.1+cu118",
+    "mujoco": "3.2.7",
+    "pydantic": "2.14.2"
+  },
+  "gpu": {
+    "device": "Tesla V100-SXM2-32GB",
+    "selected": "GPU-bf9af36c-d009-896b-f0ea-35f592684d20",
+    "capability": [
+      7,
+      0
+    ],
+    "torch": "2.5.1+cu118",
+    "cuda_runtime": "11.8"
+  },
+  "checks": {
+    "bootstrap-clean-02/manifest.json": true,
+    "bootstrap-clean-02/pip-check.log": true,
+    "bootstrap-contracts.json": true,
+    "clean-clone-final.json": true,
+    "contracts-clean-06/result.json": true,
+    "docs-final-03/result.json": true,
+    "inspect-contracts.json": true,
+    "example-clean-02/result.json": true,
+    "example-clean-02/manifest.json": true,
+    "example-clean-02/REPORT.md": true,
+    "example-clean-02/comparison.svg": true,
+    "core-clean-02/result.json": true,
+    "p1-clean-01/result.json": true,
+    "p1-clean-01/manifest.json": true,
+    "p1-clean-01/actual-four-pad-execution.mp4": true,
+    "p1-video-integrity.json": true,
+    "review-gpu-01/result.json": true,
+    "p2-gpu-01/result.json": true,
+    "install_started_empty": true,
+    "installed_lock_matches_delivery": true,
+    "installed_bootstrap_manifest_matches_delivery": true,
+    "installer_source_matches_delivery": true,
+    "research_acceptance_not_promoted": true,
+    "gpu_no_estimator_cpu_fallback": true,
+    "six_installer_contracts": true,
+    "eight_runtime_contracts": true,
+    "r4_regressions": true,
+    "review-gpu-01_only_known_source_changes": true,
+    "p2-gpu-01_only_known_source_changes": true
+  },
+  "regression_identity_notes": {
+    "review-gpu-01": {
+      "mismatches": [
+        "r4_fixture_evaluation.py",
+        "bootstrap_r4.py"
+      ],
+      "explanation": "Fixture evaluator only lost an EOF blank line; unchanged evaluator was re-exercised by final clean CUDA example. Bootstrap cache/lock changes are not imported by numerical regression and are covered by final clean installation and six installer contracts."
+    },
+    "p2-gpu-01": {
+      "mismatches": [
+        "r4_fixture_evaluation.py",
+        "bootstrap_r4.py"
+      ],
+      "explanation": "Fixture evaluator only lost an EOF blank line; unchanged evaluator was re-exercised by final clean CUDA example. Bootstrap cache/lock changes are not imported by numerical regression and are covered by final clean installation and six installer contracts."
+    }
+  },
+  "example": {
+    "execution_status": "completed",
+    "task_status": "passed",
+    "review_status": "awaiting_verification",
+    "acceptance_status": "awaiting_verification",
+    "metrics": {
+      "state_updated": true,
+      "position_rmse_m": 1.936926969211149e-05,
+      "shape_surface_rmse_m": 2.601448324934777e-05,
+      "compliance_error_m_per_n": 5.5491988042594424e-05,
+      "pose_observable": true,
+      "pose_covered": false,
+      "compliance_observable": true,
+      "compliance_covered": true
+    },
+    "private_assets_required": false
+  },
+  "verification": {
+    "source_parsing": "passed",
+    "runtime_contracts": "passed (8/8)",
+    "installer_contracts": "passed (6/6)",
+    "cuda_core": "passed",
+    "review_cuda": "passed (15/15)",
+    "p2_cuda": "passed (15/15)",
+    "p1_force_bridge_nvidia_egl": "passed (6/6)",
+    "media_full_decode": "passed",
+    "website_browser_rendering": "awaiting_verification",
+    "new_pose_animation": "not_run",
+    "onsite_camera": "needs_input (R3 skipped)",
+    "r2_server_end_to_end": "awaiting_verification",
+    "r4_manipulation_gains": "awaiting_verification",
+    "uncertainty_calibration": "awaiting_verification"
+  },
+  "limitations": [
+    "MuJoCo 3.2.7 dynamics runs on CPU; CUDA numerical checks and NVIDIA EGL rendering were required, with no CPU estimator fallback.",
+    "Initial 53-wheel rebuild predates concurrent W&B 0.22.3 update. Final independent rebuild uses all 57 current hashed wheels.",
+    "R2 server target supports readonly diagnosis; original WSL execution guard remains.",
+    "No website deployment, browser screenshot, physical grasp success or calibrated uncertainty is claimed."
+  ],
+  "limits": {
+    "paid_usd": 0,
+    "training": false,
+    "heldout_used": false,
+    "real_robot": false,
+    "drivers_modified": false,
+    "push_or_publication": false
+  },
+  "artifacts": {
+    "bootstrap-clean-02/manifest.json": {
+      "path": "runs/runtime-portability-20261102-01/bootstrap-clean-02/manifest.json",
+      "sha256": "1cbb74ab922897cfd90b3499c38562498ef69fe5e9792551e205f8ba52061fff",
+      "bytes": 901
+    },
+    "bootstrap-clean-02/pip-check.log": {
+      "path": "runs/runtime-portability-20261102-01/bootstrap-clean-02/pip-check.log",
+      "sha256": "9261363b733079a641c2e4cc9bc46ffa1d8336945a87f807b6cf68847dbc9b09",
+      "bytes": 30
+    },
+    "bootstrap-contracts.json": {
+      "path": "runs/runtime-portability-20261102-01/bootstrap-contracts.json",
+      "sha256": "32743ad4884885d597b7caf5c788ebee45f6e67233f627e50f62426cddcb9a4a",
+      "bytes": 459
+    },
+    "clean-clone-final.json": {
+      "path": "runs/runtime-portability-20261102-01/clean-clone-final.json",
+      "sha256": "dab226bb9d5560caa5a5a36f3fb08b6b1a29a5c150c2844611ea47603be94dcf",
+      "bytes": 2358
+    },
+    "contracts-clean-06/result.json": {
+      "path": "runs/runtime-portability-20261102-01/contracts-clean-06/result.json",
+      "sha256": "c85ae08081c5e50bd75b11a0a5c0022d499bae0cf419c3ef07ccfee9fa5e70ce",
+      "bytes": 541
+    },
+    "docs-final-03/result.json": {
+      "path": "runs/runtime-portability-20261102-01/docs-final-03/result.json",
+      "sha256": "740f2906cfa1756e5ac18420fdd60bca3729dccfd39760ab6204f209392132e6",
+      "bytes": 237
+    },
+    "inspect-contracts.json": {
+      "path": "runs/runtime-portability-20261102-01/inspect-contracts.json",
+      "sha256": "b5bbc3ea632f7fc62bd371940a342a4635f955310377e3cd9c80fa49f4892007",
+      "bytes": 827
+    },
+    "example-clean-02/result.json": {
+      "path": "runs/runtime-portability-20261102-01/example-clean-02/result.json",
+      "sha256": "78f69df9e4b435ee23e7db770980bbdbeec1da72b549c117b501625de305c76e",
+      "bytes": 2012
+    },
+    "example-clean-02/manifest.json": {
+      "path": "runs/runtime-portability-20261102-01/example-clean-02/manifest.json",
+      "sha256": "17455a82e927ea1840e58ae930e4c1590a9f78dee81f61c8c5a8f9e069500be8",
+      "bytes": 5577
+    },
+    "example-clean-02/REPORT.md": {
+      "path": "runs/runtime-portability-20261102-01/example-clean-02/REPORT.md",
+      "sha256": "fbdcff6837c00d3d11990d7e30ea3e44c014c5e585b5a5fbe192128458ccc361",
+      "bytes": 1273
+    },
+    "example-clean-02/comparison.svg": {
+      "path": "runs/runtime-portability-20261102-01/example-clean-02/comparison.svg",
+      "sha256": "a0565c0db345563257b4bdd4283f26590dba9ac97ce4164c507769f89c50ad24",
+      "bytes": 116002
+    },
+    "core-clean-02/result.json": {
+      "path": "runs/runtime-portability-20261102-01/core-clean-02/result.json",
+      "sha256": "09f0e17fff79ddf02da7abbbac4204ad0336b610ef76ceac3f125101a685a7ed",
+      "bytes": 1380
+    },
+    "p1-clean-01/result.json": {
+      "path": "runs/runtime-portability-20261102-01/p1-clean-01/result.json",
+      "sha256": "9547a20e3ec598b022a422245f0224cc26fe20dc8a97efb5fe6edc8e13413bd7",
+      "bytes": 1945
+    },
+    "p1-clean-01/manifest.json": {
+      "path": "runs/runtime-portability-20261102-01/p1-clean-01/manifest.json",
+      "sha256": "365e7944bdee498066064121a334f53fe18829c7f6c2ca764d390e42b652df6b",
+      "bytes": 1320
+    },
+    "p1-clean-01/actual-four-pad-execution.mp4": {
+      "path": "runs/runtime-portability-20261102-01/p1-clean-01/actual-four-pad-execution.mp4",
+      "sha256": "0bd2be5101929fa52f0b3c015f6e99b4f5f50393ea0a89a82c049663675e927a",
+      "bytes": 23104
+    },
+    "p1-video-integrity.json": {
+      "path": "runs/runtime-portability-20261102-01/p1-video-integrity.json",
+      "sha256": "2ae42e186451b1b4315fe7de81a80649c03947c246f47131041bc3aa2131c5c9",
+      "bytes": 483
+    },
+    "review-gpu-01/result.json": {
+      "path": "runs/runtime-portability-20261102-01/review-gpu-01/result.json",
+      "sha256": "0081f12d9e0d2c168a3d3dd727b300373e9ed68b6d6275f3740983b6ba0c2f8a",
+      "bytes": 2260
+    },
+    "p2-gpu-01/result.json": {
+      "path": "runs/runtime-portability-20261102-01/p2-gpu-01/result.json",
+      "sha256": "55e97c3127f2370ab2ae28d7a9c7a42d98a0645dd4b9b04050324eb39cc96757",
+      "bytes": 3561
+    },
+    "REPORT.md": {
+      "path": "runs/runtime-portability-20261102-01/REPORT.md",
+      "sha256": "54661a733bb24b2ee20bb931779e5720cbd7b7c7c4eaca5bcfec0f4ded91ea73",
+      "bytes": 7251
+    }
+  }
+}

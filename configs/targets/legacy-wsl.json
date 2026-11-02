@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "id": "legacy-wsl",
+  "kind": "legacy_wsl",
+  "platform": "linux-x86_64",
+  "data_root": "/mnt/d/humanoid-demo-r2",
+  "r2_storage": "{data_root}",
+  "r2_prefix": "{r2_storage}/envs/humanoid-r2",
+  "r1_prefix": "{project}/.local/miniforge3/envs/humanoid-r1",
+  "r4_prefix": "{project}/../humanmimic-data/r4/envs/r4-core",
+  "disk_reserves": [{"path": "/mnt/c", "minimum_free_gib": 10}, {"path": "/mnt/d", "minimum_free_gib": 20}],
+  "execution_authorized": ["r1", "r2"],
+  "execution_priority": "throughput",
+  "required_storage_marker": ".humanoid-demo-r2-owner.json",
+  "boot_policy": "configs/r2-execution-policy.json",
+  "supported_workflow": "Historical R1/R2 baseline; reboot pause remains enforced"
+}

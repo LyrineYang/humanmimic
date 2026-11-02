@@ -1,0 +1,419 @@
+{
+  "schema_version": 1,
+  "platform": "linux-x86_64",
+  "python": "3.10.14",
+  "installer": {
+    "url": "https://github.com/conda-forge/miniforge/releases/download/24.3.0-0/Miniforge3-24.3.0-0-Linux-x86_64.sh",
+    "sha256": "23367676b610de826f50f7ddc91139a816d4b59bd4c69cc9b6082d9b2e7fe8a3"
+  },
+  "pip_lock": "configs/r4-pip-linux-x86_64.lock.txt",
+  "wheels": [
+    {
+      "name": "absl-py",
+      "version": "2.5.1",
+      "file": "absl_py-2.5.1-py3-none-any.whl",
+      "sha256": "721200f2f0e9960f2ca9dc3a2a706b201f5f75d812c158f059cbbe29eeafbdb8",
+      "bytes": 137673
+    },
+    {
+      "name": "annotated-types",
+      "version": "0.8.0",
+      "file": "annotated_types-0.8.0-py3-none-any.whl",
+      "sha256": "f072f4d804ea359e4eaf198b1af7a8b0943881a87f31bb764f8bf219bb9419e0",
+      "bytes": 13427
+    },
+    {
+      "name": "click",
+      "version": "8.5.0",
+      "file": "click-8.5.0-py3-none-any.whl",
+      "sha256": "255bc9599cf7748b4b1a446ccc735421bd08a2ae529a8b88597d3de5664ee360",
+      "bytes": 125251
+    },
+    {
+      "name": "coacd",
+      "version": "1.0.5",
+      "file": "coacd-1.0.5-cp36-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+      "sha256": "70439f5170dfb8b249615650c13203c65459d34b2524fca8ef6658992b12355c",
+      "bytes": 2601508
+    },
+    {
+      "name": "docker-pycreds",
+      "version": "0.4.0",
+      "file": "docker_pycreds-0.4.0-py2.py3-none-any.whl",
+      "sha256": "7266112468627868005106ec19cd0d722702d2b7d5912a28e19b826c3d37af49",
+      "bytes": 8982
+    },
+    {
+      "name": "etils",
+      "version": "1.13.0",
+      "file": "etils-1.13.0-py3-none-any.whl",
+      "sha256": "d9cd4f40fbe77ad6613b7348a18132cc511237b6c076dbb89105c0b520a4c6bb",
+      "bytes": 170603
+    },
+    {
+      "name": "exceptiongroup",
+      "version": "1.3.1",
+      "file": "exceptiongroup-1.3.1-py3-none-any.whl",
+      "sha256": "a7a39a3bd276781e98394987d3a5701d0c4edffb633bb7a5144577f82c773598",
+      "bytes": 16740
+    },
+    {
+      "name": "filelock",
+      "version": "4.1.0",
+      "file": "filelock-4.1.0-py3-none-any.whl",
+      "sha256": "2ce9818e3e2d8f284c1a964414447ef148d42a5fd5e2a477a7118e574b293ec1",
+      "bytes": 133003
+    },
+    {
+      "name": "fsspec",
+      "version": "2026.9.0",
+      "file": "fsspec-2026.9.0-py3-none-any.whl",
+      "sha256": "8dd6e646e99ea382bd85f97a45e6b526a442d79423a7dc673f1e2756d05fcb5f",
+      "bytes": 221738
+    },
+    {
+      "name": "gitdb",
+      "version": "4.0.12",
+      "file": "gitdb-4.0.12-py3-none-any.whl",
+      "sha256": "67073e15955400952c6565cc3e707c554a4eea2e428946f7a4c162fab9bd9bcf",
+      "bytes": 62794
+    },
+    {
+      "name": "GitPython",
+      "version": "3.2.1",
+      "file": "gitpython-3.2.1-py3-none-any.whl",
+      "sha256": "d66b0832aa8755c1a84892937282df0befb16c97e5a64aeebd68be9c5e323f53",
+      "bytes": 231548
+    },
+    {
+      "name": "glfw",
+      "version": "2.11.0",
+      "file": "glfw-2.11.0-py2.py3-none-manylinux2014_x86_64.whl",
+      "sha256": "a08e1135d02c9408d7622db3d391e3e33e4187754ec45633e9a482c775f4846c",
+      "bytes": 247001
+    },
+    {
+      "name": "imageio",
+      "version": "2.36.1",
+      "file": "imageio-2.36.1-py3-none-any.whl",
+      "sha256": "20abd2cae58e55ca1af8a8dcf43293336a59adf0391f1917bf8518633cfc2cdf",
+      "bytes": 315435
+    },
+    {
+      "name": "imageio-ffmpeg",
+      "version": "0.6.0",
+      "file": "imageio_ffmpeg-0.6.0-py3-none-manylinux2014_x86_64.whl",
+      "sha256": "c7e46fcec401dd990405049d2e2f475e2b397779df2519b544b8aab515195282",
+      "bytes": 29498237
+    },
+    {
+      "name": "importlib_resources",
+      "version": "7.1.0",
+      "file": "importlib_resources-7.1.0-py3-none-any.whl",
+      "sha256": "1bd7b48b4088eddb2cd16382150bb515af0bd2c70128194392725f82ad2c96a1",
+      "bytes": 37232
+    },
+    {
+      "name": "iniconfig",
+      "version": "2.3.1",
+      "file": "iniconfig-2.3.1-py3-none-any.whl",
+      "sha256": "9121e2c1fdb355232495be3194c8dfe87ccc2d5dee45947b78e68f499790d7a7",
+      "bytes": 7552
+    },
+    {
+      "name": "Jinja2",
+      "version": "3.1.6",
+      "file": "jinja2-3.1.6-py3-none-any.whl",
+      "sha256": "85ece4451f492d0c13c5dd7c13a64681a86afae63a5f347908daf103ce6d2f67",
+      "bytes": 134899
+    },
+    {
+      "name": "MarkupSafe",
+      "version": "3.0.3",
+      "file": "markupsafe-3.0.3-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
+      "sha256": "f42d0984e947b8adf7dd6dde396e720934d12c506ce84eea8476409563607591",
+      "bytes": 20681
+    },
+    {
+      "name": "mpmath",
+      "version": "1.3.0",
+      "file": "mpmath-1.3.0-py3-none-any.whl",
+      "sha256": "a0b2b9fe80bbcd81a6647ff13108738cfb482d481d826cc0e02f5b35e5c88d2c",
+      "bytes": 536198
+    },
+    {
+      "name": "mujoco",
+      "version": "3.2.7",
+      "file": "mujoco-3.2.7-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+      "sha256": "8bec3d3dd430421da3d47e81710b104c1146fe5af959015786e50b8bc3bb92ff",
+      "bytes": 6398446
+    },
+    {
+      "name": "networkx",
+      "version": "3.4.2",
+      "file": "networkx-3.4.2-py3-none-any.whl",
+      "sha256": "df5d4365b724cf81b8c6a7312509d0c22386097011ad1abe274afd5e9d3bbc5f",
+      "bytes": 1723263
+    },
+    {
+      "name": "numpy",
+      "version": "1.26.4",
+      "file": "numpy-1.26.4-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+      "sha256": "ffa75af20b44f8dba823498024771d5ac50620e6915abac414251bd971b4529f",
+      "bytes": 18240889
+    },
+    {
+      "name": "nvidia-cublas-cu11",
+      "version": "11.11.3.6",
+      "file": "nvidia_cublas_cu11-11.11.3.6-py3-none-manylinux2014_x86_64.whl",
+      "sha256": "60252822adea5d0b10cd990a7dc7bedf7435f30ae40083c7a624a85a43225abc",
+      "bytes": 417870460
+    },
+    {
+      "name": "nvidia-cuda-cupti-cu11",
+      "version": "11.8.87",
+      "file": "nvidia_cuda_cupti_cu11-11.8.87-py3-none-manylinux2014_x86_64.whl",
+      "sha256": "4191a17913a706b5098681280cd089cd7d8d3df209a6f5cb79384974a96d24f2",
+      "bytes": 13093662
+    },
+    {
+      "name": "nvidia-cuda-nvrtc-cu11",
+      "version": "11.8.89",
+      "file": "nvidia_cuda_nvrtc_cu11-11.8.89-py3-none-manylinux2014_x86_64.whl",
+      "sha256": "a8d02f3cba345be56b1ffc3e74d8f61f02bb758dd31b0f20e12277a5a244f756",
+      "bytes": 23173745
+    },
+    {
+      "name": "nvidia-cuda-runtime-cu11",
+      "version": "11.8.89",
+      "file": "nvidia_cuda_runtime_cu11-11.8.89-py3-none-manylinux2014_x86_64.whl",
+      "sha256": "92d04069a987e1fbc9213f8376d265df0f7bb42617d44f5eda1f496acea7f2d1",
+      "bytes": 875592
+    },
+    {
+      "name": "nvidia-cudnn-cu11",
+      "version": "9.1.0.70",
+      "file": "nvidia_cudnn_cu11-9.1.0.70-py3-none-manylinux2014_x86_64.whl",
+      "sha256": "e6135ac63fe9d5b0b89cfb35c3fc1c1349f2b995becadf2e9dc21bca89d9633d",
+      "bytes": 663919573
+    },
+    {
+      "name": "nvidia-cufft-cu11",
+      "version": "10.9.0.58",
+      "file": "nvidia_cufft_cu11-10.9.0.58-py3-none-manylinux2014_x86_64.whl",
+      "sha256": "e21037259995243cc370dd63c430d77ae9280bedb68d5b5a18226bfc92e5d748",
+      "bytes": 168405419
+    },
+    {
+      "name": "nvidia-curand-cu11",
+      "version": "10.3.0.86",
+      "file": "nvidia_curand_cu11-10.3.0.86-py3-none-manylinux2014_x86_64.whl",
+      "sha256": "cd4cffbf78bb06580206b4814d5dc696d1161c902aae37b2bba00056832379e6",
+      "bytes": 58124497
+    },
+    {
+      "name": "nvidia-cusolver-cu11",
+      "version": "11.4.1.48",
+      "file": "nvidia_cusolver_cu11-11.4.1.48-py3-none-manylinux2014_x86_64.whl",
+      "sha256": "ea9fb1ad8c644ca9ed55af13cc39af3b7ba4c3eb5aef18471fe1fe77d94383cb",
+      "bytes": 128246438
+    },
+    {
+      "name": "nvidia-cusparse-cu11",
+      "version": "11.7.5.86",
+      "file": "nvidia_cusparse_cu11-11.7.5.86-py3-none-manylinux2014_x86_64.whl",
+      "sha256": "8d7cf1628fd8d462b5d2ba6678fae34733a48ecb80495b9c68672ec6a6dde5ef",
+      "bytes": 204126227
+    },
+    {
+      "name": "nvidia-nccl-cu11",
+      "version": "2.21.5",
+      "file": "nvidia_nccl_cu11-2.21.5-py3-none-manylinux2014_x86_64.whl",
+      "sha256": "49d8350629c7888701d1fd200934942671cb5c728f49acc5a0b3a768820bed29",
+      "bytes": 147811630
+    },
+    {
+      "name": "nvidia-nvtx-cu11",
+      "version": "11.8.86",
+      "file": "nvidia_nvtx_cu11-11.8.86-py3-none-manylinux2014_x86_64.whl",
+      "sha256": "979f5b2aef5da164c5c53c64c85c3dfa61b8b4704f4f963bb568bf98fa8472e8",
+      "bytes": 99130
+    },
+    {
+      "name": "pillow",
+      "version": "11.0.0",
+      "file": "pillow-11.0.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+      "sha256": "88a58d8ac0cc0e7f3a014509f0455248a76629ca9b604eca7dc5927cc593c5e9",
+      "bytes": 4283912
+    },
+    {
+      "name": "pluggy",
+      "version": "1.7.0",
+      "file": "pluggy-1.7.0-py3-none-any.whl",
+      "sha256": "7dd7b0d8832ba3cb632c306926ded123429211b83641b35dc5c41ad2d34f9bec",
+      "bytes": 27082
+    },
+    {
+      "name": "protobuf",
+      "version": "5.29.6",
+      "file": "protobuf-5.29.6-cp38-abi3-manylinux2014_x86_64.whl",
+      "sha256": "e3387f44798ac1106af0233c04fb8abf543772ff241169946f698b3a9a3d3ab9",
+      "bytes": 320478
+    },
+    {
+      "name": "psutil",
+      "version": "7.2.2",
+      "file": "psutil-7.2.2-cp36-abi3-manylinux2010_x86_64.manylinux_2_12_x86_64.manylinux_2_28_x86_64.whl",
+      "sha256": "076a2d2f923fd4821644f5ba89f059523da90dc9014e85f8e45a5774ca5bc6f9",
+      "bytes": 155560
+    },
+    {
+      "name": "pydantic",
+      "version": "2.14.2",
+      "file": "pydantic-2.14.2-py3-none-any.whl",
+      "sha256": "7efbf7507b937931cd32a5755acb00ea1cf5ccb1d4e8067a5850d5069e382118",
+      "bytes": 490403
+    },
+    {
+      "name": "pydantic_core",
+      "version": "2.50.2",
+      "file": "pydantic_core-2.50.2-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+      "sha256": "5c12a5a080570a91bbcbf6d10db008b80e3f5dea015ef2f0137bbec70f24f3f3",
+      "bytes": 2238710
+    },
+    {
+      "name": "PyOpenGL",
+      "version": "3.1.10",
+      "file": "pyopengl-3.1.10-py3-none-any.whl",
+      "sha256": "794a943daced39300879e4e47bd94525280685f42dbb5a998d336cfff151d74f",
+      "bytes": 3194996
+    },
+    {
+      "name": "pytest",
+      "version": "8.3.4",
+      "file": "pytest-8.3.4-py3-none-any.whl",
+      "sha256": "50e16d954148559c9a74109af1eaf0c945ba2d8f30f0a3d3335edde19788b6f6",
+      "bytes": 343083
+    },
+    {
+      "name": "PyYAML",
+      "version": "6.0.3",
+      "file": "pyyaml-6.0.3-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
+      "sha256": "9c7708761fccb9397fe64bbc0395abcae8c4bf7b0eac081e12b809bf47700d0b",
+      "bytes": 770293
+    },
+    {
+      "name": "scipy",
+      "version": "1.13.1",
+      "file": "scipy-1.13.1-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+      "sha256": "f26264b282b9da0952a024ae34710c2aff7d27480ee91a2e82b7b7073c24722f",
+      "bytes": 38577335
+    },
+    {
+      "name": "sentry-sdk",
+      "version": "2.73.0",
+      "file": "sentry_sdk-2.73.0-py3-none-any.whl",
+      "sha256": "0bcfa6928ea5adbb89591858b514d27adac27c7a3cccc31b20ed10e0b09eda9e",
+      "bytes": 549011
+    },
+    {
+      "name": "setproctitle",
+      "version": "1.3.8",
+      "file": "setproctitle-1.3.8-cp310-cp310-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl",
+      "sha256": "bbe67d7ac416087996e39494325d94ef9f4ac1ed33823f90de83c73925665cd2",
+      "bytes": 31928
+    },
+    {
+      "name": "six",
+      "version": "1.17.0",
+      "file": "six-1.17.0-py2.py3-none-any.whl",
+      "sha256": "4721f391ed90541fddacab5acf947aa0d3dc7d27b2e1e8eda2be8970586c3274",
+      "bytes": 11050
+    },
+    {
+      "name": "smmap",
+      "version": "5.0.3",
+      "file": "smmap-5.0.3-py3-none-any.whl",
+      "sha256": "c106e05d5a61449cf6ba9a1e650227ecfb141590d2a98412103ff35d89fc7b2f",
+      "bytes": 24390
+    },
+    {
+      "name": "sympy",
+      "version": "1.13.1",
+      "file": "sympy-1.13.1-py3-none-any.whl",
+      "sha256": "db36cdc64bf61b9b24578b6f7bab1ecdd2452cf008f34faa33776680c26d66f8",
+      "bytes": 6189177
+    },
+    {
+      "name": "tomli",
+      "version": "2.5.0",
+      "file": "tomli-2.5.0-py3-none-any.whl",
+      "sha256": "32a7b79ac57a2e83670ce329ccf675798bc5a2094783a63676866b70503f2e2b",
+      "bytes": 14765
+    },
+    {
+      "name": "torch",
+      "version": "2.5.1+cu118",
+      "file": "torch-2.5.1+cu118-cp310-cp310-linux_x86_64.whl",
+      "sha256": "eee38239682a01ab02d3790fe194753f7070f07e1741e67fb5c3c3059d3b97b2",
+      "bytes": 838332639
+    },
+    {
+      "name": "torchvision",
+      "version": "0.20.1+cu118",
+      "file": "torchvision-0.20.1+cu118-cp310-cp310-linux_x86_64.whl",
+      "sha256": "2a0b9fee398ed0dba1cee48dee31d80981420393f8b5c7980e273eb85fc6b9cb",
+      "bytes": 6544347
+    },
+    {
+      "name": "trimesh",
+      "version": "4.5.3",
+      "file": "trimesh-4.5.3-py3-none-any.whl",
+      "sha256": "c56ccbf7e2783eadcc1eec191273fcb08801c74a03f2a08c8a5dcc3d55b031e3",
+      "bytes": 704835
+    },
+    {
+      "name": "triton",
+      "version": "3.1.0",
+      "file": "triton-3.1.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+      "sha256": "6b0dd10a925263abbe9fa37dcde67a5e9b2383fc269fdf59f5657cac38c5d1d8",
+      "bytes": 209460013
+    },
+    {
+      "name": "typing_extensions",
+      "version": "4.16.0",
+      "file": "typing_extensions-4.16.0-py3-none-any.whl",
+      "sha256": "481caa481374e813c1b176ada14e97f1f67a4539ce9cfeb3f350d78d6370c2e8",
+      "bytes": 45571
+    },
+    {
+      "name": "typing-inspection",
+      "version": "0.4.4",
+      "file": "typing_inspection-0.4.4-py3-none-any.whl",
+      "sha256": "65b8397ba37ccbce054456aaccddfc91e6e3083c92824df348d96ca832f3f147",
+      "bytes": 14750
+    },
+    {
+      "name": "wandb",
+      "version": "0.22.3",
+      "file": "wandb-0.22.3-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+      "sha256": "23f3ebe41a26506117a098fdfd2706ed0e50b37899bfbefe3a0628fcbd70c69d",
+      "bytes": 19984910
+    },
+    {
+      "name": "zipp",
+      "version": "4.1.2",
+      "file": "zipp-4.1.2-py3-none-any.whl",
+      "sha256": "b30cb6cd253122169c47de245ca24a86bac2a5d3802ba15bf7ba6414eb9e144d",
+      "bytes": 10581
+    }
+  ],
+  "private_assets_required_for_example": [],
+  "system_requirements": [
+    "Linux x86_64; glibc >= 2.27",
+    "NVIDIA driver compatible with CUDA 11.8; V100 SM70 validation target",
+    "Bash, Python >= 3.6 (bootstrap only), curl for online installer fetch",
+    "At least 20 GiB free disk; 4 GiB free GPU memory for bounded example"
+  ],
+  "native_builds_for_example": []
+}

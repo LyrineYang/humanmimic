@@ -1,13 +1,13 @@
 # HumanMimic 代码同步与Linux交接
 
-更新于2026-11-01。当前工作顺序是读取最新状态、核对提交、迁移并验证目标环境，再按HANDOFF推进R4。早期Mac→Windows连接失败、“目录不存在”和初次部署记录已归入[历史文档索引](docs/archive/README.md)，不是当前部署结论。
+更新于2026-11-02。当前工作顺序是读取最新状态、核对提交、迁移并验证目标环境，再按HANDOFF推进R4。早期Mac→Windows连接失败、“目录不存在”和初次部署记录已归入[历史文档索引](docs/archive/README.md)，不是当前部署结论。
 
 ## 当前可核实的边界
 
 - 规范仓库：`LyrineYang/humanmimic`，稳定ID1436901913，仍为private；旧名`humanoid-demo`留在历史证据中。
 - 原4060/WSL的R1/R2已完成工程验收；R3现场相机和R4另行验收，详见[PLAN](PLAN.md)、[HANDOFF](HANDOFF.md)。服务器有更晚记录时先核对，不按历史失败重做已完成工作。
-- 用户提供服务器工作副本路径`/home/junqiy/projects/humanmimic`。当前文档修复会话在源WSL执行，无法通过本地文件系统访问该服务器目录；远程Git版本一致与服务器实际运行验收分别报告。
-- 本次交接发布目标是`main`与`codex/linux-handoff`同一提交。保留所有原分支提交和已有修改，使用快进/正常合并，不强推覆盖历史。
+- 用户提供服务器工作副本路径`/home/junqiy/projects/humanmimic`。本轮在该Linux/V100服务器整理代码；R4独立环境及运行证据见PLAN，Git版本与物理/研究验收分别报告。
+- 后续以`main`为主线；旧`codex/linux-handoff`是当时交接快照，不要求始终与main相同。未发布研究工作整理为一个本地整合提交，原tip由存档tag保留；不重写已发布历史、不强推。
 
 ## 已有副本同步到交接版本
 
@@ -18,17 +18,18 @@ pwd
 git status --short
 git remote set-url origin https://github.com/LyrineYang/humanmimic.git
 git fetch origin
-git merge --ff-only origin/codex/linux-handoff
+git merge --ff-only origin/main
 git rev-parse HEAD
-git ls-remote origin refs/heads/main refs/heads/codex/linux-handoff
+git rev-parse origin/main
+git ls-remote origin refs/heads/main
 ```
 
-最后三个提交SHA必须相同，才能宣称拿到同一交接版本。若快进失败、目录有未保存修改或出现本地独有提交，保留现场并检查差异，不使用`reset --hard`、`clean`或强推来制造一致。需要进一步合并时记录合并理由与检查结果。
+本地HEAD、origin/main与远端main三个SHA相同，才说明同步完成；本地领先则可能仍有未推送提交。若快进失败、目录有未保存修改或出现本地独有提交，保留现场并检查差异，不使用`reset --hard`、`clean`或强推来制造一致。需要进一步合并时记录合并理由与检查结果。
 
-新机器可从README的规范仓库克隆；需要交接分支时：
+新机器可从README的规范仓库克隆；只获取当前主线时：
 
 ```bash
-GIT_LFS_SKIP_SMUDGE=1 git clone --branch codex/linux-handoff --recurse-submodules \
+GIT_LFS_SKIP_SMUDGE=1 git clone --branch main \
   https://github.com/LyrineYang/humanmimic.git
 cd humanmimic
 ```
@@ -42,7 +43,7 @@ cd humanmimic
 | GitHub origin、克隆命令、网站/文档仓库链接 | 使用`LyrineYang/humanmimic` |
 | 源WSL目录`/home/lyrine/projects/humanoid-demo` | 现有实际目录，保持原状 |
 | 原D盘根`/mnt/d/humanoid-demo-r2` | 原始资产/缓存/结果位置，保持原状 |
-| 用户服务器目录`/home/junqiy/projects/humanmimic` | 在目标机核对；不能由Git改名推断环境已适配 |
+| 用户服务器目录`/home/junqiy/projects/humanmimic` | 已在目标机建立独立R4环境；完整R1/R2迁移仍待验收 |
 | 历史runs、绝对symlink、冻结清单和SHA | 保留原字节/身份；通过新映射和新server运行记录接入 |
 
 不要对整个仓库全局替换名称。Git同步不复制`.local/`、模型、完整视频、缓存和全部`runs/`；按[HANDOFF资产表](HANDOFF.md#52-git克隆不会带来的内容)通过授权私有通道迁移，保留原文件和失败。

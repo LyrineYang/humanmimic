@@ -8,3 +8,6 @@ models/
 cache/
 *.engine
 *.plan
+# Local destinations/credentials are never portable project configuration.
+configs/wandb.env
+configs/targets/*.local.json

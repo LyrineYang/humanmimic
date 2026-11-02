@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "id": "r4-v100",
+  "kind": "linux",
+  "platform": "linux-x86_64",
+  "data_root": "{project}/../humanmimic-data/r4",
+  "r4_prefix": "{data_root}/envs/r4-core",
+  "r2_storage": "{data_root}/../r2",
+  "r2_prefix": "{r2_storage}/envs/humanoid-r2",
+  "r1_prefix": "{project}/.local/miniforge3/envs/humanoid-r1",
+  "disk_reserves": [{"path": "{data_root}", "minimum_free_gib": 20}],
+  "execution_authorized": ["r4_example", "r4_research"],
+  "execution_priority": "throughput",
+  "supported_workflow": "CUDA analytic example; no private assets",
+  "research_preview": "LEAP physics, sensing, joint estimation, memory and bounded control; manipulation gain unverified",
+  "r2_status": "diagnostic_only; runtime/assets and full video migration remain unverified"
+}
