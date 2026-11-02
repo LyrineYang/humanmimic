@@ -2,7 +2,7 @@
 
 本项目优先让Windows笔记本提供GPU和WSL环境，Mac通过Codex远程控制查看、指导和验收同一执行端。不要把“登录同一账号”“控制另一台主机”“迁移聊天和Git状态”混为一项操作。
 
-2026-10-28 Git 同步核验：私有仓库 `https://github.com/LyrineYang/humanoid-demo` 已存在，WSL 的 gh 登录、fetch、R1 内容 push 及从 GitHub 新克隆已通过。本轮命令需临时移除指向不可用本地端口的代理变量；未更改持久代理或账号配置。Git 同步与聊天 handoff 分别验收，后者未重试。
+2026-10-28 Git 同步核验：私有仓库 `https://github.com/LyrineYang/humanmimic` 已存在，WSL 的 gh 登录、fetch、R1 内容 push 及从 GitHub 新克隆已通过。本轮命令需临时移除指向不可用本地端口的代理变量；未更改持久代理或账号配置。Git 同步与聊天 handoff 分别验收，后者未重试。
 
 ## Windows 应用能否操作 WSL
 
