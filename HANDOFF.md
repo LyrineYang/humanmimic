@@ -6,7 +6,7 @@
 
 ## 0. 最新服务器接续（2026-11-02，优先于下方历史快照）
 
-- **活跃环境/可用性Goal：** 用户要求修复隔离、目标绑定、独立重建、首跑状态与文档分叉。`humanmimic.py doctor/bootstrap/example/inspect`及Linux/V100、legacy-wsl profile已实现，空前缀安装和无私人资产CUDA首跑通过；正式本地提交/干净副本与最终回归仍按PLAN收尾，原始记录`runs/runtime-portability-20261102-01/`。R2新目标目前只读诊断，原WSL保护未解除；研究收益验收不变。
+- **环境/可用性交付：** 五项修复已进入本地299e12a、cc98a3b、70640ca，未推送。干净克隆/空前缀57-wheel安装、无私人资产CUDA首跑、8项运行契约、6项安装器契约、定向15/P2 15及最终环境P1 6项回归passed；普通查看0、严格验收3。当前入口`humanmimic.py doctor/bootstrap/example/inspect`，profile明确路径和执行范围。见[交付证据](evidence/runtime-portability-20261102.json)及`runs/runtime-portability-20261102-01/REPORT.md`。R2新目标仅只读诊断，原WSL保护未解除；研究收益仍未验收，网站浏览器渲染/发布未做。
 - **指定审查修复：** 4项发现已逐项处理，GL_VENDOR沿用已有修复；并集外表面采样、VB纯二值输入及选帧隔离、shape-only独立逐帧位姿已修复。V100新增15项定向、原P2十五项和记忆/控制十八项回归passed；shape-only位姿准备计入共同预算，缺失时拒绝更新。未新增物理试次或操作通过结论，置信度校准仍待验。见[修复报告与复跑命令](runs/r4-review-fixes-20261102-01/REPORT.md)及[摘要](evidence/r4-review-fixes-20261102.json)。
 - **当前接续：** 用户要求深入解释主线并继续代码/环境。本轮补全[直观解释、VideoManip对比、E0–E5/M1实验](docs/r4-multimodal.zh-CN.md#0-先读这一节推进什么为什么以及交付什么)，实现显式持久记忆、CUDA FK/IK、几何×力反馈局部控制、任务代理探触、独立在线进程和E2/E3入口。既有V100核心环境足够，无新增依赖；使用`source scripts/activate-r4-research.sh`，运行前仍查GPU占用。
 - **当前证据：** P1六项、P2十五项、记忆/控制十八项、统计五项CUDA检查passed；已执行完整LEAP在线负对照并保存物理录像。解析精度与数据隔离已验证，位姿区间偏窄、20种子覆盖率未做，成功抓放/几何操作收益尚未证明。P3是参考附近局部修正，P4未标定力界默认拒绝，WSM没有训练/权重接入。原失败与修复、最新回归位置见`runs/r4-memory-control-20261102-01/REPORT.md`；本轮没有CPU测试、保留/付费/真机使用。

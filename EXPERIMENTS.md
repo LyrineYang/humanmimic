@@ -510,3 +510,13 @@ next_action: null
 - 首跑passed（工程范围）：`example-01`在新环境/V100 UUID GPU-bf9af36c-d009-896b-f0ea-35f592684d20上生成8帧解析观测，独立CUDA进程拟合并交付REPORT/比较SVG/公开输入/私有评价/状态JSON。execution completed、解析task passed、research acceptance awaiting_verification；没有物理抓取、MANO、私人视频或训练权重。`core-gpu-01`CUDA矩阵及梯度检查通过，参考计算也在CUDA；可选LEAP资产检查另行报告。
 - 常规回归：`contracts-02`8项shell/CLI/状态契约passed（清洁/污染/真实Conda切换/重复激活、失败回滚、原机与新目标保护、R2只读、探索与严格状态、缓存媒体改写拒绝），源码解析单列通过；这些是标准库/启动边界检查，没有CPU数值估计。`docs-01`220本地链接/锚点和HTML结构passed，17个明确历史runs链接不当作本机媒体。新增定向GPU回归15项passed；完整P2尚在运行，收尾证据将追加，不提前标记全Goal完成。
 - README/setup/usage/results/help/贡献/网站已同步当前支持目标、原机历史和研究预览的界限；网站主要入口变为setup→example→结果，研究主线保留。账号目标配置留在ignored configs/wandb.env；文档仅保留配置状态，避免把本机账号配置写入提交。其他并发变更保留。
+
+## 2026-11-02 环境与可用性五项修复完成
+
+- 工程交付passed：隔离激活、独立profile、哈希档案空前缀重建、无需私人资产的CUDA首例、分项状态/普通与严格退出、统一文档和回归入口已进入本地可审阅提交299e12a/cc98a3b/70640ca，未推送。原始预期未改、研究门槛未降；最终[交付报告](runs/runtime-portability-20261102-01/REPORT.md)及[摘要](evidence/runtime-portability-20261102.json)记录全部证据与限制。
+- 独立验收passed：clean-checkout源码干净、两个子模块未初始化，clean-data独立data根无assets；从空前缀以Miniforge原始安装包+当前57个哈希wheel构建Python3.10.14/Torch2.5.1+cu118/MuJoCo3.2.7/W&B0.22.3。没有复制已安装包；初次53-wheel与并行W&B修复后57-wheel结果分开保留，当前锁已实测重建。六项安装器身份/锁/重复/损坏拒绝契约passed。
+- 环境/入口passed：干净副本8/8契约，包含真正创建并激活另一Conda环境后切换、污染/重复激活、失败环境不变、原WSL保护、新目标R2只读诊断、陈旧shell路径不覆盖profile及已缓存媒体变更拒绝；源码/shell解析单列通过。标准库契约检查不是CPU数值估计回退。
+- 目标V100回归passed：定向15/15、完整P2 15/15；最终57-wheel环境CUDA矩阵/梯度与P1六项passed，NVIDIA EGL录像完整解码通过。MuJoCo3.2.7动力学仍CPU执行，CUDA负责数值验收/估计，NVIDIA负责渲染；不称GPU物理。完整源码哈希与早期回归后EOF空行/安装器改动的覆盖解释写入报告，未重复无影响的数值试验。
+- 首例passed（仅解析工程门槛）：同一V100、固定8帧/200步，独立CUDA进程输出位置0.01937mm、表面0.02601mm、顺应性0.05549mm/N；位姿区间仍未覆盖误差。execution completed、task passed、review/acceptance awaiting_verification，普通查看实测0、严格查看实测3。公开观测/粗模型/估计/私有真值评价/REPORT/SVG齐全，无MANO、私人视频、权重或机器人资产依赖。
+- README/setup/usage/results/help/网站/贡献指南与PLAN/HANDOFF/启动提示同步；本地文档链接/HTML结构和内容核对通过。没有浏览器渲染/网站发布、新姿态动画或现场相机测试。LEAP新增的是指端校准，成功抓放、操作收益与不确定性校准仍awaiting_verification；R2服务器完整执行尚未迁移，R3跳过。
+- 收尾：本轮任务均已结束；新增费用0、训练0、保留0、真机0、驱动修改0。保留两套重建验收前缀及原始wheel，盘余约617GiB；原环境和其他数据未删除。并行REMOTE_WORK/RESOURCES修改保持未提交，本机账号配置仍ignored，未写入凭据。工程Goal可按上述证据完成，整个研究项目不标complete。

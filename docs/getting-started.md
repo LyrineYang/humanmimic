@@ -9,11 +9,11 @@ Start with the generated CUDA example to inspect the estimator without videos, b
 Use an authorized checkout of this private repository:
 
 ```bash
-GIT_LFS_SKIP_SMUDGE=1 git clone --recurse-submodules https://github.com/LyrineYang/humanmimic.git
+GIT_LFS_SKIP_SMUDGE=1 git clone https://github.com/LyrineYang/humanmimic.git
 cd humanmimic
 ```
 
-The runtime work is delivered on the research branch. The revision you check out must contain `scripts/humanmimic.py` and `configs/r4-bootstrap.json`; a checkout of an older default branch does not contain these commands. Local implementation/commit verification does not imply that this branch has been pushed or merged. The analytic example does not use submodule assets or LFS downloads.
+The runtime work is delivered on the research branch. The revision you check out must contain `scripts/humanmimic.py` and `configs/r4-bootstrap.json`; a checkout of an older default branch does not contain these commands. Local implementation/commit verification does not imply that this branch has been pushed or merged. The analytic example does not use submodule assets or LFS downloads. Initialize the pinned submodules separately only when preparing the full video pipeline.
 
 ## Prepare a runtime
 
