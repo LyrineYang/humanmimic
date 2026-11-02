@@ -1,0 +1,288 @@
+{
+  "date_utc": "2026-11-02",
+  "project_status": "awaiting_verification",
+  "scope": "Explicit multimodal memory, local geometry/force control, probe selection and bounded V100 readiness; no manipulation benefit claim",
+  "gpu": {
+    "device": "Tesla V100-SXM2-32GB",
+    "selected": "GPU-bf9af36c-d009-896b-f0ea-35f592684d20",
+    "capability": [
+      7,
+      0
+    ],
+    "torch": "2.5.1+cu118",
+    "cuda_runtime": "11.8",
+    "free_bytes_at_admission": 31397904384,
+    "total_bytes": 34079899648,
+    "nvidia_smi": "GPU-41c264dc-74e0-3ea6-c3b0-26cfb1972a80, Tesla V100-SXM2-32GB, 7285 MiB, 31 %, 530.30.02\nGPU-d3ba9e90-dc39-ddc2-e7cb-34c7e8f572a2, Tesla V100-SXM2-32GB, 1763 MiB, 11 %, 530.30.02\nGPU-aa7b2cfa-6a76-0781-a48c-697c751a87eb, Tesla V100-SXM2-32GB, 6206 MiB, 68 %, 530.30.02\nGPU-bf9af36c-d009-896b-f0ea-35f592684d20, Tesla V100-SXM2-32GB, 2557 MiB, 12 %, 530.30.02",
+    "cpu_fallback": false
+  },
+  "checks": {
+    "P1_distal_load_integration": {
+      "status": "passed",
+      "checks": {
+        "four_finger_direction_and_load": true,
+        "initial_no_contact": true,
+        "multiple_contacts": true,
+        "latency_queue": true,
+        "dropout_is_unknown": true,
+        "saturation_is_marked": true
+      },
+      "full_hand_loading": "awaiting_verification"
+    },
+    "P2_analytic_numeric_and_boundary": {
+      "status": "passed",
+      "checks": {
+        "read_guard_denied_project_data": true,
+        "joint_estimate": true,
+        "private_truth_mutation_invariance": true,
+        "constant_load": true,
+        "fully_missing": true,
+        "saturated": true,
+        "unanchored_constant": true,
+        "V-joint_finite": true,
+        "VB-joint_finite": true,
+        "VF-pose_only_finite": true,
+        "VF-shape_only_finite": true,
+        "VF-rigid_contact_finite": true,
+        "stale_not_no_contact": true,
+        "truth_field_rejected": true,
+        "future_packet_rejected": true
+      },
+      "joint_metrics": {
+        "state_updated": true,
+        "position_rmse_m": 1.936926969211149e-05,
+        "shape_surface_rmse_m": 2.601448324934777e-05,
+        "compliance_error_m_per_n": 5.5491988042594424e-05,
+        "pose_observable": true,
+        "pose_covered": false,
+        "compliance_observable": true,
+        "compliance_covered": true
+      }
+    },
+    "memory_control_probe_modules": {
+      "status": "passed",
+      "checks": {
+        "duplicates_do_not_add_information": true,
+        "bounded_persistent_history": true,
+        "identity_switch_rejected": true,
+        "missing_data_inflates_uncertainty": true,
+        "cuda_FK_matches_known_LEAP": true,
+        "batched_FK_matches_individual": true,
+        "cuda_IK_reduces_tip_error": true,
+        "taxel_noise_does_not_create_contact": true,
+        "G0F0_preserves_reference": true,
+        "bounded_control_residual": true,
+        "common_force_abort": true,
+        "uncalibrated_force_bound_abstains": true,
+        "task_J_from_model_is_finite": true,
+        "safe_positive_gain_candidate": true,
+        "probe_force_bound_includes_existing_load": true,
+        "global_baseline_not_filtered_by_task_gain": true,
+        "zero_gain_abstains": true,
+        "pose_tracking_between_shape_updates": true
+      },
+      "FK_max_error_m": 7.152557393586001e-09
+    },
+    "paired_statistics_synthetic_tables": {
+      "status": "passed",
+      "checks": {
+        "known_positive_detected": true,
+        "equal_groups_do_not_pass": true,
+        "failed_trials_cost_100mm": true,
+        "replacement_or_duplicate_rejected": true,
+        "partial_matrix_cannot_certify_hypothesis": true
+      },
+      "is_experimental_data": false
+    }
+  },
+  "online_negative": {
+    "execution_status": "passed",
+    "task_status": "failed",
+    "steps": 2000,
+    "control_samples": 201,
+    "duration_s": 3.999999999999781,
+    "loop_wall_s": 104.85044053196907,
+    "video_frames": 101,
+    "joint_updates": 4,
+    "gradient_steps": 200,
+    "selected_evidence_times": [
+      [
+        0.0,
+        0.10000000000000007,
+        0.20000000000000015,
+        0.3000000000000002,
+        0.4000000000000003,
+        0.5000000000000003,
+        0.6000000000000004,
+        0.7000000000000005
+      ],
+      [
+        0.0,
+        0.10000000000000007,
+        0.5000000000000003,
+        0.6000000000000004,
+        0.9000000000000007,
+        1.0000000000000007,
+        1.1000000000000008,
+        1.2000000000000008
+      ],
+      [
+        0.0,
+        0.10000000000000007,
+        0.6000000000000004,
+        0.7000000000000005,
+        1.400000000000001,
+        1.500000000000001,
+        1.6000000000000012,
+        1.7000000000000013
+      ],
+      [
+        0.0,
+        0.10000000000000007,
+        0.6000000000000004,
+        0.7000000000000005,
+        1.9000000000000015,
+        2.0000000000000013,
+        2.0999999999999903,
+        2.1999999999999793
+      ]
+    ],
+    "policy_read_guard_denied_project_data": true,
+    "stderr_bytes": 0,
+    "metrics": {
+      "final_position_error_m": 0.0800000000000096,
+      "settle_max_position_error_m": 0.0800000000000096,
+      "final_rotation_error_degrees": 29.999999999396763,
+      "settle_max_rotation_error_degrees": 29.999999999396763,
+      "penalized_position_error_m": 0.1,
+      "lift_hold_seconds": 0.0,
+      "max_penetration_m": 0.00043372000000001937,
+      "opposing_contact_fraction_when_lifted": 0.0,
+      "released_during_settle": true,
+      "hand_contact_steps": 0,
+      "maximum_wrist_force_n": 10.130141891934842,
+      "joint_tracking_rmse_rad": 0.014418351514132661
+    },
+    "policy_summary": {
+      "geometry_feedback": true,
+      "force_feedback": true,
+      "emergency": false,
+      "collision_scope": "four fingertip center proxies; actual-world full collision evaluation remains required",
+      "correction": "reference_only_release_or_missing_belief",
+      "updates": 4,
+      "probe_attempts": 0,
+      "probe_time_s": 0.0,
+      "memory_frames": 32,
+      "no_realtime_claim": true
+    },
+    "success_expected": false,
+    "is_manipulation_benefit_evidence": false
+  },
+  "verification_types": {
+    "separate_source_parse": "not_run",
+    "CPU_numerical_tests": "not_run",
+    "CUDA_module_checks": "passed",
+    "headless_MuJoCo_EGL_online_integration": "passed",
+    "physics_backend": "MuJoCo CPU; not GPU physics",
+    "animation_replay": "not_run",
+    "video_generation": "passed",
+    "independent_full_video_visual_review": "awaiting_verification",
+    "onsite_camera": "not_run"
+  },
+  "open_items": {
+    "uncertainty_calibration": "awaiting_verification; analytic pose interval undercovers, 20-seed study not run",
+    "successful_T1_T2": "awaiting_verification",
+    "complete_E1_M1_E2_E3_matrices": "awaiting_verification",
+    "probe_force_bound_calibration": "awaiting_verification; default abstains",
+    "full_grasp_synthesis": "awaiting_verification; implemented local correction only",
+    "video_frontend_and_WSM_runtime": "awaiting_verification",
+    "MANO_path": "needs_input; user already licensed"
+  },
+  "preserved_failures": {
+    "p1-gpu-01": "NVIDIA renderer-string guard false rejection; vendor guard repaired",
+    "p2-gpu-01": "compliance error 0.000444523 m/N exceeded unchanged 0.0004 threshold; symmetric surface residual repaired curvature bias",
+    "memory-control-gpu-01": "near-zero-covariance fixture should abstain; positive-case fixture corrected without lowering gain threshold",
+    "memory-control-gpu-03": "incorrect beliefs.json input filename; log retained",
+    "online-negative-01": "300-second wall timeout; no budget increase",
+    "online-negative-02": "completed before taxel-noise aggregation fix; superseded by final regression"
+  },
+  "cost_and_scope": {
+    "paid_usd": 0,
+    "new_dependencies": 0,
+    "training": false,
+    "heldout_used": false,
+    "real_hardware": false,
+    "driver_modified": false,
+    "run_bytes": 115472058,
+    "own_recorded_worker_pids_active_at_close": false
+  },
+  "artifacts_sha256": {
+    "runs/r4-memory-control-20261102-01/expectation.json": "2c523a2dfa94e61e0041cdfc108de9248aed51af620901c382ac6c0571a1522c",
+    "runs/r4-memory-control-20261102-01/p1-gpu-02/result.json": "3a9b1c2a9e8fe9323c0519b9d95b14a4bf02713a422f1249ddf796d4467942cc",
+    "runs/r4-memory-control-20261102-01/p2-gpu-01/result.json": "62a1ad207ebae38649d6f23c82256e48fd225ce90b9b3f893f948684a6da7fcb",
+    "runs/r4-memory-control-20261102-01/p2-gpu-03/result.json": "561f7f764711a6649bb3f7c49bd0675e0c7efbc2616b347e2d30516f52fdd279",
+    "runs/r4-memory-control-20261102-01/p2-guard-04/result.json": "26f224417299868a7cc93902cb596d4c7ed31fd4cdb7f37586ea718f00e304a3",
+    "runs/r4-memory-control-20261102-01/memory-control-gpu-01/result.json": "fe723238a872a6e42807d57b4d8841962ddfd737a86a1a1b833650f3c8ff902d",
+    "runs/r4-memory-control-20261102-01/memory-control-gpu-06/result.json": "8bad91b4c4a06ac4ed491594ee389c79c7d363c8d84c624774219e38707b4c33",
+    "runs/r4-memory-control-20261102-01/stats-gpu-01/result.json": "ed76cbc32799b8f4df3a3580b37ddb3786aa5f8f1cdb3ff3061cf3415344028a",
+    "runs/r4-memory-control-20261102-01/online-negative-01/failure.json": "30ac2278db0e508a83ae3ecbef34129d2ee922f4a59081056fd9cd61de1cb106",
+    "runs/r4-memory-control-20261102-01/online-negative-03/manifest.json": "66d1986cd0713834321de4e652799ebdd8dbf0ae43a6f3bf6b9a9f430a617042",
+    "runs/r4-memory-control-20261102-01/online-negative-03/private-evaluation/result.json": "cd6ee92d7ebd07c992a6037269f861a3270bbd91b7b3c6d80e8e6cf859dd09c4",
+    "runs/r4-memory-control-20261102-01/online-negative-03/private-evaluation/actual-state.npz": "b4e7638b510ed891d289445937b9413f7cc2f9b893962480188a2cd021a1c710",
+    "runs/r4-memory-control-20261102-01/online-negative-03/private-evaluation/actual-execution.mp4": "f74c4c559267240ba9e17aac8b2cfe2fe02a11c4c0825dbc4584f3c66648b132",
+    "runs/r4-memory-control-20261102-01/online-negative-03/policy-public-input.jsonl": "2a7616e26f576f982f7d661885ecc1ce65ea1fa9b44592f8694efaa576d15c6a",
+    "runs/r4-memory-control-20261102-01/online-negative-03/policy-events.jsonl": "7e699f575183a908ae11ab043d93f14feb32e2c9013de2dd525d34287872b456",
+    "runs/r4-memory-control-20261102-01/memory-control-gpu-07/result.json": "1709907b80cf5a9a520f7c66e313281519518a014f4ef4e996585eb9fa29a7a5",
+    "runs/r4-memory-control-20261102-01/REPORT.md": "530c71f880c422814024631d9c45b5128472ba0a18656432ed90532795520098"
+  },
+  "sources_sha256": {
+    "scripts/analyze-r4-control-study-gpu.py": "666675b6d3bcf25406dcbae8ecb6577f396d23ba29d415e09f655bd960051de1",
+    "scripts/check-r4-environment.py": "8ec1ea107be00243e2d91e4816b863fda994253204c72a08f91b87a7e547f347",
+    "scripts/check-r4-hand-mapping.py": "fabcdc348f95e3e6fedac46e736dd949d34e9bda8e0b4110fc4441cde433e660",
+    "scripts/check-r4-memory-control-gpu.py": "9b143237c57200d8a56ca527e51c9dc858632b5a5906d70d14a05712c1e11e4e",
+    "scripts/check-r4-multimodal-cpu.py": "6d886f4cb7f5e712f48b1721f56a8de83f3765b47f553e9dfe489105e5c49017",
+    "scripts/check-r4-p1-gpu.py": "d3a4bcda4d15239b6813bac1a6844ea0f277f704b118579e17be8ea07af2e2e1",
+    "scripts/check-r4-p2-gpu.py": "3e356581642e1239dec676d2dce76bebb569bdfdf5bdc8b1566ec8cb201e536f",
+    "scripts/check-r4-study-gpu.py": "9d548746cc4a4f600eec45433481a8da0124716611adfa9caa6ef069d90ad74f",
+    "scripts/evaluate-r4-belief-gpu.py": "cac8818455b56e8ba7f1f7c119c7caee4c67cbbfdb425de491e12505c7af0ebe",
+    "scripts/import-r4-videomanip.py": "e98869a26e8307d309201aa17e55d00e27160152c14ff3c3a433a70dbb4dc87b",
+    "scripts/prepare-r4-collision.py": "5ec411637d40a3d238b7b3e0f5fc28e7348a8d5c62d57364b029afcf6526fea5",
+    "scripts/prepare-r4-objects.py": "f4da7a1a1bacbf79d8911112a3f35a51dc0133ef827680e2b978c05d56dd5b4e",
+    "scripts/prepare-r4-prior-gpu.py": "45f8bbd9a7f7c15908b6ae21cf1049c63c61ad5c99798f883e96c2c2bf3197fa",
+    "scripts/prepare-r4-readiness.py": "145b5d6caf178c0c3233f32855699d0481e7c6dbaa0bca44e57552e32458e73d",
+    "scripts/r4_belief.py": "7d400fda11453d592aa2f5c5e973459354f5e1573ec51d2b3f7eace8c72ceea5",
+    "scripts/r4_belief_evaluation.py": "ac50525d903d18174bf54fc483c1097dc103c09998c7f2ba1c3bebaf8f3861aa",
+    "scripts/r4_contract.py": "37b3c10d61c3c42295fe425b2593fc22a96004034d08850748d9b7dc89047871",
+    "scripts/r4_control.py": "2cb12680c399c611f98b41eade50ba0d1fa95c609a0a81e505298540cb99b941",
+    "scripts/r4_cuda.py": "0adc3c0626adda57004fcce4045a8b5693a732f18836d660e8c0b0534bb46438",
+    "scripts/r4_estimator_worker.py": "80c83879d10adc264b3ed277c8816a58b0168af39c6cc5c8e95f567d7eefac94",
+    "scripts/r4_evaluation.py": "0c570474652331123165e8f9ca40e5e6b030782d6863970739e2646858f7c570",
+    "scripts/r4_gpu_fixtures.py": "4b9364949d5ca781f0b0c385b21fea02856e9f51c76b8719f85a9f401ea19b06",
+    "scripts/r4_gpu_geometry.py": "592cc24ff8cc57587fcb362b00626a6c98adc7867bf46597f95b4176ba5bc9da",
+    "scripts/r4_hand_model.py": "b32efc1da188d615c32f8df209ef3e3844fb52fa3dfbf874515494ecccc53221",
+    "scripts/r4_memory.py": "58b9674dab2d91e8a0d187348395af77407a5ac0b33a7d9a0854c363445f3416",
+    "scripts/r4_multimodal.py": "c1e4fe457f1d61ee7038f19b5d5a8795646af50f5da314f86f7fdca2415de469",
+    "scripts/r4_online_client.py": "71c5d2b2afdbad2c16cb5d518d909f0e6eff55e86c7abc295c18171f3ee9a085",
+    "scripts/r4_online_worker.py": "1216042f32dba0be34b7a9cda1e7b06d4e3ea71e35ffeb55fc1529bbecf43adb",
+    "scripts/r4_pose_tracker.py": "a5e45eb335d1a389e1f12b40d9704e45a0d8bb9212bd0d1ce753359bab0b37ab",
+    "scripts/r4_probe.py": "8b42ae03f2463eb8cfe7a7d35bed3c90c7190b4b62daae2be139fb4c2f4f2bad",
+    "scripts/r4_public.py": "e1f67ad0c987248450e986ffd88cbf14629f45add357e8bea94683ce8caf2834",
+    "scripts/r4_replay.py": "42182f20c36e1432d627e16b52bb9c4cbb6d90b4530a872939856a16f503afbf",
+    "scripts/r4_rgbd.py": "7a49769459fe27897dcea07e9d7c7a69f9745046f5bd925b6458d76fa8d4d0a0",
+    "scripts/r4_scene.py": "3ab0fce69023c6a96e54aa5767afd179e4864a29dc99c63d55d4489c1cd4618e",
+    "scripts/r4_sensor_bridge.py": "601092af8bd0a4ef7b1dbd27f77a92dd6016766e1c4e7e519343ecd9e51d36c8",
+    "scripts/render-r4-observations.py": "aecd85e28c29831704d07779e298b88a5ce95d0cf58cb424850d56fa7979415e",
+    "scripts/run-r4-belief-gpu.py": "c0f5115a70e675a04b17c1c20e35c255b1d3c14d9ec26981b799733393fd73bb",
+    "scripts/run-r4-control-study-gpu.py": "4d1dcdb02449f5546d438ff7ac5e2aff1a646a35c02a80b7d2f76470a486407f",
+    "scripts/run-r4-e1-gpu.py": "b59b32dd0d7fb35d19f0613055092e7a9f994f890354ed1941bff7e1b33f595e",
+    "scripts/run-r4-physical.py": "7a7f674625f07bf7598d7c564736c8498e1d99ad24e97d060c1bceceb8fb6055"
+  },
+  "config_sha256": {
+    "configs/r4-control.json": "e6e3467360333d75b3a57d52c77edaf3ac83e7b4ea396a0380a0ad9778428729",
+    "configs/r4-multimodal-study.json": "9f0422be769df7aecefacc2d341755128fed76e8655b6e6f3d262323269285ba",
+    "configs/r4-p1p2.json": "0945a6c7cc1f343bacfed3e5121536fb5ddf9a9f2cafa35f8d394e6072e63d2b",
+    "configs/r4-runtime.json": "fe6cd16802aa277f97d9ff717ea924d2e73d9127f4e5cb30efe29c5f895b10c9",
+    "configs/r4-stage1.json": "7984513995f89f85f4702179bfeaa0a63cb6b6fe8a1348738f7b3960f7c74b2c"
+  },
+  "targeted_probe_regression": "Includes pre-existing finger load in force prediction and prevents task-value prefiltering of global/random baselines; online negative used no_probe"
+}

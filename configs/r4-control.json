@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "status": "development, awaiting_verification",
+  "memory": {"capacity": 32, "window": 8, "mode": "diverse"},
+  "control": {
+    "maximum_joint_residual_rad": 0.06, "maximum_wrist_residual_m": 0.005,
+    "candidate_count": 16, "ik_iterations": 4, "contact_force_target_n": 0.5,
+    "force_gain_rad_per_n": 0.015, "force_stop_n": 2.0,
+    "maximum_prediction_age_s": 0.3, "maximum_proxy_penetration_m": 0.002,
+    "maximum_local_distance_m": 0.04,
+    "minimum_contact_n": 0.05, "taxel_contact_threshold_n": 0.05, "seed": 1101
+  },
+  "probe": {
+    "maximum_contacts": 6, "maximum_time_s": 3.0, "duration_s": 0.5,
+    "maximum_force_n": 2.0, "candidate_count": 32,
+    "maximum_reach_m": 0.004, "maximum_step_m": 0.00005,
+    "measurement_sigma_m": 0.001, "minimum_compliance_m_per_n": 0.0001,
+    "compliance_bound_status": "assumed_development_bound_requires_calibration",
+    "null_decision_variance": 1.0, "seed": 1101
+  },
+  "execution": {"estimation_hz": 2, "updates_per_episode": 4, "steps_per_update": 50,
+    "maximum_wall_s": 300, "maximum_episode_s": 12, "geometry_feedback": true, "force_feedback": true,
+    "probe_strategy": "no_probe", "require_calibrated_probe_bound": true,
+    "physics": "MuJoCo CPU; GPU EGL, FK, IK, estimation and candidate scoring", "realtime_claim": false}
+}

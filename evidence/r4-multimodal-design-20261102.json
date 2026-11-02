@@ -1,0 +1,182 @@
+{
+  "schema_version": 1,
+  "updated_utc": "2026-11-02T05:44:31.816260+00:00",
+  "run_id": "r4-multimodal-design-20261102-01",
+  "goal_scope": "source-grounded implementation plan and exploratory experiment design for WM-CraftNet multimodal reconstruction and improved manipulation; light CPU prototypes",
+  "research_design_status": "passed",
+  "full_r4_runtime_status": "awaiting_verification",
+  "head": "a8a58e6c6b7aaac36ad530a2b6682ef778e936fe",
+  "branch": "codex/server-research",
+  "source_audit": {
+    "status": "passed",
+    "files": 22,
+    "wm_craftnet": "a1e825acaf50ade298e30b0b13c6671627af3a1e",
+    "neuralfeels": "36398b861c05a66868490fa43dfb7742cf345386",
+    "record": "runs/r4-multimodal-design-20261102-01/source-audit.json"
+  },
+  "effective_wsm_config": {
+    "status": "passed",
+    "scope": "Executed only two audited pure config functions; no torch/model/SDK import or checkpoint load",
+    "configurations": {
+      "training": {
+        "reward_loss_scale": 0.0,
+        "encoder_mlp_keys": ".*",
+        "actor_projected_dim": 32,
+        "deterministic_dim": 512,
+        "decoder_feature_dim": 1536,
+        "aux_heads": {
+          "wm_pose_pred": true,
+          "wm_tac_pred": true,
+          "wm_value_pred": true,
+          "wm_obj_pred": true
+        }
+      },
+      "released_config": {
+        "reward_loss_scale": 0.0,
+        "encoder_mlp_keys": ".*",
+        "actor_projected_dim": 32,
+        "deterministic_dim": 512,
+        "decoder_feature_dim": 1536,
+        "aux_heads": {
+          "wm_pose_pred": false,
+          "wm_tac_pred": false,
+          "wm_value_pred": false,
+          "wm_obj_pred": false
+        }
+      }
+    }
+  },
+  "cpu_diagnostic": {
+    "status": "passed",
+    "is_research_result": false,
+    "scope": "Native force transducer and analytic inference/decision diagnostics; no LEAP manipulation or WSM inference",
+    "cpu_only": true,
+    "mujoco": "3.2.7",
+    "python": "3.10.14",
+    "sensor": {
+      "steps": 500,
+      "normal_n": 0.49050000000000027,
+      "grid_normal_n": 0.49050000000000055,
+      "expected_static_weight_n": 0.4905,
+      "grid_channels": "z,x,y; 4x4 angular bins; not DIGIT optical contact geometry"
+    },
+    "analytic_patch_fixture": {
+      "fit": {
+        "status": "passed",
+        "data_rank": 3,
+        "condition": 35.87310794572474,
+        "estimate": {
+          "shape_offset_m": 0.0030000000000000057,
+          "pose_offset_m": 0.001999999999999995,
+          "effective_compliance_m_per_n": 0.001
+        },
+        "covariance": [
+          [
+            1.345414213396562e-08,
+            -1.0000000048536239e-08,
+            -3.328402350966379e-09
+          ],
+          [
+            -1.0000000048536235e-08,
+            9.999999981373549e-09,
+            1.4815298085197892e-17
+          ],
+          [
+            -3.3284023509663857e-09,
+            1.4815304843008462e-17,
+            3.915767417089551e-09
+          ]
+        ],
+        "evaluations": 18,
+        "scope": "Local linear identifiability diagnostic; covariance assumes independent calibrated residuals"
+      },
+      "without_pose_anchor": {
+        "status": "unobservable",
+        "data_rank": 2,
+        "reason": "Shape, pose and compliance are confounded; collect independent pose and varying-force evidence",
+        "estimate": null,
+        "covariance": null
+      },
+      "constant_load": {
+        "status": "unobservable",
+        "data_rank": 2,
+        "reason": "Shape, pose and compliance are confounded; collect independent pose and varying-force evidence",
+        "estimate": null,
+        "covariance": null
+      },
+      "naive_shape_error_m": 0.00285
+    },
+    "task_touch_selection": {
+      "selected": "critical_patch",
+      "candidates": [
+        {
+          "id": "critical_patch",
+          "permitted": true,
+          "task_variance_reduction": 3.2000000000000003e-06,
+          "score": 3.2000000000000003e-06
+        },
+        {
+          "id": "uncertain_backside",
+          "permitted": true,
+          "task_variance_reduction": 0.0,
+          "score": 0.0
+        }
+      ]
+    },
+    "friction": {
+      "mu_lower": 0.5,
+      "mu_upper": null,
+      "identification": "lower_bound_only",
+      "assumption": "Sticking contact; normal/shear magnitudes are calibrated sensor measurements"
+    },
+    "wall_seconds": 0.05893631651997566,
+    "source_sha256": {
+      "r4_multimodal.py": "c1e4fe457f1d61ee7038f19b5d5a8795646af50f5da314f86f7fdca2415de469",
+      "check-r4-multimodal-cpu.py": "6d886f4cb7f5e712f48b1721f56a8de83f3765b47f553e9dfe489105e5c49017"
+    },
+    "heldout_used": false,
+    "gpu_jobs": 0,
+    "paid_usd": 0
+  },
+  "tests": {
+    "passed": 30,
+    "previous_suite": 17,
+    "new_tests": 13,
+    "log": "runs/r4-multimodal-design-20261102-01/tests-final.log"
+  },
+  "preservation": {
+    "existing_code_config_test_evidence_files": 104,
+    "changed": []
+  },
+  "source_sha256": {
+    "scripts/r4_multimodal.py": "c1e4fe457f1d61ee7038f19b5d5a8795646af50f5da314f86f7fdca2415de469",
+    "scripts/check-r4-multimodal-cpu.py": "6d886f4cb7f5e712f48b1721f56a8de83f3765b47f553e9dfe489105e5c49017",
+    "tests/test_r4_multimodal.py": "bb55976946885f48a00dd097f160a2c6adc2cca9fb0db39e15f6735ba91dc99d",
+    "configs/r4-multimodal-study.json": "80bfc7bf2fb01533efcda78debbc89f2b5aed08a1de143ca6b58a3fd2fd695b7"
+  },
+  "resource_scope": {
+    "gpu_jobs": 0,
+    "training_runs": 0,
+    "paid_usd": 0,
+    "new_dependencies_installed": false,
+    "driver_modified": false,
+    "real_robot_connected": false,
+    "heldout_used": false,
+    "new_video": false
+  },
+  "mano": "user will send licensed files; not received as a readable artifact during this research turn; not required for CPU/design delivery",
+  "not_claimed": [
+    "successful LEAP tactile manipulation",
+    "complete object reconstruction",
+    "WSM inference or pretrained-weight reproduction",
+    "continuous-force/optical-tactile equivalence",
+    "new method superiority or novelty established"
+  ],
+  "artifacts": {
+    "plan": "docs/r4-multimodal.zh-CN.md",
+    "protocol": "configs/r4-multimodal-study.json",
+    "report": "runs/r4-multimodal-design-20261102-01/REPORT.md",
+    "source_audit": "runs/r4-multimodal-design-20261102-01/source-audit.json",
+    "cpu_result": "runs/r4-multimodal-design-20261102-01/cpu-probe-02/result.json"
+  }
+}

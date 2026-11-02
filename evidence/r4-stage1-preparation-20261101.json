@@ -1,0 +1,645 @@
+{
+  "schema_version": 1,
+  "updated_utc": "2026-11-02T05:11:07.905331+00:00",
+  "run_id": "r4-stage1-preparation-20261101-01",
+  "preparation_status": "passed for core runtime and downstream interfaces; full video frontend not ready",
+  "overall_r4_status": "awaiting_verification",
+  "head": "a8a58e6c6b7aaac36ad530a2b6682ef778e936fe",
+  "branch": "codex/server-research",
+  "source_sha256": {
+    "scripts/r4_scene.py": "e81b582e2eb1c012559bb88ac87116dbcb0a1b7c38c67d6bb595bfc704b8dde1",
+    "scripts/import-r4-videomanip.py": "e98869a26e8307d309201aa17e55d00e27160152c14ff3c3a433a70dbb4dc87b",
+    "scripts/prepare-r4-collision.py": "5ec411637d40a3d238b7b3e0f5fc28e7348a8d5c62d57364b029afcf6526fea5",
+    "scripts/check-r4-hand-mapping.py": "fabcdc348f95e3e6fedac46e736dd949d34e9bda8e0b4110fc4441cde433e660",
+    "scripts/r4_contract.py": "37b3c10d61c3c42295fe425b2593fc22a96004034d08850748d9b7dc89047871",
+    "scripts/render-r4-observations.py": "aecd85e28c29831704d07779e298b88a5ce95d0cf58cb424850d56fa7979415e",
+    "scripts/r4_evaluation.py": "0c570474652331123165e8f9ca40e5e6b030782d6863970739e2646858f7c570",
+    "scripts/prepare-r4-readiness.py": "145b5d6caf178c0c3233f32855699d0481e7c6dbaa0bca44e57552e32458e73d",
+    "scripts/prepare-r4-objects.py": "f4da7a1a1bacbf79d8911112a3f35a51dc0133ef827680e2b978c05d56dd5b4e",
+    "scripts/check-r4-environment.py": "8ec1ea107be00243e2d91e4816b863fda994253204c72a08f91b87a7e547f347",
+    "scripts/run-r4-physical.py": "17196d6368e6f7cd4cbae782cb22b6588d49f5e0b1e4260708fd29a1fab7f9ed",
+    "scripts/activate-r4.sh": "aa3a7161f3330b4fd9fb47658830449f9e0fbd6e08fa435996d1aa7d5914663a",
+    "tests/test_r4_evaluation.py": "418e4d6f980cf08ba4d4cd0137952d816802818b6bf6c7282661c1c6af515f74",
+    "tests/test_r4_import.py": "184d394cddaae47e05fc0a58d4551c4efdc80bbb6a284521eb48bc62803bd44b",
+    "tests/test_r4_contract.py": "6eb333f61ff675e11f1e4ccba4d17e39b8d29a07907f85fdcb5869db7c8c77fe",
+    "configs/conda-r4-linux-64.explicit.txt": "64428eec1c554c8703420b05881e36bb1f5e2f81ecc979d0ba36b14b1d09cd40",
+    "configs/requirements-r4-core.lock.txt": "5c626a2678d794142bef83a3d1d27d0075610dd200c0bb8846e621c2ad395739",
+    "configs/r4-stage1.json": "7984513995f89f85f4702179bfeaa0a63cb6b6fe8a1348738f7b3960f7c74b2c",
+    "configs/requirements-r4-core.txt": "a2231efeac0331fcf381f27fc39480ad6270caca5a681cc73fd3bb721e1e91c7"
+  },
+  "network": {
+    "status": "passed",
+    "user_selected_proxy": "socks5h://127.0.0.1:7893",
+    "global_proxy_modified": false
+  },
+  "environment": {
+    "status": "passed",
+    "python": "3.10.14 | packaged by conda-forge | (main, Mar 20 2024, 12:45:18) [GCC 12.3.0]",
+    "executable": "/home/junqiy/projects/humanmimic-data/r4/envs/r4-core/bin/python",
+    "platform": "Linux-4.15.0-213-generic-x86_64-with-glibc2.27",
+    "glibc": [
+      "glibc",
+      "2.27"
+    ],
+    "versions": {
+      "numpy": "1.26.4",
+      "scipy": "1.13.1",
+      "mujoco": "3.2.7",
+      "torch": "2.5.1+cu118",
+      "torchvision": "0.20.1+cu118",
+      "trimesh": "4.5.3",
+      "imageio-ffmpeg": "0.6.0"
+    },
+    "cuda_visible_devices": "GPU-d3ba9e90-dc39-ddc2-e7cb-34c7e8f572a2",
+    "errors": [],
+    "pip_check": {
+      "returncode": 0,
+      "output": "No broken requirements found.\n"
+    },
+    "cuda": {
+      "device": "Tesla V100-SXM2-32GB",
+      "capability": [
+        7,
+        0
+      ],
+      "compiled_architectures": [
+        "sm_50",
+        "sm_60",
+        "sm_70",
+        "sm_75",
+        "sm_80",
+        "sm_86",
+        "sm_37",
+        "sm_90"
+      ],
+      "toolkit": "11.8",
+      "max_absolute_fp32_error": 3.076239541144332e-05,
+      "predeclared_error_limit": 0.001,
+      "finite_gradients": true,
+      "peak_allocated_bytes": 11665408
+    },
+    "model": {
+      "nq": 16,
+      "nv": 16,
+      "nu": 16,
+      "joint_names": [
+        "if_mcp",
+        "if_rot",
+        "if_pip",
+        "if_dip",
+        "mf_mcp",
+        "mf_rot",
+        "mf_pip",
+        "mf_dip",
+        "rf_mcp",
+        "rf_rot",
+        "rf_pip",
+        "rf_dip",
+        "th_cmc",
+        "th_axl",
+        "th_mcp",
+        "th_ipl"
+      ],
+      "asset_manifest_sha256": "bf8b2990649fc80ad3ec3036601cbd176ac1c1a8aa2fdb659a7a48bd267041bc"
+    },
+    "scope": "Python dependencies, real single-GPU computation and MJCF loading; not manipulation acceptance"
+  },
+  "coacd_version": "1.0.5",
+  "pip_check_final": "passed",
+  "verification": {
+    "source_parse": "passed",
+    "pytest": {
+      "status": "passed",
+      "tests": 17
+    },
+    "hand_mapping": {
+      "comparisons": 64,
+      "source_urdf_sha256": "e061254c8163340d710484997affb16a07a9461f58e35f909782b5b9792a53c1",
+      "T_sourcebase_palm": [
+        [
+          -0.9999999999999987,
+          5.3589793170057245e-08,
+          0.0,
+          0.0
+        ],
+        [
+          -5.3589793170057245e-08,
+          -0.9999999999999987,
+          0.0,
+          0.038
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.098
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "maximum_position_error_m": 5.039941174500894e-08,
+      "maximum_rotation_error_rad": 9.813314466621493e-07,
+      "limits": {
+        "position_m": 0.0005,
+        "rotation_rad": 0.01
+      },
+      "rows": [
+        {
+          "pose": 0.0,
+          "joint": "if_mcp",
+          "position_error_m": 9.85133562538035e-18,
+          "rotation_error_rad": 4.621577758518884e-07
+        },
+        {
+          "pose": 0.0,
+          "joint": "if_rot",
+          "position_error_m": 1.7624623538075962e-08,
+          "rotation_error_rad": 4.6212947087884015e-07
+        },
+        {
+          "pose": 0.0,
+          "joint": "if_pip",
+          "position_error_m": 2.784250834713546e-08,
+          "rotation_error_rad": 4.621294732422708e-07
+        },
+        {
+          "pose": 0.0,
+          "joint": "if_dip",
+          "position_error_m": 2.257502263559342e-08,
+          "rotation_error_rad": 4.621294732422708e-07
+        },
+        {
+          "pose": 0.0,
+          "joint": "mf_mcp",
+          "position_error_m": 7.757919228897728e-18,
+          "rotation_error_rad": 4.621577758518884e-07
+        },
+        {
+          "pose": 0.0,
+          "joint": "mf_rot",
+          "position_error_m": 1.7624623538075962e-08,
+          "rotation_error_rad": 4.6212947087884015e-07
+        },
+        {
+          "pose": 0.0,
+          "joint": "mf_pip",
+          "position_error_m": 2.784250834884981e-08,
+          "rotation_error_rad": 4.621294732422708e-07
+        },
+        {
+          "pose": 0.0,
+          "joint": "mf_dip",
+          "position_error_m": 2.2575022638004184e-08,
+          "rotation_error_rad": 4.621294732422708e-07
+        },
+        {
+          "pose": 0.0,
+          "joint": "rf_mcp",
+          "position_error_m": 1.5515838457795457e-17,
+          "rotation_error_rad": 4.621577758518884e-07
+        },
+        {
+          "pose": 0.0,
+          "joint": "rf_rot",
+          "position_error_m": 1.7624623528271827e-08,
+          "rotation_error_rad": 4.6212947087884015e-07
+        },
+        {
+          "pose": 0.0,
+          "joint": "rf_pip",
+          "position_error_m": 2.7842508343466475e-08,
+          "rotation_error_rad": 4.621294732422708e-07
+        },
+        {
+          "pose": 0.0,
+          "joint": "rf_dip",
+          "position_error_m": 2.257578460858329e-08,
+          "rotation_error_rad": 4.621294732422708e-07
+        },
+        {
+          "pose": 0.0,
+          "joint": "th_cmc",
+          "position_error_m": 6.942281208919283e-18,
+          "rotation_error_rad": 6.699423977796339e-07
+        },
+        {
+          "pose": 0.0,
+          "joint": "th_axl",
+          "position_error_m": 8.709251178036002e-09,
+          "rotation_error_rad": 4.738619125999619e-07
+        },
+        {
+          "pose": 0.0,
+          "joint": "th_mcp",
+          "position_error_m": 1.5833406950063597e-08,
+          "rotation_error_rad": 4.852838501524495e-07
+        },
+        {
+          "pose": 0.0,
+          "joint": "th_ipl",
+          "position_error_m": 7.088128193278475e-09,
+          "rotation_error_rad": 4.852838498892057e-07
+        },
+        {
+          "pose": 0.2,
+          "joint": "if_mcp",
+          "position_error_m": 9.85133562538035e-18,
+          "rotation_error_rad": 4.6215777565560036e-07
+        },
+        {
+          "pose": 0.2,
+          "joint": "if_rot",
+          "position_error_m": 1.86724150784997e-08,
+          "rotation_error_rad": 4.1367913306772115e-07
+        },
+        {
+          "pose": 0.2,
+          "joint": "if_pip",
+          "position_error_m": 2.7543097151568964e-08,
+          "rotation_error_rad": 4.1879999481798003e-07
+        },
+        {
+          "pose": 0.2,
+          "joint": "if_dip",
+          "position_error_m": 2.4328589106520144e-08,
+          "rotation_error_rad": 4.187999948624307e-07
+        },
+        {
+          "pose": 0.2,
+          "joint": "mf_mcp",
+          "position_error_m": 7.757919228897728e-18,
+          "rotation_error_rad": 4.6215777565560036e-07
+        },
+        {
+          "pose": 0.2,
+          "joint": "mf_rot",
+          "position_error_m": 1.867241509300761e-08,
+          "rotation_error_rad": 4.1367913306772115e-07
+        },
+        {
+          "pose": 0.2,
+          "joint": "mf_pip",
+          "position_error_m": 2.7543097159470478e-08,
+          "rotation_error_rad": 4.1879999481798003e-07
+        },
+        {
+          "pose": 0.2,
+          "joint": "mf_dip",
+          "position_error_m": 2.4328589113417318e-08,
+          "rotation_error_rad": 4.187999948624307e-07
+        },
+        {
+          "pose": 0.2,
+          "joint": "rf_mcp",
+          "position_error_m": 1.5515838457795457e-17,
+          "rotation_error_rad": 4.6215777565560036e-07
+        },
+        {
+          "pose": 0.2,
+          "joint": "rf_rot",
+          "position_error_m": 1.8672415072463384e-08,
+          "rotation_error_rad": 4.1367913306772115e-07
+        },
+        {
+          "pose": 0.2,
+          "joint": "rf_pip",
+          "position_error_m": 2.754309713810416e-08,
+          "rotation_error_rad": 4.1879999481798003e-07
+        },
+        {
+          "pose": 0.2,
+          "joint": "rf_dip",
+          "position_error_m": 2.432872063977897e-08,
+          "rotation_error_rad": 4.187999948624307e-07
+        },
+        {
+          "pose": 0.2,
+          "joint": "th_cmc",
+          "position_error_m": 6.942281208919283e-18,
+          "rotation_error_rad": 6.699423976859589e-07
+        },
+        {
+          "pose": 0.2,
+          "joint": "th_axl",
+          "position_error_m": 8.914794354340305e-09,
+          "rotation_error_rad": 4.829782426785269e-07
+        },
+        {
+          "pose": 0.2,
+          "joint": "th_mcp",
+          "position_error_m": 1.4451703588647303e-08,
+          "rotation_error_rad": 5.370083213215414e-07
+        },
+        {
+          "pose": 0.2,
+          "joint": "th_ipl",
+          "position_error_m": 1.376338511191638e-08,
+          "rotation_error_rad": 5.370118839595622e-07
+        },
+        {
+          "pose": 0.5,
+          "joint": "if_mcp",
+          "position_error_m": 9.85133562538035e-18,
+          "rotation_error_rad": 4.621577755770957e-07
+        },
+        {
+          "pose": 0.5,
+          "joint": "if_rot",
+          "position_error_m": 1.9534749114958063e-08,
+          "rotation_error_rad": 3.334163187303451e-07
+        },
+        {
+          "pose": 0.5,
+          "joint": "if_pip",
+          "position_error_m": 2.6157133040856207e-08,
+          "rotation_error_rad": 3.7057600174247475e-07
+        },
+        {
+          "pose": 0.5,
+          "joint": "if_dip",
+          "position_error_m": 2.4081944614029558e-08,
+          "rotation_error_rad": 3.705760016353625e-07
+        },
+        {
+          "pose": 0.5,
+          "joint": "mf_mcp",
+          "position_error_m": 7.757919228897728e-18,
+          "rotation_error_rad": 4.621577755770957e-07
+        },
+        {
+          "pose": 0.5,
+          "joint": "mf_rot",
+          "position_error_m": 1.953474911837818e-08,
+          "rotation_error_rad": 3.334163187303451e-07
+        },
+        {
+          "pose": 0.5,
+          "joint": "mf_pip",
+          "position_error_m": 2.615713304855616e-08,
+          "rotation_error_rad": 3.7057600174247475e-07
+        },
+        {
+          "pose": 0.5,
+          "joint": "mf_dip",
+          "position_error_m": 2.4081944621626236e-08,
+          "rotation_error_rad": 3.705760016353625e-07
+        },
+        {
+          "pose": 0.5,
+          "joint": "rf_mcp",
+          "position_error_m": 1.5515838457795457e-17,
+          "rotation_error_rad": 4.621577755770957e-07
+        },
+        {
+          "pose": 0.5,
+          "joint": "rf_rot",
+          "position_error_m": 1.9534749113818026e-08,
+          "rotation_error_rad": 3.334163187303451e-07
+        },
+        {
+          "pose": 0.5,
+          "joint": "rf_pip",
+          "position_error_m": 2.615713303698994e-08,
+          "rotation_error_rad": 3.7057600174247475e-07
+        },
+        {
+          "pose": 0.5,
+          "joint": "rf_dip",
+          "position_error_m": 2.408172147457329e-08,
+          "rotation_error_rad": 3.705760016353625e-07
+        },
+        {
+          "pose": 0.5,
+          "joint": "th_cmc",
+          "position_error_m": 6.942281208919283e-18,
+          "rotation_error_rad": 6.699423977865729e-07
+        },
+        {
+          "pose": 0.5,
+          "joint": "th_axl",
+          "position_error_m": 9.846143005350888e-09,
+          "rotation_error_rad": 5.273849402663024e-07
+        },
+        {
+          "pose": 0.5,
+          "joint": "th_mcp",
+          "position_error_m": 1.4563505756959128e-08,
+          "rotation_error_rad": 7.409503421382812e-07
+        },
+        {
+          "pose": 0.5,
+          "joint": "th_ipl",
+          "position_error_m": 3.6225616479156843e-08,
+          "rotation_error_rad": 7.409561384517448e-07
+        },
+        {
+          "pose": 0.8,
+          "joint": "if_mcp",
+          "position_error_m": 9.85133562538035e-18,
+          "rotation_error_rad": 4.62157775694849e-07
+        },
+        {
+          "pose": 0.8,
+          "joint": "if_rot",
+          "position_error_m": 1.961482715662801e-08,
+          "rotation_error_rad": 2.4566569291283533e-07
+        },
+        {
+          "pose": 0.8,
+          "joint": "if_pip",
+          "position_error_m": 2.3899385798961744e-08,
+          "rotation_error_rad": 3.5376729972374166e-07
+        },
+        {
+          "pose": 0.8,
+          "joint": "if_dip",
+          "position_error_m": 2.217347319738772e-08,
+          "rotation_error_rad": 3.5376729966890437e-07
+        },
+        {
+          "pose": 0.8,
+          "joint": "mf_mcp",
+          "position_error_m": 7.757919228897728e-18,
+          "rotation_error_rad": 4.62157775694849e-07
+        },
+        {
+          "pose": 0.8,
+          "joint": "mf_rot",
+          "position_error_m": 1.961482715662801e-08,
+          "rotation_error_rad": 2.4566569291283533e-07
+        },
+        {
+          "pose": 0.8,
+          "joint": "mf_pip",
+          "position_error_m": 2.389938580504009e-08,
+          "rotation_error_rad": 3.5376729972374166e-07
+        },
+        {
+          "pose": 0.8,
+          "joint": "mf_dip",
+          "position_error_m": 2.21734732024094e-08,
+          "rotation_error_rad": 3.5376729966890437e-07
+        },
+        {
+          "pose": 0.8,
+          "joint": "rf_mcp",
+          "position_error_m": 1.5515838457795457e-17,
+          "rotation_error_rad": 4.62157775694849e-07
+        },
+        {
+          "pose": 0.8,
+          "joint": "rf_rot",
+          "position_error_m": 1.961482715662801e-08,
+          "rotation_error_rad": 2.4566569291283533e-07
+        },
+        {
+          "pose": 0.8,
+          "joint": "rf_pip",
+          "position_error_m": 2.389938579427291e-08,
+          "rotation_error_rad": 3.5376729972374166e-07
+        },
+        {
+          "pose": 0.8,
+          "joint": "rf_dip",
+          "position_error_m": 2.217309772323908e-08,
+          "rotation_error_rad": 3.5376729966890437e-07
+        },
+        {
+          "pose": 0.8,
+          "joint": "th_cmc",
+          "position_error_m": 6.942281208919283e-18,
+          "rotation_error_rad": 6.699423976963672e-07
+        },
+        {
+          "pose": 0.8,
+          "joint": "th_axl",
+          "position_error_m": 1.1094183505815843e-08,
+          "rotation_error_rad": 5.977693153064944e-07
+        },
+        {
+          "pose": 0.8,
+          "joint": "th_mcp",
+          "position_error_m": 1.7601439746779723e-08,
+          "rotation_error_rad": 9.813257650993364e-07
+        },
+        {
+          "pose": 0.8,
+          "joint": "th_ipl",
+          "position_error_m": 5.039941174500894e-08,
+          "rotation_error_rad": 9.813314466621493e-07
+        }
+      ],
+      "status": "passed"
+    },
+    "headless_physics": {
+      "execution_status": "passed",
+      "task_status": "failed",
+      "input_kind": "synthetic_fixture",
+      "is_research_result": false,
+      "split": "readiness",
+      "steps": 2000,
+      "control_samples": 201,
+      "duration_seconds": 3.999999999999781,
+      "wall_seconds": 2.77701882366091,
+      "metrics": {
+        "final_position_error_m": 0.07999999535145096,
+        "settle_max_position_error_m": 0.07999999535145312,
+        "final_rotation_error_degrees": 30.000000035698807,
+        "settle_max_rotation_error_degrees": 30.000000035698807,
+        "penalized_position_error_m": 0.1,
+        "lift_hold_seconds": 0.0,
+        "max_penetration_m": 0.0004337203725290478,
+        "opposing_contact_fraction_when_lifted": 0.0,
+        "released_during_settle": true,
+        "hand_contact_steps": 0,
+        "maximum_wrist_force_n": 10.130141891934842,
+        "joint_tracking_rmse_rad": 0.014418351514132665
+      },
+      "video": {
+        "frames": 101,
+        "renderer": "Tesla V100-SXM2-32GB/PCIe/SSE2",
+        "file": "actual-execution.mp4"
+      },
+      "artifacts_sha256": {
+        "actual-state.npz": "e9b8247bf9ddf86f5a0dd99aea0caeb62c213216cea91bd1f0947f3ea9f03c6c",
+        "scene.xml": "248043ea7356d9c65d9c16636bb4c0227e14ecd7d47368a9ff07bd5d327d2874",
+        "actual-execution.mp4": "723e05967d3b8bea080988491ce87535948bbb486ae6246c0e302f7476b9e8b0",
+        "actual-state.csv": "8f996a01266586bd5b7ea117105bed8d5847886bd900f9e5848600fbda90151c",
+        "geom-names.json": "9d6eb0149145e054aca3165b8e64ab5905bc426ee0355c26d3dc2f26955fab4a"
+      }
+    },
+    "media": {
+      "status": "passed",
+      "media": {
+        "physical": {
+          "frames_decoded": 101,
+          "sha256": "723e05967d3b8bea080988491ce87535948bbb486ae6246c0e302f7476b9e8b0"
+        },
+        "observations": {
+          "frames_decoded": 24,
+          "sha256": "cbcbcf08bdf5bc0c9081858ccc708ba9f6186f344cd8bd8cd0a836647c4be679"
+        }
+      },
+      "synthetic_observation_surface_distance_m": {
+        "median": 0.0002461099589436723,
+        "p95": 0.0007464441018970952,
+        "diagnostic_limit_p95": 0.002
+      },
+      "scope": "media decoding, procedural debug observation projection and expected negative task result; not manipulation acceptance"
+    },
+    "visual_review": "passed; hand above separate orange object, as expected for negative fixture",
+    "cached_replay": "awaiting_verification",
+    "live_camera": "not run; R3 skipped",
+    "overwrite_guard": {
+      "status": "passed",
+      "existing_artifacts_unchanged": true,
+      "returncode": 1
+    }
+  },
+  "data": {
+    "development_objects": 12,
+    "views_per_object": 24,
+    "points_per_object": 32768,
+    "frames_decoded": 288,
+    "kind": "synthetic_rgbd_mechanism_observations; not monocular reconstruction",
+    "heldout_generated": 0,
+    "heldout_used": false,
+    "dexycb": "calibration downloaded; sequences/CAD/instance split awaiting_verification",
+    "mano": "authorized assets; path needs_input"
+  },
+  "remaining": [
+    "full VideoManip frontend environments and pretrained assets",
+    "coarse-model estimator and shared grasp planner",
+    "six refinement methods and three ablations",
+    "collision surface accuracy/inertia audit",
+    "successful manipulation baseline",
+    "formal hypothesis evaluation"
+  ],
+  "resources": {
+    "data_root": "/home/junqiy/projects/humanmimic-data/r4",
+    "disk_gib": 8.863227844238281,
+    "cap_gib": 40,
+    "volume_free_gib": 667.4325981140137,
+    "paid_usd": 0,
+    "active_r4_processes": "",
+    "training_started": false,
+    "driver_changed": false,
+    "real_robot_connected": false
+  },
+  "preservation": {
+    "status": "passed",
+    "protected_count": 82,
+    "changed": []
+  },
+  "artifacts": {
+    "plan": "docs/r4-stage1.zh-CN.md",
+    "report": "runs/r4-stage1-preparation-20261101-01/REPORT.md",
+    "physical_video": "runs/r4-stage1-preparation-20261101-01/physical-mesh-negative-03/actual-execution.mp4",
+    "development_audit": "runs/r4-stage1-preparation-20261101-01/development-data-audit.json",
+    "observations_index": "/home/junqiy/projects/humanmimic-data/r4/datasets/r4-localgeom-v1/observations-index.json"
+  }
+}

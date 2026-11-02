@@ -50,6 +50,26 @@ These notes separate measured observations from design interpretations. They des
 
 The next useful evidence is a pair of counterexamples: a geometrically feasible candidate that fails in closed loop, and an edited candidate that succeeds under the same controller. Neither has been established by this project yet. [R4 experimental design](research.md)
 
+## 07 — Contact is evidence about several possible errors
+
+**Design insight.** A fingertip meeting the object early can mean an incorrect surface, a shifted object, or contact compression. Writing every discrepancy into geometry makes the wrong explanation permanent. Varying load at the same calibrated hand region, with an independent pose constraint, helps distinguish these explanations. Constant load or missing pose evidence may leave them inseparable.
+
+**Implementation and observation.** The CUDA estimator jointly fits pose, local normal displacement and effective compliance, then freezes unobservable directions. An analytic GPU fixture exposed a curvature bias in one-sided tangent-plane residuals; symmetric normal integration reduced the bias without relaxing acceptance thresholds. This verifies a numerical correction on the fixture, not accurate real-object material identification. Pose confidence intervals are still insufficiently calibrated.
+
+**Consequence.** Export evidence, rejected observations and unknown directions with the mesh. Never use simulator contact locations as estimator inputs. [Mechanism and limitations](r4-multimodal.zh-CN.md#04-接触怎样修正几何而不把错误写进网格)
+
+## 08 — Memory should retain evidence without manufacturing confidence
+
+**Design insight.** A newly occluded groove should not disappear from the object model, but an old object pose should not remain certain after a slip. Persistent shape, changing pose and confidence have different lifetimes.
+
+**Implementation.** Explicit memory stores unique timestamped visual/tactile/action evidence and an object-coordinate belief. It selects a bounded mix of recent and older observations. Cached poses initialize a solve; the old posterior is not treated as another independent sensor. This is an inspectable baseline, not an implemented learned WSM. The M1 comparison must hold window size, point count and optimization budget fixed to test whether selecting useful history actually helps. [Memory design](r4-multimodal.zh-CN.md#03-多模态记忆到底怎样实现)
+
+## 09 — More touch does not establish a geometry contribution
+
+**Research hypothesis.** Improving the geometry used for control should reduce manipulation error beyond what direct force feedback already achieves. E2 therefore compares all four geometry/force combinations with common references, gains, safety limits and independent executions. Its primary contrast is G1F1 versus G0F1; failures remain in the denominator.
+
+**Research hypothesis.** A useful probe should reduce task-relevant uncertainty, not simply global uncertainty. E3 compares no probe, random, uniform, global-information and task-sensitive selection under the same budget. Current task sensitivities are explicit grasp/support surrogates; they are not gradients of actual task success. The default implementation abstains when its force-prediction bound lacks calibration. Neither hypothesis has yet been demonstrated by successful grasp/place trials. [Experimental design](r4-multimodal.zh-CN.md#07-每组实验到底回答什么产出什么)
+
 ## What these notes do not establish
 
 The current evidence does not establish unseen-task generalization, real-time camera operation, real-robot transfer, obstacle avoidance, or a new learning algorithm. The original five R2 held-out videos are now used data. Subsequent method changes need a new frozen test split.

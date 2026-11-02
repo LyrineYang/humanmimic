@@ -16,7 +16,9 @@
 
 HumanMimic connects GEM-X motion estimation, a pretrained SONIC controller and MuJoCo. Give it a short video; the pipeline extracts human motion, runs the robot controller, and saves a side-by-side comparison with the intermediate data and execution metrics.
 
-**Developer preview · Simulation only · Manual environment setup.** Recorded-video and reference-motion workflows are implemented. Live camera input and obstacle-aware adaptation are on the roadmap.
+**Developer preview · Simulation only · Rebuildable Linux/V100 CUDA example.** Recorded-video and reference-motion workflows are implemented. Live-camera work is skipped for the current stage; video-based object reconstruction and dexterous interaction are the next research direction.
+
+**R4 research in development:** LEAP sensing, CUDA shape/pose/compliance estimation and explicit multimodal memory now have runnable components. Bounded geometry/force control and probe selection are being evaluated; manipulation gains remain unverified. Read the [plain-language research walkthrough and experiment design (Chinese)](docs/r4-multimodal.zh-CN.md) or [research overview](docs/research.md).
 
 ## What you can do
 
@@ -40,44 +42,44 @@ GIT_LFS_SKIP_SMUDGE=1 git clone --recurse-submodules https://github.com/LyrineYa
 cd humanmimic
 ```
 
-The repository includes source, configuration, small demo images and results. Environments, pretrained weights, body-model assets and full videos are prepared separately.
+The research branch adds a generated CUDA example with no MANO, private videos or trained weights. These commands require a revision containing `scripts/humanmimic.py`; local delivery does not imply publication on the default branch. The original R1/R2 results remain tied to the 4060 workstation.
 
-| Your starting point | Next step |
-| :--- | :--- |
-| **Just exploring** | Browse the [demo and results](docs/results.md) or [pipeline](docs/architecture.md). No GPU or installation needed. |
-| **Setting up a machine** | Follow the [setup checklist](docs/getting-started.md#prepare-a-runtime). The verified baseline is an 8 GB RTX 4060 Laptop under WSL2; a portable installer is not available yet. |
-| **Runtime already prepared** | Use the video example below, then the [usage guide](docs/usage.md). |
+### 2. Build and try the supported example
 
-### 2. Check your video
-
-On a prepared, authorized execution target, choose a **single-person video up to 60 seconds**, with a fixed camera and visible full body and feet. Start with a simple gesture or squat.
+On Linux x86_64 with a V100 and a compatible existing NVIDIA driver:
 
 ```bash
-source scripts/activate-r2.sh
-python scripts/run-r2-video.py \
-  --input /absolute/path/to/clip.mp4 \
-  --run-id my-first-video \
-  --check-only
+python3 scripts/humanmimic.py doctor --target r4-v100
+python3 scripts/humanmimic.py bootstrap \
+  --prefix "$PWD/../humanmimic-data/r4/envs/r4-core" \
+  --cache "$PWD/../humanmimic-data/r4/cache/bootstrap" \
+  --output runs/install-r4-01
+source scripts/activate-r4-research.sh
+nvidia-smi --query-gpu=uuid,name,memory.free,utilization.gpu --format=csv
+# Replace GPU-... with one available device UUID:
+python scripts/humanmimic.py example \
+  --gpu GPU-... --output runs/my-first-example
 ```
 
-This checks the input, storage and scheduling; it does not run a model or prove the runtime is ready. Continue only when `active_task_pids` is empty and `reserved_heldout_source` is `false`. Remove `--check-only` to run the pipeline. Optional `--events` annotations enable motion-event evaluation; without them, a demo can be generated but full acceptance stays unverified.
+The installer verifies a pinned Conda base and hashed wheels. It needs about 20 GiB free disk; the bounded example requires one explicitly selected GPU and has no CPU fallback. [Setup, proxy/offline options and target configuration](docs/getting-started.md#prepare-a-runtime)
 
-> **Current runtime status:** new execution on the original workstation is paused for Linux-server migration. Its boot guard also applies to `--check-only`. Use the [runtime readiness guide](docs/getting-started.md#prepare-a-runtime) before launching a run; source inspection and existing results remain available.
+### 3. Read the result
 
-### 3. Open the output
+Open `runs/my-first-example/REPORT.md`, `comparison.svg` and `result.json`. Generated observations, estimated shape/pose/compliance and evaluation data remain separate. This is an analytic reconstruction example, with **no physical manipulation**. Execution, task checks and research acceptance are separate fields; producing results does not prove useful grasping or calibrated uncertainty.
 
-A completed pipeline writes to `$R2_STORAGE_ROOT/runs/my-first-video/` (default storage root: `/mnt/d/humanoid-demo-r2`):
-
-```text
-my-first-video/
-├── REPORT.md                    # Start here: outcome and artifact links
-├── demo/comparison.mp4          # Original → estimated motion → actual robot
-├── extraction/                 # Source, estimates and converted references
-├── physical/                   # Actual states, controller logs and metrics
-└── body-audit/                  # Tracking and motion-event evaluation
+```bash
+python3 scripts/humanmimic.py inspect runs/my-first-example
 ```
 
-Review the report even when a video was produced: physical stability and correct imitation are separate checks. [Command options, output details and exit codes →](docs/usage.md)
+| Your next step | Where to go |
+| --- | --- |
+| Inspect results without a GPU | [Evidence and limitations](docs/results.md) |
+| Use a real video | [R1/R2 setup and usage](docs/usage.md#video-to-simulation); full server migration remains unverified |
+| Diagnose the server's R2 gaps | `python3 scripts/humanmimic.py doctor --target r4-v100 --stage r2` |
+| Develop a change | [Contribution and regression commands](CONTRIBUTING.md#routine-checks) |
+| Explore the research | [Memory, contact and geometry experiments](docs/r4-multimodal.zh-CN.md) |
+
+The original WSL execution guard remains active. Read-only diagnostics report its restrictions instead of requiring a false boot identity or storage marker.
 
 ## What works today
 
@@ -85,10 +87,11 @@ Review the report even when a video was produced: physical stability and correct
 | :--- | :--- | :--- |
 | Reference-motion tracking | Implemented | Five fixed motions, two trials each: **10/10 passed** |
 | Recorded-video imitation | Implemented; offline | Held-out videos: **4/5 passed**; debug videos: **3/5 passed** |
-| Live-camera input | Planned; camera testing needed | Not accepted yet |
-| Scene-constrained adaptation | Research design prepared | Not implemented yet |
+| Live-camera input | Skipped for this stage | Not accepted |
+| Generated CUDA example | Rebuild and stable run/inspect commands | Independent environment and analytic first-run evidence; no robot execution |
+| Video geometry → dexterous interaction | LEAP/CUDA sensing, estimation and memory components implemented | Targeted V100 checks passed; full video frontend, successful manipulation and geometry gains unverified |
 
-These are small engineering suites on the original 4060 environment. All ten current video rollouts were stable; three still failed motion-event checks. Full videos remain local, and all five held-out videos have been used. [Complete results and limitations →](docs/results.md)
+The R1/R2 numbers are small engineering suites on the original 4060 environment; the R4 component checks use V100. All ten current video rollouts were stable; three still failed motion-event checks. Full videos remain local, and all five held-out videos have been used. [Complete results and limitations →](docs/results.md)
 
 ## How it works
 
@@ -104,7 +107,7 @@ Perception runs offline in stages, then releases its models before the controlle
 
 **Limited memory favors inspectable stages.** Separating extraction, control and rendering made the accepted offline workflow possible on an 8 GB GPU. The caches also make failures easier to locate and investigate.
 
-The next question is how to adapt a demonstrated reach around an obstacle with a small budget of physical trials. The proposed approach edits the reference, screens candidates geometrically, then checks survivors with the frozen controller.
+The next question is whether task-relevant object geometry reconstructed from video can improve dexterous manipulation accuracy under a fixed observation and compute budget. The review separates reconstruction, contact estimation and physical execution, with independent geometry for evaluation. [Detailed research report (Chinese)](docs/research-video-interaction.zh-CN.md).
 
 [Evidence-backed insights](docs/insights.md) · [Research questions and experimental design](docs/research.md)
 

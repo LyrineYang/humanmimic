@@ -926,3 +926,6 @@ tbody tr:hover {
     transition:none!important;
   }
 }
+
+/* Runtime recipe remains readable without widening the page on small screens. */
+.command-example { padding: 22px; background: #e9ede8; border-radius: 10px; overflow-x: auto; max-width: 100%; font-size: 13px; line-height: 1.7; }

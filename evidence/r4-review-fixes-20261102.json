@@ -1,0 +1,229 @@
+{
+  "schema_version": 1,
+  "status": "passed",
+  "scope": "Four referenced code-review findings only; not R4 manipulation or uncertainty-calibration acceptance",
+  "completed_utc": "2026-11-02T09:47:14.364927+00:00",
+  "review_thread": "01a19b46-55b5-7481-bfc0-d714ae890a8f",
+  "review_access": "read_thread called with and without host; returned empty. Exact referenced local thread transcript read as fallback.",
+  "report": "runs/r4-review-fixes-20261102-01/REPORT.md",
+  "expectation": "runs/r4-review-fixes-20261102-01/expectation.json",
+  "raw_findings": "runs/r4-review-fixes-20261102-01/review-findings.txt",
+  "git_head": "a8a58e6c6b7aaac36ad530a2b6682ef778e936fe",
+  "git_branch": "codex/server-research",
+  "fixes": {
+    "EGL_vendor": {
+      "status": "passed",
+      "action": "Verified existing GL_VENDOR checks in both entrances; no new physical run",
+      "prior_result": "runs/r4-memory-control-20261102-01/p1-gpu-02/result.json",
+      "prior_result_sha256": "3a9b1c2a9e8fe9323c0519b9d95b14a4bf02713a422f1249ddf796d4467942cc",
+      "prior_result_status": "passed",
+      "unchanged_check_script_sha256": "d3a4bcda4d15239b6813bac1a6844ea0f277f704b118579e17be8ea07af2e2e1"
+    },
+    "union_boundary": {
+      "status": "passed",
+      "action": "Exclude internal touching faces using outward-normal free-space occupancy; retain exposed duplicates and rotated boundaries",
+      "before": {
+        "joined_boxes_exclude_internal_interface": {
+          "incorrect_samples": 472,
+          "maximum_outer_surface_error_m": 0.018873519609530612
+        },
+        "joined_cylinders_exclude_internal_caps": {
+          "incorrect_samples": 502,
+          "maximum_outer_surface_error_m": 0.019327707242504665
+        },
+        "duplicate_exposed_faces_retained": {
+          "incorrect_samples": 0,
+          "maximum_outer_surface_error_m": 0.0
+        },
+        "rotated_joined_boxes": {
+          "incorrect_samples": 472,
+          "maximum_outer_surface_error_m": 0.018873519609530612
+        }
+      },
+      "after": {
+        "joined_boxes_exclude_internal_interface": {
+          "incorrect_samples": 0,
+          "maximum_outer_surface_error_m": 0.0
+        },
+        "joined_cylinders_exclude_internal_caps": {
+          "incorrect_samples": 0,
+          "maximum_outer_surface_error_m": 3.469446951953614e-18
+        },
+        "duplicate_exposed_faces_retained": {
+          "incorrect_samples": 0,
+          "maximum_outer_surface_error_m": 0.0
+        },
+        "rotated_joined_boxes": {
+          "incorrect_samples": 0,
+          "maximum_outer_surface_error_m": 3.469446951953614e-18
+        }
+      },
+      "sample_count_per_case": 2048
+    },
+    "binary_modality": {
+      "status": "passed",
+      "action": "Remove continuous force before memory and fitting; deterministic bit-only selection; V drops tactile before memory",
+      "before_contact_rows": [
+        8,
+        0
+      ],
+      "after_contact_rows": [
+        8,
+        8
+      ],
+      "full_VB_fit_and_memory_invariance": true
+    },
+    "shape_only_pose": {
+      "status": "passed",
+      "action": "Freeze independent per-frame measurements or coarse/vision-only poses; reject unavailable independent poses; preparation counts against original budgets",
+      "frozen_transform_max_element_error": 1.566524687746096e-13,
+      "error_units": "Matrix entries mix rotation and translation; this is not a scalar displacement error",
+      "preparation_in_shared_budget": true,
+      "missing_pose_rejected": true
+    }
+  },
+  "gpu": {
+    "device": "Tesla V100-SXM2-32GB",
+    "selected": "GPU-bf9af36c-d009-896b-f0ea-35f592684d20",
+    "capability": [
+      7,
+      0
+    ],
+    "torch": "2.5.1+cu118",
+    "cuda_runtime": "11.8",
+    "free_bytes_at_admission": 30825381888,
+    "total_bytes": 34079899648,
+    "nvidia_smi": "GPU-41c264dc-74e0-3ea6-c3b0-26cfb1972a80, Tesla V100-SXM2-32GB, 0 MiB, 0 %, 530.30.02\nGPU-d3ba9e90-dc39-ddc2-e7cb-34c7e8f572a2, Tesla V100-SXM2-32GB, 0 MiB, 0 %, 530.30.02\nGPU-aa7b2cfa-6a76-0781-a48c-697c751a87eb, Tesla V100-SXM2-32GB, 0 MiB, 0 %, 530.30.02\nGPU-bf9af36c-d009-896b-f0ea-35f592684d20, Tesla V100-SXM2-32GB, 3103 MiB, 10 %, 530.30.02",
+    "cpu_fallback": false
+  },
+  "hardware_exclusive": false,
+  "environment": {
+    "prefix": "/home/junqiy/projects/humanmimic-data/r4/envs/r4-core",
+    "python": "3.10.14",
+    "torch": "2.5.1+cu118",
+    "cuda_runtime": "11.8",
+    "mujoco": "3.2.7",
+    "installed_by_this_task": [],
+    "parallel_changes": "Other project audit and W&B changes were preserved and are not attributed to this task."
+  },
+  "suites": {
+    "after-gpu-02": {
+      "status": "passed",
+      "checks_passed": 15,
+      "checks_total": 15,
+      "result": "runs/r4-review-fixes-20261102-01/after-gpu-02/result.json",
+      "result_sha256": "4b8abfdcbe7b3adf36ab9a8e6ca73ec90e73adcfbf97329617fbdd6886007d45",
+      "manifest": "runs/r4-review-fixes-20261102-01/after-gpu-02/manifest.json"
+    },
+    "p2-regression-01": {
+      "status": "passed",
+      "checks_passed": 15,
+      "checks_total": 15,
+      "result": "runs/r4-review-fixes-20261102-01/p2-regression-01/result.json",
+      "result_sha256": "c6fc0e4b7c7585d7ee3ef777a0b6aa6b3447c1b1b59c886aba656bfe8474f834",
+      "manifest": "runs/r4-review-fixes-20261102-01/p2-regression-01/manifest.json"
+    },
+    "memory-regression": {
+      "status": "passed",
+      "checks_passed": 18,
+      "checks_total": 18,
+      "result": "runs/r4-review-fixes-20261102-01/memory-regression/result.json",
+      "result_sha256": "cc28cfe20e7780758108871c5718ad987c5e953609e86e9329ad222eb71d5b41",
+      "manifest": "runs/r4-review-fixes-20261102-01/memory-regression/manifest.json"
+    }
+  },
+  "source_version_checks": {
+    "after-gpu-02": {
+      "source_changes_since_manifest": []
+    },
+    "p2-regression-01": {
+      "source_changes_since_manifest": [
+        "scripts/check-r4-review-fixes-gpu.py",
+        "scripts/r4_belief_evaluation.py"
+      ],
+      "explanation": "These two files are not imported by the P2 suite. The review regression runner was extended and private evaluator dtype corrected while P2 ran; both final files were subsequently covered by after-gpu-02 and the evaluator by existing-negative-evaluation."
+    },
+    "memory-regression": {
+      "source_changes_since_manifest": []
+    }
+  },
+  "private_evaluation_integration": {
+    "status": "passed",
+    "result_status": "awaiting_verification",
+    "execution_status": "completed",
+    "source_run": "runs/r4-memory-control-20261102-01/online-negative-03",
+    "result": "runs/r4-review-fixes-20261102-01/existing-negative-evaluation/metrics.json",
+    "result_sha256": "cebcda09c0166dede8d5f68cad8d0cfca7e00166e4342186daa3da335213b7bc",
+    "records": 4,
+    "missing_outputs": 0,
+    "last_world_surface": {
+      "surface_mean_m": 0.006884603461715263,
+      "surface_p95_m": 0.016495563997899344,
+      "symmetric_chamfer_m": 0.007781173460478486,
+      "fscore_1mm": 0.07637779552715655,
+      "fscore_2mm": 0.20660490412979352,
+      "fscore_5mm": 0.4203579359145287
+    },
+    "new_physical_trial": false,
+    "operation_improvement_verified": false
+  },
+  "retained_failures": [
+    {
+      "path": "runs/r4-review-fixes-20261102-01/before-gpu/result.json",
+      "status": "failed",
+      "failed_checks": 5
+    },
+    {
+      "path": "runs/r4-review-fixes-20261102-01/after-gpu-01/manifest.json",
+      "status": "failed",
+      "reason": "Float/Double indexed assignment in box normals; repaired without relaxing checks"
+    }
+  ],
+  "bookkeeping_note": "First summary assembly used unsupported git branch --show-current on Git 2.17; repeated with git rev-parse --abbrev-ref HEAD. No numerical code/result changed.",
+  "source_sha256_final": {
+    "scripts/r4_belief_evaluation.py": "e0320e4013d5c9d57ffdbae88451179dfd1213aac113c59115c413eee63a0dc6",
+    "scripts/r4_modalities.py": "f8cd18e2cb1139be5d06e4e9b125e2298b1c13f1c24ff8ab08e502cb03a96eb2",
+    "scripts/r4_public.py": "4b842797e1adc693a0261af7a2f6b8e2f8b99513fdd23b5491f561abf1a8fe89",
+    "scripts/r4_belief.py": "922695f129205afaed9421dde11ca0d41cd0ba0076b16475fef6e56df3a8b736",
+    "scripts/r4_memory.py": "5b2fb0b70964ef5ff7854abb5134de8d897fec51d16c1bda0150a701e34cdd4e",
+    "scripts/r4_estimator_worker.py": "875f41847ecb2d435a9710f92e2ea10a98eeec345f3dab510bf3c7a6a48a3f35",
+    "scripts/r4_replay.py": "ae82282c0374c561316e889e5448e99065f50dee0f4715a2a9939a149d2261ed",
+    "scripts/run-r4-physical.py": "517e3299481852e670c9f56a89585a3c339eefadf6fc02745160c537173250df",
+    "scripts/check-r4-review-fixes-gpu.py": "3d29e9d73abac2aacb836f460339e70846896a8d8c3dcc040aa70fa47f34bddb",
+    "docs/r4-multimodal.zh-CN.md": "802edc7c2de7f38c4b647e6aed8e2ca52f5e6f7d160f5062fa923e7a1b008efc",
+    "configs/r4-multimodal-study.json": "01f2708bfff648a0793ff1dc0f549a8f5d23ff6abd1733bb653330e745eaec26"
+  },
+  "validation_scope": {
+    "manual_source_review": "passed",
+    "standalone_cpu_source_parsing": "not_run",
+    "cpu_numerical_tests": "not_run",
+    "gpu_numeric_and_process_checks": "passed",
+    "animation_playback": "not_run",
+    "new_headless_physics": "not_run",
+    "new_video": "none",
+    "live_camera": "not_run",
+    "heldout_used": false,
+    "training_runs": 0,
+    "paid_usd": 0,
+    "robot_connections": 0,
+    "driver_changes": 0
+  },
+  "research_acceptance": {
+    "status": "awaiting_verification",
+    "pose_interval_coverage": {
+      "status": "awaiting_verification",
+      "reason": "Run --coverage; calibration is not inferred from a fit"
+    },
+    "joint_fixture_pose_covered": false,
+    "successful_T1_T2": "awaiting_verification",
+    "local_geometry_manipulation_gain": "awaiting_verification"
+  },
+  "completion": {
+    "own_run_processes_active": [],
+    "git_diff_check_exit": 0,
+    "git_diff_check_log": "runs/r4-review-fixes-20261102-01/git-diff-check.log",
+    "committed": false,
+    "pushed": false,
+    "other_workspace_changes_preserved": true
+  }
+}

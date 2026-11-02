@@ -1,0 +1,115 @@
+{
+  "recorded_utc": "2026-11-01T10:45:17.581649+00:00",
+  "scope": "Read-only server inventory and primary-source R4 research; no dependency installation or experiment",
+  "project": "/home/junqiy/projects/humanmimic",
+  "origin": "https://github.com/LyrineYang/humanmimic.git",
+  "synced_head": "a8a58e6c6b7aaac36ad530a2b6682ef778e936fe",
+  "branch": "codex/server-research",
+  "scope_change": {
+    "r3": "skipped for this stage by user; historical execution unverified",
+    "r4": "video-based interaction-object reconstruction and dexterous manipulation research; old static-box design retained as optional baseline"
+  },
+  "hardware": {
+    "gpu_count": 4,
+    "gpu": "Tesla V100-SXM2-32GB",
+    "gpu_memory_mib_each": 32768,
+    "sm": "7.0",
+    "driver": "530.30.02",
+    "cuda_toolkits": [
+      "11.8.89",
+      "12.1.66"
+    ],
+    "os": "Ubuntu 18.04.6",
+    "glibc": "2.27",
+    "cpu": "2x Intel Xeon Gold 5117",
+    "physical_cores": 28,
+    "logical_cpus": 56,
+    "memory_total_bytes": 270118342656,
+    "memory_available_bytes": 262002720768,
+    "home_available_bytes": 730509557760,
+    "root_available_bytes": 61432918016,
+    "observed_utc": "2026-11-01T10:29:11Z"
+  },
+  "observations": {
+    "gpu_0": "Existing compute workload observed; not interrupted",
+    "gpus_1_3": "No allocated memory at snapshot; not reserved",
+    "docker_socket": "failed: permission denied including approved host read-only query; runtime and data root unverified",
+    "ffmpeg": "failed: libxcb-xfixes.so.0 missing",
+    "project_environments_assets": "not prepared",
+    "submodules": "uninitialized; fixed versions retained"
+  },
+  "statuses": {
+    "inventory": "passed",
+    "research": "passed: literature review only",
+    "documentation_checks": "passed: current document links and anchors, JSON/HTML structural parse, protected bytes and git diff; no browser visual check",
+    "source_compilation": "awaiting_verification",
+    "model_inference": "awaiting_verification",
+    "animation_playback": "awaiting_verification",
+    "headless_physics": "awaiting_verification",
+    "r4_capability": "awaiting_verification",
+    "original_machine_unuploaded_code": "needs_input: user checking",
+    "historical_artifacts_present_locally": "failed: 22 pre-existing links target original-machine raw artifacts absent from clone"
+  },
+  "actions": {
+    "dependency_installs": 0,
+    "model_downloads": 0,
+    "model_runs": 0,
+    "simulation_runs": 0,
+    "containers_started": 0,
+    "training_runs": 0,
+    "paid_api_calls": 0,
+    "new_paid_resource_cost_usd": 0,
+    "system_or_driver_changes": 0,
+    "commits_created": 0,
+    "pushed": false
+  },
+  "reports": [
+    "docs/server-readiness.zh-CN.md",
+    "docs/research-video-interaction.zh-CN.md"
+  ],
+  "raw_evidence_directory": "runs/migration-research-20261101-01",
+  "raw_files_sha256": {
+    "research-web-record.json": "881ec80e3fe9cd4ce7e94a71a1565b3348443384759409efe22ba2bf2fef6c23",
+    "gpu_topology.json": "0d2ea6b947ef03011bec1299b60f0278497f244a89b9ccf14828e32f310fa412",
+    "host-inventory.json": "639ba0cdb9e1865b12b1ce95388246595446b64b59470c942bd5ad4fb64fc92b",
+    "cuda_toolkit.json": "e070881f9de753ac92ce5045eac163f7d14487c3ee60eba80349aeac400d6fb5",
+    "os.json": "76c4f20ca44886de594eec3c9123580ed3d5b5cc2dd17bf563f88af310ec6156",
+    "cpu.json": "902061a76513099f0d2bc7fbc09ca5685dc64745ee45904a956b0e054a4e9df5",
+    "submodules.json": "ddfa895af45ebbdac7cd7a4a5f41998b9093c19b1822a55f19c16dffb4107adb",
+    "new_remote.json": "b8ebb81f43a81e91fc56040ec16757ad7b8c4913a8a9dcb5c13eae4e60e8d17a",
+    "disks.json": "a3581826ae76f687ffbd9ced590113139237b636c607e011e829aff1ae1c2275",
+    "memory.json": "a2940e090b64e71319291093e13c936c353ad69e84c6ebb4a70c061ffafe85fd",
+    "gpu_processes.json": "4fda38e7cc9447296f1776dcb8831a17629d10b1397fab4187510147790f10f3",
+    "gpu.json": "20287aa80ada4a330aab6912c2e31591c01f581b7f76e86ef32e947c8c4b1b58",
+    "blocks.json": "b4be4f02f8d7ba2cea26357d696f75dd2d80539ac8d1c82638aa55e10bbd9d4a",
+    "tools.json": "138a4eba7f90380e600e955d6041baf10432fd49772fe430c23055f2a93db88f",
+    "document-checks-initial.json": "93096c699a0f078084a55b757e8811a2e097f73ad75e82bb055b377b9cc765a6",
+    "gpu_inventory.json": "3f73e71c4b87e6ff9529e346c2dd55711e6d9a8efe385602df44b7cdaeb0331e",
+    "cgroups.json": "10d80e5a8e7d42a71b5aac7bbb3b649e59133758faff308e3932f233ab4409f7",
+    "inventory.json": "109b4fd6d04752dbdb6fdb91091983662bb9ae5cff1ee4f42240eed2c0cfe234",
+    "disk_bytes.json": "2a6a0ef7cb9c3cc995590d45bf03f4b567153b52b2ee8c42387e82ce7d6cc2f0",
+    "rename.json": "68b8fe8a8815a7256ce4310193110fac17f22b9751c2d542add81fef92334ade",
+    "document-checks.json": "484cacc82438931c13b6e431743ea218b12e1690af204d32fa306041cc499a90",
+    "docker-access.json": "c924c7656da52ab7f9a3d522c1b68e77a02f3dee06b527b52dc243575d170d5d",
+    "expectation.json": "f3359be724ad9afd2efc1ae9bb361f6b80050b70dff7e3a8b2873355927bc7e5"
+  },
+  "source_heads": {
+    "hongsukchoi/VideoMimic": "cfded6d85dd55893074c844f74a49297e318980c",
+    "sharpa-robotics/WM-Craftnet": "a1e825acaf50ade298e30b0b13c6671627af3a1e",
+    "facebookresearch/spider": "44717007de41cbef7565dff7ff9f4453557a2d3d"
+  },
+  "checks": {
+    "local_link_targets": 210,
+    "available_targets": 188,
+    "missing_original_machine_artifact_links": 22,
+    "anchors_passed": 13,
+    "protected_files_unchanged": 81,
+    "website_only_repository_links_changed": true,
+    "frozen_sha256": "c3403dc4581ed61880e66f3c4cbbaa84961c1455621c0e5f170c10c0006378d1"
+  },
+  "reports_sha256": {
+    "docs/server-readiness.zh-CN.md": "3e82efb5efa0c8358d4d0b4826da194a12d3dd99a396751a7adfb8a10789378a",
+    "docs/research-video-interaction.zh-CN.md": "a1f43a5383ea96451b3f5ec8633d0641c0faa1db859893c766a9e84f97b08a62"
+  },
+  "completed_utc": "2026-11-01T10:48:14.974289+00:00"
+}

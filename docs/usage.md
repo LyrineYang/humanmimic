@@ -4,6 +4,29 @@
 
 The recipes below assume a prepared, authorized execution target. **The original workstation is currently paused for server migration**; these are usage instructions, not a request to restart it. For a new machine, complete the [runtime checklist](getting-started.md#prepare-a-runtime) first.
 
+## CUDA example and results
+
+After [setup](getting-started.md#prepare-a-runtime), run the generated fixture with an explicitly selected GPU:
+
+```bash
+python scripts/humanmimic.py example --gpu GPU-... --output runs/my-first-example
+python3 scripts/humanmimic.py inspect runs/my-first-example
+# Strict research acceptance check of the SAME saved result; no rerun:
+python3 scripts/humanmimic.py inspect runs/my-first-example --require-acceptance
+```
+
+The last command exits 3 while research acceptance remains unverified. The normal run exits 0 after successful artifact generation. Read `task_status` for the analytic engineering thresholds and `acceptance_status` for the separate research conclusion. A generated fixture does not establish manipulation gains.
+
+| Artifact | Meaning |
+| --- | --- |
+| `REPORT.md` / `comparison.svg` | Explanation and object-local coarse/estimated surface illustration |
+| `public-observations/` | Generated visual/contact observations and coarse prior |
+| `estimation/belief.json` | Separate CUDA worker's estimated state and uncertainty |
+| `private-evaluation/` | Analytic labels/metrics withheld from the estimator |
+| `manifest.json` / `result.json` | Source/configuration/GPU identity, results and status contract |
+
+The example uses no private assets, no CPU numerical fallback, no policy training and no physical rollout. Use a fresh output directory for each run; existing evidence is never overwritten.
+
 ## Video to simulation
 
 ### Choose an input
@@ -15,14 +38,14 @@ Use a local video file up to 60 seconds: one person, fixed camera, whole body an
 Run commands from the repository root. Replace the input path and pick a new run ID for a new attempt:
 
 ```bash
-source scripts/activate-r2.sh
 python scripts/run-r2-video.py \
+  --target r4-v100 \
   --input /absolute/path/to/clip.mp4 \
   --run-id my-first-video \
   --check-only
 ```
 
-The check does not invoke perception or control. It still requires valid storage and execution-policy configuration, and it does not prove that models or the controller will run.
+Use Python 3.10+ for this existing R2 entry (the R4 Python also suffices for inspection). The check does not invoke perception or control. It reports target authorization, dependencies and disk reserves without bypassing original-machine protection. It inspects file identity, not video decoding or model readiness.
 
 | Report field | What to do |
 | :--- | :--- |
@@ -32,14 +55,16 @@ The check does not invoke perception or control. It still requires valid storage
 | `cached_terminal_result_available` | If `true`, the run has a retained result; another call will report it rather than perform a new trial. |
 | `event_annotation_provided` | `false` is fine for exploration; full motion-event acceptance requires annotations. |
 
-A top-level `status: passed` in this inspection means the check completed. It can still report active tasks or a reserved source; read the fields above before proceeding.
+`execution_status: completed` means inspection completed. `ready_to_attempt`, `authorization` and `issues` describe the separate target readiness. The Linux R4 profile reports R2 as diagnostic-only; do not remove `--check-only` until a full R2 runtime and execution target have been authorized and verified.
 
 ### Execute
 
-When the inspection is clear, run the same command without `--check-only`:
+On a separately prepared and authorized R2 target, activate its R2 environment and use the matching profile. For the historical target (still paused by its boot policy):
 
 ```bash
+source scripts/activate-r2.sh
 python scripts/run-r2-video.py \
+  --target legacy-wsl \
   --input /absolute/path/to/clip.mp4 \
   --run-id my-first-video
 ```
@@ -54,11 +79,13 @@ This runs extraction, reference conversion, the matched R1 controller/simulator,
 | `--run-id NAME` | Required output name; start with a letter/digit, then use letters, digits, `.`, `_` or `-`. |
 | `--source-url URL` | Optional original source address for provenance; not a downloader. |
 | `--events PATH` | Optional source-based event annotations for measured imitation checks. |
-| `--check-only` | Input, storage and scheduling inspection; no model or controller execution. |
+| `--check-only` | Input, target and scheduling inspection; no model or controller execution. |
+| `--target NAME_OR_JSON` | Independent target paths, reserves and execution policy; defaults to legacy-wsl. |
+| `--require-acceptance` | Strict exit status using unchanged research acceptance. |
 
 ## Find and interpret the output
 
-Read the final JSON printed by the command for `run`, `demo` and `status`. The default root is `/mnt/d/humanoid-demo-r2/runs/`; `R2_STORAGE_ROOT` selects the configured data root.
+Read the final JSON printed by the command for `run`, `demo`, `execution_status`, `task_status`, `review_status` and `acceptance_status`. The default root is `/mnt/d/humanoid-demo-r2/runs/`; `R2_STORAGE_ROOT` selects the configured data root.
 
 | Path within the run | Use it to… |
 | :--- | :--- |
@@ -77,13 +104,14 @@ An early failure may not produce a report or demo; inspect its invocation logs f
 
 ### Status and exit codes
 
-| Status | Meaning | Normal completed-run exit |
-| :--- | :--- | :--- |
-| `passed` | Required extraction, physics, event and media/visual checks passed. | `0` |
-| `failed` | At least one required check failed; the evidence is retained. | `1` |
-| `awaiting_verification` | Work or review is incomplete, including missing event annotations or visual review. | `2` |
+| Field | Meaning |
+| --- | --- |
+| `execution_status` | `completed`: the audit verified generated extraction/media; `incomplete`/`failed`: command did not produce a complete verified artifact package |
+| `task_status` | Physical/event or analytic task checks: `passed`, `failed`, or `awaiting_verification` |
+| `review_status` | Pending or completed review; no automatic visual sign-off |
+| `acceptance_status` | Original strict research decision, unchanged by successful artifact generation |
 
-Argument errors also use exit `2`, and runtime exceptions can exit `1`. **Read the JSON/log message, not just the exit code.** Inspection mode can exit `0` without performing a trial.
+Normal exploration exits **0** for completed execution and **1** for failed/incomplete execution. Inspect task/acceptance fields even on exit 0. `--require-acceptance` instead returns **0** only for accepted results, **1** for failed execution/acceptance, and **3** for missing research evidence. Argument errors use **2**. The existing strict suite/audit entry points retain their original acceptance and exit conventions; this change does not turn a failed gesture or fall into a pass.
 
 A generated MP4 is not an acceptance badge. Its robot panel is offline playback of recorded actual states; the human 3D panel is an estimate, not ground truth. A stable robot may still miss the demonstrated gesture.
 

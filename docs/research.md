@@ -1,67 +1,45 @@
-# Adapting motion with limited physical verification
+# From video geometry to dexterous interaction
 
 [Home](../README.md) / Research direction
 
-**Status: proposed, not implemented.** R1 and R2 provide the execution and measurement infrastructure. R4 will investigate whether a small, explicitly bounded amount of closed-loop evaluation can make scene-constrained motion edits more reliable.
+**Status: development code and bounded V100 checks available; manipulation benefit unverified. Updated 2026-11-02.** R4 is now the main research direction; on-site camera R3 is skipped for this stage. The accepted R1/R2 results remain tied to the original workstation.
 
 ## The question
 
-Given a demonstration, a target and a known obstacle, how should a system spend a fixed compute budget to find a reference motion that a frozen humanoid controller can execute?
+At a fixed observation and compute budget, can task-relevant local geometry and explicit uncertainty improve dexterous manipulation accuracy and success more than uniformly refining an object's reconstruction?
 
-This project focuses on reference adaptation and verification. It reuses pretrained SONIC weights. Adding scene information alone is not a claim of novelty; the contribution would need to come from measured behavior, a clear baseline and a defensible budget comparison.
+The proposed pipeline separates scene context, dynamic object shape/pose, hand contact phases, retargeting and physical execution. Planning receives reconstructed geometry; evaluation uses independently known geometry. This separation matters: evaluating against the same incorrect mesh can conceal scale errors, penetration and missing functional details.
 
-## The first setting
+## What the review changes
 
-Use a mostly stationary, two-foot-supported, single-arm reach around one static box in simulation. Obstacle geometry is known. Keep the robot, original motion, target, policy weights, initialization and evaluation rules fixed across methods. Modify the reference; never write a candidate directly into the robot's actual state during execution.
+VideoMimic informs global human/scene reconstruction; WM-Craftnet informs recurrent visual/tactile state estimation. More direct video-to-hand-object-to-robot methods already exist, including VideoManip, Do as I Do, C2Dex and OmniHOI. Combining reconstruction, contact constraints and retargeting alone is not a novelty claim.
 
-Starting with known geometry removes scene reconstruction as a confound. Restricting the task makes the gap between geometric feasibility and controller execution testable before expanding to walking or contact-rich tasks.
+Candidate contributions are budgeted task-sensitive refinement, robustness across plausible geometry hypotheses, and evidence that geometric improvements cause better execution. Compare these against uniform refinement, contact-only refinement and uncertainty-only selection with the same inputs and controller. Keep shape, pose and controller improvements separate in ablations.
 
-## Two decisive experiments
+[Detailed Chinese research report, sources and evaluation design](research-video-interaction.zh-CN.md) · [Observed server readiness and migration gaps](server-readiness.zh-CN.md)
 
-| Experiment | Required evidence | If it fails |
-| :--- | :--- | :--- |
-| **Geometry is insufficient** | At least one candidate passes the declared kinematic/collision checks but fails actual SONIC + MuJoCo execution | Re-examine the task and baselines before claiming a need for learned execution risk |
-| **Reference adaptation is usable** | At least one edited reference reaches the original target, avoids the box and remains stable under frozen SONIC | Fix the candidate representation or execution interface before scaling search |
+## Scope and evidence
 
-These are research decision points, not replacements for R4's full acceptance criteria.
+The independently prepared V100 runtime now supports LEAP/MuJoCo collection, NVIDIA EGL rendering and CUDA estimation. The user has authorized local implementation, environment preparation and bounded development checks. Training from scratch, paid resources, real hardware and the formal held-out cohort remain outside this round. MuJoCo dynamics run on the CPU; estimation, planning numerics and rendering use the GPU. No CPU estimator fallback is provided.
 
-## Proposed method
+The implementation now includes a four-finger force bridge, a public-observation/private-evaluation boundary, joint shape/pose/effective-compliance estimation, persistent evidence memory, bounded reference corrections and task-sensitive probe selection. These are development components. Successful manipulation and a causal gain from geometry refinement have not been established. The complete VideoManip frontend and a learned WSM runtime are also not ready.
 
-1. Parameterize a small number of wrist-path control points around the original reach.
-2. Generate bounded perturbations while preserving the endpoint and motion identity.
-3. Use inverse kinematics, joint limits and collision distances to reject invalid candidates cheaply.
-4. Evaluate a fixed maximum number of survivors using the real frozen controller and MuJoCo.
-5. Select a candidate that satisfies task, collision and stability constraints; rank valid candidates by deviation and compute cost.
-6. If none succeeds, report rejection or failure explicitly. Do not silently relabel it as a safe success.
+## The current research loop
 
-The first implementation should use deterministic search with recorded seeds. A small execution-risk predictor or adaptive allocation of rollout budget is a later hypothesis, conditional on the two experiments above and enough properly separated data. It is not required to claim completion of the existing R4 plan.
+Maintain an object-coordinate model and its uncertain pose; retain unique visual, tactile and action evidence; use new contact observations to distinguish shape error from motion or contact compression; then spend the next observation on a region whose uncertainty matters to the task. Finally, measure actual execution in a separate physical world. A better-looking mesh is not the endpoint.
 
-## Comparisons
+Memory currently means explicit evidence and belief storage, not a trained latent state: at most 32 keyframes, with at most eight selected per update. Previous posteriors initialize the next solve; they are not counted again as independent measurements. Missing observations grow uncertainty. Shape/pose/compliance ambiguities remain marked unknown.
 
-| Method | Purpose |
-| :--- | :--- |
-| Unmodified demonstration | Establish the scene-induced failure |
-| Amplitude scaling | Test a simple, inexpensive alternative |
-| Geometric edit without closed-loop selection | Isolate the value of execution checks |
-| Full edit + bounded closed-loop selection | Test the proposed R4 method |
+The decisive control is a four-way geometry/force-feedback comparison: G0F0, G1F0, G0F1 and G1F1. G1F1 versus G0F1 asks whether geometry helps after direct force feedback is already available. E1 tests perception on the same recordings; M1 tests recent versus persistent evidence; E3 compares probe strategies under equal contact/time/force limits. E4/E5 separately investigate learned memory and any later authorized training.
 
-Use the same layouts and targets for all methods. Report actual simulation calls and wall time, including unsuccessful candidates. Future adaptive-budget methods must be compared with a fixed-budget search at matched resources.
+VideoManip already includes contact optimization. Our proposed addition is an inspectable feedback and evaluation loop around uncertain geometry during execution, complementary to video-derived demonstrations. We do not claim to reproduce its unpublished training pipeline or outperform it on incomparable tasks. See the [plain-language walkthrough, comparison and experimental matrix](r4-multimodal.zh-CN.md#0-先读这一节推进什么为什么以及交付什么) and [implementation/run guide](r4-multimodal.zh-CN.md#10-当前实现环境与运行入口).
 
-## Evaluation, fixed before testing
+Before future execution, freeze the task family, hand embodiment, input modalities, tolerances, budget and held-out split after development. Report local surface/normal error, scale and pose, actual task accuracy, success, slips, penetration, rejection and total cost. All original R2 held-out videos are already used.
 
-The authoritative criteria remain in [PLAN.md](../PLAN.md). Develop on **10 layouts**, then freeze **at least 20 separate layouts** with seeds and geometric/task definitions. Record any test use; after inspecting results, those layouts are no longer unseen.
+## Preserved known-geometry baseline
 
-R4 passes only if at least **three held-out layouts** show the original motion colliding while the adapted motion reaches the **same target**, avoids collision and remains stable in actual physical execution. Deliver at least three complete comparison recordings and report every layout, including failures.
+The previous R4 design used a mostly stationary single-arm reach around one known static box, editing reference motion under frozen SONIC. Its original comparison remains: original motion, amplitude scaling, geometric editing without closed-loop selection, and full editing with bounded physical evaluation.
 
-Report task success rate, collision rate, stability, motion deviation and computation time. Also retain planning calls, rollout count, memory and rejection/degradation rates to support later budget comparisons. A method that declines the hard cases has not solved them.
+Its original acceptance remains archived in [PLAN](../PLAN.md#r4-场景约束动作修正): 10 development layouts, at least 20 held-out layouts, and at least three cases where adaptation avoids the original collision while stably reaching the same target, with complete comparison recordings. These criteria have not been weakened. This is now an optional baseline; completing it would not establish the expanded R4 research objective.
 
-## Scope and dependencies
-
-R1 provides a verified physical execution path; R2 adds full video provenance and event evaluation. R3 still needs a real camera and concurrency/latency measurements. R4 can begin independently of camera availability using accepted references.
-
-The reported availability of four V100 32 GB cards is future capacity, not an established execution result. Their host, software compatibility and storage have not been accepted. The verified results here remain from the 4060. No distributed run, new model training or paid deployment is implied by this design.
-
-Contact-rich tasks, scene reconstruction from video, controller distillation, world-model acceleration and full foundation-policy training are deferred. A related-work review must precede any novelty claim; this document describes a testable project direction rather than a publication claim.
-
-
-For implementation milestones, existing assets and Linux migration prerequisites, see the [operational handoff (Chinese)](../HANDOFF.md). The server environment and R4 implementation remain unverified; these notes do not change the acceptance criteria above.
+The authoritative current scope and next steps are in [PLAN](../PLAN.md); operational context is in [HANDOFF](../HANDOFF.md).

@@ -11,6 +11,7 @@ import time
 
 from r2_common import GEMX, PROJECT, SONIC, STORAGE, sha256, storage_check, write_json
 from r2_cache import verify_cached_extraction
+from runtime_target import load_target, execution_guard
 
 
 def active_tasks():
@@ -29,13 +30,9 @@ def active_tasks():
 
 
 def throughput_policy():
-    path = PROJECT / "configs/r2-execution-policy.json"
-    if not path.exists():
-        return False
-    policy = json.loads(path.read_text())
-    if Path("/proc/sys/kernel/random/boot_id").read_text().strip() != policy["local_boot_id_authorized"]:
-        raise RuntimeError("Local machine rebooted: user requested server handoff, not more local retries")
-    return policy["execution_priority"] == "throughput"
+    target = load_target()
+    execution_guard(target, "r2")
+    return target["execution_priority"] == "throughput"
 
 
 def wait_for_recorded_task(path, *, pose_required=True):

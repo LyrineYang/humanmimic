@@ -1,5 +1,8 @@
 # Website design and publication handoff
 
+Update 2026-11-01: this archived static prototype still presents the previous scene-adaptation research concept. Only repository links were corrected in this round; current R3/R4 scope is in [PLAN](../PLAN.md) and [research](research.md). The site has not been redeployed or visually revalidated for the new direction.
+
+
 [Home](../README.md) / Website
 
 **Status: local prototype prepared; no hosted website has been deployed.** The GitHub README is the current project homepage. The site in [website/](../website/) carries the same narrative, evidence and visual language into a responsive page for later publication.
@@ -79,3 +82,8 @@ Choose the audience and destination explicitly; the current repository remains p
 For static hosting, prepare a staging directory containing `website/` plus the referenced `docs/assets/` paths, preserving relative structure, or rewrite the asset references as part of packaging. Do not serve the repository root as the production document root: it includes internal execution plans and ignored local artifacts. Move documentation to accessible pages if the audience will not have private-repository access. Set canonical/social metadata only after the final URL is known.
 
 Then verify the packaged artifact at desktop and mobile widths, test every navigation/filter control, and confirm actual deployment separately. The repository prototype and its visual review do not imply a published website.
+
+
+## Runtime entry update — November 2, 2026
+
+The local prototype now leads with setup → generated example → result interpretation, with troubleshooting beside the commands. R1/R2 original-workstation evidence, V100 R4 components and unverified manipulation gains are distinct. The dashed known-scene pipeline diagram is retained as a historical baseline; the current research section explains memory, contact and shape/pose/compliance instead. A local source commit and static preview do not publish a website or update the remote default branch.

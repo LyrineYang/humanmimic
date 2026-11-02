@@ -10,11 +10,23 @@ Start with the command's message and the relevant stage log. A missing dependenc
 | :--- | :--- | :--- |
 | `Project Miniforge is missing` or `R2 environment missing` | Source was cloned, but the required environment is absent. | Follow the [runtime checklist](getting-started.md#prepare-a-runtime). Activation scripts do not install packages. |
 | `Unrecognized R2 storage root` | The selected volume has not been prepared and verified for this project. | Confirm the intended data volume and migration configuration. Do not create a dummy ownership marker to skip validation. |
-| `Host disk reserve below configured floor` | The configured C/D free-space floor was not met. | Inspect capacity and choose an appropriate storage layout. Preserve prior results and models. |
-| `Local machine rebooted: user requested server handoff, not more local retries` | The boot identity changed and the source-machine execution policy blocks more local work. | Follow [HANDOFF.md](../HANDOFF.md). This also applies to `--check-only`; changing the run ID does not clear it. |
+| `Host disk reserve below configured floor` | The selected target profile's free-space floor was not met. | Inspect capacity and choose an appropriate storage layout. Preserve prior results and models. |
+| `Original WSL execution paused after reboot` | The boot identity changed and the source-machine execution policy blocks more local work. | Follow [HANDOFF.md](../HANDOFF.md). Read-only `--check-only` reports the restriction; execution still enforces it. Changing the run ID does not clear it. |
 | Input or annotation path rejected | A file is missing, or the annotation does not match the input SHA/role. | Use an absolute existing path. Bind your own source hash and `debug` annotation role. |
 | Reserved held-out source | The video belongs to a declared held-out suite. | Use its frozen suite workflow. All five original held-out videos are already used; do not reclassify them as unseen. |
 | Unsupported source duration | The current video path accepts complete sources up to 60 seconds. | Choose an appropriate complete input; the pipeline does not silently trim it. |
+
+## R4 setup and first run
+
+| Symptom | Next step |
+| --- | --- |
+| R4 Conda environment missing | Run the [bootstrap](getting-started.md#2-rebuild-an-empty-prefix) into a new prefix, then set `R4_ENV_PREFIX` if it is not the default. Failed activation leaves the current shell intact. |
+| Installer checksum mismatch / missing wheel | Retain the download log and obtain the exact archive in `configs/r4-bootstrap.json`; do not remove hash checks. |
+| Prefix exists without a completed installation / inventory drift | Preserve it; choose a new prefix for a rebuild. A matching completed install is verified without reinstalling. |
+| Proxy 403 or network timeout | Supply a locally approved `bootstrap --proxy URL`, or verified `--installer` and `--wheelhouse`. No fixed port is required. |
+| CUDA unavailable | Use `doctor` for dependency diagnosis, then check device exposure and occupancy on the target. There is no CPU estimator fallback. |
+| Example exits 0 but acceptance is pending | Read the three status fields and scope. The analytic task may pass while manipulation/uncertainty claims remain unverified. |
+| Strict acceptance check exits 3 | The command completed but required research evidence is missing. This is distinct from argument-error exit 2. |
 
 ## During execution
 

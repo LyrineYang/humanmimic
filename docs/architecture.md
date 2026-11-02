@@ -36,11 +36,11 @@ Video synchronization follows recorded consumption and simulation time. No test-
 
 The accepted 8 GB workflow runs perception stages sequentially, writes caches, releases the perception process, then runs the controller and simulator. Rendering actual states is another offline stage. Caches are part of the reproducibility interface: source, implementation, model and output hashes must match before reuse.
 
-This design enables offline inspection and recovery. R3 will need separate verification of concurrent perception/control, input freshness, camera dropouts and measured end-to-end latency.
+This design enables offline inspection and recovery. R3 is skipped for the current stage. If resumed, it will need separate verification of concurrent perception/control, input freshness, camera dropouts and measured end-to-end latency.
 
 ## What the diagram's dashed branch means
 
-The scene-adaptation branch is **proposed R4 work**. Known geometry would enter a reference editor before SONIC; candidates would be screened and then compared through closed-loop execution. The arrow does not indicate a currently available module. [Research design](research.md)
+The dashed scene-adaptation branch depicts the **previous known-geometry R4 baseline**, which remains unimplemented. The expanded research direction now concerns video-based object geometry and dexterous interaction, requiring a separate hand-level interface and physical baseline. The existing diagram describes the body-imitation path, not the full future hand-object system. [Current research design](research.md)
 
 ## Reading demonstrations correctly
 

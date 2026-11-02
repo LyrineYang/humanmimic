@@ -1,7 +1,30 @@
 # 人形机器人动作复刻启动提示
 
-> 2026-11-01最新交接：用户准备迁移Linux服务器并开展R4。先读[HANDOFF.md](HANDOFF.md)、AGENTS和PLAN；原R2 Goal已完成，本轮无新Goal或服务器任务。当前WSL boot已变化，不恢复本机GPU重试。后面的Mac/Windows启动提示及R2命令保留作历史/复跑依据；服务器需独立环境/路径/硬件适配和验收，不能继承原4060 passed标签。
+## 当前活跃Goal：环境与可用性修复（2026-11-02）
 
+依用户新Goal，按PLAN完成环境隔离与目标配置→Linux x86_64/V100 R4目标空前缀重建→不依赖私人资产的CUDA小示例及执行/任务/验收分项输出→文档同步与常规回归。修改前预期及原始证据放在runs/runtime-portability-20261102-01/。R1/R2保留原机保护和历史验收，新的只读目标诊断不得被原机boot错误阻断；正式执行仍检查目标授权。允许必要的用户态安装、有限GPU检查、可审阅的本地源码提交；不推送/公开、不训练、不用保留、不计费、不连接真机、不改驱动、不用CPU数值替代。不把解析小示例当成功抓放或研究收益。该Goal完整完成前保持active，下方研究接续是后续路线，不替代本次交付范围。
+
+## 当前接续提示（2026-11-02 R4显式记忆与操作闭环）
+
+最新用户要求补清主线/insight/实验与VideoManip区别，同时继续后续代码和环境配置。本轮补持久证据记忆、受限P3控制和P4探触；保留不做CPU检查、不训练/计费/真机/保留的边界。本轮启动时GPU3经宿主只读检查空闲，可做已授权的小规模CUDA就绪验证；每次运行仍检查占用，不把源码实现或数值fixture当成功操作。新记录runs/r4-memory-control-20261102-01，旧“暂无GPU”的描述是上一轮状态。
+
+最新代码含P1/P2、持久证据记忆、CUDA批量LEAP FK/IK、参考附近的几何/力修正、任务代理探触和E2/E3有界运行入口。P1六项、P2十五项、记忆/控制十八项和统计五项GPU检查通过；完整LEAP负对照已接通独立在线进程，但任务仍failed，不能称成功抓放。位姿置信区间尚未校准，主动探触默认拒绝未标定顺应性界。MANO用户稍后提供路径，资产不入Git。
+
+最新解释/实验/命令在docs/r4-multimodal.zh-CN.md第0/10节；本轮证据runs/r4-memory-control-20261102-01，源码交付历史另在r4-p1p2-implementation-20261102-01。激活source scripts/activate-r4-research.sh；复用独立Python3.10/Torch2.5.1cu118/MuJoCo3.2.7，不用升级或重装，GPU UUID运行前显式选择。本轮没有CPU测试/独立源码解析；MuJoCo动力学仍为CPU，CUDA用于估计/规划/数值判定，EGL用GPU，不称GPU物理或实时控制。
+
+该研究交付已落地docs/r4-multimodal.zh-CN.md及configs/r4-multimodal-study.json；22份上游源文件已核对，CPU原型与30项测试通过，500步原生力阵列探针0.4905N。实际操作收益未验证。后续按P1传感桥→P2显式状态→P3几何×力反馈→P4探触价值→P5原生WSM→P6冻结顺序推进；旧第一阶段手型/任务/门槛不变。不要重复运行已结束的cpu-probe-01/02。
+
+先读AGENTS、PLAN当前状态/验收、docs/r4-stage1.zh-CN.md及EXPERIMENTS最新记录，再按需看源码。项目 `/home/junqiy/projects/humanmimic`；数据独立在相邻humanmimic-data/r4；origin已改名，基于a8a58e6，分支codex/server-research，保留全部已有修改。
+
+用户已授权本机安装、资产和小规模准备验证。已完成Python3.10/Torch2.5.1cu118/MuJoCo3.2.7/CoACD1.0.5、LEAP16DoF映射、12开发对象合成观测、VideoManip标准导入与实际物理评价入口。17项测试、V100数值/EGL及4秒负对照运行passed；任务failed符合预期，不能称抓取成功。数据约8.9GiB、云费用0；证据runs/r4-stage1-preparation-20261101-01。安装使用用户7893 SOCKS代理已成功，不再询问放行27891；无全局代理/系统驱动修改。
+
+下一步校准不确定性、准备成功抓放参考/统一抓取规划器、oracle可达和M1/E2/E3开发对照；无需重选手型/路线。局部联合优化已实现，完整VideoManip前端/权重、DexYCB冻结序列、完整抓取合成和WSM运行仍缺。用户已有合法MANO，稍后提供路径，不重复询问授权；前端默认Inspire不能冒充LEAP。未训练/计费/用保留；源码、数值fixture、物理执行和操作成功分别报告。
+
+运行前检查任务PID/日志和当前GPU占用。第一次GPU1空闲，后被其他任务使用，最终准备复验用GPU3；不要把历史空闲信息当现状。原R1/R2 passed属于4060、五条R2保留已用；新机不能继承验收。R3本阶段跳过，不连接真机、不改系统驱动，不执行下面历史续跑命令。
+
+## 历史启动提示（原Mac/Windows/WSL阶段，非当前指令）
+
+以下原文保留作历史溯源，范围/任务状态已由上面的当前提示与PLAN替代。
 
 ## 完整启动提示
 
@@ -27,7 +50,7 @@ R4：实现并评估场景约束动作修正，在静态障碍物伸手避碰任
 
 2026-10-28 用户指定偏好 conda，本次“R1 完整环境配置加一次完整动作复现及结果”已通过：Macarena 1375 帧、全动作 RMSE 0.13617 rad、未跌倒，报告与录像在 runs/r1-reproduction-20261028-01/。后续先读取该证据，不重复安装或重复执行本次 Goal。复用项目 `.local/miniforge3` 下的 `humanoid-r1`，通过 `source scripts/activate-r1.sh` 激活；保留 CUDA 12.8、TensorRT 10.13.3、源码构建的 CycloneDDS 绑定、SDK 配套运行库、RUNPATH 及 configs/r1-dds.xml 的 loopback 单播/分片配置。源码提交不变，局部仿真传输补丁见 UPSTREAM.json。配置见 configs/environment-r1.yml、configs/constraints-r1.txt、configs/r1-evaluation.json。单次复现不替代 PLAN.md 五动作各两次的 R1 验收，不改变四项最终验收，也不授权计费资源、真机或从零训练。
 
-私有 Git 远端为 `https://github.com/LyrineYang/humanoid-demo`，WSL 已验证 gh 登录与 fetch；保留两端历史，不执行强推。此前认证缺失属于历史状态，handoff 本身尚未重试。
+私有 Git 远端为 `https://github.com/LyrineYang/humanmimic`，WSL 已验证 gh 登录与 fetch；保留两端历史，不执行强推。此前认证缺失属于历史状态，handoff 本身尚未重试。
 
 R1五动作各两次已在2026-10-29正式passed：runs/r1-suite-acceptance-20261029-03，当前驱动617.42，10/10试次、5/5动作双次通过、6300控制样本、RMSE0.10875–0.17517rad、无跌倒。固定清单configs/r1-suite.json，原失败和中断批次独立保留。下一阶段直接推进R2视频链路；只有受影响代码或环境改变才在新目录重验R1，不因新会话重建环境或重做已通过验收。
 

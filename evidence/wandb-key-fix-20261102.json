@@ -1,0 +1,37 @@
+{
+  "status": "passed",
+  "wandb": "0.22.3",
+  "python": "/home/junqiy/projects/humanmimic-data/r4/envs/r4-core/bin/python",
+  "synthetic_86_character_key": "accepted and round-tripped through isolated temporary netrc",
+  "real_credentials_used": false,
+  "offline_steps": [
+    [
+      0,
+      1
+    ],
+    [
+      1,
+      2
+    ],
+    [
+      2,
+      3
+    ]
+  ],
+  "data_file": "/home/junqiy/projects/humanmimic/runs/wandb-key-fix-20261102/wandb/offline-run-20261102_100553-4vjnxw09/run-4vjnxw09.wandb",
+  "online_sync": "awaiting_verification",
+  "changed_packages": {
+    "wandb": [
+      "0.17.9",
+      "0.22.3"
+    ]
+  },
+  "added_packages": {
+    "annotated-types": "0.8.0",
+    "pydantic": "2.14.2",
+    "pydantic-core": "2.50.2",
+    "typing-inspection": "0.4.4"
+  },
+  "pip_check": "passed",
+  "cli_version": "0.22.3"
+}

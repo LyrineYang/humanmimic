@@ -4,22 +4,41 @@
 
 这是交接快照；当前状态仍以[PLAN.md](PLAN.md)为准，历史证据以[EXPERIMENTS.md](EXPERIMENTS.md)及原始`runs/`为准，规则见[AGENTS.md](AGENTS.md)。不要把旧实验段落中的“正在运行”当成当前任务。
 
+## 0. 最新服务器接续（2026-11-02，优先于下方历史快照）
+
+- **活跃环境/可用性Goal：** 用户要求修复隔离、目标绑定、独立重建、首跑状态与文档分叉。`humanmimic.py doctor/bootstrap/example/inspect`及Linux/V100、legacy-wsl profile已实现，空前缀安装和无私人资产CUDA首跑通过；正式本地提交/干净副本与最终回归仍按PLAN收尾，原始记录`runs/runtime-portability-20261102-01/`。R2新目标目前只读诊断，原WSL保护未解除；研究收益验收不变。
+- **指定审查修复：** 4项发现已逐项处理，GL_VENDOR沿用已有修复；并集外表面采样、VB纯二值输入及选帧隔离、shape-only独立逐帧位姿已修复。V100新增15项定向、原P2十五项和记忆/控制十八项回归passed；shape-only位姿准备计入共同预算，缺失时拒绝更新。未新增物理试次或操作通过结论，置信度校准仍待验。见[修复报告与复跑命令](runs/r4-review-fixes-20261102-01/REPORT.md)及[摘要](evidence/r4-review-fixes-20261102.json)。
+- **当前接续：** 用户要求深入解释主线并继续代码/环境。本轮补全[直观解释、VideoManip对比、E0–E5/M1实验](docs/r4-multimodal.zh-CN.md#0-先读这一节推进什么为什么以及交付什么)，实现显式持久记忆、CUDA FK/IK、几何×力反馈局部控制、任务代理探触、独立在线进程和E2/E3入口。既有V100核心环境足够，无新增依赖；使用`source scripts/activate-r4-research.sh`，运行前仍查GPU占用。
+- **当前证据：** P1六项、P2十五项、记忆/控制十八项、统计五项CUDA检查passed；已执行完整LEAP在线负对照并保存物理录像。解析精度与数据隔离已验证，位姿区间偏窄、20种子覆盖率未做，成功抓放/几何操作收益尚未证明。P3是参考附近局部修正，P4未标定力界默认拒绝，WSM没有训练/权重接入。原失败与修复、最新回归位置见`runs/r4-memory-control-20261102-01/REPORT.md`；本轮没有CPU测试、保留/付费/真机使用。
+
+以下P1/P2“未执行”和CPU原型条目是前两轮历史，不覆盖上面当前证据。
+
+- 用户进一步要求推进P1/P2并明确不要CPU检查。四指LEAP触力桥、公开观测/私有评价分流、独立CUDA联合位姿/局部网格/有效顺应性估计、GPU校准/覆盖率/E1重放与评价源码已写入；本轮未执行CPU检查、源码解析或GPU任务，新增验收全部awaiting_verification。接续命令/局限见[多模态文档第9节](docs/r4-multimodal.zh-CN.md#9-p1p2实现与gpu运行准备2026-11-02)，原始准备记录`runs/r4-p1p2-implementation-20261102-01/`。不能继承此前原型passed，不能将E1感知精度当E2操作精度。
+
+- 用户随后提出WM-CraftNet多模态状态/触力觉用于重建及操作的研究目标；[详细方案](docs/r4-multimodal.zh-CN.md)已完成源码对照、库选型、实施步骤、E0–E5试验与CPU原型。30项测试和原生触力探针通过；没有新GPU/训练/操作成功结论，MANO将直接由用户发送。最新接续以PLAN为准。
+
+- 仓库 `/home/junqiy/projects/humanmimic`、origin `https://github.com/LyrineYang/humanmimic.git`，基于a8a58e6、分支codex/server-research；用户仍核查原机遗漏。后续最新状态见PLAN。
+- 用户进一步授权R4方案、独立环境与运行准备；已完成[第一阶段方案](docs/r4-stage1.zh-CN.md)、V100核心栈/LEAP资产、12开发对象观测、导入/碰撞/物理评价实现。17项测试、CUDA和NVIDIA EGL运行passed；物理负对照抓取failed符合预期，不是R4操作能力通过。
+- 安装网络已经通过用户7893代理解决；原27891域名拒绝是历史。独立数据根humanmimic-data/r4约8.9GiB，启动source scripts/activate-r4.sh；下方旧WSL环境不可直接复制。源文件和现有人工改动保留，未提交/推送本轮改动。
+- MANO用户拥有授权、路径稍后提供；完整视频前端子环境/权重、DexYCB序列/CAD、规划器与六种几何方法的操作闭环尚未完成。P2局部网格联合优化已有源码，待GPU验收。当前不从零训练、调用付费API、执行正式保留集或连接真机。
+- R1/R2原机验收/已用测试不变，R3跳过。源码、环境和准备物理/录像分项通过不转移为新机R1/R2或R4整体验收；原始报告runs/r4-stage1-preparation-20261101-01/REPORT.md。
+
 ## 1. 接手先做什么
 
 1. 读本文件、PLAN当前状态/验收和AGENTS；需要具体证据再读EXPERIMENTS及各片报告。沿用既定路线。
 2. 核对Git提交、已有修改、目标机器、任务PID/启动时间/boot与日志；观察超时不等于失败，勿重复提交。
-3. 用户现在准备迁移到Linux服务器。本轮只完成交接资料，没有连接服务器、创建环境或启动R4。没有活跃Goal，也没有在运行的项目模型/控制任务。
+3. 旧交接编写时尚未连接服务器；当前已进入上述服务器并完成R4核心运行准备。准备任务已结束；其他GPU负载会变，按PLAN与第0节核对当前进程再运行。
 4. 当前WSL boot是`da152f79-87d4-4995-876b-7bb6b59456c8`，已不同于R2验收时的`fa0233fb-701c-42d8-81da-0d007d2efe7d`。这说明WSL启动身份变化，不能据此断定Windows关机原因。按用户“再次关机则转服务器”的约定，不恢复本机GPU重试，也不改旧boot保护绕过它。
-5. 拿到用户连接的既有服务器后先只读预检，验证兼容性，再建立独立环境与新运行目录。源机器的passed标签不自动转移到服务器。
+5. 服务器R4独立核心环境与准备试次已建立；完整视频前端仍待接通。源机器的passed标签不自动转移到服务器。
 
 源快照：`9808b0393a778eae4b7308abd11224359acf8abc`，原分支`codex/project-homepage`；本交接在`codex/linux-handoff`分支整理。R2完成提交`59c6ded`，R2运行冻结提交`42463b0`，英文主页内容提交`ff1c621`。接手时再核对实际HEAD，不强制退回这些历史提交。
 
 服务器获取本交接分支的示例（只拉代码，先确认目录/权限和私有仓库认证；本轮未执行）：
 
 ```bash
-export SERVER_PROJECT="$HOME/projects/humanoid-demo"
+export SERVER_PROJECT="$HOME/projects/humanmimic"
 GIT_LFS_SKIP_SMUDGE=1 git clone --branch codex/linux-handoff --recurse-submodules \
-  https://github.com/LyrineYang/humanoid-demo.git "$SERVER_PROJECT"
+  https://github.com/LyrineYang/humanmimic.git "$SERVER_PROJECT"
 ```
 
 跳过LFS不等于资产已准备；后面列出的模型、真实LFS实体、环境和结果需另行私有迁移。若分支之后已合并，使用用户确认过的最新版本。
@@ -30,11 +49,11 @@ GIT_LFS_SKIP_SMUDGE=1 git clone --branch codex/linux-handoff --recurse-submodule
 - 用户偏好conda。R1和R2隔离，不用升级已验证的R1来解决R2依赖问题。
 - 代理负责部署、实现、验证和修复；额度内常规工作持续推进，不每个检查点都重新要确认。先把方案做成可审阅结果，再提出真正需要用户决定的问题。
 - 只做仿真。未授权真机连接、从零训练、付费云资源、系统驱动/风扇/功耗修改或重装系统。Modal的30美元是历史报告额度，余额未验证，计费执行仍未授权；以[budget.json](configs/budget.json)为准，新增云支出为0。
-- 用户已准备可用服务器，会自行提供连接。此前文档提到“4×V100 32GB”，属于报告过的资源，尚未实机验收；主机、GPU型号、驱动、CPU/RAM、磁盘、权限和SSH信息仍待目标环境确认。
+- 当前已实测服务器为4×V100-SXM2-32GB，驱动530.30.02，内存约251.6GiB；硬件观察完成，软件栈和控制验收尚未完成。详见本机盘点，不再重复等待服务器连接。
 - 优先吞吐，不人为低温等待、不逐帧休息、不强制组间冷却；保留真实温度记录和32帧持久化检查点。硬件温控保持原状；再次本机关机后转已有服务器，不反复本机试错。见[执行策略](configs/r2-execution-policy.json)。
 - 大环境、权重、缓存、临时文件和结果集中规划到数据盘。原100GiB是D盘容量规划，非独占配额，不创建占位大文件；源代码、Git和原R1环境仍在WSL/C。服务器需重新指定实际数据卷。
 - Demo要完整展示“原视频—2D覆盖—估计3D人体/骨架—实际仿真”。保留原片、所有数值中间结果、失败、时间映射和各路视频；不剪去失败段，不拟合时间偏移美化结果。原视频音频仍在原片，现有comparison为静音。
-- 网站展示名HumanMimic，仓库`LyrineYang/humanoid-demo`仍private。英文主页已发布到既有仓库默认分支；不新建仓库、公开模型/受限资产或擅自部署网站。
+- 网站展示名HumanMimic，仓库`LyrineYang/humanmimic`仍private。英文主页已发布到既有仓库默认分支；不新建仓库、公开模型/受限资产或擅自部署网站。
 
 ## 3. 已完成与未完成：不要从头再做
 
@@ -42,13 +61,15 @@ GIT_LFS_SKIP_SMUDGE=1 git clone --branch codex/linux-handoff --recurse-submodule
 | --- | --- | --- |
 | R1 | 固定5动作各2次，10/10通过，5/5动作双次通过；6300控制样本，无跌倒，29关节RMSE约0.10875–0.17517rad | 4060/WSL上的`passed`；目标Linux服务器尚未验收 |
 | R2 | 固定5调试全部报告：3passed/2failed；5保留全部报告：4passed/1failed，达到原≥4/5门槛 | R2工程验收`passed`，不是任意视频泛化/人体3D真值/实时验收 |
-| R3 | 尚未接入现场相机，未完成3分钟现场控制与延迟/断流恢复测试 | `needs_input`；录像回放不能代替 |
-| R4 | 研究设计和验收已确定，运行模块尚未编写 | `awaiting_verification`；不能说已实现或有原创性验证 |
+| R3 | 用户明确本阶段跳过现场相机 | 历史未验收；不标passed，不阻塞R4 |
+| R4 | LEAP桥、联合估计、显式记忆和局部控制/探触已实现；GPU分项与在线负对照有证据 | 整体`awaiting_verification`；成功抓放、置信度校准、方法收益和正式保留未完成 |
 | 项目展示 | 英文README、研究/insights/架构/结果文档、原创SVG、静态网页原型与小型demo帧 | 私有GitHub主页发布已核验；独立网站未部署 |
 
 当前R2的10个试次均物理稳定，12095个源参考完整消费，其中保留5784；50个MP4全解码、实际状态/视频SHA和视觉审计通过。物理稳定不等于动作事件通过。
 
 ### 权威结果与完整演示
+
+以下 `runs/` 链接是原机证据位置，本次 Git 克隆没有对应原始结果/录像；当前可直接读取的是 Git 内的 evidence 摘要。保留原链接便于原机追溯，不将本地缺文件解释为原验收未发生，也不宣称已完成证据迁移。
 
 - R1原始验收：[runs/r1-suite-acceptance-20261029-03](runs/r1-suite-acceptance-20261029-03/)，主要看`REPORT.md`、`suite-audit.json`和全部十次记录。
 - R2原始验收：[完整报告](runs/r2-suite-acceptance-20261101-01/REPORT.md)、[suite-summary.json](runs/r2-suite-acceptance-20261101-01/suite-summary.json)、[artifact-review.json](runs/r2-suite-acceptance-20261101-01/artifact-review.json)、[逐片CSV](runs/r2-suite-acceptance-20261101-01/source-results.csv)。
@@ -89,13 +110,13 @@ GP4YqDYMmcI的canonical `run-audit.json`保留失败初审、visual待验字段�
 
 主要入口及用途见[架构](docs/architecture.md)、[准备指南](docs/getting-started.md)。先用现有接口，不假设已有R4 runner或一键Linux迁移脚本。
 
-## 5. 环境与必须迁移的资产
+## 5. 原机环境与资产参考清单
 
 ### 5.1 锁定源版本
 
 - SONIC：`45c03facbf848e0c743091b7d9c17952096ff908`，含上述DDS补丁。
 - GEM-X：`20555befe2fbbe5b2015e1fff7ff214dc18ea9d6`。
-- Git仓库：`https://github.com/LyrineYang/humanoid-demo`，需要既有私有仓库权限；不要把Git/HF token写进命令、文档或Git。
+- Git仓库：`https://github.com/LyrineYang/humanmimic`，需要既有私有仓库权限；不要把Git/HF token写进命令、文档或Git。
 
 | 组件 | R1 | R2 |
 | --- | --- | --- |
@@ -128,22 +149,22 @@ R2收尾D根实占19.884GiB；本轮只读测得WSL `.local/`额外约15.56GiB�
 
 ### 6.1 V100分支是实质兼容风险
 
-如果目标确为V100（Volta/SM7.0），不要原封不动复用当前4060环境：
+目标现已确认为V100（Volta/SM7.0），不能原封不动复用原4060环境：
 
 - 官方明确TensorRT10.4是最后支持Volta的版本，10.5起移除，因此现用10.13.3不支持V100。候选是独立的Volta兼容TensorRT10.4用户态栈，并检查SONIC C++ API/插件和ONNX支持，再重编译控制器；**这是待验证方案，不是已经完成的迁移**。[NVIDIA架构说明](https://docs.nvidia.com/deeplearning/tensorrt/10.x.x/architecture/architecture-overview.html)、[10.4发布说明](https://docs.nvidia.com/deeplearning/tensorrt/10.x.x/getting-started/release-notes-10/10.4.0.html)。
-- 本轮只读取已安装库的编译元数据，没有启动CUDA内核：R1 `2.7.1+cu128`编译列表**不含sm_70**；R2 `2.10.0+cu128`列表**包含sm_70**。R1需另选兼容轮子/构建；R2仍须验证驱动、SOMA/Warp及完整模型阶段，不能由一个架构标志判整链路通过。原始列表见`runs/linux-handoff-20261101-01/inventory.json`。
+- 原机交接阶段只读取了已安装库的编译元数据，没有启动CUDA内核；这些库尚未在本机安装：R1 `2.7.1+cu128`编译列表**不含sm_70**；R2 `2.10.0+cu128`列表**包含sm_70**。R1需另选兼容轮子/构建；R2仍须验证驱动、SOMA/Warp及完整模型阶段，不能由一个架构标志判整链路通过。原始列表见`runs/linux-handoff-20261101-01/inventory.json`。
 - 不执行无约束的`pip install -U torch`。后续PyTorch CUDA12.8构建对Volta支持也有版本边界，按服务器选定版本及实际`torch.cuda.get_arch_list()`核实，保留单独server锁文件。[PyTorch官方发布工程说明](https://dev-discuss.pytorch.org/t/dropping-volta-support-from-cuda-12-8-binaries-for-release-2-11/3290)。
 - 迁移ONNX和原始权重，在目标GPU重建engine/plan/时序缓存。没有显式验证的硬件兼容模式时，TensorRT engine不能假定跨GPU复用；旧缓存只保留作历史。[TensorRT支持矩阵](https://docs.nvidia.com/deeplearning/tensorrt/10.x.x/getting-started/support-matrix.html)。
 - 四卡不自动成为单卡128GB，也不自动加速现有串行runner。先单卡建立稳定基线；并行候选另做进程、DDS域/端口、日志和随机种子隔离。
 
-上述支持关系于2026-11-01查询；具体服务器尚未连接。若不是V100，按实际GPU重新做相同兼容性核查，不照搬V100方案或安装笔记本驱动号617.42。仍不更改服务器系统驱动；不兼容时记录证据，再选择可用用户态栈/资源。
+上述支持关系于2026-11-01核查；本机只读盘点已确认V100，另有glibc2.27、Docker socket权限和FFmpeg缺库问题。仍不更改服务器系统驱动，也不安装笔记本驱动号617.42；独立用户态方案及目标机运行均待后续验证。
 
 ### 6.2 推荐布局与需要适配的实际代码
 
 布局是建议，先核对用户可写的数据盘再确定，不要求固定账户或`/srv`权限：
 
 ```text
-SERVER_PROJECT/                 Git源码（例如 ~/projects/humanoid-demo）
+SERVER_PROJECT/                 Git源码（例如 ~/projects/humanmimic）
   .local/                       新建的R1 conda/原生SDK入口
   models/sonic-default/          原始ONNX/配置，来源SHA不变
 SERVER_DATA/                    真实数据盘，路径由服务器确认
@@ -166,9 +187,9 @@ SERVER_DATA/                    真实数据盘，路径由服务器确认
 
 原R2冻结清单不要改。适配后的源码/配置形成**新的server版本与试次身份**，归档原冻结清单及其SHA。现有`freeze-r2-suite.py`会拒绝已使用的保留视频，不能删台账、清used标志或改角色来过检查；若需要全套R2迁移复验，应实现明确的“已使用数据迁移回归”配置/入口，而非伪装新的heldout验收。
 
-### 6.3 迁移次序和放行证据
+### 6.3 未来获准安装/运行后的迁移次序和放行证据
 
-1. **只读预检，状态awaiting_verification。** 记录目标OS/CPU架构、GPU型号/UUID/驱动、可见卡数、RAM、数据卷空闲、现有conda和权限。目标架构不是linux-x86_64时，原linux-64显式包单不能直接套用。
+1. **只读硬件预检已完成；运行就绪仍awaiting_verification。** 记录目标OS/CPU架构、GPU型号/UUID/驱动、可见卡数、RAM、数据卷空闲、现有conda和权限。目标架构不是linux-x86_64时，原linux-64显式包单不能直接套用。
 
    ```bash
    uname -a
@@ -180,19 +201,19 @@ SERVER_DATA/                    真实数据盘，路径由服务器确认
    command -v conda
    ```
 
-2. **保护与传输。** Git代码+带SHA的资产白名单分别处理；先dry-run同步，再通过用户既有SSH通道传实际文件，保留所有失败和中间结果，不使用`--delete`清旧文件。`rsync -a`会保留symlink，指向`/mnt/d`的绝对链接必须另作新工作映射；不盲目解引用整棵目录。先核对目标接收到的文件SHA，再宣称迁移完成。现有源资产仍在原机，不先删除。
+2. **源码对账与独立资产准备。** 用户核查未上传源码后按Git差异合并；本机环境/模型按获准来源和SHA独立配置。若以后确需私有归档旧结果，先dry-run与白名单，再通过用户既有通道传实际文件，保留所有失败和中间结果，不使用`--delete`清旧文件。`rsync -a`会保留symlink，指向`/mnt/d`的绝对链接必须另作新工作映射；不盲目解引用整棵目录。先核对目标接收到的文件SHA，再宣称迁移完成。现有源资产仍在原机，不先删除。
 3. **独立conda/原生SDK。** 以已记录版本为起点，按实际GPU兼容性选择server构建，保留两环境和新的server锁文件。Conda显式文件用于同平台复现，不证明GPU/驱动/原生SDK可用；原目录`cp`过去不等于prefix已重定位、editable安装和动态链接已恢复。[Conda环境文档](https://docs.conda.io/projects/conda/en/stable/user-guide/tasks/manage-environments.html)。
 4. **代码适配与编译。** 只在新server版本完成上表适配；按授权来源准备DDS/TensorRT/ORT C++和真实LFS资产，应用已有DDS补丁一次、重编译`g1_deploy_onnx_ref`，在目标卡重建引擎。检查匹配SDK C/Python DDS及实际链接，不能把ORT CPU依赖悄悄当TensorRT替代执行器。
 5. **环境与基础运行。** 完成CUDA数值、模型导入/前向、DDS loopback收发、G1加载/步进、真实单动作闭环和实际状态录像检查。`scripts/check-r1-environment.py`是已有环境检查入口，但其中包含CUDA计算和基础物理，**不是纯只读命令**；仅在上述准备后运行。环境import通过不代表控制passed。
 6. **R1目标硬件复验。** 环境/二进制变化后，以原5动作各2次、原RMSE≤0.35/无跌倒/完整消费规则建立新server结果；新manifest记录新二进制/GPU，保留原动作/策略/评价SHA。原4060十试次不覆盖。先检查`prepare-r1-suite.py`、`audit-r1-suite.py`实际参数，不假设旧二进制SHA会自动适应。
 7. **按R4依赖做最小R2迁移回归。** 若使用已保存的SMPL参考，先用已有debug参考验证完整流式控制、150帧初始化、原生时钟、身体评估和真实录像；无需为了R4先重做所有视频的重型提取。若要宣称服务器上的R2完整链路通过，再验证所有模型阶段和对应整批迁移回归，并标记已用数据；后续调参需要新预划分测试。
-8. **服务器基线成立后进入R4。** 新机器上固定同一硬件、策略/模型、动作、初始化和评估规则，再比较四种方法。服务器环境准备、源码适配、无界面闭环、实际状态回放、现场相机分别记passed/failed/awaiting_verification/needs_input；不凭旧机结果提前通过。
+8. **按实际依赖进入新R4。** 独立灵巧手分支可先建立自己的物理/重建基线，无需等待所有R1/R2重跑；若采用SONIC/G1则先完成对应复验。固定硬件、输入、控制权重和评价规则，按新研究报告做对照。分项记录环境、代码、回放、物理验收；R3本阶段跳过，不凭旧机结果提前通过。
 
 暂未实现的server路径适配、V100构建和迁移回归都没有现成一键命令。本文件不假造`setup-server.sh`或R4 runner。
 
-## 7. R4具体工作计划
+## 7. 原R4已知几何基线（历史方案）
 
-沿用[PLAN R4](PLAN.md#r4-场景约束动作修正)和[研究设计](docs/research.md)：**冻结SONIC，只修改参考动作；主要固定双脚、单臂伸手、一个静态箱体、已知仿真几何；先离线搜索。** 不把场景重建、走路绕障、接触丰富任务、风险模型训练或分布式训练加进第一版。
+原方案如下，保留其[原始门槛](PLAN.md#r4-场景约束动作修正)以便回归：**冻结SONIC，只修改参考动作；主要固定双脚、单臂伸手、一个静态箱体、已知仿真几何；先离线搜索。** 用户现已扩大R4范围，此方案不再限制场景重建或接触丰富研究，也不代表新R4完整验收。当前路线见[研究报告](docs/research-video-interaction.zh-CN.md)；训练和运行仍需遵守当前授权。
 
 ### A. 场景、参考与评价接口
 
@@ -253,11 +274,11 @@ SERVER_DATA/                    真实数据盘，路径由服务器确认
 
 ## 9. 可交给下一位代理的接续文本
 
-下面是用户接通服务器后可发送的普通工作指令。本交接没有自动创建新的Goal或启动服务器任务：
+以下为当前服务器的接续范围，覆盖旧“静态箱体优先”提示：
 
 ```text
-先读HANDOFF.md、AGENTS.md和PLAN.md，核对实际HEAD/修改/活跃任务。R1在4060上10/10通过，R2原5+5工程验收通过（保留4/5）；原始失败和全部中间结果保留，R2五条保留已用，不再称未见。R3相机未接入，R4尚未实现。
-在已接通的Linux服务器做只读预检，确认GPU/驱动/平台/磁盘后准备独立conda和原生SDK。若是V100，优先处理TensorRT10.13.3不支持Volta、R1当前Torch wheel不含sm70的问题；不要改系统驱动、删旧资产或启用计费资源。保留原冻结清单与审计，适配WSL路径/owner/boot/硬件校验，使用新的server身份和运行目录。
-校验私有迁移资产的SHA、重建目标卡engine/控制器和动态链接，完成受环境变化影响的R1检查及R4需要的参考回归，再推进R4：固定双脚单臂绕静态箱体伸手，改参考而不写实际状态，运动学筛选+有限闭环回放，四种对照，10开发布局和至少20冻结测试，至少3个原碰撞而修正稳定到原目标的保留布局，保留全部结果和至少3组完整对照录像。
-持续实现、验证和修复，按PLAN更新状态、EXPERIMENTS追加历史；不要把环境安装、一个示例或部分验收当全部项目完成。普通技术实现细节可在开发集自主确定后冻结；缺服务器访问或现场相机时继续独立工作并明确状态。
+先读AGENTS与PLAN当前状态/验收，再读本机盘点、R4研究报告和HANDOFF。origin已改为humanmimic并同步a8a58e6，文档分支codex/server-research。用户核查原机未上传代码；环境与资产本机独立配置。
+本轮只更新远端/链接、只读盘点和深入研究，暂不安装依赖或启动实验。R3本阶段跳过，R4主线为视频手物/交互对象细粒度重建与灵巧操作。静态箱体方案仅保留基线，不是研究上限。
+4×V100已确认，但Volta/TRT、旧glibc、Docker权限和FFmpeg等尚未解决。现有GPU0负载不干扰，不改驱动或系统。R1/R2原机passed不转移；旧冻结清单、失败、已使用保留集全部保留，新机以后建立独立身份。
+未来运行获准后，优先手型物理基线和本地视频重建基线，固定控制器评价几何误差与操作精度的关系，再冻结新保留集与完整对照。付费API、训练和真机未授权。按PLAN更新状态、EXPERIMENTS追加证据，不把准备材料当成能力验证。
 ```
