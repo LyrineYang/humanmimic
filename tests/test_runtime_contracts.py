@@ -56,11 +56,19 @@ class RuntimeContracts(unittest.TestCase):
             self.assertEqual(info['shell_path'].split(':').count(info['conda']+'/bin'),1)
 
     def test_switch_from_actual_conda_environment(self):
-        script='source "$R4_ENV_PREFIX/etc/profile.d/conda.sh"; conda activate "$R4_ENV_PREFIX"; '
-        script+='export PYTHONPATH=/old/environment LD_LIBRARY_PATH=/old/environment; '
-        info=self.shell(self.probe(script+'source scripts/activate-r4.sh || exit;'))
-        self.assertNotIn('/old/environment',info['ld'])
-        self.assertNotIn('/old/environment',info['path'])
+        with tempfile.TemporaryDirectory() as temporary:
+            other=Path(temporary)/'other-conda-environment'
+            env=dict(os.environ,CONDA_REGISTER_ENVS='false',R4_TEST_OTHER_PREFIX=str(other))
+            created=subprocess.run([str(Path(env['R4_ENV_PREFIX'])/'bin/conda'),'create','--offline','--no-default-packages','--yes','--prefix',str(other)],
+                                   env=env,stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True)
+            self.assertEqual(created.returncode,0,created.stderr)
+            script='source "$R4_ENV_PREFIX/etc/profile.d/conda.sh"; conda activate "$R4_TEST_OTHER_PREFIX" || exit; '
+            script+='[[ "$CONDA_PREFIX" == "$R4_TEST_OTHER_PREFIX" ]] || exit 1; '
+            script+='export PYTHONPATH=/old/environment LD_LIBRARY_PATH=/old/environment; '
+            info=self.shell(self.probe(script+'source scripts/activate-r4.sh || exit;'),env)
+            self.assertNotEqual(info['conda'],str(other))
+            self.assertNotIn('/old/environment',info['ld'])
+            self.assertNotIn('/old/environment',info['path'])
 
     def test_failed_activation_is_transactional(self):
         env=dict(os.environ,R4_ENV_PREFIX='/does-not-exist-humanmimic',PYTHONPATH='/keep/me',LD_LIBRARY_PATH='/keep/library')
