@@ -7,7 +7,7 @@
 - 规范仓库：`LyrineYang/humanmimic`，稳定ID1436901913，仍为private；旧名`humanoid-demo`留在历史证据中。
 - 原4060/WSL的R1/R2已完成工程验收；R3现场相机和R4另行验收，详见[PLAN](PLAN.md)、[HANDOFF](HANDOFF.md)。服务器有更晚记录时先核对，不按历史失败重做已完成工作。
 - 用户提供服务器工作副本路径`/home/junqiy/projects/humanmimic`。本轮在该Linux/V100服务器整理代码；R4独立环境及运行证据见PLAN，Git版本与物理/研究验收分别报告。
-- 后续以`main`为主线；旧`codex/linux-handoff`是当时交接快照，不要求始终与main相同。未发布研究工作整理为一个本地整合提交，原tip由存档tag保留；不重写已发布历史、不强推。
+- 后续以`main`为主线；旧`codex/linux-handoff`是当时交接快照，不要求始终与main相同。研究工作已整理为整合提交e4c50ac，并于2026-11-02按用户要求推送main；原tip及原本机文档由两个archive标签同步保留，不重写已发布历史、不强推。
 
 ## 已有副本同步到交接版本
 

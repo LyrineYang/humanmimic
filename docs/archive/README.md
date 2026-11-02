@@ -23,6 +23,8 @@ git show a8a58e6c6b7aaac36ad530a2b6682ef778e936fe:STARTUP_PROMPT.md
 
 ## 2026-11-02 研究分支归档
 
-本地tag `archive/server-research-20261102`保留原研究tip `3c6d3f0264cb5efefbefcfce934af31386efb669`，包括299e12a、cc98a3b、70640ca及收尾证据。整理后的main以最新已发布main为父提交合入相同有效实现；旧实验中的Git SHA继续可读，不改写旧验收记录。
+已推送tag `archive/server-research-20261102`保留原研究tip `3c6d3f0264cb5efefbefcfce934af31386efb669`，包括299e12a、cc98a3b、70640ca及收尾证据。整理后的main以最新已发布main为父提交合入相同有效实现；旧实验中的Git SHA继续可读，不改写旧验收记录。
 
 三个已被CUDA实现替代、且没有当前调用者的CPU原型文件从工作树删除：`scripts/r4_multimodal.py`、`scripts/check-r4-multimodal-cpu.py`、`tests/test_r4_multimodal.py`。只读历史示例：`git show archive/server-research-20261102:scripts/r4_multimodal.py`。
+
+原未提交的REMOTE_WORK/RESOURCES完整字节由`archive/local-notes-20261102`保留；两个archive标签已与main整合提交e4c50ac一起按用户要求推送，不改变旧实验对象的身份。

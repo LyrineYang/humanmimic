@@ -44,7 +44,7 @@ cd humanmimic
 
 Already have a checkout? See the [repository synchronization guide](REMOTE_WORK.md) and verify the revision before resuming on another machine.
 
-The current source includes a generated CUDA example with no MANO, private videos or trained weights. These commands require a revision containing `scripts/humanmimic.py`; local delivery does not imply publication on the default branch. The original R1/R2 results remain tied to the 4060 workstation.
+The current source includes a generated CUDA example with no MANO, private videos or trained weights. These commands are available on `main` from commit `e4c50ac`, containing `scripts/humanmimic.py`. The original R1/R2 results remain tied to the 4060 workstation.
 
 ### 2. Build and try the supported example
 

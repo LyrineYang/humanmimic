@@ -13,7 +13,7 @@ GIT_LFS_SKIP_SMUDGE=1 git clone https://github.com/LyrineYang/humanmimic.git
 cd humanmimic
 ```
 
-The runtime work has been integrated into the local main line. The revision you check out must contain `scripts/humanmimic.py` and `configs/r4-bootstrap.json`; a checkout of an older default branch does not contain these commands. Local integration does not imply that GitHub has received the new commit. The analytic example does not use submodule assets or LFS downloads. Initialize the pinned submodules separately only when preparing the full video pipeline.
+The runtime is published on `main` from commit `e4c50ac`. The revision you check out must contain `scripts/humanmimic.py` and `configs/r4-bootstrap.json`; an older checkout does not contain these commands. The analytic example does not use submodule assets or LFS downloads. Initialize the pinned submodules separately only when preparing the full video pipeline.
 
 ## Prepare a runtime
 
