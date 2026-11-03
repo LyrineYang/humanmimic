@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "campaign_id": "r4-e3-development-20261102",
+  "primary_study": "E3",
+  "split": "debug",
+  "seeds": [
+    1101,
+    1102,
+    1103
+  ],
+  "objects": [
+    "stepped_prism-101",
+    "stepped_prism-102",
+    "stepped_prism-103",
+    "grooved_block-104",
+    "grooved_block-105",
+    "grooved_block-106",
+    "necked_column-107",
+    "necked_column-108",
+    "necked_column-109",
+    "u_handle-110",
+    "u_handle-111",
+    "u_handle-112"
+  ],
+  "tasks": [
+    "lift_hold",
+    "precision_place"
+  ],
+  "priority": [
+    "E3_core",
+    "E2",
+    "E3_ablation",
+    "E1"
+  ],
+  "E1": {
+    "seeds": [
+      1101
+    ],
+    "occlusions": [
+      0,
+      0.8
+    ],
+    "modalities": [
+      "V",
+      "VB",
+      "VF"
+    ],
+    "trials": 72,
+    "trial_timeout_s": 550
+  },
+  "E2": {
+    "groups": [
+      "G0F1",
+      "G1F1"
+    ],
+    "probe": "no_probe",
+    "trials": 144,
+    "trial_timeout_s": 430
+  },
+  "E3": {
+    "strategies": [
+      "no_probe",
+      "random",
+      "uniform",
+      "global_uncertainty",
+      "task_risk_reduction"
+    ],
+    "core_trials": 360,
+    "ablation_trials": 144,
+    "trial_timeout_s": 430,
+    "ablations": [
+      {
+        "name": "recent_memory",
+        "memory": "recent",
+        "group": "G1F1",
+        "probe": "task_risk_reduction"
+      },
+      {
+        "name": "geometry_feedback_off",
+        "memory": "diverse",
+        "group": "G0F1",
+        "probe": "task_risk_reduction"
+      }
+    ],
+    "primary_contrast": [
+      "global_uncertainty",
+      "task_risk_reduction"
+    ],
+    "secondary_contrasts": [
+      "no_probe",
+      "random",
+      "uniform"
+    ],
+    "relative_error_reduction_target": 0.2,
+    "success_noninferiority_margin": 0.05
+  },
+  "pairing": "All variants of each object/seed/task remain on the same GPU UUID; deterministic variant shuffle seed 41101.",
+  "scientific_gates": [
+    "successful_fixed_reference_each_family_each_task",
+    "full_hand_force_bound_calibration",
+    "LEAP_pose_compliance_coverage"
+  ],
+  "readiness": "awaiting_verification: no successful grasp/force-bound/LEAP coverage artifacts yet",
+  "training": false,
+  "heldout_used": false
+}

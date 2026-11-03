@@ -31,7 +31,8 @@ def launch(payload, output, timeout):
                         "PYTHONDONTWRITEBYTECODE": "1", "PYTHONNOUSERSITE": "1", "CUBLAS_WORKSPACE_CONFIG": ":4096:8"})
     with (output / "worker.stderr.log").open("wb") as error, (output / "belief.json").open("wb") as result:
         process = subprocess.Popen([sys.executable, "-B", str(source / "r4_estimator_worker.py")], stdin=subprocess.PIPE,
-                                    stdout=result, stderr=error, env=environment, cwd=source, close_fds=True, start_new_session=True)
+                                    stdout=result, stderr=error, env=environment, cwd=source, close_fds=True,
+                                    start_new_session=os.environ.get("R4_CAMPAIGN_PROCESS_GROUP") != "1")
         manifest["worker_pid"] = process.pid
         write_json(output / "manifest.json", manifest)
         try:

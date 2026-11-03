@@ -1,0 +1,86 @@
+{
+  "completed_utc": "2026-11-03T00:05:50.957514+00:00",
+  "status": "awaiting_verification",
+  "scope": "E3-first protocol, budgeted launch preparation; not training or manipulation acceptance",
+  "authorization": {
+    "gpu_hours_max": 144,
+    "wall_hours_max": 36,
+    "gpu_count_max": 4
+  },
+  "allocation_gpu_hours": {
+    "prerequisites": 8,
+    "E1": 12,
+    "E2": 18,
+    "E3": 72,
+    "unallocated": 34
+  },
+  "matrix": {
+    "E1": 72,
+    "E2": 144,
+    "E3_core": 360,
+    "E3_ablations": 144,
+    "total_trials": 720,
+    "matrix_upper_slot_hours": 88.4,
+    "including_8h_prerequisites_approx": 96.4,
+    "balanced_four_slot_hours": 22.1,
+    "conservative_serial_prerequisites_plus_parallel_matrix_wall_hours": 30.1,
+    "status": "configured timeout arithmetic; not measured throughput"
+  },
+  "passed": {
+    "standard_library_budget_dispatch_tests": 18,
+    "runtime_contract_tests": 8,
+    "source_and_shell_parsing": true,
+    "pip_check": true,
+    "documentation": {
+      "markdown": 23,
+      "html": 1,
+      "local_links": 313
+    }
+  },
+  "awaiting_verification": [
+    "New CUDA E3 statistical checks",
+    "Four-GPU dispatch and GPU worker cleanup",
+    "Successful fixed grasp/place references",
+    "Full-hand LEAP force-bound calibration and uncertainty coverage",
+    "Complete GPU memory/RAM/disk and throughput measurement"
+  ],
+  "resource_snapshot": {
+    "gpus": "4x V100-SXM2-32GB, all with active compute processes",
+    "available_memory_gib_approx": 229,
+    "free_disk_gib_approx": 614
+  },
+  "runtime": {
+    "python": "3.10.14 | packaged by conda-forge | (main, Mar 20 2024, 12:45:18) [GCC 12.3.0]",
+    "prefix": "/home/junqiy/projects/humanmimic-data/r4/envs/r4-core",
+    "packages": {
+      "torch": "2.5.1+cu118",
+      "mujoco": "3.2.7",
+      "numpy": "1.26.4",
+      "scipy": "1.13.1",
+      "wandb": "0.22.3"
+    },
+    "pip_check_exit": 0,
+    "pip_check": "No broken requirements found.\n",
+    "gpu_numerical_check_this_turn": false,
+    "scope": "installed metadata and dependency consistency only"
+  },
+  "training_stack_complete": false,
+  "training_started": false,
+  "gpu_experiments_started_this_turn": false,
+  "cpu_numerical_fallback_used": false,
+  "heldout_used": false,
+  "paid_usd": 0,
+  "campaign_clock_started": false,
+  "raw_run": "runs/r4-e3-launch-preparation-20261102-01",
+  "source_sha256": {
+    "scripts/r4_campaign.py": "41cc38bbbcae071ce17b560fc92e7ed89ba2d76456aa3b7ede12ecd6a67001a9",
+    "scripts/run-r4-campaign.py": "3fd96d2e25fe642380e5ce2a0295c39bad7d79dc8681e0d7db7bc70a460ca1a4",
+    "scripts/analyze-r4-campaign-gpu.py": "e187fc483bd49d5770799ac8f9932dd3bbfb1d7ddac68edf9aa06255c985f3a7",
+    "scripts/check-r4-campaign-analysis-gpu.py": "cbfdd095b6db0ac87bc9659d627937e5c518d4ddd4958415862e236a560c988e",
+    "scripts/run-r4-e1-gpu.py": "5adc26fb5e15601c01aae6ab2021ff342e69144016bb66cea0adef2a291ad442",
+    "scripts/r4_replay.py": "ae88068d2aab35471f76f1ae987570588d54505cab4d511177ead4708842441b",
+    "configs/budget.json": "b68a781c1a3574795f27db18781a9d6ee6b120a4cca90a8dcfe5c9c3ba3b272b",
+    "configs/r4-e3-campaign.json": "a4142542ec86d563521cb598ee07e5a1fd102b40b70b87a159f49abe669cf6e4",
+    "configs/r4-runtime.json": "6a7da0179248c3e4f38eab1e0b58837a161cc3b7bd72f3ae0108b490d2a658bd"
+  }
+}

@@ -1,8 +1,10 @@
 {
   "schema_version": 1,
+  "primary_study": "E3",
+  "active_campaign": "configs/r4-e3-campaign.json",
   "status": "development design; not frozen for heldout execution",
   "scope": "simulation-only multimodal object reconstruction and manipulation",
-  "current_authorization": {"source_review": true, "p1_p2_implementation": true, "memory_control_probe_implementation": true, "gpu_experiment_code": true, "light_cpu_diagnostics": false, "gpu_runs": true, "gpu_run_scope": "bounded local development readiness; no full matrix launched", "training": false, "formal_heldout": false, "paid_usd": 0},
+  "current_authorization": {"source_review": true, "p1_p2_implementation": true, "memory_control_probe_implementation": true, "gpu_experiment_code": true, "light_cpu_diagnostics": false, "gpu_runs": true, "gpu_run_scope": "local development subject to scientific gates and configs/budget.json: <=144 GPUh, <=36 wallh, <=4 GPUs; no training", "training": false, "formal_heldout": false, "paid_usd": 0},
   "retained_protocol": "configs/r4-stage1.json",
   "source_refs": {
     "wm_craftnet": "a1e825acaf50ade298e30b0b13c6671627af3a1e",
@@ -32,9 +34,9 @@
   "execution_seeds": [1101, 1102, 1103],
   "studies": {
     "E0": {"purpose": "sensor semantics and identifiability", "execution": "CUDA numerical checks and GPU-gated MuJoCo/EGL distal-load integration; no CPU numerical fallback", "implemented": true, "distal_checks": "passed", "full_hand_loading_calibration": "awaiting_verification"},
-    "E1": {"purpose": "same-trajectory perception comparison", "input_tiers": ["V", "VB", "VF"], "visual_occlusion_fractions": [0.0, 0.5, 0.8], "records_per_object_seed": 1, "development_replays": 324, "implemented": true, "execution_status": "awaiting_verification", "entrypoint": "scripts/run-r4-e1-gpu.py"},
-    "M1": {"purpose": "persistent evidence selection under matched budgets", "modes": ["single", "recent", "diverse"], "primary_contrast": "diverse versus recent, both at most 8 frames", "capacity": 32, "window": 8, "implemented": true, "execution_status": "module and online integration passed; memory advantage awaiting_verification", "entrypoint": "scripts/run-r4-belief-gpu.py --memory"},
-    "E2": {"purpose": "geometry-update by force-feedback causal factorial", "groups": ["G0F0", "G1F0", "G0F1", "G1F1"], "tasks": ["lift_hold", "precision_place"], "development_rollouts": 288, "future_heldout_rollouts": 576, "implemented": true, "implementation_scope": "bounded local reference correction and trial runner; successful grasp initialization still missing", "execution_status": "awaiting_verification", "entrypoint": "scripts/run-r4-control-study-gpu.py --study E2"},
+    "E1": {"purpose": "same-trajectory perception comparison", "input_tiers": ["V", "VB", "VF"], "visual_occlusion_fractions": [0, 0.8], "records_per_object_seed": 1, "development_replays": 72, "implemented": true, "execution_status": "awaiting_verification", "entrypoint": "scripts/run-r4-e1-gpu.py", "execution_seeds": [1101]},
+    "M1": {"purpose": "persistent evidence selection under matched budgets", "modes": ["single", "recent", "diverse"], "primary_contrast": "diverse versus recent, both at most 8 frames", "capacity": 32, "window": 8, "implemented": true, "execution_status": "module and online integration passed; memory advantage awaiting_verification", "entrypoint": "scripts/run-r4-belief-gpu.py --memory", "active_campaign": "recent vs diverse integrated in E3; equal 8-frame window; standalone matrix deferred"},
+    "E2": {"purpose": "geometry-mediated benefit with force feedback held on; supporting causal contrast", "groups": ["G0F1", "G1F1"], "tasks": ["lift_hold", "precision_place"], "development_rollouts": 144, "future_heldout_rollouts": 576, "implemented": true, "implementation_scope": "bounded local reference correction and trial runner; successful grasp initialization still missing", "execution_status": "awaiting_verification", "entrypoint": "scripts/run-r4-control-study-gpu.py --study E2"},
     "E3": {"purpose": "equal-budget active touch", "strategies": ["no_probe", "random", "uniform", "global_uncertainty", "task_risk_reduction"], "tasks": ["lift_hold", "precision_place"], "development_rollouts": 360, "implemented": true, "execution_status": "awaiting_verification; default force-bound calibration gate abstains", "entrypoint": "scripts/run-r4-control-study-gpu.py --study E3"},
     "E4": {"purpose": "frozen native Sharpa WSM representation probes and observation-history controls", "requires_native_22dof_inputs": true, "LEAP_zero_padding_allowed": false, "published_checkpoint_head_claim": "pose/tactile/value/shape disabled in released config; binary state dictionary not yet inspected", "implemented": false},
     "E5": {"purpose": "future calibrated geometry/force/event heads and cross-hand adapters", "requires_separate_training_authorization": true, "implemented": false}
@@ -42,14 +44,16 @@
   "probe_budget": {"contacts_max": 6, "total_time_s_max": 3.0, "predicted_force_n_max": 2.0, "counts_inside_existing_episode_s": 12.0, "total_wall_cap_per_method_object_s": 300, "calibrate_on_development_before_freeze": true},
   "geometry_budget": {"selected_observations": 4096, "maximum_changed_vertices": 2048, "update_steps": 200, "planner_candidates": 64, "planner_rollouts": 128},
   "statistical_plan": {
+    "primary_study": "E3",
+    "primary_active_touch_contrast": "penalized_position_error(global_uncertainty)-penalized_position_error(task_risk_reduction)",
     "unit": "object; average paired seeds before bootstrap",
     "confidence": 0.95,
     "primary_geometry_mediated_contrast": "penalized_position_error(G0F1)-penalized_position_error(G1F1)",
-    "secondary_feedback_contrast": "penalized_position_error(G1F0)-penalized_position_error(G1F1)",
+    "secondary_feedback_contrast": "deferred: G1F0 versus G1F1 requires the omitted full E2 factorial",
     "relative_error_reduction_target": 0.2,
     "success_noninferiority_margin": 0.05,
     "failure_penalty_m": 0.1,
     "exploratory_multiple_comparisons": "report intervals and adjust with Holm before confirmatory claims"
   },
-  "runtime_estimates": {"status": "one V100 online negative fixture measured: 4s simulation, 104.85s loop wall, four 50-step updates; not a real-time or full-matrix throughput claim", "clock": "simulation time; synchronous inference pauses physics", "planned_control_hz": 50, "planned_pose_tracking_hz": 10, "planned_geometry_hz": 2, "maximum_geometry_updates_per_episode": 4, "parallel_gpus": 1, "cpu_threads_max": 8, "additional_data_cap_gib_before_review": 5}
+  "runtime_estimates": {"status": "one V100 online negative fixture measured: 4s simulation, 104.85s loop wall, four 50-step updates; not a real-time or full-matrix throughput claim", "clock": "simulation time; synchronous inference pauses physics", "planned_control_hz": 50, "planned_pose_tracking_hz": 10, "planned_geometry_hz": 2, "maximum_geometry_updates_per_episode": 4, "parallel_gpus": 4, "additional_data_cap_gib_before_review": 5, "cpu_threads_per_gpu": 8}
 }

@@ -9,5 +9,14 @@
   "additional_dependencies_for_explicit_memory_control": [],
   "learned_wsm": "separate future environment; no Sharpa checkpoint or Isaac Gym installed in r4-core",
   "limits": {"maximum_episode_s": 12, "maximum_wall_s": 300, "maximum_gradient_steps": 200,
-             "heldout": false, "training": false, "paid_usd": 0}
+             "heldout": false, "training": false, "paid_usd": 0},
+  "campaign": {
+    "budget": "configs/budget.json#local_r4_campaign",
+    "protocol": "configs/r4-e3-campaign.json",
+    "maximum_parallel_single_gpu_workers": 4,
+    "worker_gpu_count": 1,
+    "same_gpu_uuid_for_paired_variants": true,
+    "new_dependencies": [],
+    "gpu_admission": "no existing compute process on selected UUID; >=4 GiB free; independent per-trial watchdog"
+  }
 }

@@ -48,5 +48,29 @@
     "scene_adaptation": 8.0,
     "final_verification": 5.0,
     "unallocated_reserve": 5.0
+  },
+  "local_r4_campaign": {
+    "campaign_id": "r4-e3-development-20261102",
+    "authorization": "user confirmed 144 GPU-hours maximum, 36 continuous wall-hours, up to 4 local GPUs; E3 primary",
+    "gpu_hours_max": 144,
+    "wall_hours_max": 36,
+    "concurrent_gpus_max": 4,
+    "cpu_threads_per_worker": 8,
+    "training": false,
+    "heldout": false,
+    "paid_usd": 0,
+    "stage_gpu_hours": {
+      "prerequisites": 8,
+      "E1": 12,
+      "E2": 18,
+      "E3": 72
+    },
+    "unallocated_gpu_hours": 34,
+    "reserve_policy": "Not automatically spendable. Reallocate in this file with reason/evidence before next frozen campaign plan; never reset ledger or wall start.",
+    "clock_policy": "Continuous wall clock starts at first admitted job, persists across restart; charge GPU slot occupancy including initialization, evaluation, cleanup and failures.",
+    "initial_output_review_gib": 5,
+    "campaign_output_cap_gib": 80,
+    "minimum_free_disk_gib": 100,
+    "note": "Local GPU occupancy is separate from the historical USD/Modal ledger; no paid-resource authorization."
   }
 }

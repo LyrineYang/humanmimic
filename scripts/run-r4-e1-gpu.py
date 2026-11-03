@@ -28,7 +28,11 @@ def main():
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--execute", action="store_true", help="Without this flag, only materialize the immutable execution plan")
     parser.add_argument("--ablations", action="store_true", help="Separate pose_only/shape_only/rigid_contact extension; not part of the 324 core replays")
+    parser.add_argument("--occlusions", nargs="+", type=float, choices=[0, .5, .8], default=[0, .5, .8])
+    parser.add_argument("--modalities", nargs="+", choices=["V", "VB", "VF"], default=["V", "VB", "VF"])
     args = parser.parse_args()
+    if len(set(args.occlusions)) != len(args.occlusions) or len(set(args.modalities)) != len(args.modalities):
+        raise ValueError("Duplicate variants would invalidate paired denominators")
     manifest = json.loads(args.records.read_text())
     if manifest.get("split") != "debug" or not 1 <= len(manifest["records"]) <= 36:
         raise ValueError("Only up to 36 development object/seed recordings are accepted")
@@ -68,10 +72,10 @@ def main():
                 or collection.get("evaluation_scene_sha256") != hashes["evaluation_scene"]):
             raise ValueError("Public observations and private evaluation do not match the same recorded run")
         record_hashes.append(hashes)
-        variants = [(m, "joint") for m in ["V", "VB", "VF"]]
+        variants = [(m, "joint") for m in args.modalities]
         if args.ablations:
             variants += [("VF", a) for a in ["pose_only", "shape_only", "rigid_contact"]]
-        for occlusion, (modality, ablation) in itertools.product([0, .5, .8], variants):
+        for occlusion, (modality, ablation) in itertools.product(args.occlusions, variants):
             cases.append({"record": len(record_hashes)-1, "object_id": identity[0], "seed": identity[1],
                           "occlusion": occlusion, "modality": modality, "ablation": ablation})
     args.output.mkdir(parents=True, exist_ok=False)
