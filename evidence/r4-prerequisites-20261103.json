@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "status": "awaiting_verification",
-  "updated_utc": "2026-11-03T15:42:56.982273+00:00",
+  "updated_utc": "2026-11-03T23:00:06.056152+00:00",
   "scope": "R4 local simulation prerequisites; not E3 method results or learned training",
   "engineering": {
     "p1": {
@@ -149,26 +149,38 @@
     "fit_status": "passed",
     "fit_trials": 20,
     "frozen_translation_multiplier": 60.42928000695408,
-    "verification_status": "running",
-    "verification_completed": 5,
+    "verification_status": "passed",
+    "verification_completed": 20,
     "joint_pose_compliance_gate": false,
-    "scope": "two-object conditional translation only"
+    "scope": "two-object conditional translation only",
+    "verification_coverage": 0.9,
+    "verification_used": true,
+    "online_covariance_calibrated": false
   },
   "queue": {
-    "pid": 40617,
+    "pid": null,
     "directory": "runs/r4-prerequisites-overnight-20261103-02",
     "maximum_wall_s": 10800,
     "parallel_children": 4,
     "gpu_index": 0,
     "minimum_free_memory_mib": 6144,
-    "drain_when_empty": true
+    "drain_when_empty": true,
+    "status": "finished",
+    "historical_pid": 40617,
+    "cohort_status": "failed",
+    "rejected_candidate_indices": [
+      63,
+      64,
+      65,
+      66
+    ]
   },
   "budget": {
     "maximum_gpu_hours": 144,
     "continuous_wall_hours": 36,
     "prerequisite_limit_gpu_hours": 8,
-    "closed_cohorts_gpu_hours": 1.9812151532439102,
-    "active_reserved_gpu_hours": 3.0027777777777778,
+    "closed_cohorts_gpu_hours": 3.0269522614598583,
+    "active_reserved_gpu_hours": 0,
     "start_epoch": 1793710446.4996653,
     "deadline_epoch": 1793840046.4996653
   },
@@ -179,12 +191,28 @@
   "physics_backend": "MuJoCo CPU, NVIDIA EGL; not CPU numerical fallback",
   "full_hand_bound_scope": "local articulated hand/probe loading only; not object material compliance or all grasp postures",
   "analytic_joint_coverage": {
-    "status": "running",
+    "status": "passed",
     "seeds": [
       2101,
       2120
     ],
     "shards": 4,
-    "gate_scope": "analytic only; no LEAP readiness claim"
+    "gate_scope": "analytic only; no LEAP readiness claim",
+    "coverage_fraction": 1.0,
+    "scope": "last-frame xyz and scalar compliance; no rotation/LEAP claim"
+  },
+  "final_artifacts": {
+    "verification": {
+      "path": "runs/r4-prerequisites-overnight-20261103-02/confidence/verify/result.json",
+      "sha256": "39fcddf5cae3cbf7b1c91a76cdfab01a908e2950d71754fcdcd2ec55f90062fc"
+    },
+    "analytic": {
+      "path": "runs/r4-prerequisites-overnight-20261103-02/analytic-joint-coverage.json",
+      "sha256": "b6cbbbd256340ca5fe3d5d1b017a33990b6a37295e305564a6008da762b983c5"
+    },
+    "cohort": {
+      "path": "runs/r4-prerequisites-overnight-20261103-02/session/result.json",
+      "sha256": "867bf6aa415b0c253d762066c142dd21e8c546f3d54e17f91d541b8ae6c55e39"
+    }
   }
 }
