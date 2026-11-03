@@ -637,4 +637,4 @@ python -B scripts/run-r4-campaign.py run --plan runs/r4-e3-next/plan.json
 
 本批存储准入线80GiB（只覆盖该campaign输出，旧非campaign准备仍沿用40GiB），首批约4–5GiB停发并复核，保持磁盘≥100GiB空闲和启动余量。648个物理试次按旧负对照线性外推已约60GiB；非实测保证。审核文件绑定plan SHA和实际输出量后可带`--storage-review`续跑；这是逐试次磁盘准入，不是内核磁盘配额。恢复仍消耗原36小时窗口，须及时处理，不能删失败录像节省空间。
 
-E2/E3、分任务及消融CUDA汇总已纳入冻结计划最后一个有界作业，不另开无限额分析。源码解析/18项标准库调度契约已passed；新增统计CUDA数值、四卡并发和新的进程组下GPU清理均awaiting_verification。没有使用CPU数值替代，没有启动训练/仿真/新GPU试次。最新本机检查：4×V100 32GB均有其他项目活跃进程，约229GiB可用RAM、614GiB可用磁盘；环境Python3.10.14/Torch2.5.1+cu118/MuJoCo3.2.7，pip check passed。原始预期、版本、资源和核验日志见`runs/r4-e3-launch-preparation-20261102-01/`。
+E2/E3、分任务及消融CUDA汇总已纳入冻结计划最后一个有界作业，不另开无限额分析。源码解析/18项标准库调度契约已passed；新增统计CUDA数值、四卡并发和新的进程组下GPU清理均awaiting_verification。没有使用CPU数值替代，没有启动训练/仿真/新GPU试次。本轮初检4×V100 32GB均忙，收尾快照0/2无计算PID、1/3忙，未启动完整四卡窗口；约229GiB可用RAM、614GiB可用磁盘；环境Python3.10.14/Torch2.5.1+cu118/MuJoCo3.2.7，pip check passed。原始预期、版本、资源和核验日志见`runs/r4-e3-launch-preparation-20261102-01/`。
