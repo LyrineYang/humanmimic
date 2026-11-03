@@ -13,7 +13,7 @@ from types import SimpleNamespace
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT/"scripts"))
-from r4_campaign import Ledger, assert_frozen, digest, exclusive, idle_device, read, stop_group, validate_limits
+from r4_campaign import Ledger, assert_frozen, digest, exclusive, idle_device, admitted_device, read, stop_group, validate_limits
 
 spec = importlib.util.spec_from_file_location("campaign_runner", ROOT/"scripts/run-r4-campaign.py")
 runner = importlib.util.module_from_spec(spec)
@@ -70,6 +70,16 @@ class BudgetTests(unittest.TestCase):
         for i in range(4): self.reserve(str(i), "GPU-"+str(i))
         with self.assertRaisesRegex(RuntimeError, "concurrency"):
             self.reserve("fifth", "GPU-4")
+
+    def test_explicit_shared_gpu_keeps_foreign_jobs_and_bounds_concurrency(self):
+        auth=self.limits['shared_gpu_authorization'];uuid=auth['gpu_uuids'][0]
+        devices={uuid:{'name':'Tesla V100','free_mib':28000,'compute_pids':[123]}}
+        self.assertEqual(admitted_device(devices,uuid,self.limits)['compute_pids'],[123])
+        for i in range(4):self.reserve(str(i),uuid,seconds=10)
+        with self.assertRaisesRegex(RuntimeError,'concurrency'):self.reserve('fifth',uuid,seconds=10)
+        self.assertEqual(self.ledger.committed(),40)
+        devices[uuid]['free_mib']=auth['minimum_free_headroom_mib']
+        with self.assertRaisesRegex(RuntimeError,'headroom'):admitted_device(devices,uuid,self.limits)
 
     def test_stage_reservation_includes_all_active_jobs(self):
         self.limits["stage_gpu_hours"]["E3"] = .2

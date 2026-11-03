@@ -25,7 +25,7 @@
     "minimum_force_span_n": 0.15, "minimum_force_samples": 3,
     "maximum_support_radius_m": 0.008, "huber_delta": 2.0,
     "information_relative_threshold": 0.000001, "information_absolute_threshold": 0.0001,
-    "maximum_wall_s": 300, "seed": 1101
+    "maximum_wall_s": 300, "seed": 1101, "information_batch_size": 16
   },
   "execution": {"device": "cuda", "cpu_fallback": false, "training": false, "heldout_allowed": false, "paid_usd": 0},
   "acceptance": {"force_tolerance_n": 0.03, "pose_translation_tolerance_m": 0.002,

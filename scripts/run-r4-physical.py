@@ -28,7 +28,10 @@ def norm_limit(value, limit):
 def run(args):
     sensor_config = None
     gpu = None
-    if args.policy_config and not (args.sensors and args.prior and args.mission):
+    force_only = getattr(args, 'force_feedback_only', False)
+    if force_only and not (args.sensors and args.policy_config):
+        raise ValueError('Force-only development reference check requires public sensors and a fixed policy config')
+    if args.policy_config and not force_only and not (args.sensors and args.prior and args.mission):
         raise ValueError("Online control requires --sensors, --prior and a separate public --mission")
     if args.sensors:
         from r4_cuda import require_cuda
@@ -67,12 +70,14 @@ def run(args):
                 "execution": "bounded wrist wrench and joint actuators; free object; qpos assigned only at initialization",
                 "heldout_used": False}
     if args.sensors:
+        from r4_native_sensor import load_sensor
+        manifest['native_sensor'] = load_sensor()
         manifest.update({"gpu": gpu, "sensor_config_sha256": sha256(args.sensor_config),
                          "object_id": task.get("object_id"), "sensor_seed": sensor_config["seed"],
                          "observation_directory": "public-observations", "evaluation_directory": "private-evaluation",
                          "physics_backend": "MuJoCo CPU rigid-body dynamics; NVIDIA GPU RGB-D rendering",
                          "estimator": "separate CUDA replay process; not run inside simulator"})
-        for name in ["r4_sensor_bridge.py", "r4_rgbd.py", "r4_cuda.py"]:
+        for name in ["r4_sensor_bridge.py", "r4_native_sensor.py", "r4_rgbd.py", "r4_cuda.py"]:
             manifest["source_sha256"][name] = sha256(Path(__file__).parent / name)
     write_json(args.output / "manifest.json", manifest)
     xml = make_scene(args.hand_asset, task, physics, sensor_config=sensor_config)
@@ -106,8 +111,28 @@ def run(args):
     data.qpos[qadr] = frames[0]["joint_position"]
     data.ctrl[actuator] = frames[0]["joint_position"]
     mujoco.mj_forward(model, data)
+    from r4_hand_gravity import HandGravity
+    hand_gravity=HandGravity(args.hand_asset)
+    manifest['source_sha256']['r4_hand_gravity.py']=sha256(Path(__file__).parent/'r4_hand_gravity.py')
+    manifest['joint_gravity_compensation']='Separate hand-only dynamics model, encoder joints and wrist rotation; unchanged actuator torque limits'
+    write_json(args.output/'manifest.json',manifest)
     online = None
-    if args.policy_config:
+    force_controller = None
+    if force_only:
+        from r4_control import ReferenceController
+        from r4_hand_model import export_hand
+        from r4_tactile_geometry import HandTactileSurface
+        import torch
+        geometry=HandTactileSurface(bridge.calibration,json.loads(args.sensor_config.read_text())['estimator'],torch.device('cuda'))
+        support={finger:geometry.calibrate_surface(pad['triangles_sensor_m']) for finger,pad in bridge.calibration['pads'].items()}
+        force_controller = ReferenceController(export_hand(model), None,
+            json.loads(args.policy_config.read_text())['control'], torch.device('cuda'),support=support)
+        manifest.update(policy_config_sha256=sha256(args.policy_config), controller_group='G0F1-reference-calibration',
+                        estimator='disabled for force-only reference preparation; not an E2/E3 trial')
+        for name in ['r4_control.py','r4_hand_model.py','r4_tactile_geometry.py']:
+            manifest['source_sha256'][name]=sha256(Path(__file__).parent/name)
+        write_json(args.output/'manifest.json',manifest)
+    if args.policy_config and not force_only:
         from r4_hand_model import export_hand
         from r4_online_client import OnlineClient
         from r4_public import validate_prior
@@ -125,7 +150,7 @@ def run(args):
                         policy_read_guard_denied_project_data=online.ready["read_guard_denied_project_data"],
                         execution_timing="offline synchronous GPU control; simulation pauses while computing; no realtime claim")
         manifest["estimator"] = "persistent independent CUDA process; public observations only"
-        for name in ["r4_online_client.py", "r4_online_worker.py", "r4_memory.py", "r4_hand_model.py", "r4_control.py", "r4_probe.py", "r4_pose_tracker.py", "r4_belief.py", "r4_public.py", "r4_modalities.py", "r4_estimator_worker.py"]:
+        for name in ["r4_online_client.py", "r4_online_worker.py", "r4_memory.py", "r4_hand_model.py", "r4_control.py", "r4_probe.py", "r4_pose_tracker.py", "r4_belief.py", "r4_tactile_geometry.py", "r4_public.py", "r4_modalities.py", "r4_estimator_worker.py"]:
             manifest["source_sha256"][name] = sha256(Path(__file__).parent/name)
         write_json(args.output/"manifest.json", manifest)
     # All subsequent states come from mj_step. Never assign qpos inside the loop.
@@ -135,6 +160,10 @@ def run(args):
     rotations = Rotation.from_quat(np.array([f["wrist_quaternion"] for f in frames])[:, [1, 2, 3, 0]])
     rotation_interp = Slerp(times, rotations)
     hand_mass = float(model.body_mass.sum() - model.body_mass[obj])
+    # Known hand mass/kinematics only. Weight compensation at the palm alone
+    # leaves a gravitational moment from each link's displaced centre of mass.
+    hand_bodies = np.array([i for i in range(1, model.nbody) if i != obj])
+    hand_gravity_forces = model.body_mass[hand_bodies, None] * np.asarray(physics['gravity'])
     renderer = mujoco.Renderer(model, height=480, width=640) if args.render else None
     camera = mujoco.MjvCamera()
     camera.lookat[:] = task.get("camera_lookat", [0, 0, .16])
@@ -150,6 +179,7 @@ def run(args):
     object_geoms = set(np.flatnonzero(model.geom_bodyid == obj).tolist())
     samples, reference_samples, diagnostics, contact_samples, opposition = [], [], [], [], []
     hand_contact_samples = []
+    private_hand_contacts = []
     maximum_penetration, max_force, nframes = 0., 0., 0
     finger_contact_steps = 0
     wall_start = time.monotonic()
@@ -171,21 +201,26 @@ def run(args):
                     wrist_observation[:3, :3], wrist_observation[:3, 3] = data.xmat[palm].reshape(3, 3), data.xpos[palm]
                     observation = observation_writer.append(data.time, bridge.receive(data.time), data.qpos[qadr], last_applied_joints,
                         rgbd.sample(data) if step % (5*control_stride) == 0 else None, wrist=wrist_observation.tolist())
-                    if online:
+                    if online or force_controller:
                         wrist_reference = np.eye(4)
                         wrist_reference[:3, :3], wrist_reference[:3, 3] = target_rot.as_matrix(), target_pos
-                        command = online.step(observation, {"joint_position": target_joints.tolist(), "T_world_wrist": wrist_reference.tolist()})
+                        public_reference={"joint_position": target_joints.tolist(), "T_world_wrist": wrist_reference.tolist()}
+                        command = (online.step(observation, public_reference) if online else
+                                   force_controller.command(observation, public_reference, None, geometry=False, force_feedback=True,
+                                                            release=task['task']=='precision_place' and t>=9.0))
                         policy_abort = command["abort_episode"]
                         target_joints = np.asarray(command["joint_position"])
                         target_transform = np.asarray(command["T_world_wrist"])
                         target_pos, target_rot = target_transform[:3, 3], Rotation.from_matrix(target_transform[:3, :3])
-                data.ctrl[actuator] = target_joints
-                last_applied_joints = target_joints.copy()
-            mujoco.mj_objectVelocity(model, data, mujoco.mjtObj.mjOBJ_BODY, palm, velocity, 0)
+                data.ctrl[actuator] = hand_gravity.target(target_joints,data.qpos[qadr],data.xmat[palm].reshape(3,3))
+                last_applied_joints = data.ctrl[actuator].copy()
+            mujoco.mj_objectVelocity(model, data, mujoco.mjtObj.mjOBJ_XBODY, palm, velocity, 0)
             force = physics["wrist_position_kp"] * (target_pos - data.xpos[palm]) - physics["wrist_position_kd"] * velocity[3:]
             force += np.array([0, 0, hand_mass * 9.81])
             current_rot = Rotation.from_matrix(data.xmat[palm].reshape(3, 3))
             torque = physics["wrist_rotation_kp"] * (target_rot * current_rot.inv()).as_rotvec() - physics["wrist_rotation_kd"] * velocity[:3]
+            # xfrc_applied acts at the palm inertial centre, not its body origin.
+            torque -= np.cross(data.xipos[hand_bodies] - data.xipos[palm], hand_gravity_forces).sum(axis=0)
             data.xfrc_applied[palm, :3] = norm_limit(force, physics["wrist_force_limit_n"])
             data.xfrc_applied[palm, 3:] = norm_limit(torque, physics["wrist_torque_limit_nm"])
             max_force = max(max_force, float(np.linalg.norm(data.xfrc_applied[palm, :3])))
@@ -205,6 +240,9 @@ def run(args):
                 diagnostics.append([float(data.time), *data.actuator_force[actuator], *data.xfrc_applied[palm], data.ncon])
                 thumb_contact, finger_contact = False, False
                 for contact_index, contact in enumerate(data.contact[:data.ncon]):
+                    if args.diagnose_hand_contacts and any(int(model.geom_bodyid[g]) in hand_bodies for g in [contact.geom1,contact.geom2]):
+                        force_private=np.zeros(6);mujoco.mj_contactForce(model,data,contact_index,force_private)
+                        private_hand_contacts.append([float(data.time),int(contact.geom1),int(contact.geom2),float(contact.dist),*force_private])
                     if int(contact.geom1) in object_geoms or int(contact.geom2) in object_geoms:
                         contact_force = np.zeros(6)
                         mujoco.mj_contactForce(model, data, contact_index, contact_force)
@@ -238,6 +276,8 @@ def run(args):
             renderer.close()
     actual = np.asarray(samples)
     reference = np.asarray(reference_samples)
+    if args.diagnose_hand_contacts:
+        np.savez_compressed(evaluation_output/'private-hand-contacts.npz',contacts=np.asarray(private_hand_contacts).reshape(-1,10))
     np.savez_compressed(evaluation_output / "actual-state.npz", samples=actual, reference=reference,
                         actuator_diagnostics=np.asarray(diagnostics), contacts=np.asarray(contact_samples).reshape(-1, 10),
                         opposing_contacts=np.asarray(opposition), touching_hand=np.asarray(hand_contact_samples))
@@ -251,7 +291,7 @@ def run(args):
               "is_research_result": False, "split": contract["split"], "steps": step, "requested_steps": total_steps, "control_samples": len(actual),
               "duration_seconds": float(data.time), "wall_seconds": time.monotonic() - wall_start,
               "policy_abort": policy_abort, "requested_duration_seconds": duration,
-              "policy_summary": command["diagnostic"] if online else None,
+              "policy_summary": command["diagnostic"] if online or force_controller else None,
               "metrics": {**task_metrics,
                           "hand_contact_steps": finger_contact_steps, "maximum_wrist_force_n": max_force,
                           "joint_tracking_rmse_rad": float(np.sqrt(np.mean((actual[:, 8:24] - reference[:, 1:17]) ** 2)))},
@@ -278,9 +318,11 @@ if __name__ == "__main__":
     parser.add_argument("--config", type=Path, default=Path(__file__).resolve().parents[1] / "configs/r4-stage1.json")
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--render", action="store_true")
+    parser.add_argument('--diagnose-hand-contacts',action='store_true',help='Evaluator-only hand/object/floor/self contact record; never a public observation')
     parser.add_argument("--sensors", action="store_true", help="Opt-in P1 public sensor stream plus separate private truth; requires CUDA/NVIDIA EGL")
     parser.add_argument("--sensor-config", type=Path, default=Path(__file__).resolve().parents[1] / "configs/r4-p1p2.json")
     parser.add_argument("--policy-config", type=Path)
+    parser.add_argument("--force-feedback-only", action='store_true', help='Development reference preparation only: same bounded F control, no object estimator; not a main study variant')
     parser.add_argument("--prior", type=Path)
     parser.add_argument("--mission", type=Path)
     parser.add_argument("--controller-group", choices=["G0F0", "G1F0", "G0F1", "G1F1"], default="G1F1")

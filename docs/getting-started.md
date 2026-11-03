@@ -103,6 +103,8 @@ The full R1/R2 stack still needs the pinned SONIC/GEM-X sources, native controll
 
 The LEAP research path uses the public hand assets with their recorded upstream revision/hashes, described in the [R4 plan](r4-stage1.zh-CN.md). The generated example needs none. MANO remains separately licensed; keep it outside Git. Research commands and limits remain in the [multimodal protocol](r4-multimodal.zh-CN.md).
 
+LEAP force sensing additionally requires the project-local MuJoCo 3.2.7 touch-grid correction, built with the existing C++17 compiler. Follow [the isolated plugin build instructions](r4-multimodal.zh-CN.md#124-11月3日晚实际推进与环境补丁); its loader verifies the version and binary hash. The installed MuJoCo package and system driver remain separate from this artifact. This is unnecessary for the generated analytic CUDA example.
+
 ## Assets and attribution
 
 This repository remains private and has no project-wide open-source license. Third-party code/assets retain their own terms. The installer downloads public package archives; it grants no new redistribution rights. Credentials, local W&B destinations, models and full private videos stay outside Git. Optional `configs/wandb.env` is ignored; the example forces local/offline logging and never uploads.

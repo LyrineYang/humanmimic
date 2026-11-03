@@ -74,8 +74,8 @@ class HandModel:
         """Accept [...,16] joint arrays; fixed chain tensors stay on the GPU."""
         frames = []
         for bodies, site_position, site_rotation in self.chains:
-            r = wrist[:3, :3].expand(*q.shape[:-1], 3, 3)
-            p = wrist[:3, 3].expand(*q.shape[:-1], 3)
+            r = wrist[..., :3, :3].expand(*q.shape[:-1], 3, 3)
+            p = wrist[..., :3, 3].expand(*q.shape[:-1], 3)
             for position, fixed_rotation, joints in bodies:
                 p = p + r@position
                 r = r@fixed_rotation
@@ -90,6 +90,25 @@ class HandModel:
             transform[..., :3, :3], transform[..., :3, 3] = r, p
             frames.append(transform)
         return torch.stack(frames, dim=-3)
+
+    def position_jacobian(self,q,wrist,points_world=None):
+        """Analytic world translation Jacobian of known hand sensor sites, CUDA."""
+        if q.shape!=(16,) or wrist.shape!=(4,4):raise ValueError('Single known hand state required')
+        rows=[]
+        for finger,(bodies,site_position,_) in enumerate(self.chains):
+            r=wrist[:3,:3];p=wrist[:3,3];axes=[]
+            for position,fixed_rotation,joints in bodies:
+                p=p+r@position;r=r@fixed_rotation
+                for index,reference,pivot,k,k2 in joints:
+                    axis=torch.stack([k[2,1],k[0,2],k[1,0]])
+                    axes.append((index,r@axis,p+r@pivot))
+                    angle=q[index]-reference;turn=self.identity+angle.sin()*k+(1-angle.cos())*k2
+                    p=p+r@(pivot-turn@pivot);r=r@turn
+            tip=p+r@site_position if points_world is None else points_world[finger]
+            jac=torch.zeros((3,16),device=self.device,dtype=q.dtype)
+            for index,axis,origin in axes:jac[:,index]=torch.linalg.cross(axis,tip-origin)
+            rows.append(jac)
+        return torch.stack(rows)
 
     def ik(self, reference, wrist, targets, limit=.06, iterations=4):
         q = reference.detach().clone()

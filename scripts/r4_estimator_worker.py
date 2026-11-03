@@ -79,12 +79,15 @@ def replay(payload, device):
                "maximum_displacement_m", "maximum_compliance_m_per_n", "kernel_radius_m", "correspondence_radius_m",
                "neighbors", "surface_sigma_m", "shape_prior_sigma_m",
                "compliance_prior_sigma_m_per_n", "minimum_force_span_n", "minimum_force_samples", "maximum_support_radius_m",
-               "huber_delta", "information_relative_threshold", "information_absolute_threshold", "maximum_wall_s", "seed"})
+               "huber_delta", "information_relative_threshold", "information_absolute_threshold", "maximum_wall_s", "seed"},
+         {"information_batch_size"})
     finite(cfg)
     if any(type(value) not in {int, float} or value <= 0 for key, value in cfg.items() if key != "seed"):
         raise ValueError("Estimator configuration must contain positive finite scalars")
     if cfg["shape_modes"] > 64 or cfg["neighbors"] > 32:
         raise ValueError("Local shape/correspondence budget exceeded")
+    if type(cfg.get("information_batch_size", 1)) is not int or not 1 <= cfg.get("information_batch_size", 1) <= 64:
+        raise ValueError("Invalid information batch size")
     if not 1 <= cfg["steps"] <= 200 or not 1 <= cfg["maximum_points"] <= 4096 or not 16 <= cfg["maximum_vertices"] <= 2048:
         raise ValueError("R4 geometry budget exceeded")
     if not 1 <= cfg["window_frames"] <= 8 or not 0 < cfg["maximum_wall_s"] <= 300:

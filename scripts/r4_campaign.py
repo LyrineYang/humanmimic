@@ -77,6 +77,21 @@ def idle_device(devices, uuid):
     return gpu
 
 
+def gpu_parallelism(limits, uuid):
+    auth = limits.get('shared_gpu_authorization', {})
+    return auth.get('maximum_parallel_children', 1) if uuid in auth.get('gpu_uuids', []) else 1
+
+
+def admitted_device(devices, uuid, limits):
+    auth = limits.get('shared_gpu_authorization', {})
+    if uuid not in auth.get('gpu_uuids', []):
+        return idle_device(devices, uuid)
+    gpu = devices[uuid]
+    if 'V100' not in gpu['name'] or gpu['free_mib'] < auth['minimum_free_headroom_mib']+1024:
+        raise RuntimeError('Shared GPU memory headroom unavailable; retain all foreign jobs: '+uuid)
+    return gpu
+
+
 def validate_limits(limits):
     # This version is specifically the user's local 144 GPUh / 36h authorization.
     for name, maximum in [("gpu_hours_max", 144), ("wall_hours_max", 36), ("concurrent_gpus_max", 4)]:
@@ -127,7 +142,8 @@ class Ledger:
         if stage not in self.limits["stage_gpu_hours"] or not math.isfinite(seconds) or seconds <= 0:
             raise ValueError("Invalid reservation")
         running = [j for j in self.state["jobs"].values() if j["status"] == "running"]
-        if len(running) >= self.limits["concurrent_gpus_max"] or any(j["gpu_uuid"] == uuid for j in running):
+        if (len(running) >= self.limits["concurrent_gpus_max"] or
+                sum(j['gpu_uuid']==uuid for j in running) >= gpu_parallelism(self.limits, uuid)):
             raise RuntimeError("GPU concurrency/ownership conflict")
         if self.committed()+seconds > self.limits["gpu_hours_max"]*3600:
             raise RuntimeError("Total GPU-hour limit exhausted")
@@ -139,7 +155,8 @@ class Ledger:
         if self.state["start_epoch"] is None:
             self.state.update(start_epoch=now, start_monotonic=mono, boot_id=self.boot)
         self.state["jobs"][key] = {"stage": stage, "gpu_uuid": uuid, "reserved_s": seconds,
-            "start_epoch": now, "start_monotonic": mono, "status": "running", "plan_sha256": plan_sha}
+            "start_epoch": now, "start_monotonic": mono, "status": "running", "plan_sha256": plan_sha,
+            "accounting": "per-reservation wall time; concurrent same-GPU trial charges are a conservative upper bound"}
         self.save()
 
     def finish(self, key, outcome):

@@ -14,14 +14,16 @@ import xml.etree.ElementTree as ET
 import mujoco
 import numpy as np
 from scipy.spatial import ConvexHull
+from r4_native_sensor import PLUGIN, load_sensor
 
 
 def instrument(root, config):
     """Only sites/sensors are added; mass, joints, actuators and contacts stay intact."""
+    load_sensor()
     extension = root.find("extension")
     if extension is None:
         extension = ET.SubElement(root, "extension")
-    ET.SubElement(extension, "plugin", plugin="mujoco.sensor.touch_grid")
+    ET.SubElement(extension, "plugin", plugin=PLUGIN)
     sensors = root.find("sensor")
     if sensors is None:
         sensors = ET.SubElement(root, "sensor")
@@ -34,7 +36,7 @@ def instrument(root, config):
                       pos=" ".join(map(str, spec["position_m"])),
                       quat=" ".join(map(str, spec["quaternion_wxyz"])))
         plugin = ET.SubElement(sensors, "plugin", name=f"r4_{finger}_force_grid",
-                               plugin="mujoco.sensor.touch_grid", objtype="site", objname=site)
+                               plugin=PLUGIN, objtype="site", objname=site)
         for key, value in {"nchannel": "3", "size": " ".join(map(str, config["size"])),
                            "fov": " ".join(map(str, config["fov_deg"])), "gamma": str(config["gamma"])}.items():
             ET.SubElement(plugin, "config", key=key, value=value)
@@ -83,6 +85,7 @@ def hand_surface(model, body, site):
 
 class SensorBridge:
     def __init__(self, model, config):
+        self.native_sensor = load_sensor()
         self.config = copy.deepcopy(config)
         self.rng = np.random.default_rng(config["seed"])
         self.pending = deque()

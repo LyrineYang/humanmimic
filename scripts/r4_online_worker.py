@@ -38,7 +38,7 @@ def main():
         raise ValueError("Control contact threshold must match sensor calibration")
     memory = EvidenceMemory(device, mission["object_id"], mission["episode_id"], policy["memory"]["capacity"],
                             force_threshold_n=header["calibration"]["threshold_n"])
-    controller = ReferenceController(header["hand"], header["prior"], policy["control"], device)
+    controller = ReferenceController(header["hand"], header["prior"], policy["control"], device, support=estimator.support)
     probe = ProbeSelector(device, policy["probe"])
     install_read_guard()
     try:

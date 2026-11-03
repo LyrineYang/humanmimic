@@ -22,7 +22,14 @@ def skew(v):
 
 
 def so3(v):
-    return torch.matrix_exp(skew(v))
+    # Native batched Rodrigues avoids matrix_exp's serial vmap fallback. The
+    # clamped norm keeps the derivative finite at zero; skew supplies its exact
+    # first derivative there. sinc is stable for small rotations.
+    theta = v.square().sum(-1).clamp_min(1e-16).sqrt()
+    a = torch.sinc(theta/math.pi)[..., None, None]
+    b = .5*torch.sinc(theta/(2*math.pi)).square()[..., None, None]
+    k = skew(v)
+    return torch.eye(3, device=v.device, dtype=v.dtype)+a*k+b*(k@k)
 
 
 def rotation_vector(r):
@@ -110,51 +117,8 @@ class BeliefEstimator:
         return transform
 
     def calibrate_surface(self, triangles):
-        """CUDA rays intersect known hand geometry, never the manipulated object.
-
-        3x3 rays per angular bin; spatial support includes spread plus calibration
-        margin. Edge bins with missing rays are invalid, not exact contact points.
-        Finite sampling is an approximation to calibrate in P1, not ground truth.
-        """
-        tri = self.tensor(triangles)
-        if tri.ndim != 3 or tri.shape[1:] != (3, 3):
-            raise ValueError("Invalid calibrated hand triangles")
-        width, height = self.cal["size"]
-        fov = self.tensor(self.cal["fov_deg"]) * math.pi / 180
-        yy, xx = torch.meshgrid(torch.arange(height, device=self.device), torch.arange(width, device=self.device), indexing="ij")
-        fractions = self.tensor([[x, y] for y in [.05, .5, .95] for x in [.05, .5, .95]])
-        a = ((xx.reshape(-1, 1) + fractions[:, 0]) / width * 2 - 1) * fov[0]
-        e = ((yy.reshape(-1, 1) + fractions[:, 1]) / height * 2 - 1) * fov[1]
-        rays = torch.stack([e.cos() * a.sin(), e.sin(), -e.cos() * a.cos()], -1).reshape(-1, 3)
-        edge1, edge2 = tri[:, 1] - tri[:, 0], tri[:, 2] - tri[:, 0]
-        p = torch.linalg.cross(rays[:, None, :], edge2[None, :, :], dim=-1)
-        determinant = (p * edge1).sum(-1)
-        inverse = torch.where(determinant.abs() > 1e-10, 1 / determinant, torch.zeros_like(determinant))
-        distance_to_origin = -tri[:, 0]
-        u = (p * distance_to_origin).sum(-1) * inverse
-        q = torch.linalg.cross(distance_to_origin, edge1)
-        v = (rays[:, None, :] * q).sum(-1) * inverse
-        distance = (edge2 * q).sum(-1)[None, :] * inverse
-        valid = (determinant.abs() > 1e-10) & (u >= 0) & (v >= 0) & (u + v <= 1) & (distance > 0)
-        distance = torch.where(valid, distance, torch.zeros_like(distance))
-        far, triangle_id = distance.max(-1)  # outer envelope of the known hand
-        near = torch.where(valid, distance, torch.full_like(distance, torch.inf)).min(-1).values
-        near = torch.where(torch.isfinite(near), near, torch.zeros_like(near))
-        # A bin can hit several known collision pieces. Include their full depth
-        # interval rather than inventing a contact on only the outermost piece.
-        near_points = (rays * near[:, None]).reshape(width * height, 9, 3)
-        far_points = (rays * far[:, None]).reshape(width * height, 9, 3)
-        points = torch.cat([near_points, far_points], 1)
-        all_normals = unit(torch.linalg.cross(edge1, edge2))
-        normals = all_normals[triangle_id].reshape(width * height, 9, 3)
-        centers = (near_points[:, 4] + far_points[:, 4]) / 2
-        spread = (points - centers[:, None, :]).norm(dim=-1).max(-1).values
-        reference_normal = normals[:, 4].repeat_interleave(9, dim=0)
-        normal_compatible = (((all_normals[None, :, :] * reference_normal[:, None, :]).sum(-1) > .5) | ~valid).all(-1).reshape(-1, 9).all(-1)
-        # Inflate sampled angular support; no sub-taxel localization claim.
-        radius = 1.5 * spread + self.cal["surface_margin_m"]
-        return {"points": centers, "normals": normals[:, 4], "radius": radius,
-                "valid": (far.reshape(-1, 9) > 0).all(-1) & normal_compatible & (radius <= self.cfg["maximum_support_radius_m"])}
+        from r4_tactile_geometry import HandTactileSurface
+        return HandTactileSurface(self.cal,self.cfg,self.device).calibrate_surface(triangles)
 
     def prepare(self, frames):
         cfg = self.cfg
@@ -431,6 +395,30 @@ class BeliefEstimator:
                     "events": data["events"], "covariance": None, "state_updated": False,
                     "independent_pose": independent_pose, "steps": pose_steps}
         optimizer = torch.optim.Adam([parameters], lr=cfg["learning_rate"])
+        reference_triangles = self.v[self.faces]
+        reference_area = torch.linalg.cross(reference_triangles[:, 1]-reference_triangles[:, 0], reference_triangles[:, 2]-reference_triangles[:, 0])
+        def topology_valid(x):
+            vertices=state(x)[2];triangles=vertices[self.faces]
+            area=torch.linalg.cross(triangles[:,1]-triangles[:,0],triangles[:,2]-triangles[:,0])
+            return bool((area.norm(dim=-1)>=1e-12).all() and ((reference_area*area).sum(-1)>0).all())
+        def feasible_step(previous,proposal,shape_only=False):
+            # Keep the existing topology criterion. Scale the whole update so
+            # null-space projection directions remain frozen at final output.
+            for backtrack in range(21):
+                fraction=2.**(-backtrack)
+                candidate=proposal if backtrack==0 else previous+(proposal-previous)*fraction
+                if shape_only and backtrack:
+                    candidate=candidate.clone();candidate[:6*count]=proposal[:6*count];candidate[-1]=proposal[-1]
+                if topology_valid(candidate):return candidate,backtrack
+            # A line search may reject a step at an active boundary. Retaining
+            # its already valid state is not a topology/accuracy pass override.
+            if topology_valid(previous):
+                candidate=previous.clone()
+                if shape_only:candidate[:6*count]=proposal[:6*count];candidate[-1]=proposal[-1]
+                return candidate,21
+            raise RuntimeError('No feasible local mesh step; previous geometry may be invalid')
+        if not topology_valid(initial_parameters):raise ValueError('Incoming geometry violates topology constraints')
+        topology_backtracks=0
         trace = []
         for iteration in range(budget-pose_steps):
             if time.monotonic() > (wall_deadline if wall_deadline is not None else started + cfg["maximum_wall_s"]):
@@ -445,7 +433,11 @@ class BeliefEstimator:
             if parameters.grad is None or not torch.isfinite(parameters.grad).all():
                 raise RuntimeError("Nonfinite joint gradient")
             parameters.grad *= active
+            previous_parameters=parameters.detach().clone()
             optimizer.step()
+            with torch.no_grad():
+                feasible,backtracks=feasible_step(previous_parameters,parameters,shape_only=True)
+                parameters.copy_(feasible);topology_backtracks+=backtracks
             trace.append(float(loss.detach()))
         # Observability is computed WITHOUT regularization. A prior cannot make
         # an unobservable compliance or occluded shape become a measurement.
@@ -456,13 +448,21 @@ class BeliefEstimator:
         def information(at):
             with torch.no_grad():
                 columns = []
-                for j in range(size):
+                batch = int(cfg.get("information_batch_size", 1))
+                if not 1 <= batch <= 64:
+                    raise ValueError("Information batch must be in [1,64]")
+                directions = torch.eye(size, device=at.device, dtype=at.dtype)*1e-3
+                for j in range(0, size, batch):
                     if time.monotonic() > (wall_deadline if wall_deadline is not None else started + cfg["maximum_wall_s"]):
                         raise TimeoutError("Information calculation exceeded declared wall budget")
-                    direction = torch.zeros_like(at)
-                    direction[j] = 1e-3
-                    columns.append((residual(at + direction, False) - residual(at - direction, False)) / .002)
-                jac = torch.stack(columns, -1)
+                    delta = directions[j:j+batch]
+                    if batch == 1:
+                        value=((residual(at+delta[0], False)-residual(at-delta[0], False))/.002)[:,None]
+                    else:
+                        values=torch.vmap(lambda x: residual(x,False))(torch.cat([at+delta,at-delta],dim=0))
+                        value=((values[:len(delta)]-values[len(delta):])/.002).T
+                    columns.append(value)
+                jac = torch.cat(columns, -1)
                 err = residual(at, False)
                 weighted = jac * (1 + (err / cfg["huber_delta"])**2).pow(-.75)[:, None]
                 return weighted.T @ weighted
@@ -477,6 +477,8 @@ class BeliefEstimator:
         # Freeze unobservable coupled directions at their incoming estimate.
         projected = initial_parameters + projector @ (point.detach() - initial_parameters)
         projected = initial_parameters + (projected - initial_parameters) * active
+        with torch.no_grad():
+            projected,projection_backtracks=feasible_step(initial_parameters,projected)
         # Report uncertainty at the state actually returned, after null freezing.
         eigenvalues, eigenvectors = torch.linalg.eigh(information(projected))
         threshold = max(cfg["information_absolute_threshold"], float(eigenvalues.max()) * cfg["information_relative_threshold"])
@@ -509,6 +511,7 @@ class BeliefEstimator:
                                  "shape_m": cfg["shape_scale_m"], "compliance_derivative_m_per_n": float(compliance.detach()*(1-compliance.detach()/cfg["maximum_compliance_m_per_n"]))},
             "covariance": covariance.tolist(), "null_projector": null_projector.tolist(),
             "uncertainty_status": "uncalibrated local data-information approximation; null directions have unbounded uncertainty",
+            "topology_backtracks": topology_backtracks, "null_projection_backtracks": projection_backtracks,
             "information_eigenvalues": eigenvalues.tolist(), "information_threshold": threshold,
             "accepted_visual_points": accepted_visual, "accepted_contact_taxels": accepted_contact,
             "events": data["events"], "friction_interval": None, "slip_probability": None,

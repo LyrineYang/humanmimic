@@ -16,7 +16,7 @@ import subprocess
 import sys
 import time
 
-from r4_campaign import (ROOT, Ledger, assert_frozen, digest, exclusive, idle_device,
+from r4_campaign import (ROOT, Ledger, assert_frozen, digest, exclusive, idle_device, admitted_device, gpu_parallelism,
                          inventory, output_bytes, read, stop_group, validate_limits, write)
 
 
@@ -98,6 +98,9 @@ def gate_files(gates_path, cases):
             files.append(artifact)
         if not result["video"]["frames"] or result["policy_abort"]:
             raise ValueError("Baseline requires complete actual execution video and no policy abort")
+        if (manifest.get('policy_config_sha256') != digest(ROOT/'configs/r4-control.json') or
+                manifest.get('controller_group') not in {'G0F1-reference-calibration','G0F1','G1F1'}):
+            raise ValueError('Successful reference must also pass the current bounded force controller; open-loop high-load success is insufficient')
         covered.add((match[0]["object_id"].rsplit("-", 1)[0], match[0]["task"]))
         files += [directory/"manifest.json", directory/"private-evaluation/result.json"]
     expected = {(c["object_id"].rsplit("-", 1)[0], c["task"]) for c in cases}
@@ -132,6 +135,7 @@ def source_files():
     root = Path(os.environ.get("R4_DATA_ROOT", str(ROOT.parent/"humanmimic-data/r4")))
     # Asset and environment mutations also invalidate a frozen comparison.
     assets = [p for p in (root/"assets/leap_hand").rglob("*") if p.is_file()]
+    assets += [p for p in (root/"native_plugins/touch_grid-3.2.7-v1").glob("*") if p.is_file()]
     environment = list((Path(sys.prefix)/"conda-meta").glob("*.json"))
     environment += list((Path(sys.prefix)/"lib/python3.10/site-packages").glob("*.dist-info/RECORD"))
     return (list((ROOT/"scripts").glob("*r4*.py")) + list((ROOT/"configs").glob("r4*.json"))
@@ -140,8 +144,8 @@ def source_files():
 
 def prepare(args, config, limits):
     runtime_check()
-    if len(args.gpus) != 4 or len(set(args.gpus)) != 4:
-        raise ValueError("Freeze four distinct GPU UUIDs; no implicit index remapping")
+    if not 1 <= len(args.gpus) <= 4 or len(set(args.gpus)) != len(args.gpus):
+        raise ValueError("Freeze one to four distinct GPU UUIDs; no implicit index remapping")
     devices = inventory()
     if any(g not in devices for g in args.gpus):
         raise ValueError("Unknown GPU UUID")
@@ -195,7 +199,7 @@ def prepare(args, config, limits):
                     "--sensor-config", case["sensor_config"], "--sensors", "--render", "--prior", case["prior"], "--mission", case["mission"],
                     "--policy-config", str(policy_paths[row["memory"]]), "--controller-group", row["group"],
                     "--probe-strategy", row["probe"], "--output", str(dest)]
-        row.update(argv=argv, output=str(dest), gpu_uuid=args.gpus[row["slot"]])
+        row.update(argv=argv, output=str(dest), gpu_uuid=args.gpus[row["slot"] % len(args.gpus)])
     data_root = Path(os.environ.get("R4_DATA_ROOT", str(ROOT.parent/"humanmimic-data/r4"))).resolve()
     rows.append({"id": "analysis", "kind": "analysis", "stage": "E3", "variant": "analysis", "timeout_s": 120,
                  "gpu_uuid": args.gpus[0], "output": str(args.output/"analysis"),
@@ -276,7 +280,7 @@ def run(args, config, limits):
             raise RuntimeError("Unreconciled previous jobs: inspect PIDs/logs and charge before resuming; never reset ledger")
         devices = inventory()
         for uuid, expected in plan["gpus"].items():
-            gpu = idle_device(devices, uuid)
+            gpu = admitted_device(devices, uuid, limits)
             if gpu["index"] != expected["index"] or gpu["driver"] != expected["driver"]:
                 raise RuntimeError("GPU/EGL mapping or driver changed after freeze")
             locks.append(exclusive(root/"runs"/(uuid+".lock")))
@@ -298,11 +302,11 @@ def run(args, config, limits):
                     del active[key]
                     if row["stage"] == "prerequisites" and ledger.state["jobs"][key]["outcome"]["execution_status"] != "completed":
                         raise RuntimeError("Prerequisite failed; stop and diagnose")
-            busy = {item[1]["gpu_uuid"] for item in active.values()}
+            busy = {uuid: sum(item[1]['gpu_uuid']==uuid for item in active.values()) for uuid in plan['gpus']}
             for row in list(pending):
                 if pause_reason:
                     break
-                if row["gpu_uuid"] in busy or len(active) >= limits["concurrent_gpus_max"]:
+                if busy[row['gpu_uuid']] >= gpu_parallelism(limits,row['gpu_uuid']) or len(active) >= limits["concurrent_gpus_max"]:
                     continue
                 if row.get("kind") == "analysis" and (active or any(r.get("kind") != "analysis" for r in pending)):
                     continue
@@ -319,7 +323,7 @@ def run(args, config, limits):
                 if Path(row["output"]).exists():
                     raise RuntimeError("Output exists without completed ledger entry; inspect before resuming")
                 assert_frozen(plan, frozen_cache)
-                gpu = idle_device(inventory(), row["gpu_uuid"])
+                gpu = admitted_device(inventory(), row["gpu_uuid"], limits)
                 key = plan_sha+":"+row["id"]
                 ledger.reserve(key, row["stage"], row["gpu_uuid"], row["timeout_s"], plan_sha)
                 env = dict(os.environ, CUDA_VISIBLE_DEVICES=row["gpu_uuid"], MUJOCO_EGL_DEVICE_ID=str(gpu["index"]),
@@ -340,7 +344,7 @@ def run(args, config, limits):
                 ledger.state["jobs"][key].update(pid=process.pid, boot_id=ledger.boot)
                 ledger.save()
                 active[key] = (process, row, started, log)
-                busy.add(row["gpu_uuid"])
+                busy[row['gpu_uuid']] += 1
                 pending.remove(row)
             if active:
                 time.sleep(.2)
@@ -368,7 +372,7 @@ def main():
     p = sub.add_parser("prepare")
     for field in ["cases", "records", "gates", "output"]:
         p.add_argument("--"+field, type=Path, required=True)
-    p.add_argument("--gpus", nargs=4, required=True)
+    p.add_argument("--gpus", nargs='+', required=True)
     p = sub.add_parser("prepare-prerequisites"); p.add_argument("--gpu", required=True); p.add_argument("--output", type=Path, required=True)
     p = sub.add_parser("run"); p.add_argument("--plan", type=Path, required=True); p.add_argument("--storage-review", type=Path)
     args = parser.parse_args()

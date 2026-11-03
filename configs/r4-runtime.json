@@ -7,6 +7,13 @@
   "gpu_selection": "explicit UUID after checking current occupancy; never a persistent assumed-free index",
   "data_root_default": "../humanmimic-data/r4",
   "additional_dependencies_for_explicit_memory_control": [],
+  "leap_native_sensor": {
+    "plugin": "humanmimic.sensor.touch_grid", "mujoco_version": "3.2.7",
+    "builder": "scripts/build-r4-touch-plugin.py", "compiler": "C++17 g++",
+    "data_root_relative_directory": "native_plugins/touch_grid-3.2.7-v1",
+    "verification": "pinned upstream source hashes, isolated build and verified binary manifest",
+    "required_for": "LEAP force collection; not the generated analytic CUDA example"
+  },
   "learned_wsm": "separate future environment; no Sharpa checkpoint or Isaac Gym installed in r4-core",
   "limits": {"maximum_episode_s": 12, "maximum_wall_s": 300, "maximum_gradient_steps": 200,
              "heldout": false, "training": false, "paid_usd": 0},
@@ -17,6 +24,6 @@
     "worker_gpu_count": 1,
     "same_gpu_uuid_for_paired_variants": true,
     "new_dependencies": [],
-    "gpu_admission": "no existing compute process on selected UUID; >=4 GiB free; independent per-trial watchdog"
+    "gpu_admission": "explicit shared authorization in budget.json permits GPU0 with >=6 GiB spare; all other UUIDs require idle admission; independent per-trial watchdog"
   }
 }

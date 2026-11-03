@@ -1,0 +1,190 @@
+{
+  "schema_version": 1,
+  "status": "awaiting_verification",
+  "updated_utc": "2026-11-03T15:42:56.982273+00:00",
+  "scope": "R4 local simulation prerequisites; not E3 method results or learned training",
+  "engineering": {
+    "p1": {
+      "status": "passed",
+      "checks": {
+        "four_finger_direction_and_load": true,
+        "initial_no_contact": true,
+        "multiple_contacts": true,
+        "latency_queue": true,
+        "dropout_is_unknown": true,
+        "saturation_is_marked": true
+      },
+      "result": "runs/r4-prerequisites-live-20261103-01/p1-native-fixed/result.json",
+      "sha256": "4e1acc1784ecc3a3e523b4da73278faf362fb70a5dc66179a2f9e7486e8aeec2"
+    },
+    "p2": {
+      "status": "passed",
+      "checks": {
+        "read_guard_denied_project_data": true,
+        "joint_estimate": true,
+        "private_truth_mutation_invariance": true,
+        "constant_load": true,
+        "fully_missing": true,
+        "saturated": true,
+        "unanchored_constant": true,
+        "V-joint_finite": true,
+        "VB-joint_finite": true,
+        "VF-pose_only_finite": true,
+        "VF-shape_only_finite": true,
+        "VF-rigid_contact_finite": true,
+        "stale_not_no_contact": true,
+        "truth_field_rejected": true,
+        "future_packet_rejected": true
+      },
+      "result": "runs/r4-prerequisites-overnight-20261103-02/p2-surface-full/result.json",
+      "sha256": "2f2956e9f139073ac755e3cf302a228cceb46e46187c03b5f6791de089cc0704"
+    },
+    "memory_control": {
+      "status": "passed",
+      "checks": {
+        "duplicates_do_not_add_information": true,
+        "bounded_persistent_history": true,
+        "identity_switch_rejected": true,
+        "missing_data_inflates_uncertainty": true,
+        "cuda_FK_matches_known_LEAP": true,
+        "batched_FK_matches_individual": true,
+        "cuda_IK_reduces_tip_error": true,
+        "analytic_hand_jacobian_matches_autodiff": true,
+        "surface_contact_jacobian_matches_autodiff": true,
+        "force_contact_uses_public_taxel_hand_surface": true,
+        "normal_force_excludes_tangential_load": true,
+        "force_feedback_moves_against_load_when_under_target": true,
+        "force_feedback_moves_with_load_when_over_target": true,
+        "taxel_noise_does_not_create_contact": true,
+        "G0F0_preserves_reference": true,
+        "bounded_control_residual": true,
+        "force_feedback_without_object_belief": true,
+        "missing_belief_F0_preserves_reference": true,
+        "release_disables_force_closing": true,
+        "force_feedback_survives_unobservable_pose": true,
+        "duplicate_timestamp_does_not_integrate_force": true,
+        "accumulated_force_remains_bounded": true,
+        "release_resets_force_memory": true,
+        "common_force_abort": true,
+        "uncalibrated_force_bound_abstains": true,
+        "task_J_from_model_is_finite": true,
+        "safe_positive_gain_candidate": true,
+        "probe_force_bound_includes_existing_load": true,
+        "global_baseline_not_filtered_by_task_gain": true,
+        "zero_gain_abstains": true,
+        "pose_tracking_between_shape_updates": true
+      },
+      "result": "runs/r4-prerequisites-overnight-20261103-02/normal-force-gpu/result.json",
+      "sha256": "75e395f3f2779123f545f716bb7b04d34dddefcef9c353116c56333b641b6a7f"
+    },
+    "full_hand_load": {
+      "status": "passed",
+      "checks": {
+        "full_hand_load": true,
+        "conservative_force_bound": true,
+        "disjoint_fit_verify_seeds": true
+      },
+      "result": "runs/r4-prerequisites-live-20261103-01/full-hand-gravity-40/result.json",
+      "sha256": "58d64594f1b963a4da69aa873999e498a9ff7189276a3163ad2260ff40b60e8f"
+    },
+    "throughput_equivalence": {
+      "status": "passed",
+      "checks": {
+        "pose_equivalent": true,
+        "shape_equivalent": true,
+        "covariance_equivalent": true,
+        "compliance_equivalent": true,
+        "SO3_forward_matches_exponential": true,
+        "SO3_gradient_matches_exponential": true,
+        "SO3_native_vmap_equivalent": true,
+        "batched_wrist_fk_equivalent": true,
+        "quaternion_pi_branches": true
+      },
+      "result": "runs/r4-prerequisites-live-20261103-01/so3-equivalence-gpu-v2/result.json",
+      "sha256": "b2f2f5ef41f536d01317b03389ad4b3b2339a1993b26a8b0a37bd6ff91ca9cbf"
+    },
+    "online_negative": {
+      "execution_status": "passed",
+      "task_status": "failed",
+      "expected_task_failure": true,
+      "frames": 101,
+      "duration_s": 3.999999999999781,
+      "result": "runs/r4-prerequisites-overnight-20261103-02/online-negative-current/private-evaluation/result.json",
+      "sha256": "64a33148aaa54f4458c5ed3c7c046acab1280711bc0d152f646b895fba1fa282"
+    },
+    "private_contact_logging": {
+      "status": "passed",
+      "checks": {
+        "contact-audit-u-stop": true,
+        "contact-audit-step-fast": true,
+        "contact-audit-u-tracked": true
+      },
+      "gpu": {
+        "device": "Tesla V100-SXM2-32GB",
+        "selected": "GPU-41c264dc-74e0-3ea6-c3b0-26cfb1972a80",
+        "capability": [
+          7,
+          0
+        ],
+        "torch": "2.5.1+cu118",
+        "cuda_runtime": "11.8",
+        "free_bytes_at_admission": 30568153088,
+        "total_bytes": 34079899648,
+        "nvidia_smi": "GPU-41c264dc-74e0-3ea6-c3b0-26cfb1972a80, Tesla V100-SXM2-32GB, 3349 MiB, 17 %, 530.30.02\nGPU-d3ba9e90-dc39-ddc2-e7cb-34c7e8f572a2, Tesla V100-SXM2-32GB, 9839 MiB, 77 %, 530.30.02\nGPU-aa7b2cfa-6a76-0781-a48c-697c751a87eb, Tesla V100-SXM2-32GB, 0 MiB, 0 %, 530.30.02\nGPU-bf9af36c-d009-896b-f0ea-35f592684d20, Tesla V100-SXM2-32GB, 0 MiB, 0 %, 530.30.02",
+        "cpu_fallback": false
+      },
+      "note": "Earlier u-stop comparison used different force-normal code and was not a valid pair; kept as historical diagnostic."
+    },
+    "confidence_cli_metadata": {
+      "status": "complete",
+      "result": "runs/r4-prerequisites-overnight-20261103-02/final-confidence-cli-pilot/manifest.json"
+    }
+  },
+  "manipulation": {
+    "current_bounded_force_baselines": "failed",
+    "historical_U_T1_T2": "passed on old frozen open-loop version, forces exceed2N; not current readiness",
+    "four_family_current_gate": false
+  },
+  "confidence": {
+    "fit_status": "passed",
+    "fit_trials": 20,
+    "frozen_translation_multiplier": 60.42928000695408,
+    "verification_status": "running",
+    "verification_completed": 5,
+    "joint_pose_compliance_gate": false,
+    "scope": "two-object conditional translation only"
+  },
+  "queue": {
+    "pid": 40617,
+    "directory": "runs/r4-prerequisites-overnight-20261103-02",
+    "maximum_wall_s": 10800,
+    "parallel_children": 4,
+    "gpu_index": 0,
+    "minimum_free_memory_mib": 6144,
+    "drain_when_empty": true
+  },
+  "budget": {
+    "maximum_gpu_hours": 144,
+    "continuous_wall_hours": 36,
+    "prerequisite_limit_gpu_hours": 8,
+    "closed_cohorts_gpu_hours": 1.9812151532439102,
+    "active_reserved_gpu_hours": 3.0027777777777778,
+    "start_epoch": 1793710446.4996653,
+    "deadline_epoch": 1793840046.4996653
+  },
+  "training": false,
+  "heldout_used": false,
+  "paid_usd": 0,
+  "gpu_numerics": true,
+  "physics_backend": "MuJoCo CPU, NVIDIA EGL; not CPU numerical fallback",
+  "full_hand_bound_scope": "local articulated hand/probe loading only; not object material compliance or all grasp postures",
+  "analytic_joint_coverage": {
+    "status": "running",
+    "seeds": [
+      2101,
+      2120
+    ],
+    "shards": 4,
+    "gate_scope": "analytic only; no LEAP readiness claim"
+  }
+}

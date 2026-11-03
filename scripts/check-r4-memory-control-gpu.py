@@ -94,7 +94,36 @@ def main():
     target = hand.forward(desired_q, wrist)[:, :3, 3]
     solved = hand.ik(q, wrist, target)
     checks["cuda_IK_reduces_tip_error"] = bool((hand.forward(solved, wrist)[:, :3, 3]-target).norm() < (predicted-target).norm())
+    auto_jac=torch.autograd.functional.jacobian(lambda x:hand.forward(x,wrist)[:,:3,3],q,vectorize=True)
+    checks['analytic_hand_jacobian_matches_autodiff']=bool(torch.allclose(hand.position_jacobian(q,wrist),auto_jac,atol=1e-10,rtol=1e-10))
+    offset=hand.tensor([.003,-.004,.005])
+    def surface_positions(value):
+        transforms=hand.forward(value,wrist)
+        return (transforms[:,:3,:3]@offset)+transforms[:,:3,3]
+    surface_auto=torch.autograd.functional.jacobian(surface_positions,q,vectorize=True)
+    checks['surface_contact_jacobian_matches_autodiff']=bool(torch.allclose(hand.position_jacobian(q,wrist,surface_positions(q)),surface_auto,atol=1e-10,rtol=1e-10))
+    from r4_sensor_bridge import SensorBridge
+    from r4_tactile_geometry import HandTactileSurface
+    calibration=SensorBridge(model,cfg['sensor']).calibration
+    support_model=HandTactileSurface(calibration,cfg['estimator'],device)
+    support={f:support_model.calibrate_surface(p['triangles_sensor_m']) for f,p in calibration['pads'].items()}
+    supported=ReferenceController(known,payload['prior'],policy['control'],device,support=support)
+    region=support['mf'];index=int(torch.where(region['valid'])[0][0])
+    force=torch.zeros((192,3),device=device,dtype=torch.float64);force[index,2]=.3
+    packet={'sensor_id':'mf','valid':True,'time_s':0.,'force_sensor_n':force.reshape(12,16,3).tolist(),
+            'saturated':torch.zeros((12,16),device=device,dtype=torch.bool).tolist(),'T_world_sensor':wrist.tolist()}
+    contact=supported.forces({'time_s':0.,'tactile':[packet]})['mf']['contact_world_m']
+    checks['force_contact_uses_public_taxel_hand_surface']=bool(torch.allclose(hand.tensor(contact),region['points'][index]+wrist[:3,3],atol=1e-10))
+    normal=region['normals'][index];axis=hand.tensor([1.,.3,.2]);tangent=axis-normal*(axis@normal);tangent/=tangent.norm()
+    force[index]=-.7*normal+.4*tangent;packet['force_sensor_n']=force.reshape(12,16,3).tolist()
+    resolved=supported.forces({'time_s':0.,'tactile':[packet]})['mf']
+    checks['normal_force_excludes_tangential_load']=abs(resolved['normal_load_n']-.7)<1e-10 and resolved['norm_n']>.8
     controller = ReferenceController(known, payload["prior"], policy["control"], device)
+    direction=hand.tensor([1.,0.,0.])
+    loading=controller.force_adjustment(q,wrist,{'mf':{'norm_n':.3,'force_world_n':[.3,0.,0.]}})
+    unloading=controller.force_adjustment(q,wrist,{'mf':{'norm_n':1.7,'force_world_n':[1.7,0.,0.]}})
+    checks['force_feedback_moves_against_load_when_under_target']=float(direction@auto_jac[1]@loading)<0
+    checks['force_feedback_moves_with_load_when_over_target']=float(direction@auto_jac[1]@unloading)>0
     obs = copy.deepcopy(payload["frames"][-1])
     obs["joint_position_rad"] = q.tolist()
     noisy = copy.deepcopy(obs)
@@ -106,6 +135,27 @@ def main():
     controlled = controller.command(obs, reference, belief, geometry=True, force_feedback=True)
     checks["G0F0_preserves_reference"] = bool(torch.allclose(torch.tensor(baseline["joint_position"], device=device), q.float(), atol=1e-6))
     checks["bounded_control_residual"] = float((torch.tensor(controlled["joint_position"], device=device)-q).abs().max()) <= .060001
+    missing = controller.command(obs,reference,None,geometry=False,force_feedback=True)
+    missing_off = controller.command(obs,reference,None,geometry=False,force_feedback=False)
+    released = controller.command(obs,reference,None,geometry=False,force_feedback=True,release=True)
+    checks['force_feedback_without_object_belief'] = float((torch.tensor(missing['joint_position'],device=device)-q).abs().max())>1e-5
+    checks['missing_belief_F0_preserves_reference'] = bool(torch.allclose(torch.tensor(missing_off['joint_position'],device=device),q.float(),atol=1e-6))
+    checks['release_disables_force_closing'] = bool(torch.allclose(torch.tensor(released['joint_position'],device=device),q.float(),atol=1e-6))
+    unknown=copy.deepcopy(belief);unknown['null_projector']=torch.eye(len(belief['covariance']),device=device).tolist()
+    unobserved=controller.command(obs,reference,unknown,geometry=True,force_feedback=True)
+    checks['force_feedback_survives_unobservable_pose']=bool(torch.allclose(torch.tensor(unobserved['joint_position'],device=device),torch.tensor(missing['joint_position'],device=device),atol=1e-6))
+    integral=ReferenceController(known,payload['prior'],policy['control'],device)
+    first=integral.command(obs,reference,None,geometry=False,force_feedback=True)
+    duplicate=integral.command(obs,reference,None,geometry=False,force_feedback=True)
+    checks['duplicate_timestamp_does_not_integrate_force']=first['joint_position']==duplicate['joint_position']
+    later=copy.deepcopy(obs)
+    for i in range(300):
+        later['time_s']=obs['time_s']+(i+1)*.02
+        for packet in later['tactile']:packet['time_s']=later['time_s']
+        accumulated=integral.command(later,reference,None,geometry=False,force_feedback=True)
+    checks['accumulated_force_remains_bounded']=float((hand.tensor(accumulated['joint_position'])-q).abs().max())<=.06000001
+    integral.command(later,reference,None,geometry=False,force_feedback=True,release=True)
+    checks['release_resets_force_memory']=bool((integral.force_residual==0).all())
     obs["tactile"][0]["force_sensor_n"] = [[[0, 0, 3.]]]
     checks["common_force_abort"] = all(controller.command(obs, reference, belief, geometry=g, force_feedback=f)["abort_episode"] for g in [False, True] for f in [False, True])
     selector = ProbeSelector(device, policy["probe"])

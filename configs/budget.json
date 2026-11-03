@@ -14,7 +14,11 @@
   "platform_limits_verified": false,
   "execution_policy": {
     "preferred_gpu": "L4",
-    "allowed_gpus_after_authorization": ["L4", "A10", "L40S"],
+    "allowed_gpus_after_authorization": [
+      "L4",
+      "A10",
+      "L40S"
+    ],
     "max_containers": 1,
     "gpu_count": 1,
     "first_preflight_timeout_seconds": 300,
@@ -32,8 +36,8 @@
     "includes_build_load_idle_storage_egress": false
   },
   "rates_usd_per_second": {
-    "cpu_per_physical_core": 0.0000131,
-    "memory_per_gib": 0.00000222,
+    "cpu_per_physical_core": 1.31e-05,
+    "memory_per_gib": 2.22e-06,
     "gpu": {
       "L4": 0.000222,
       "A10": 0.000306,
@@ -71,6 +75,15 @@
     "initial_output_review_gib": 5,
     "campaign_output_cap_gib": 80,
     "minimum_free_disk_gib": 100,
-    "note": "Local GPU occupancy is separate from the historical USD/Modal ledger; no paid-resource authorization."
+    "note": "Local GPU occupancy is separate from the historical USD/Modal ledger; no paid-resource authorization.",
+    "shared_gpu_authorization": {
+      "gpu_uuids": [
+        "GPU-41c264dc-74e0-3ea6-c3b0-26cfb1972a80"
+      ],
+      "source": "2026-11-03 user explicitly permits sharing GPU0 and requires retaining foreign process",
+      "minimum_free_headroom_mib": 6144,
+      "initial_parallel_children": 2,
+      "maximum_parallel_children": 4
+    }
   }
 }

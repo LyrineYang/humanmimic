@@ -20,7 +20,7 @@ def launch(payload, output, timeout):
     manifest = {"status": "running", "started_utc": datetime.datetime.now(datetime.timezone.utc).isoformat(),
                 "launcher_pid": os.getpid(), "boot_id": Path("/proc/sys/kernel/random/boot_id").read_text().strip(),
                 "public_payload_sha256": hashlib.sha256(wire).hexdigest(), "heldout_used": False,
-                "source_sha256": {name: sha256(source/name) for name in ["r4_belief.py", "r4_public.py", "r4_modalities.py", "r4_cuda.py", "r4_memory.py", "r4_estimator_worker.py", "r4_replay.py", "run-r4-belief-gpu.py"]},
+                "source_sha256": {name: sha256(source/name) for name in ["r4_belief.py", "r4_tactile_geometry.py", "r4_public.py", "r4_modalities.py", "r4_cuda.py", "r4_memory.py", "r4_estimator_worker.py", "r4_replay.py", "run-r4-belief-gpu.py"]},
                 "config": payload["config"], "modality": payload["modality"], "ablation": payload["ablation"],
                 "seed": payload["seed"], "occlusion": payload["occlusion"],
                 "cuda_visible_devices": os.environ.get("CUDA_VISIBLE_DEVICES")}
