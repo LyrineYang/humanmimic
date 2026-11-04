@@ -18,7 +18,7 @@ HumanMimic connects GEM-X motion estimation, a pretrained SONIC controller and M
 
 **Developer preview · Simulation only · Rebuildable Linux/V100 CUDA example.** Recorded-video and reference-motion workflows are implemented. Live-camera work is skipped for the current stage; video-based object reconstruction and dexterous interaction are the next research direction.
 
-**R4 research in development:** LEAP sensing, CUDA shape/pose/compliance estimation and explicit multimodal memory now have runnable components. Bounded geometry/force control and probe selection are being evaluated; manipulation gains remain unverified. Read the [plain-language research walkthrough and experiment design (Chinese)](docs/r4-multimodal.zh-CN.md) or [research overview](docs/research.md).
+**R4 research in development:** Learn an initial manipulation from video, then use interaction evidence to revise the object model and spend observations where they matter for stable grasping and precise placement. LEAP sensing, CUDA shape/pose/compliance estimation and explicit memory have runnable components. Current 2 N grasp/place acceptance, the complete video-to-policy learning pipeline and manipulation gains remain unverified. Read the [experiment design (Chinese)](docs/r4-multimodal.zh-CN.md), [latest prerequisite results](docs/results.md#r4--november-3-prerequisite-results) or [video-learning alternatives and reproduction estimates (Chinese)](docs/research-video-interaction.zh-CN.md#11-视频学习操控的候选实现与复现难度2026-11-04).
 
 ## What you can do
 

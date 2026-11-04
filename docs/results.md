@@ -2,7 +2,7 @@
 
 [Home](../README.md) / Evidence
 
-**Updated: November 2, 2026.** R1/R2 below preserve engineering acceptance from the original RTX 4060 Laptop environment. R4 component evidence comes from the V100 server. R1 uses fixed official/debug examples; R2 uses five debug and five held-out videos with narrow input conditions. Neither is a broad generalization benchmark.
+**Updated: November 4, 2026.** R1/R2 below preserve engineering acceptance from the original RTX 4060 Laptop environment. R4 component evidence comes from the V100 server. R1 uses fixed official/debug examples; R2 uses five debug and five held-out videos with narrow input conditions. Neither is a broad generalization benchmark.
 
 ## R1 — Reference tracking
 
@@ -99,8 +99,26 @@ The 2026-11-01 server inventory and research review are preparation evidence, no
 
 The stable [setup](getting-started.md#prepare-a-runtime) and [example](usage.md#cuda-example-and-results) paths build a separate Linux/V100 prefix and generate observations without private assets. A completed example produces a coarse/estimated surface illustration, estimated state/covariance and independent analytic metrics. `execution_status`, `task_status` and `acceptance_status` are separate; an exit-0 run is not a successful grasp claim.
 
-The latest research review fixes exclude internal union faces from geometry metrics, remove continuous-force information from the binary baseline, and freeze independent per-frame poses for shape-only evaluation. [Review evidence](../evidence/r4-review-fixes-20261102.json) records 15 targeted, 15 P2 and 18 memory/control checks. [Earlier online evidence](../evidence/r4-memory-control-20261102.json) records an actual LEAP negative control: execution completed, task failed as expected. Neither establishes a geometry-induced operation gain, and pose uncertainty calibration remains unverified.
+The November 2 research review fixes exclude internal union faces from geometry metrics, remove continuous-force information from the binary baseline, and freeze independent per-frame poses for shape-only evaluation. [Review evidence](../evidence/r4-review-fixes-20261102.json) records 15 targeted, 15 P2 and 18 memory/control checks. [Earlier online evidence](../evidence/r4-memory-control-20261102.json) records an actual LEAP negative control: execution completed, task failed as expected. Neither establishes a geometry-induced operation gain; the later calibration below has a narrower, explicitly stated scope.
 
 The [runtime-portability delivery](../evidence/runtime-portability-20261102.json) records the independent rebuild from 57 hashed wheels, eight environment/CLI checks, six installer contracts, targeted 15/15 and P2 15/15 CUDA regressions, and a fresh six-check LEAP force-bridge run with NVIDIA EGL. The generated example has translation RMSE 0.0194 mm, surface RMSE 0.0260 mm and compliance error 0.0555 mm/N on its analytic fixture. Its pose interval does not cover the fixture error; these numbers do not establish calibrated uncertainty or operation accuracy. Ordinary inspection returns 0 and strict acceptance inspection returns 3 for the same saved result.
 
 Historical metrics above are not replaced by new environment runs. Raw installation, example, force-calibration video and audit outputs live in `runs/runtime-portability-20261102-01/`; [PLAN](../PLAN.md) is the current authority. Website links and HTML structure were checked; browser rendering and remote publication were not performed in this delivery.
+
+## R4 — November 3 prerequisite results
+
+The [prerequisite summary](../evidence/r4-prerequisites-20261103.json) records the latest frozen V100 evidence. Numerical estimation and hand kinematics use CUDA; MuJoCo dynamics run on the CPU and rendering uses NVIDIA EGL. These are simulation results, with no real-robot or live-camera acceptance.
+
+| Evidence | Result | Limit |
+| --- | --- | --- |
+| LEAP force bridge / P2 joint estimator / memory, control and probes | `passed`: 6 / 15 / 31 CUDA checks | Module behavior, not successful manipulation |
+| Full-hand loading at the calibration posture | `passed`: 20 fit + 20 separate verification trials; conservative local compliance bound about 0.1214 mm/N | Hand/probe response, not object material or arbitrary grasp posture |
+| Conditional translation confidence | `passed`: 18/20 independent verification trials covered, after 20 fit trials; frozen interval multiplier 60.4293 | Two development objects and a fixed time window; multiplier is offline only, not applied to online covariance |
+| Analytic joint confidence fixture | `passed`: 20/20 simultaneous final-frame xyz/scalar-compliance coverage | No rotation and no physical LEAP object-compliance validation |
+| Earlier U-shaped object reference | T1 held 7.48 s; T2 errors 3.763 mm / 1.944 degrees | Exceeds the current 2 N force bound and predates controller changes; not an eligible E3 reference |
+| Current bounded grasp/place reference | `failed` / `awaiting_verification` | No accepted T1/T2 under the current force bound; no demonstrated geometry or active-probing gain |
+| Current online negative control | Execution `passed`, task `failed`; 4 s and 101 recorded frames | Confirms the isolated observation-to-estimator-to-control path only |
+
+All three prerequisite cohorts have finished. Total charged occupancy is 3.0270 GPU-hours, with no billed cloud spend or learned-policy training. The overnight cohort has 139 commands and retains an overall `failed` status because four grasp candidates were rejected for missing the required two-finger load. These rejections are not erased by the calibration passes. E3 remains gated on accepted manipulation references and complete calibration; 24 held-out objects remain unused.
+
+Raw outputs, private evaluation, videos and failure logs are retained in `runs/r4-prerequisites-live-20261103-01/` and `runs/r4-prerequisites-overnight-20261103-02/`; large media are not included in Git. The [video-learning comparison](research-video-interaction.zh-CN.md#11-视频学习操控的候选实现与复现难度2026-11-04) is a source review, not an additional runtime result.
