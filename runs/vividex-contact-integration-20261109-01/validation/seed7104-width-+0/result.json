@@ -1,0 +1,60 @@
+{
+  "condition": {
+    "id": "seed7104-width-+0",
+    "seed": 7104,
+    "halfwidth_delta_mm": 0
+  },
+  "variants": {
+    "baseline": {
+      "edge_error_m": 0.006206188218580377,
+      "penalized_error_m": 0.006206188218580377,
+      "valid": true,
+      "prerelease_edge_error_m": 0.00035916349017939275,
+      "residual_dx_m": 6.971399480359963e-06,
+      "offset_m": -0.0008152452900091617,
+      "reachable": true,
+      "lower_reachable": true,
+      "detached": true,
+      "table_supported": true,
+      "drift_m": 1.822825379587302e-06,
+      "orientation_error_deg": 5.382607802606915
+    },
+    "contact": {
+      "edge_error_m": 0.005462454671465541,
+      "penalized_error_m": 0.005462454671465541,
+      "valid": true,
+      "prerelease_edge_error_m": 0.0004452900109762209,
+      "residual_dx_m": -0.0007802803054669794,
+      "offset_m": -2.7993585061817923e-05,
+      "reachable": true,
+      "lower_reachable": true,
+      "detached": true,
+      "table_supported": true,
+      "drift_m": 1.8301649673044456e-06,
+      "orientation_error_deg": 5.466774035694623
+    }
+  },
+  "scope": "Privileged-state pretrained grasp; nominal pose prior shared; unknown local box extent; scripted residual/lower/release; external calibrated probe",
+  "probe_valid": true,
+  "probe_peak_n": 0.5013195991838493,
+  "memory": {
+    "grasp_id": "seed7104-width-+0-native-grasp",
+    "normal": [
+      1.0,
+      0.0,
+      0.0
+    ],
+    "mean_m": -2.7993585061817923e-05,
+    "sigma_m": 0.0003,
+    "events": [
+      "one-probe"
+    ],
+    "valid": true,
+    "scope": "Local support offset along one normal; fixed grasp and orientation"
+  },
+  "policy_steps": 60,
+  "goal_edge_x_m": -0.07863328724946313,
+  "common_states_sha256": "b25b0f17646c99fc008c5850b771a9236122fcc653eb622412000e5c67fc23c3",
+  "policy_input_actions_sha256": "d3cb4357eaa90d3b848086ae6b6b4b19d3e69cd98f719e08a8ec7ab6810178f7",
+  "fork_sha256": "bb5eb4861af027e5bcaf371dd2d023974c58df0535e937bb4f6a27267fb57d24"
+}

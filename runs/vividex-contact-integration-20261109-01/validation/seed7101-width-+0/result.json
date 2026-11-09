@@ -1,0 +1,60 @@
+{
+  "condition": {
+    "id": "seed7101-width-+0",
+    "seed": 7101,
+    "halfwidth_delta_mm": 0
+  },
+  "variants": {
+    "baseline": {
+      "edge_error_m": 0.0008444709801380679,
+      "penalized_error_m": 0.0008444709801380679,
+      "valid": true,
+      "prerelease_edge_error_m": 1.5626847197552918e-05,
+      "residual_dx_m": 3.873534509243881e-05,
+      "offset_m": -0.0085496194026181,
+      "reachable": true,
+      "lower_reachable": true,
+      "detached": true,
+      "table_supported": true,
+      "drift_m": 2.119490753089996e-06,
+      "orientation_error_deg": 4.127137102315552
+    },
+    "contact": {
+      "edge_error_m": 0.000366421457382915,
+      "penalized_error_m": 0.000366421457382915,
+      "valid": true,
+      "prerelease_edge_error_m": 0.0004896272655081635,
+      "residual_dx_m": -0.000471416047005499,
+      "offset_m": -0.008039468010520159,
+      "reachable": true,
+      "lower_reachable": true,
+      "detached": true,
+      "table_supported": true,
+      "drift_m": 2.1097033357425457e-06,
+      "orientation_error_deg": 4.223759940386703
+    }
+  },
+  "scope": "Privileged-state pretrained grasp; nominal pose prior shared; unknown local box extent; scripted residual/lower/release; external calibrated probe",
+  "probe_valid": true,
+  "probe_peak_n": 0.4636139182930854,
+  "memory": {
+    "grasp_id": "seed7101-width-+0-native-grasp",
+    "normal": [
+      1.0,
+      0.0,
+      0.0
+    ],
+    "mean_m": -0.008039468010520159,
+    "sigma_m": 0.0003,
+    "events": [
+      "one-probe"
+    ],
+    "valid": true,
+    "scope": "Local support offset along one normal; fixed grasp and orientation"
+  },
+  "policy_steps": 37,
+  "goal_edge_x_m": -0.1194240212320038,
+  "common_states_sha256": "a994d0468d88f98888e87af9e9bd44b722a77ca8fc7d9a272a0c11e6c1e8eef1",
+  "policy_input_actions_sha256": "cd533399d2420db23ddcda2d9ecde0a6fc80d84773d8bb72a3b8141f16c3d3c7",
+  "fork_sha256": "161086e445def3da371c7657143421abc52d6af744f94eb35bf623b89c69e60c"
+}

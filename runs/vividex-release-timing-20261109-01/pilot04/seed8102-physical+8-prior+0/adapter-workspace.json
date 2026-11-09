@@ -1,0 +1,37 @@
+{
+  "activated_after_policy_steps": 32,
+  "original_ctrlrange": [
+    [
+      -0.25,
+      0.25
+    ],
+    [
+      -0.2,
+      0.2
+    ],
+    [
+      -0.3,
+      0.5
+    ]
+  ],
+  "original_joint_range": [
+    [
+      -0.25,
+      0.25
+    ],
+    [
+      -0.2,
+      0.2
+    ],
+    [
+      -0.3,
+      0.5
+    ]
+  ],
+  "adapter_range_m": [
+    -0.6,
+    0.6
+  ],
+  "shared_by_all_variants": true,
+  "scope": "Free wrist Cartesian stage; not a physical arm reachability result"
+}

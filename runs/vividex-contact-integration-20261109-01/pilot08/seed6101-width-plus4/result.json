@@ -1,0 +1,60 @@
+{
+  "condition": {
+    "id": "seed6101-width-plus4",
+    "seed": 6101,
+    "halfwidth_delta_mm": 4
+  },
+  "variants": {
+    "baseline": {
+      "edge_error_m": 0.0010023681380488536,
+      "penalized_error_m": 0.0010023681380488536,
+      "valid": true,
+      "prerelease_edge_error_m": 0.0023963994310812475,
+      "residual_dx_m": 0.0003874785438197914,
+      "offset_m": 0.022693506172342143,
+      "reachable": true,
+      "lower_reachable": true,
+      "detached": true,
+      "table_supported": true,
+      "drift_m": 8.480270042826504e-07,
+      "orientation_error_deg": 0.7108460733789304
+    },
+    "contact": {
+      "edge_error_m": 0.001884287137214835,
+      "penalized_error_m": 0.001884287137214835,
+      "valid": true,
+      "prerelease_edge_error_m": 0.0006575048696345065,
+      "residual_dx_m": -0.0025026720544931713,
+      "offset_m": 0.025583656770655112,
+      "reachable": true,
+      "lower_reachable": true,
+      "detached": true,
+      "table_supported": true,
+      "drift_m": 8.311066661854109e-07,
+      "orientation_error_deg": 0.7124269966259309
+    }
+  },
+  "scope": "Privileged-state pretrained grasp; nominal pose prior shared; unknown local box extent; scripted residual/lower/release; external calibrated probe",
+  "probe_valid": true,
+  "probe_peak_n": 0.6988660954748244,
+  "memory": {
+    "grasp_id": "seed6101-width-plus4-native-grasp",
+    "normal": [
+      1.0,
+      0.0,
+      0.0
+    ],
+    "mean_m": 0.025583656770655112,
+    "sigma_m": 0.0003,
+    "events": [
+      "one-probe"
+    ],
+    "valid": true,
+    "scope": "Local support offset along one normal; fixed grasp and orientation"
+  },
+  "policy_steps": 60,
+  "goal_edge_x_m": 0.14068930106751865,
+  "common_states_sha256": "1e130ad700cc80bf056bd78b80353468ab40764a156d1d300d01d986135119bd",
+  "policy_input_actions_sha256": "62b4b3e27c978e2b7dfb72788c7cad5ec5b2eebf992ff0764ff2c810ccfc7325",
+  "fork_sha256": "4ef9b777196a1f05957264d6bc81eefbf639fac4a04e72760a2693d1a64eeab5"
+}

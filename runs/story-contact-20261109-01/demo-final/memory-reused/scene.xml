@@ -1,0 +1,35 @@
+<mujoco model="contact_offset_rig">
+      <option timestep="0.002" gravity="0 0 -9.81" iterations="100"/>
+      <visual><global offwidth="960" offheight="720"/><headlight ambient=".4 .4 .4" diffuse=".7 .7 .7"/></visual>
+      <asset><texture type="2d" name="grid" builtin="checker" rgb1=".15 .19 .25" rgb2=".19 .24 .30" width="128" height="128"/>
+        <material name="floor_mat" texture="grid" texrepeat="8 8" reflectance=".1"/></asset>
+      <default><geom friction=".8 .005 .0001" solref=".004 1" solimp=".98 .999 .001"/>
+        <joint damping="2"/><position kp="500" kv="12" forcelimited="true" forcerange="-8 8"/></default>
+      <worldbody>
+        <light pos="0 -.3 .8" dir="0 0 -1" diffuse=".9 .9 .9"/>
+        <geom name="table" type="plane" size=".5 .5 .01" material="floor_mat"/>
+        <geom name="datum" type="box" pos=".15 -.14 .06" size=".01 .07 .06" rgba=".25 .65 .85 1"/>
+        <geom name="target" type="box" pos="0.07999999999999999 .10 .0005" size=".025 .025 .0005" rgba=".2 .95 .6 .35" contype="0" conaffinity="0"/>
+        <geom name="edge_goal" type="box" pos="0.105 .10 .001" size=".0006 .04 .001" rgba=".2 1 .7 1" contype="0" conaffinity="0"/>
+        <body name="carriage" pos="0 0 0">
+          <joint name="x" type="slide" axis="1 0 0"/>
+          <joint name="y" type="slide" axis="0 1 0"/>
+          <joint name="z" type="slide" axis="0 0 1"/>
+          <inertial pos="0 0 .04" mass=".15" diaginertia=".001 .001 .001"/>
+          <body name="clamp">
+            <inertial pos="0 0 0" mass=".10" diaginertia=".001 .001 .001"/>
+            <site name="wrist" size=".004" rgba="1 1 1 1"/>
+            <geom type="box" pos="0 0 .025" size=".045 .035 .008" rgba=".55 .65 .76 1" contype="0" conaffinity="0"/>
+            <geom type="box" pos="0 -.03 0" size=".04 .006 .022" rgba=".5 .6 .7 1" contype="0" conaffinity="0"/>
+            <geom type="box" pos="0 .03 0" size=".04 .006 .022" rgba=".5 .6 .7 1" contype="0" conaffinity="0"/>
+          </body>
+        </body>
+        <body name="object" pos="0.033 -.14 .09">
+          <freejoint name="object_free"/>
+          <geom name="block" type="box" size="0.025 .023 .025" mass=".06" rgba="1 .55 .16 1"/>
+        </body>
+      </worldbody>
+      <actuator><position name="mx" joint="x"/><position name="my" joint="y"/><position name="mz" joint="z"/></actuator>
+      <equality><weld name="stable_clamp" body1="clamp" body2="object" relpose="0.008 0 -.02 1 0 0 0" solref=".004 1"/></equality>
+      <sensor><force name="wrist_force" site="wrist"/></sensor>
+    </mujoco>

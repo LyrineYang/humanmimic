@@ -1,0 +1,142 @@
+{
+  "condition": {
+    "id": "seed8103-physical+0-prior+0",
+    "seed": 8103,
+    "halfwidth_delta_mm": 0,
+    "prior_halfwidth_error_mm": 0
+  },
+  "variants": {
+    "early-baseline": {
+      "edge_error_m": 0.004895296341036498,
+      "penalized_error_m": 0.004895296341036498,
+      "valid": true,
+      "prerelease_edge_error_m": 0.0002903118764739365,
+      "residual_dx_m": -0.0003097251495070841,
+      "airborne_grasp_ok": true,
+      "timing": "early",
+      "variant": "baseline",
+      "probe_valid": true,
+      "probe_peak_n": 0.5643616991601788,
+      "offset_m": -0.015089824626985188,
+      "reachable": true,
+      "lower_reachable": true,
+      "detached": true,
+      "table_supported": true,
+      "drift_m": 1.909787949458234e-06,
+      "orientation_error_deg": 7.775090282547307
+    },
+    "early-contact": {
+      "edge_error_m": 0.0049431995145626795,
+      "penalized_error_m": 0.0049431995145626795,
+      "valid": true,
+      "prerelease_edge_error_m": 0.0003300644744893,
+      "residual_dx_m": -0.0006142397010892586,
+      "airborne_grasp_ok": true,
+      "timing": "early",
+      "variant": "contact",
+      "probe_valid": true,
+      "probe_peak_n": 0.5643616991601788,
+      "offset_m": -0.014785310075403025,
+      "reachable": true,
+      "lower_reachable": true,
+      "detached": true,
+      "table_supported": true,
+      "drift_m": 1.8712031308500256e-06,
+      "orientation_error_deg": 8.04791892964801
+    },
+    "supported-baseline": {
+      "edge_error_m": 0.004516749156658478,
+      "penalized_error_m": 0.004516749156658478,
+      "valid": true,
+      "prerelease_edge_error_m": 7.428677722665089e-05,
+      "residual_dx_m": -0.0004228895704985469,
+      "airborne_grasp_ok": true,
+      "timing": "supported",
+      "variant": "baseline",
+      "probe_valid": true,
+      "probe_peak_n": 0.30322136374762576,
+      "offset_m": -0.015089824626985188,
+      "reachable": true,
+      "lower_reachable": true,
+      "detached": true,
+      "table_supported": true,
+      "drift_m": 1.8940904769900049e-06,
+      "orientation_error_deg": 7.8196199455249245
+    },
+    "supported-contact": {
+      "edge_error_m": 0.0042662581609995975,
+      "penalized_error_m": 0.0042662581609995975,
+      "valid": true,
+      "prerelease_edge_error_m": 0.00014194715673102043,
+      "residual_dx_m": 0.001120523211785296,
+      "airborne_grasp_ok": true,
+      "timing": "supported",
+      "variant": "contact",
+      "probe_valid": true,
+      "probe_peak_n": 0.30322136374762576,
+      "offset_m": -0.016633237409269017,
+      "reachable": true,
+      "lower_reachable": true,
+      "detached": true,
+      "table_supported": true,
+      "drift_m": 1.9434874750694106e-06,
+      "orientation_error_deg": 6.920240100203174
+    }
+  },
+  "probe": {
+    "early": {
+      "valid": true,
+      "peak_n": 0.5643616991601788,
+      "memory": {
+        "grasp_id": "seed8103-physical+0-prior+0-early-native-grasp",
+        "normal": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "mean_m": -0.014785310075403025,
+        "sigma_m": 0.0003,
+        "events": [
+          "one-probe"
+        ],
+        "valid": true,
+        "scope": "Local support offset along one normal; fixed grasp and orientation"
+      },
+      "accepted": true
+    },
+    "supported": {
+      "valid": true,
+      "peak_n": 0.30322136374762576,
+      "memory": {
+        "grasp_id": "seed8103-physical+0-prior+0-supported-native-grasp",
+        "normal": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "mean_m": -0.016633237409269017,
+        "sigma_m": 0.0003,
+        "events": [
+          "one-probe"
+        ],
+        "valid": true,
+        "scope": "Local support offset along one normal; fixed grasp and orientation"
+      },
+      "accepted": true
+    }
+  },
+  "scope": "Privileged-state pretrained grasp; nominal pose prior shared; unknown local box extent; scripted residual/lower/release; external calibrated probe",
+  "public_grasp_gate": {
+    "load_z_n": 8.833367981531387,
+    "passed": true
+  },
+  "policy_steps": 60,
+  "goal_edge_x_m": -0.18066741832007677,
+  "common_states_sha256": "36f7327c475bb4addfcc0d3d98622b7c667041ebdb6a3870aff8ef3a9e8a53df",
+  "policy_input_actions_sha256": "20b6007477f14a013145d44944be8087426112e376071a98b78e81fb4aeccc43",
+  "fork_sha256": {
+    "early": "9e8a08f4ecbbf450cd01a531f5c24ba31d7cfdf46449b71f007c8eb08fa158b3",
+    "supported": "b675e9b1e55cadfcf8632057111b0f9a085a9cfe168b45d71ca57d514a84cbac"
+  },
+  "base_fork_sha256": "f7f4a315396aacb90f3c205f528df34a9421c07499d0fcb7137b30bc9f512ed0"
+}

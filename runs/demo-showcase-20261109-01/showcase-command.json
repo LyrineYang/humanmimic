@@ -1,0 +1,22 @@
+[
+  "/home/junqiy/projects/humanmimic-data/r4/envs/r4-core/lib/python3.10/site-packages/imageio_ffmpeg/binaries/ffmpeg-linux-x86_64-v7.0.2",
+  "-hide_banner",
+  "-loglevel",
+  "warning",
+  "-nostdin",
+  "-threads",
+  "2",
+  "-filter_threads",
+  "1",
+  "-f",
+  "concat",
+  "-safe",
+  "0",
+  "-i",
+  "/home/junqiy/projects/humanmimic/runs/demo-showcase-20261109-01/concat.txt",
+  "-c",
+  "copy",
+  "-movflags",
+  "+faststart",
+  "/home/junqiy/projects/humanmimic/runs/demo-showcase-20261109-01/media/showcase.mp4"
+]

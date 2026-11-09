@@ -1,0 +1,24 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1600
+PlayResY: 900
+WrapStyle: 2
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Default,WenQuanYi Zen Hei,30,&H00FFFFFF,&H00FFFFFF,&H00101824,&H00101824,0,0,0,0,100,100,0,0,1,0,0,7,0,0,0,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.00,0:00:02.44,Default,,0,0,0,,{\an7\pos(40,20)\fs22\1c&HC3DF72&}HUMANMIMIC  /  SIMULATION DEMO
+Dialogue: 0,0:00:00.00,0:00:02.44,Default,,0,0,0,,{\an7\pos(40,52)\fs35\1c&HFFFFFF&}03 / 完整手加载校准
+Dialogue: 0,0:00:00.00,0:00:02.44,Default,,0,0,0,,{\an7\pos(1040,125)\fs28\1c&HC3DF72&}原始全程 · 1× 速度
+Dialogue: 0,0:00:00.00,0:00:02.44,Default,,0,0,0,,{\an7\pos(1040,170)\fs23\1c&HCAB8A9&}真实动力学记录 / 2026-11-03
+Dialogue: 0,0:00:00.00,0:00:02.44,Default,,0,0,0,,{\an7\pos(40,848)\fs25\1c&H7FC7F5&}局部传感 / 校准演示｜不代表任意姿态安全，也不代表物体材料标定
+Dialogue: 0,0:00:00.00,0:00:02.44,Default,,0,0,0,,{\an7\pos(1040,245)\fs25\1c&HCAB8A9&}校准试次
+Dialogue: 0,0:00:00.00,0:00:02.44,Default,,0,0,0,,{\an7\pos(1040,285)\fs40\1c&HFFFFFF&}20 拟合 + 20 验证
+Dialogue: 0,0:00:00.00,0:00:02.44,Default,,0,0,0,,{\an7\pos(1040,370)\fs25\1c&HCAB8A9&}局部顺应性下界
+Dialogue: 0,0:00:00.00,0:00:02.44,Default,,0,0,0,,{\an7\pos(1040,410)\fs40\1c&HFFFFFF&}0.1214 mm/N
+Dialogue: 0,0:00:00.00,0:00:02.44,Default,,0,0,0,,{\an7\pos(1040,495)\fs25\1c&HCAB8A9&}证据范围
+Dialogue: 0,0:00:00.00,0:00:02.44,Default,,0,0,0,,{\an7\pos(1040,535)\fs40\1c&HFFFFFF&}已标定局部手姿
+Dialogue: 0,0:00:00.00,0:00:02.44,Default,,0,0,0,,{\an7\pos(1040,690)\fs24\1c&HCAB8A9&}完整原片，未剪去失败片段\N字幕与调色仅用于展示

@@ -1,0 +1,33 @@
+{
+  "source_commit": "9790140170d8be49b828ab214ce3537a2475fcea",
+  "source_diff": "diff --git a/hand_imitation/env/models/control.py b/hand_imitation/env/models/control.py\nindex 045c149..2ede9b2 100644\n--- a/hand_imitation/env/models/control.py\n+++ b/hand_imitation/env/models/control.py\n@@ -194,8 +194,8 @@ class SingleObjectTask(Task):\n         full_rot = np.concatenate((hand_rot, obj_rot.reshape((1,4))), 0)\n         full_vel = np.concatenate((hand_vel, obj_vel), 0)\n \n-        obs['position'] = np.concatenate((base_pos[:42], full_com.reshape(-1), full_rot.reshape(-1))).astype(np.float32)\n-        obs['velocity'] = np.concatenate((base_vel[:42], full_vel.reshape(-1))).astype(np.float32)\n+        obs['position'] = np.concatenate((base_pos[:36], full_com.reshape(-1), full_rot.reshape(-1))).astype(np.float32)\n+        obs['velocity'] = np.concatenate((base_vel[:36], full_vel.reshape(-1))).astype(np.float32)\n         obs['hand_position'] = np.concatenate((base_pos[:30], hand_com.reshape(-1), hand_rot.reshape(-1))).astype(np.float32)\n         obs['hand_velocity'] = np.concatenate((base_vel[:30], hand_vel.reshape(-1))).astype(np.float32)\n         obs['state'] = np.concatenate((obs['position'], obs['velocity']))\n",
+  "checkpoint_sha256": "ab0cdfa83c0a2e1b9664bf2a1488b0434b697b7027978c252068c78c985eda83",
+  "config_sha256": "261b72cba8e2bd883a89f6366c7e8505272919879d9dc5b2b26dfda012e2a568",
+  "entry_sha256": "f8ed0e88fbb2c867d8c512d6c3c4cd555e1723c30c1dc6d13699caabfced6370",
+  "task_kwargs": {
+    "action": "place",
+    "append_time": true,
+    "pregrasp": "template",
+    "random_episode": true,
+    "reward_kwargs": {
+      "lift_bonus_mag": 2.5,
+      "lift_bonus_thresh": 0.02,
+      "n_envs": 32,
+      "obj_com_term": 0.25,
+      "obj_err_scale": 50,
+      "obj_reward_ramp": 0,
+      "obj_reward_start": 0,
+      "object_reward_scale": 10.0
+    },
+    "rot_aug": false
+  },
+  "env_name": "ycb-011_banana-20200820-subject-03-20200820_141935",
+  "seed": 5401,
+  "camera": "left",
+  "scripted_release": true,
+  "scope": "Official pretrained state policy with privileged simulator observations; no new-video learning",
+  "gpu": "Tesla V100-SXM2-32GB",
+  "torch": "2.5.1+cu118",
+  "training": false,
+  "heldout": false
+}

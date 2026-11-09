@@ -1,0 +1,100 @@
+{
+  "gpu": "Tesla V100-SXM2-32GB",
+  "torch": "2.5.1+cu118",
+  "mujoco": "3.2.7",
+  "source_sha256": {
+    "/home/junqiy/projects/humanmimic/scripts/run-contact-offset-demo-gpu.py": "c71b6d75b8739678af599a9fbf90c9e51751e4320524e9baa40fe4fd6c9832a9",
+    "/home/junqiy/projects/humanmimic/scripts/r4_contact_offset.py": "ffa926f4d81540d08413f6834bfb92e5d306010669d6b2e02add2b34c045a02f"
+  },
+  "baseline": {
+    "execution_status": "passed",
+    "correction": false,
+    "seed": 3101,
+    "scope": "Post-grasp simplified rigid clamp, one task-normal offset; not LEAP or pretrained policy",
+    "offset_truth_m": 0.008,
+    "width_error_truth_m": 0.0,
+    "final_edge_error_mm": 7.999999999999993,
+    "peak_probe_force_n": 1.060718356439314,
+    "probe_count": 1,
+    "sim_time_s": 10.030000000000019,
+    "object_final_height_m": 0.02499957201210236,
+    "memory": {
+      "grasp_id": "fixed-clamp-1",
+      "normal": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "mean_m": 0.03294542823166833,
+      "sigma_m": 0.0003,
+      "events": [
+        "plane-touch-1"
+      ],
+      "valid": true,
+      "scope": "Local support offset along one normal; fixed grasp and orientation"
+    },
+    "task_status": "failed"
+  },
+  "corrected": {
+    "execution_status": "passed",
+    "correction": true,
+    "seed": 3101,
+    "scope": "Post-grasp simplified rigid clamp, one task-normal offset; not LEAP or pretrained policy",
+    "offset_truth_m": 0.008,
+    "width_error_truth_m": 0.0,
+    "final_edge_error_mm": 0.05457176833166544,
+    "peak_probe_force_n": 1.060718356439314,
+    "probe_count": 1,
+    "sim_time_s": 10.030000000000019,
+    "object_final_height_m": 0.02499957201210236,
+    "memory": {
+      "grasp_id": "fixed-clamp-1",
+      "normal": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "mean_m": 0.03294542823166833,
+      "sigma_m": 0.0003,
+      "events": [
+        "plane-touch-1"
+      ],
+      "valid": true,
+      "scope": "Local support offset along one normal; fixed grasp and orientation"
+    },
+    "task_status": "passed"
+  },
+  "reused": {
+    "execution_status": "passed",
+    "correction": true,
+    "seed": 3101,
+    "scope": "Post-grasp simplified rigid clamp, one task-normal offset; not LEAP or pretrained policy",
+    "offset_truth_m": 0.008,
+    "width_error_truth_m": 0.0,
+    "final_edge_error_mm": 0.05457176833172095,
+    "peak_probe_force_n": 0.0,
+    "probe_count": 0,
+    "sim_time_s": 5.399999999999627,
+    "object_final_height_m": 0.02499957201210236,
+    "memory": {
+      "grasp_id": "fixed-clamp-1",
+      "normal": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "mean_m": 0.03294542823166833,
+      "sigma_m": 0.0003,
+      "events": [
+        "plane-touch-1"
+      ],
+      "valid": true,
+      "scope": "Local support offset along one normal; fixed grasp and orientation"
+    },
+    "task_status": "passed"
+  },
+  "observation_contract_checks": 4,
+  "training": false,
+  "heldout": false,
+  "status": "passed"
+}

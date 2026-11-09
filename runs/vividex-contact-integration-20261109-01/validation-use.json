@@ -1,0 +1,11 @@
+{
+  "status": "used_at_launch_do_not_tune",
+  "protocol_sha256": "dde51fff78fba65dca7fa90d7112bd2bc385a48c5384650ffd1f3e575121f980",
+  "seed_range": [
+    7101,
+    7106
+  ],
+  "count": 30,
+  "original_project_heldout_used": false,
+  "marked_utc": "2026-11-09T14:38:04.325243+00:00"
+}

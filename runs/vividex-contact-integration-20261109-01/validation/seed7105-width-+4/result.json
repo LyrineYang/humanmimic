@@ -1,0 +1,60 @@
+{
+  "condition": {
+    "id": "seed7105-width-+4",
+    "seed": 7105,
+    "halfwidth_delta_mm": 4
+  },
+  "variants": {
+    "baseline": {
+      "edge_error_m": 0.00558988282647252,
+      "penalized_error_m": 0.00558988282647252,
+      "valid": true,
+      "prerelease_edge_error_m": 0.002221015186170322,
+      "residual_dx_m": 7.947909887306981e-05,
+      "offset_m": -0.013901285200727587,
+      "reachable": true,
+      "lower_reachable": true,
+      "detached": true,
+      "table_supported": true,
+      "drift_m": 1.3922809608045836e-06,
+      "orientation_error_deg": 6.769878564558481
+    },
+    "contact": {
+      "edge_error_m": 0.0029154132473732386,
+      "penalized_error_m": 0.0029154132473732386,
+      "valid": true,
+      "prerelease_edge_error_m": 0.000672401329498501,
+      "residual_dx_m": -0.0026581473615406304,
+      "offset_m": -0.011163658740313897,
+      "reachable": true,
+      "lower_reachable": true,
+      "detached": true,
+      "table_supported": true,
+      "drift_m": 1.391738892240014e-06,
+      "orientation_error_deg": 6.860495534372502
+    }
+  },
+  "scope": "Privileged-state pretrained grasp; nominal pose prior shared; unknown local box extent; scripted residual/lower/release; external calibrated probe",
+  "probe_valid": true,
+  "probe_peak_n": 0.7405059461958051,
+  "memory": {
+    "grasp_id": "seed7105-width-+4-native-grasp",
+    "normal": [
+      1.0,
+      0.0,
+      0.0
+    ],
+    "mean_m": -0.011163658740313897,
+    "sigma_m": 0.0003,
+    "events": [
+      "one-probe"
+    ],
+    "valid": true,
+    "scope": "Local support offset along one normal; fixed grasp and orientation"
+  },
+  "policy_steps": 41,
+  "goal_edge_x_m": -0.14812045816061312,
+  "common_states_sha256": "a320652a74ac7bbcc21a5e373efafd0f567a9a846fc8236b1478baffe39652b4",
+  "policy_input_actions_sha256": "64726a59f581913672c918b4879e7be856ebe53c922cdf079b5f2bcc1dfcec70",
+  "fork_sha256": "f44ce9a2543d4076a6d88e0901c79ccfe8ffc7c26cc3491a8f4875772d8dbf4d"
+}

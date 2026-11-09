@@ -1,0 +1,60 @@
+{
+  "condition": {
+    "id": "seed7102-width-+0",
+    "seed": 7102,
+    "halfwidth_delta_mm": 0
+  },
+  "variants": {
+    "baseline": {
+      "edge_error_m": 0.0054455855294479535,
+      "penalized_error_m": 0.0054455855294479535,
+      "valid": true,
+      "prerelease_edge_error_m": 0.00011675967503033124,
+      "residual_dx_m": 6.913633614816922e-05,
+      "offset_m": -0.002884713725929834,
+      "reachable": true,
+      "lower_reachable": true,
+      "detached": true,
+      "table_supported": true,
+      "drift_m": 2.3185771715042476e-06,
+      "orientation_error_deg": 2.5652194592939406
+    },
+    "contact": {
+      "edge_error_m": 0.005254982872114795,
+      "penalized_error_m": 0.005254982872114795,
+      "valid": true,
+      "prerelease_edge_error_m": 0.00016453310251198644,
+      "residual_dx_m": 1.4478093506322537e-05,
+      "offset_m": -0.0028300554832879875,
+      "reachable": true,
+      "lower_reachable": true,
+      "detached": true,
+      "table_supported": true,
+      "drift_m": 2.2975228206527996e-06,
+      "orientation_error_deg": 2.7792136265834895
+    }
+  },
+  "scope": "Privileged-state pretrained grasp; nominal pose prior shared; unknown local box extent; scripted residual/lower/release; external calibrated probe",
+  "probe_valid": true,
+  "probe_peak_n": 0.24591547062357572,
+  "memory": {
+    "grasp_id": "seed7102-width-+0-native-grasp",
+    "normal": [
+      1.0,
+      0.0,
+      0.0
+    ],
+    "mean_m": -0.0028300554832879875,
+    "sigma_m": 0.0003,
+    "events": [
+      "one-probe"
+    ],
+    "valid": true,
+    "scope": "Local support offset along one normal; fixed grasp and orientation"
+  },
+  "policy_steps": 60,
+  "goal_edge_x_m": 0.00626655662700288,
+  "common_states_sha256": "0ad86ca69fd8d776c2ac4895b4fca073ca808370dbf3f9149735de96b55973c3",
+  "policy_input_actions_sha256": "a62b88a8750770e81975d2c2f58f3ae7c26d970485735d556959b7ffa62a54a8",
+  "fork_sha256": "59144dac27f9d8e921b44447ed0d70a0407e9d5e520714986cfd2d17eaeea594"
+}

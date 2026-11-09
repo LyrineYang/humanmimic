@@ -1,0 +1,60 @@
+{
+  "condition": {
+    "id": "seed7106-width-+4",
+    "seed": 7106,
+    "halfwidth_delta_mm": 4
+  },
+  "variants": {
+    "baseline": {
+      "edge_error_m": 0.004260857696555265,
+      "penalized_error_m": 0.004260857696555265,
+      "valid": true,
+      "prerelease_edge_error_m": 0.0027546478936562035,
+      "residual_dx_m": 1.6760094066703424e-05,
+      "offset_m": 0.007489254355579622,
+      "reachable": true,
+      "lower_reachable": true,
+      "detached": true,
+      "table_supported": true,
+      "drift_m": 1.3143989948952423e-06,
+      "orientation_error_deg": 2.7277813879521955
+    },
+    "contact": {
+      "edge_error_m": 0.0018717480385594953,
+      "penalized_error_m": 0.0018717480385594953,
+      "valid": true,
+      "prerelease_edge_error_m": 4.8669683455848656e-05,
+      "residual_dx_m": -0.002518881198665973,
+      "offset_m": 0.010024895648312302,
+      "reachable": true,
+      "lower_reachable": true,
+      "detached": true,
+      "table_supported": true,
+      "drift_m": 1.3050578680792768e-06,
+      "orientation_error_deg": 3.0663808597128135
+    }
+  },
+  "scope": "Privileged-state pretrained grasp; nominal pose prior shared; unknown local box extent; scripted residual/lower/release; external calibrated probe",
+  "probe_valid": true,
+  "probe_peak_n": 0.23540907728152083,
+  "memory": {
+    "grasp_id": "seed7106-width-+4-native-grasp",
+    "normal": [
+      1.0,
+      0.0,
+      0.0
+    ],
+    "mean_m": 0.010024895648312302,
+    "sigma_m": 0.0003,
+    "events": [
+      "one-probe"
+    ],
+    "valid": true,
+    "scope": "Local support offset along one normal; fixed grasp and orientation"
+  },
+  "policy_steps": 60,
+  "goal_edge_x_m": 0.14705403899273434,
+  "common_states_sha256": "c6a9d3fa634194838caa204752d8a593785e50a5c6bdcbc839696687423ea06b",
+  "policy_input_actions_sha256": "50fd0eb97b29e2401c91580caedbd1db41418db0a4205bb67e3862a4614b9667",
+  "fork_sha256": "2655aa395f6211115015c7d91e78beed67a006fd47799cc692415de8f37f389b"
+}

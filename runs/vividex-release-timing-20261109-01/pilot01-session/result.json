@@ -1,0 +1,24 @@
+{
+  "status": "passed",
+  "outcomes": [
+    {
+      "index": 0,
+      "returncode": 0,
+      "wall_s": 117.78073669876903
+    }
+  ],
+  "wall_s": 117.98350780643523,
+  "gpu": {
+    "index": 0,
+    "uuid": "GPU-41c264dc-74e0-3ea6-c3b0-26cfb1972a80",
+    "name": "Tesla V100-SXM2-32GB",
+    "driver": "530.30.02",
+    "free_mib": 14508,
+    "compute_pids": [
+      46512
+    ]
+  },
+  "manifest_sha256": "305a15e07d6f0521b046251be8eef25789a2c2c2a88313b27ba3414585461dbe",
+  "training": false,
+  "heldout_used": false
+}

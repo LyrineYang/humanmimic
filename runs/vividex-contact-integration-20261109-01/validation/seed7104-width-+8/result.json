@@ -1,0 +1,60 @@
+{
+  "condition": {
+    "id": "seed7104-width-+8",
+    "seed": 7104,
+    "halfwidth_delta_mm": 8
+  },
+  "variants": {
+    "baseline": {
+      "edge_error_m": 0.00542078341681515,
+      "penalized_error_m": 0.00542078341681515,
+      "valid": true,
+      "prerelease_edge_error_m": 0.0045691594724255324,
+      "residual_dx_m": 0.0002517602806943811,
+      "offset_m": -0.010775967847568894,
+      "reachable": true,
+      "lower_reachable": true,
+      "detached": true,
+      "table_supported": true,
+      "drift_m": 7.740173523659306e-07,
+      "orientation_error_deg": 2.8362552226332305
+    },
+    "contact": {
+      "edge_error_m": 0.0003698595097763255,
+      "penalized_error_m": 0.0003698595097763255,
+      "valid": true,
+      "prerelease_edge_error_m": 0.0008054136170616427,
+      "residual_dx_m": -0.00479743939985703,
+      "offset_m": -0.005726768167017481,
+      "reachable": true,
+      "lower_reachable": true,
+      "detached": true,
+      "table_supported": true,
+      "drift_m": 7.739750578439196e-07,
+      "orientation_error_deg": 2.8362250621489498
+    }
+  },
+  "scope": "Privileged-state pretrained grasp; nominal pose prior shared; unknown local box extent; scripted residual/lower/release; external calibrated probe",
+  "probe_valid": true,
+  "probe_peak_n": 0.6113473923988987,
+  "memory": {
+    "grasp_id": "seed7104-width-+8-native-grasp",
+    "normal": [
+      1.0,
+      0.0,
+      0.0
+    ],
+    "mean_m": -0.005726768167017481,
+    "sigma_m": 0.0003,
+    "events": [
+      "one-probe"
+    ],
+    "valid": true,
+    "scope": "Local support offset along one normal; fixed grasp and orientation"
+  },
+  "policy_steps": 34,
+  "goal_edge_x_m": -0.041151888015732205,
+  "common_states_sha256": "16332e505df8ba3808aab633110cc10bad79a6da4f03d8935b889754734a2fd6",
+  "policy_input_actions_sha256": "c599855fe4fef72bb3cadc7f7e36cc77f38127ff775a23149270e93143dad15f",
+  "fork_sha256": "3af48e6246c0ea510e9badeba034478e064a6ee06d532e3edb884b8042edb69f"
+}

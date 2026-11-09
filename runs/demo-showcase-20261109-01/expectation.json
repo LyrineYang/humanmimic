@@ -1,0 +1,13 @@
+{
+  "scope": "Package existing demo recordings and explain next steps; no new simulation/training or budget reset",
+  "base_commit": "15d63ba9472fceebc558c1db1425b1aea612c2f2",
+  "expected": [
+    "Selected recordings hash-match their original evaluation",
+    "Full-duration 1x source playback is preserved, with clear historical/debug labels",
+    "No fabricated force, success or video-learning claim",
+    "Standalone playable videos and a local index with provenance",
+    "Media decode and duration checks, representative frames reviewed",
+    "Runtime/config files unchanged; expired campaign remains closed"
+  ],
+  "research_gpu_hours": 0
+}

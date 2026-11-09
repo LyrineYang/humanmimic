@@ -1,0 +1,75 @@
+{
+  "status": "passed",
+  "checks": {
+    "selected_sources_fully_preserved": true,
+    "all_videos_decode": true
+  },
+  "files": [
+    {
+      "file": "media/hold.mp4",
+      "frames": 301,
+      "duration_s": 12.04,
+      "sha256": "e5a5ba95ba71c2d8b5b7cfa734c0efccf079c349b65673386a57bfcb332a2383"
+    },
+    {
+      "file": "media/intro.mp4",
+      "frames": 75,
+      "duration_s": 3.0,
+      "sha256": "c901c2876f415ee2b6f6846cba5ce7ccfc8319049e63c8276c59cfc47d36c4c6"
+    },
+    {
+      "file": "media/load.mp4",
+      "frames": 61,
+      "duration_s": 2.44,
+      "sha256": "4f6c1ed593058c929cea2f92fbbaf78ecab21ed6bf3f40adaa95dfd64cbdf4f4"
+    },
+    {
+      "file": "media/original-hold.mp4",
+      "frames": 301,
+      "duration_s": 12.04,
+      "sha256": "b3ce9811629fb2f8dbbe24d7ec80b27046a613e77e032bde5386999c960e54ad"
+    },
+    {
+      "file": "media/original-load.mp4",
+      "frames": 61,
+      "duration_s": 2.44,
+      "sha256": "82a519f057f5ba1e3d4dd30947837346c32724fa766d4ba311f51966a805117e"
+    },
+    {
+      "file": "media/original-place.mp4",
+      "frames": 301,
+      "duration_s": 12.04,
+      "sha256": "6cf3bca768afc6740b6ee9949433d9459bccff2453c5f454db64ffc8fb0ac022"
+    },
+    {
+      "file": "media/original-touch.mp4",
+      "frames": 51,
+      "duration_s": 2.04,
+      "sha256": "0bd2be5101929fa52f0b3c015f6e99b4f5f50393ea0a89a82c049663675e927a"
+    },
+    {
+      "file": "media/outro.mp4",
+      "frames": 75,
+      "duration_s": 3.0,
+      "sha256": "a0936f4a5372c41d0528a522294c6fe13a5a06290504f7e651cca80bd8326cd2"
+    },
+    {
+      "file": "media/place.mp4",
+      "frames": 301,
+      "duration_s": 12.04,
+      "sha256": "29a8fbd45347da24655cc1d86a8c5f85f7112c3b8f951ad208e8487fb644055e"
+    },
+    {
+      "file": "media/showcase.mp4",
+      "frames": 864,
+      "duration_s": 34.56,
+      "sha256": "57461fd2aed9ad94d06f1481bf31419bdd0dc421e0544091ecd1ff4fcd9e49f3"
+    },
+    {
+      "file": "media/touch.mp4",
+      "frames": 51,
+      "duration_s": 2.04,
+      "sha256": "071f0d73aa4873405abcd1cf17681bc2893d6d3a07d1971a34859cd560b9d252"
+    }
+  ]
+}

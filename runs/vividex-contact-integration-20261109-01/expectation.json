@@ -1,0 +1,21 @@
+{
+  "time": "2026-11-09T13:21:51.226235+00:00",
+  "request": "Connect contact correction to frozen ViViDex; matched observations and one-probe budget; remaining8GPUh; no scratch training; no showcase; raw demos permitted",
+  "expected": [
+    "Native Adroit free object and pretrained grasp, no weld/teleport during execution",
+    "Same policy/input/prefix/contact events for both variants; exact state fork after common probe",
+    "Unobserved collision-box extent variation, excluded from policy/corrector inputs",
+    "Post-policy placement residual only; controller reads public hand/probe measurements plus shared nominal pose prior",
+    "Primary metric is actual object support-edge error after release and settling; failure penalty retained",
+    "Freeze new development verification before use; original project heldout untouched",
+    "State/action/model/metric archives; existing ledger/cost retained"
+  ],
+  "primary_gate_proposed": {
+    "paired_penalized_mae_improvement_at_least": 0.25,
+    "probe_force_limit_n": 2,
+    "release_drift_max_m": 0.002,
+    "maximum_final_orientation_error_deg": 10,
+    "failure_penalty_m": 0.05
+  },
+  "base_ledger_hours": 0.11771810532340574
+}

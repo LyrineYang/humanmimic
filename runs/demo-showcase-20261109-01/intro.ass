@@ -1,0 +1,16 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1600
+PlayResY: 900
+WrapStyle: 2
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Default,WenQuanYi Zen Hei,30,&H00FFFFFF,&H00FFFFFF,&H00101824,&H00101824,0,0,0,0,100,100,0,0,1,0,0,7,0,0,0,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.00,0:00:03.00,Default,,0,0,0,,{\an7\pos(100,165)\fs28\1c&HC3DF72&}HUMANMIMIC  /  RESEARCH PREVIEW
+Dialogue: 0,0:00:00.00,0:00:03.00,Default,,0,0,0,,{\an7\pos(100,270)\fs57\1c&HFFFFFF&}从看懂动作，到拿稳放准
+Dialogue: 0,0:00:00.00,0:00:03.00,Default,,0,0,0,,{\an7\pos(100,390)\fs32\1c&H7FC7F5&}HumanMimic / 现有仿真演示
+Dialogue: 0,0:00:00.00,0:00:03.00,Default,,0,0,0,,{\an7\pos(100,505)\fs30\1c&HCAB8A9&}先展示已有物理执行，再验证模型修正的价值\N本片为历史开发样例，不是完整视频学习系统

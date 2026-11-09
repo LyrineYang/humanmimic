@@ -1,0 +1,125 @@
+{
+  "scope": "Presentation of existing recordings; no new scientific trials",
+  "base_commit": "15d63ba9472fceebc558c1db1425b1aea612c2f2",
+  "source_date": "2026-11-03",
+  "generated_date": "2026-11-09",
+  "transform": "Full frame scaled 1.5x; gamma 1.35, brightness +0.025; side-panel titles and logged-state readout; full-duration 1x playback",
+  "research_gpu_hours": 0,
+  "r2_full_video_available_here": false,
+  "r2_source_creator": "https://www.youtube.com/watch?v=gRexOgq8h-8",
+  "geometry_scope": "Previously computed analytic CUDA fixture; no physical manipulation",
+  "items": [
+    {
+      "id": "place",
+      "title": "01 / LEAP 抓取、搬移与释放",
+      "source": "runs/r4-prerequisites-live-20261103-01/physical-u_handle-110-place-calibrated-01/private-evaluation/actual-execution.mp4",
+      "source_sha256": "6cf3bca768afc6740b6ee9949433d9459bccff2453c5f454db64ffc8fb0ac022",
+      "original_evaluation_hash_present": true,
+      "result": "runs/r4-prerequisites-live-20261103-01/physical-u_handle-110-place-calibrated-01/private-evaluation/result.json",
+      "result_sha256": "85a569ed672b3ff6055b0ea41180dd7111391d4720c8bf13235c90a9fc997e6e",
+      "source_duration_s": 12.04,
+      "source_fps": 25.0,
+      "metrics": [
+        [
+          "最终位置误差",
+          "3.76 mm"
+        ],
+        [
+          "最终角度误差",
+          "1.94°"
+        ],
+        [
+          "抬升保持",
+          "3.90 s"
+        ]
+      ],
+      "note": "历史开发参考｜手指载荷超过当前 2 N 界｜不是视频学习或 E3 收益结果",
+      "task_status": "passed",
+      "file": "media/place.mp4"
+    },
+    {
+      "id": "hold",
+      "title": "02 / LEAP 抬升与稳定保持",
+      "source": "runs/r4-prerequisites-live-20261103-01/physical-u_handle-110-07-c01/private-evaluation/actual-execution.mp4",
+      "source_sha256": "b3ce9811629fb2f8dbbe24d7ec80b27046a613e77e032bde5386999c960e54ad",
+      "original_evaluation_hash_present": true,
+      "result": "runs/r4-prerequisites-live-20261103-01/physical-u_handle-110-07-c01/private-evaluation/result.json",
+      "result_sha256": "519fce85c9047b21ee643c6da14183eff460368c0aafccc55d57cd8568276fb4",
+      "source_duration_s": 12.04,
+      "source_fps": 25.0,
+      "metrics": [
+        [
+          "抬升保持",
+          "7.48 s"
+        ],
+        [
+          "最大穿透",
+          "0.95 mm"
+        ],
+        [
+          "抬升期间对向接触",
+          "100%"
+        ]
+      ],
+      "note": "历史开发参考｜手指载荷超过当前 2 N 界｜不是视频学习或 E3 收益结果",
+      "task_status": "passed",
+      "file": "media/hold.mp4"
+    },
+    {
+      "id": "load",
+      "title": "03 / 完整手加载校准",
+      "source": "runs/r4-prerequisites-live-20261103-01/full-hand-gravity-40/full-hand-load.mp4",
+      "source_sha256": "82a519f057f5ba1e3d4dd30947837346c32724fa766d4ba311f51966a805117e",
+      "original_evaluation_hash_present": false,
+      "result": "runs/r4-prerequisites-live-20261103-01/full-hand-gravity-40/result.json",
+      "result_sha256": "58d64594f1b963a4da69aa873999e498a9ff7189276a3163ad2260ff40b60e8f",
+      "source_duration_s": 2.44,
+      "source_fps": 25.0,
+      "metrics": [
+        [
+          "校准试次",
+          "20 拟合 + 20 验证"
+        ],
+        [
+          "局部顺应性下界",
+          "0.1214 mm/N"
+        ],
+        [
+          "证据范围",
+          "已标定局部手姿"
+        ]
+      ],
+      "note": "局部传感 / 校准演示｜不代表任意姿态安全，也不代表物体材料标定",
+      "task_status": null,
+      "file": "media/load.mp4"
+    },
+    {
+      "id": "touch",
+      "title": "04 / 四指触力传感桥",
+      "source": "runs/r4-prerequisites-live-20261103-01/p1-native-fixed/actual-four-pad-execution.mp4",
+      "source_sha256": "0bd2be5101929fa52f0b3c015f6e99b4f5f50393ea0a89a82c049663675e927a",
+      "original_evaluation_hash_present": false,
+      "result": "runs/r4-prerequisites-live-20261103-01/p1-native-fixed/result.json",
+      "result_sha256": "4e1acc1784ecc3a3e523b4da73278faf362fb70a5dc66179a2f9e7486e8aeec2",
+      "source_duration_s": 2.04,
+      "source_fps": 25.0,
+      "metrics": [
+        [
+          "工程检查",
+          "6 项通过"
+        ],
+        [
+          "已检查",
+          "方向 / 载荷 / 失联"
+        ],
+        [
+          "证据范围",
+          "四个远端指节组件"
+        ]
+      ],
+      "note": "局部传感 / 校准演示｜不代表任意姿态安全，也不代表物体材料标定",
+      "task_status": null,
+      "file": "media/touch.mp4"
+    }
+  ]
+}

@@ -24,13 +24,18 @@ def main():
     p.add_argument('--timeout', type=float, default=1800)
     p.add_argument('--gpu', required=True)
     p.add_argument('--parallel', type=int, default=2)
+    p.add_argument('--budget-section', choices=['local_r4_campaign', 'local_demo_campaign'], default='local_r4_campaign')
+    p.add_argument('--stage', default='prerequisites')
     p.add_argument('--requests',type=Path,help='Optional immutable request spool; STOP file drains and ends the session')
     args = p.parse_args()
-    cfg = read(ROOT/'configs/budget.json')['local_r4_campaign']
+    cfg = read(ROOT/'configs/budget.json')[args.budget_section]
     auth = cfg.get('shared_gpu_authorization', {})
     if args.gpu not in auth.get('gpu_uuids', []) or not 1 <= args.parallel <= auth['maximum_parallel_children']:
         raise ValueError('Shared GPU/cohort size not authorized')
     manifest = read(args.manifest)
+    if not cfg.get('video_generation_authorized', True):
+        if any(flag in argv for argv in manifest['commands'] for flag in ('--video','--record-video')):
+            raise ValueError('Video generation is disabled by the current user instruction')
     for path, sha in manifest['source_sha256'].items():
         if digest(path) != sha: raise ValueError('Frozen source changed: '+path)
     root = Path(os.environ.get('R4_DATA_ROOT', str(ROOT.parent/'humanmimic-data/r4')))
@@ -43,7 +48,7 @@ def main():
     device = inventory()[args.gpu]
     if device['free_mib'] < auth['minimum_free_headroom_mib']+4096:
         raise RuntimeError('Insufficient free memory for shared pilot; do not disturb foreign workload')
-    ledger.reserve(key, 'prerequisites', args.gpu, args.timeout+10, digest(args.manifest))
+    ledger.reserve(key, args.stage, args.gpu, args.timeout+10, digest(args.manifest))
     env = dict(os.environ, CUDA_VISIBLE_DEVICES=args.gpu, MUJOCO_GL='egl', MUJOCO_EGL_DEVICE_ID=str(device['index']),
                OMP_NUM_THREADS='4', OPENBLAS_NUM_THREADS='4', MKL_NUM_THREADS='4', R4_CAMPAIGN_PROCESS_GROUP='1', PYTHONNOUSERSITE='1')
     active, outcomes = [], []

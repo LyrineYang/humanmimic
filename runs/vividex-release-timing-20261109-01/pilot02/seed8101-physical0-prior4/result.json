@@ -1,0 +1,138 @@
+{
+  "condition": {
+    "id": "seed8101-physical0-prior4",
+    "seed": 8101,
+    "halfwidth_delta_mm": 0,
+    "prior_halfwidth_error_mm": 4
+  },
+  "variants": {
+    "early-baseline": {
+      "edge_error_m": 0.0010871145459268386,
+      "penalized_error_m": 0.0010871145459268386,
+      "valid": true,
+      "prerelease_edge_error_m": 0.00037201635018211526,
+      "residual_dx_m": -0.0046413415006761535,
+      "timing": "early",
+      "variant": "baseline",
+      "probe_valid": true,
+      "probe_peak_n": 0.6535919532254009,
+      "offset_m": 0.011300840237776319,
+      "reachable": true,
+      "lower_reachable": true,
+      "detached": true,
+      "table_supported": true,
+      "drift_m": 1.7073035530985362e-06,
+      "orientation_error_deg": 2.916206412700623
+    },
+    "early-contact": {
+      "edge_error_m": 0.00015142356833004744,
+      "penalized_error_m": 0.00015142356833004744,
+      "valid": true,
+      "prerelease_edge_error_m": 0.0008818513977120884,
+      "residual_dx_m": -0.0020165242216560707,
+      "timing": "early",
+      "variant": "contact",
+      "probe_valid": true,
+      "probe_peak_n": 0.6535919532254009,
+      "offset_m": 0.008676022958756236,
+      "reachable": true,
+      "lower_reachable": true,
+      "detached": true,
+      "table_supported": true,
+      "drift_m": 1.7010306725567164e-06,
+      "orientation_error_deg": 2.406036588820782
+    },
+    "supported-baseline": {
+      "edge_error_m": 0.0010139363309830327,
+      "penalized_error_m": 0.0010139363309830327,
+      "valid": true,
+      "prerelease_edge_error_m": 0.0005964863186795066,
+      "residual_dx_m": -0.004597139226976618,
+      "timing": "supported",
+      "variant": "baseline",
+      "probe_valid": true,
+      "probe_peak_n": 0.9820438294837582,
+      "offset_m": 0.011300840237776319,
+      "reachable": true,
+      "lower_reachable": true,
+      "detached": true,
+      "table_supported": true,
+      "drift_m": 1.7055885509642418e-06,
+      "orientation_error_deg": 2.8797493004625427
+    },
+    "supported-contact": {
+      "edge_error_m": 0.0002869563742023684,
+      "penalized_error_m": 0.0002869563742023684,
+      "valid": true,
+      "prerelease_edge_error_m": 0.0010255078720667124,
+      "residual_dx_m": -0.001101638311051454,
+      "timing": "supported",
+      "variant": "contact",
+      "probe_valid": true,
+      "probe_peak_n": 0.9820438294837582,
+      "offset_m": 0.007805339321851155,
+      "reachable": true,
+      "lower_reachable": true,
+      "detached": true,
+      "table_supported": true,
+      "drift_m": 1.7057992762084192e-06,
+      "orientation_error_deg": 2.487500143618585
+    }
+  },
+  "probe": {
+    "early": {
+      "valid": true,
+      "peak_n": 0.6535919532254009,
+      "memory": {
+        "grasp_id": "seed8101-physical0-prior4-early-native-grasp",
+        "normal": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "mean_m": 0.008676022958756236,
+        "sigma_m": 0.0003,
+        "events": [
+          "one-probe"
+        ],
+        "valid": true,
+        "scope": "Local support offset along one normal; fixed grasp and orientation"
+      },
+      "accepted": true
+    },
+    "supported": {
+      "valid": true,
+      "peak_n": 0.9820438294837582,
+      "memory": {
+        "grasp_id": "seed8101-physical0-prior4-supported-native-grasp",
+        "normal": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "mean_m": 0.007805339321851155,
+        "sigma_m": 0.0003,
+        "events": [
+          "one-probe"
+        ],
+        "valid": true,
+        "scope": "Local support offset along one normal; fixed grasp and orientation"
+      },
+      "accepted": true
+    }
+  },
+  "scope": "Privileged-state pretrained grasp; nominal pose prior shared; unknown local box extent; scripted residual/lower/release; external calibrated probe",
+  "public_grasp_gate": {
+    "load_z_n": 8.80934954511344,
+    "passed": true
+  },
+  "policy_steps": 60,
+  "goal_edge_x_m": 0.010912490844944667,
+  "common_states_sha256": "d5c263bdd9b6c0eb24e2b3a41e7c350b94f3a3d854d0762a04fbf5a3ac689b07",
+  "policy_input_actions_sha256": "8498edaebda3dc7e213bc6c50488be5544a984d5fbe57dafea683b7b6f774680",
+  "fork_sha256": {
+    "early": "0e0bbc21f3f49334904709e4ee461d3f5c9fa45783ea52e66d603e9d6bcf82c4",
+    "supported": "c275edd81ffdab8ecf364ee7ca83f2bfe551df471713627c4ffec1851a0c3916"
+  },
+  "base_fork_sha256": "d36437e98908905e9c83df5c747ac271350b51f35c756f77207ce5d2ac62b737"
+}

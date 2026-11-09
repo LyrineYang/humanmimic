@@ -1,0 +1,40 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "trial": "demo-final",
+      "identical_probe_observations": true,
+      "samples": 2315
+    },
+    {
+      "trial": "verify-00",
+      "identical_probe_observations": true,
+      "samples": 2765
+    },
+    {
+      "trial": "verify-01",
+      "identical_probe_observations": true,
+      "samples": 2590
+    },
+    {
+      "trial": "verify-02",
+      "identical_probe_observations": true,
+      "samples": 2440
+    },
+    {
+      "trial": "verify-03",
+      "identical_probe_observations": true,
+      "samples": 2290
+    },
+    {
+      "trial": "verify-04",
+      "identical_probe_observations": true,
+      "samples": 2240
+    },
+    {
+      "trial": "verify-05",
+      "identical_probe_observations": true,
+      "samples": 2115
+    }
+  ]
+}

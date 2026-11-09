@@ -40,6 +40,28 @@ class BudgetTests(unittest.TestCase):
         self.assertIsNone(self.ledger.state["start_epoch"])
         self.assertFalse(self.path.exists())
 
+    def test_demo_budget_has_separate_identity_and_hard_eight_hour_cap(self):
+        limits = copy.deepcopy(read(ROOT/'configs/budget.json')['local_demo_campaign'])
+        self.assertNotEqual(limits['campaign_id'], self.limits['campaign_id'])
+        demo = Ledger(self.path, limits, now=lambda: self.clock,
+                      monotonic=lambda: self.monotonic, boot='fixture')
+        demo.reserve('preflight', 'preflight', 'GPU-0', 60, 'frozen')
+        self.monotonic += 5
+        demo.finish('preflight', {'status': 'passed'})
+        self.assertEqual(demo.committed(), 5)
+        with self.assertRaisesRegex(ValueError, 'identity'):
+            self.reopen()
+        limits['gpu_hours_max'] = 8.01
+        with self.assertRaises(ValueError): validate_limits(limits)
+
+    def test_demo_rejects_old_stages_and_training(self):
+        limits = copy.deepcopy(read(ROOT/'configs/budget.json')['local_demo_campaign'])
+        demo = Ledger(self.path, limits)
+        with self.assertRaises(ValueError):
+            demo.reserve('wrong', 'E3', 'GPU-0', 60, 'frozen')
+        limits['training'] = True
+        with self.assertRaises(ValueError): validate_limits(limits)
+
     def test_actual_failure_cost_not_full_reservation(self):
         self.reserve()
         self.monotonic += 31
@@ -187,7 +209,7 @@ class BudgetTests(unittest.TestCase):
         cache = {}
         with patch("r4_campaign.digest", wraps=digest) as hashed:
             assert_frozen(plan, cache); assert_frozen(plan, cache)
-            self.assertEqual(hashed.call_count, 1)
+            self.assertEqual(hashed.call_count, 2)
             previous = path.stat()
             path.write_text("4321")
             os.utime(path, ns=(previous.st_atime_ns, previous.st_mtime_ns))

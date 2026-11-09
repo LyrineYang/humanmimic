@@ -1,0 +1,188 @@
+{
+  "split": "frozen_new_development_validation",
+  "conditions": [
+    {
+      "id": "seed7101-width--8",
+      "seed": 7101,
+      "halfwidth_delta_mm": -8
+    },
+    {
+      "id": "seed7101-width--4",
+      "seed": 7101,
+      "halfwidth_delta_mm": -4
+    },
+    {
+      "id": "seed7101-width-+0",
+      "seed": 7101,
+      "halfwidth_delta_mm": 0
+    },
+    {
+      "id": "seed7101-width-+4",
+      "seed": 7101,
+      "halfwidth_delta_mm": 4
+    },
+    {
+      "id": "seed7101-width-+8",
+      "seed": 7101,
+      "halfwidth_delta_mm": 8
+    },
+    {
+      "id": "seed7102-width--8",
+      "seed": 7102,
+      "halfwidth_delta_mm": -8
+    },
+    {
+      "id": "seed7102-width--4",
+      "seed": 7102,
+      "halfwidth_delta_mm": -4
+    },
+    {
+      "id": "seed7102-width-+0",
+      "seed": 7102,
+      "halfwidth_delta_mm": 0
+    },
+    {
+      "id": "seed7102-width-+4",
+      "seed": 7102,
+      "halfwidth_delta_mm": 4
+    },
+    {
+      "id": "seed7102-width-+8",
+      "seed": 7102,
+      "halfwidth_delta_mm": 8
+    },
+    {
+      "id": "seed7103-width--8",
+      "seed": 7103,
+      "halfwidth_delta_mm": -8
+    },
+    {
+      "id": "seed7103-width--4",
+      "seed": 7103,
+      "halfwidth_delta_mm": -4
+    },
+    {
+      "id": "seed7103-width-+0",
+      "seed": 7103,
+      "halfwidth_delta_mm": 0
+    },
+    {
+      "id": "seed7103-width-+4",
+      "seed": 7103,
+      "halfwidth_delta_mm": 4
+    },
+    {
+      "id": "seed7103-width-+8",
+      "seed": 7103,
+      "halfwidth_delta_mm": 8
+    },
+    {
+      "id": "seed7104-width--8",
+      "seed": 7104,
+      "halfwidth_delta_mm": -8
+    },
+    {
+      "id": "seed7104-width--4",
+      "seed": 7104,
+      "halfwidth_delta_mm": -4
+    },
+    {
+      "id": "seed7104-width-+0",
+      "seed": 7104,
+      "halfwidth_delta_mm": 0
+    },
+    {
+      "id": "seed7104-width-+4",
+      "seed": 7104,
+      "halfwidth_delta_mm": 4
+    },
+    {
+      "id": "seed7104-width-+8",
+      "seed": 7104,
+      "halfwidth_delta_mm": 8
+    },
+    {
+      "id": "seed7105-width--8",
+      "seed": 7105,
+      "halfwidth_delta_mm": -8
+    },
+    {
+      "id": "seed7105-width--4",
+      "seed": 7105,
+      "halfwidth_delta_mm": -4
+    },
+    {
+      "id": "seed7105-width-+0",
+      "seed": 7105,
+      "halfwidth_delta_mm": 0
+    },
+    {
+      "id": "seed7105-width-+4",
+      "seed": 7105,
+      "halfwidth_delta_mm": 4
+    },
+    {
+      "id": "seed7105-width-+8",
+      "seed": 7105,
+      "halfwidth_delta_mm": 8
+    },
+    {
+      "id": "seed7106-width--8",
+      "seed": 7106,
+      "halfwidth_delta_mm": -8
+    },
+    {
+      "id": "seed7106-width--4",
+      "seed": 7106,
+      "halfwidth_delta_mm": -4
+    },
+    {
+      "id": "seed7106-width-+0",
+      "seed": 7106,
+      "halfwidth_delta_mm": 0
+    },
+    {
+      "id": "seed7106-width-+4",
+      "seed": 7106,
+      "halfwidth_delta_mm": 4
+    },
+    {
+      "id": "seed7106-width-+8",
+      "seed": 7106,
+      "halfwidth_delta_mm": 8
+    }
+  ],
+  "stabilize_s": 3.0,
+  "probe_start_gap_m": 0.012,
+  "probe_max_travel_m": 0.03,
+  "probe_speed_m_s": 0.002,
+  "probe_retract_m_s": 0.04,
+  "residual_limit_m": 0.02,
+  "placement_dx_m": 0.0,
+  "settle_s": 2.0,
+  "root_tracking_kp": 8.0,
+  "root_tracking_kd": 0.4,
+  "upright_updates": 2,
+  "support_clearance_m": -0.003,
+  "passive_release": true,
+  "acceptance": {
+    "minimum_relative_penalized_mae_improvement": 0.25,
+    "minimum_contact_valid_fraction": 0.8,
+    "no_valid_count_regression": true,
+    "probe_peak_3d_force_max_n": 2,
+    "release_drift_m": 0.002,
+    "orientation_error_deg": 10,
+    "failure_penalty_floor_m": 0.05,
+    "seed_cluster_bootstrap_95ci_lower_positive": true
+  },
+  "frozen_utc": "2026-11-09T14:38:04.325243+00:00",
+  "notes": [
+    "All30 conditions retained, no tuning after validation starts",
+    "Original24-object project heldout untouched",
+    "Public nominal pose is privileged state shared by arms; no visual policy claim",
+    "Probe calibrated at .02s/1 damping, table at .05s/1.5; native hand-object collision law retained",
+    "Both arms share2 upright pose updates, final shared pose, one force/encoder probe and exact fork",
+    "Probe2N3D limit is not a whole-hand force bound",
+    "Baseline observes the same probe but does not update nominal support offset"
+  ]
+}

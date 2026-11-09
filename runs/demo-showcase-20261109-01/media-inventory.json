@@ -1,0 +1,1078 @@
+[
+  {
+    "path": "runs/runtime-portability-20261102-01/p1-clean-01/actual-four-pad-execution.mp4",
+    "bytes": 23104
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-u_handle-110-09-gravity-force-c01/private-evaluation/actual-execution.mp4",
+    "bytes": 84009
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-necked_column-107-09-gravity-force-c01/private-evaluation/actual-execution.mp4",
+    "bytes": 240651
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-stepped_prism-101-07-c03/private-evaluation/actual-execution.mp4",
+    "bytes": 278777
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-u_handle-110-09-integral-force-c00/private-evaluation/actual-execution.mp4",
+    "bytes": 80628
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-necked_column-107-07-c00/private-evaluation/actual-execution.mp4",
+    "bytes": 261549
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-stepped-06-near-05-0.8/private-evaluation/actual-execution.mp4",
+    "bytes": 300816
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-u_handle-110-force-only-lift/private-evaluation/actual-execution.mp4",
+    "bytes": 79444
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-u_handle-110-09-force-c03/private-evaluation/actual-execution.mp4",
+    "bytes": 248803
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-stepped_prism-101-09-integral-force-c00/private-evaluation/actual-execution.mp4",
+    "bytes": 241122
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-stepped-06-near-04-0.9/private-evaluation/actual-execution.mp4",
+    "bytes": 216226
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-stepped-04-c00/private-evaluation/actual-execution.mp4",
+    "bytes": 182712
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-stepped-05-c04/private-evaluation/actual-execution.mp4",
+    "bytes": 203748
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-stepped-06-c03/private-evaluation/actual-execution.mp4",
+    "bytes": 238891
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-stepped-05-c03/private-evaluation/actual-execution.mp4",
+    "bytes": 242100
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-stepped-01-c00/private-evaluation/actual-execution.mp4",
+    "bytes": 314276
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-stepped-06-c00/private-evaluation/actual-execution.mp4",
+    "bytes": 269780
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-stepped_prism-101-09-integral-force-c01/private-evaluation/actual-execution.mp4",
+    "bytes": 239350
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-stepped-06-near-03-0.8/private-evaluation/actual-execution.mp4",
+    "bytes": 258278
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-necked_column-107-07-c03/private-evaluation/actual-execution.mp4",
+    "bytes": 263057
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-stepped_prism-101-09-force-c02/private-evaluation/actual-execution.mp4",
+    "bytes": 91097
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-necked_column-107-09-directional-force-c01/private-evaluation/actual-execution.mp4",
+    "bytes": 231344
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/full-hand-u_handle-110-40/full-hand-load.mp4",
+    "bytes": 12191
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-stepped-06-near-03-0.9/private-evaluation/actual-execution.mp4",
+    "bytes": 235983
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-stepped-04-c05/private-evaluation/actual-execution.mp4",
+    "bytes": 257593
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-grooved_block-104-09-gravity-force-c01/private-evaluation/actual-execution.mp4",
+    "bytes": 243784
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-necked_column-107-09-force-c00/private-evaluation/actual-execution.mp4",
+    "bytes": 279124
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-u_handle-110-09-directional-force-c00/private-evaluation/actual-execution.mp4",
+    "bytes": 79305
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-stepped_prism-101-09-directional-force-c02/private-evaluation/actual-execution.mp4",
+    "bytes": 230721
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-u_handle-110-09-force-c01/private-evaluation/actual-execution.mp4",
+    "bytes": 96396
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-u_handle-110-settling-c03/private-evaluation/actual-execution.mp4",
+    "bytes": 236072
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/pilot-p1/actual-four-pad-execution.mp4",
+    "bytes": 22972
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-stepped_prism-101-09-force-c03/private-evaluation/actual-execution.mp4",
+    "bytes": 205663
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-stepped_prism-101-09-gravity-force-c01/private-evaluation/actual-execution.mp4",
+    "bytes": 241841
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-necked_column-107-07-c01/private-evaluation/actual-execution.mp4",
+    "bytes": 254401
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-stepped-06-near-00-0.9/private-evaluation/actual-execution.mp4",
+    "bytes": 280663
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-stepped-03-c05/private-evaluation/actual-execution.mp4",
+    "bytes": 281624
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-stepped-05-c05/private-evaluation/actual-execution.mp4",
+    "bytes": 197858
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-stepped_prism-101-07-c01/private-evaluation/actual-execution.mp4",
+    "bytes": 264339
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-stepped-04-c01/private-evaluation/actual-execution.mp4",
+    "bytes": 325666
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-u_handle-110-settling-c00/private-evaluation/actual-execution.mp4",
+    "bytes": 80942
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-stepped-06-c02/private-evaluation/actual-execution.mp4",
+    "bytes": 282155
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-u_handle-110-09-force-c02/private-evaluation/actual-execution.mp4",
+    "bytes": 201613
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-necked_column-107-09-gravity-force-c00/private-evaluation/actual-execution.mp4",
+    "bytes": 253117
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-stepped_prism-101-07-c00/private-evaluation/actual-execution.mp4",
+    "bytes": 269846
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-u_handle-110-07-gravity-force-c01/private-evaluation/actual-execution.mp4",
+    "bytes": 76436
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-stepped-02-c00/private-evaluation/actual-execution.mp4",
+    "bytes": 288870
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-stepped-06-near-00-0.8/private-evaluation/actual-execution.mp4",
+    "bytes": 274951
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-stepped-03-c07/private-evaluation/actual-execution.mp4",
+    "bytes": 293879
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-u_handle-110-09-directional-force-c01/private-evaluation/actual-execution.mp4",
+    "bytes": 202578
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-u_handle-110-09-gravity-force-c00/private-evaluation/actual-execution.mp4",
+    "bytes": 79771
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-stepped-06-near-01-0.8/private-evaluation/actual-execution.mp4",
+    "bytes": 281479
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-u_handle-110-09-force-c00/private-evaluation/actual-execution.mp4",
+    "bytes": 89029
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-stepped_prism-101-settling-c00/private-evaluation/actual-execution.mp4",
+    "bytes": 258641
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-u_handle-110-force-only-place/private-evaluation/actual-execution.mp4",
+    "bytes": 79031
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-stepped-06-c05/private-evaluation/actual-execution.mp4",
+    "bytes": 210192
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-u_handle-110-07-c03/private-evaluation/actual-execution.mp4",
+    "bytes": 285442
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-grooved_block-104-09-force-c00/private-evaluation/actual-execution.mp4",
+    "bytes": 259034
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/wrist-compensated-stepped-03-c02/private-evaluation/actual-execution.mp4",
+    "bytes": 271209
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-stepped-05-c07/private-evaluation/actual-execution.mp4",
+    "bytes": 169632
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-stepped_prism-101-09-integral-force-c02/private-evaluation/actual-execution.mp4",
+    "bytes": 226168
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-stepped_prism-101-09-force-c00/private-evaluation/actual-execution.mp4",
+    "bytes": 258266
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-stepped-03-c00/private-evaluation/actual-execution.mp4",
+    "bytes": 331163
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/full-hand-fixed-pilot/full-hand-load.mp4",
+    "bytes": 10424
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-necked_column-107-07-c02/private-evaluation/actual-execution.mp4",
+    "bytes": 268424
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-stepped-06-near-02-0.8/private-evaluation/actual-execution.mp4",
+    "bytes": 284032
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-stepped-06-c01/private-evaluation/actual-execution.mp4",
+    "bytes": 221751
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-stepped-03-c02/private-evaluation/actual-execution.mp4",
+    "bytes": 305713
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-stepped_prism-101-07-c02/private-evaluation/actual-execution.mp4",
+    "bytes": 263682
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-grooved_block-104-09-force-c02/private-evaluation/actual-execution.mp4",
+    "bytes": 103532
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-u_handle-110-07-c00/private-evaluation/actual-execution.mp4",
+    "bytes": 228437
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-u_handle-110-settling-c02/private-evaluation/actual-execution.mp4",
+    "bytes": 196314
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-stepped-03-c01/private-evaluation/actual-execution.mp4",
+    "bytes": 316931
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-necked_column-107-09-directional-force-c00/private-evaluation/actual-execution.mp4",
+    "bytes": 250446
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-necked_column-107-09-force-c03/private-evaluation/actual-execution.mp4",
+    "bytes": 209538
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-stepped-05-c00/private-evaluation/actual-execution.mp4",
+    "bytes": 280876
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-stepped_prism-101-09-directional-force-c00/private-evaluation/actual-execution.mp4",
+    "bytes": 244701
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-grooved_block-104-07-c03/private-evaluation/actual-execution.mp4",
+    "bytes": 263299
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-necked_column-107-09-force-c01/private-evaluation/actual-execution.mp4",
+    "bytes": 101473
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-stepped-06-c04/private-evaluation/actual-execution.mp4",
+    "bytes": 209635
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/p1-native-fixed/actual-four-pad-execution.mp4",
+    "bytes": 23104
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-grooved_block-104-09-integral-force-c00/private-evaluation/actual-execution.mp4",
+    "bytes": 243950
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-stepped-02-c05/private-evaluation/actual-execution.mp4",
+    "bytes": 325898
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-stepped-02-c01/private-evaluation/actual-execution.mp4",
+    "bytes": 213083
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-stepped-06-near-05-0.9/private-evaluation/actual-execution.mp4",
+    "bytes": 206020
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-grooved_block-104-09-force-c01/private-evaluation/actual-execution.mp4",
+    "bytes": 140190
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/full-hand-pilot-01/full-hand-load.mp4",
+    "bytes": 10202
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/wrist-corrected-stepped-03-c02/private-evaluation/actual-execution.mp4",
+    "bytes": 311953
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-stepped_prism-101-settling-c03/private-evaluation/actual-execution.mp4",
+    "bytes": 205329
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-stepped-03-c04/private-evaluation/actual-execution.mp4",
+    "bytes": 230648
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-u_handle-110-07-c02/private-evaluation/actual-execution.mp4",
+    "bytes": 231713
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-grooved_block-104-07-c01/private-evaluation/actual-execution.mp4",
+    "bytes": 295800
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-grooved_block-104-07-c02/private-evaluation/actual-execution.mp4",
+    "bytes": 277149
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-stepped_prism-101-09-gravity-force-c00/private-evaluation/actual-execution.mp4",
+    "bytes": 246681
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/wrist-compensated-stepped-03-c00/private-evaluation/actual-execution.mp4",
+    "bytes": 316457
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-u_handle-110-09-gravity-force-c03/private-evaluation/actual-execution.mp4",
+    "bytes": 235953
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-grooved_block-104-09-directional-force-c01/private-evaluation/actual-execution.mp4",
+    "bytes": 243609
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-u_handle-110-09-directional-force-c03/private-evaluation/actual-execution.mp4",
+    "bytes": 235089
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-necked_column-107-09-integral-force-c00/private-evaluation/actual-execution.mp4",
+    "bytes": 244461
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/wrist-corrected-stepped-03-c06/private-evaluation/actual-execution.mp4",
+    "bytes": 197764
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-stepped_prism-101-09-gravity-force-c02/private-evaluation/actual-execution.mp4",
+    "bytes": 232396
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-stepped-05-c02/private-evaluation/actual-execution.mp4",
+    "bytes": 288300
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-stepped-05-c06/private-evaluation/actual-execution.mp4",
+    "bytes": 315855
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-u_handle-110-09-gravity-force-c02/private-evaluation/actual-execution.mp4",
+    "bytes": 197324
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-stepped_prism-101-09-directional-force-c01/private-evaluation/actual-execution.mp4",
+    "bytes": 243383
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-stepped_prism-101-09-integral-force-c03/private-evaluation/actual-execution.mp4",
+    "bytes": 197373
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-stepped-02-c02/private-evaluation/actual-execution.mp4",
+    "bytes": 206685
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-stepped-04-c06/private-evaluation/actual-execution.mp4",
+    "bytes": 262497
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-stepped-04-c02/private-evaluation/actual-execution.mp4",
+    "bytes": 341207
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-grooved_block-104-09-force-c03/private-evaluation/actual-execution.mp4",
+    "bytes": 260830
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/full-hand-gravity-40/full-hand-load.mp4",
+    "bytes": 9559
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-u_handle-110-09-integral-force-c02/private-evaluation/actual-execution.mp4",
+    "bytes": 194442
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-grooved_block-104-09-directional-force-c00/private-evaluation/actual-execution.mp4",
+    "bytes": 246892
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-stepped-06-near-01-0.9/private-evaluation/actual-execution.mp4",
+    "bytes": 315069
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-stepped_prism-101-settling-c01/private-evaluation/actual-execution.mp4",
+    "bytes": 250312
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-stepped-01-c01/private-evaluation/actual-execution.mp4",
+    "bytes": 379785
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-stepped_prism-101-09-force-c01/private-evaluation/actual-execution.mp4",
+    "bytes": 255565
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-u_handle-110-07-directional-force-c01/private-evaluation/actual-execution.mp4",
+    "bytes": 73103
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-grooved_block-104-09-integral-force-c01/private-evaluation/actual-execution.mp4",
+    "bytes": 239780
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-stepped-06-near-04-0.8/private-evaluation/actual-execution.mp4",
+    "bytes": 209479
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/full-hand-fixed-40/full-hand-load.mp4",
+    "bytes": 10290
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-stepped_prism-101-09-gravity-force-c03/private-evaluation/actual-execution.mp4",
+    "bytes": 201212
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-necked_column-107-09-integral-force-c01/private-evaluation/actual-execution.mp4",
+    "bytes": 228242
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-stepped-05-c01/private-evaluation/actual-execution.mp4",
+    "bytes": 303688
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-stepped-04-c07/private-evaluation/actual-execution.mp4",
+    "bytes": 177844
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-grooved_block-104-07-c00/private-evaluation/actual-execution.mp4",
+    "bytes": 269256
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-stepped-03-c06/private-evaluation/actual-execution.mp4",
+    "bytes": 198469
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-u_handle-110-09-directional-force-c02/private-evaluation/actual-execution.mp4",
+    "bytes": 197407
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-u_handle-110-07-c01-place/private-evaluation/actual-execution.mp4",
+    "bytes": 400456
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-u_handle-110-09-integral-force-c01/private-evaluation/actual-execution.mp4",
+    "bytes": 197193
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-u_handle-110-07-integral-force-c01/private-evaluation/actual-execution.mp4",
+    "bytes": 75026
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-stepped_prism-101-settling-c02/private-evaluation/actual-execution.mp4",
+    "bytes": 243401
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-stepped-04-c03/private-evaluation/actual-execution.mp4",
+    "bytes": 333842
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-necked_column-107-09-force-c02/private-evaluation/actual-execution.mp4",
+    "bytes": 108952
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-stepped-06-near-02-0.9/private-evaluation/actual-execution.mp4",
+    "bytes": 287146
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-stepped-03-c03/private-evaluation/actual-execution.mp4",
+    "bytes": 276510
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-grooved_block-104-09-gravity-force-c00/private-evaluation/actual-execution.mp4",
+    "bytes": 248987
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-stepped-02-c03/private-evaluation/actual-execution.mp4",
+    "bytes": 290923
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-stepped-04-c04/private-evaluation/actual-execution.mp4",
+    "bytes": 289764
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/wrist-compensated-stepped-03-c06/private-evaluation/actual-execution.mp4",
+    "bytes": 193091
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-u_handle-110-place-calibrated-01/private-evaluation/actual-execution.mp4",
+    "bytes": 389792
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-u_handle-110-09-integral-force-c03/private-evaluation/actual-execution.mp4",
+    "bytes": 234769
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-u_handle-110-settling-c01/private-evaluation/actual-execution.mp4",
+    "bytes": 204331
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/wrist-corrected-stepped-03-c00/private-evaluation/actual-execution.mp4",
+    "bytes": 324167
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-u_handle-110-07-c01/private-evaluation/actual-execution.mp4",
+    "bytes": 258137
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-stepped-06-c07/private-evaluation/actual-execution.mp4",
+    "bytes": 173345
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-stepped_prism-101-09-directional-force-c03/private-evaluation/actual-execution.mp4",
+    "bytes": 199718
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-stepped-02-c04/private-evaluation/actual-execution.mp4",
+    "bytes": 228245
+  },
+  {
+    "path": "runs/r4-prerequisites-live-20261103-01/physical-stepped-06-c06/private-evaluation/actual-execution.mp4",
+    "bytes": 197731
+  },
+  {
+    "path": "runs/r4-memory-control-20261102-01/online-negative-02/private-evaluation/actual-execution.mp4",
+    "bytes": 215278
+  },
+  {
+    "path": "runs/r4-memory-control-20261102-01/online-negative-01/private-evaluation/actual-execution.mp4",
+    "bytes": 96082
+  },
+  {
+    "path": "runs/r4-memory-control-20261102-01/collection-gpu-01/private-evaluation/actual-execution.mp4",
+    "bytes": 196835
+  },
+  {
+    "path": "runs/r4-memory-control-20261102-01/p1-gpu-02/actual-four-pad-execution.mp4",
+    "bytes": 23034
+  },
+  {
+    "path": "runs/r4-memory-control-20261102-01/online-negative-03/private-evaluation/actual-execution.mp4",
+    "bytes": 196322
+  },
+  {
+    "path": "runs/r4-stage1-preparation-20261101-01/physical-mesh-negative-02/actual-execution.mp4",
+    "bytes": 215081
+  },
+  {
+    "path": "runs/r4-stage1-preparation-20261101-01/physical-mesh-negative-03/actual-execution.mp4",
+    "bytes": 196195
+  },
+  {
+    "path": "runs/r4-stage1-preparation-20261101-01/physical-negative-01/actual-execution.mp4",
+    "bytes": 214388
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-6104/private-evaluation/actual-execution.mp4",
+    "bytes": 261075
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-u_handle-110-normal-fast-c00/private-evaluation/actual-execution.mp4",
+    "bytes": 111062
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-tracked-u-lift-medium/private-evaluation/actual-execution.mp4",
+    "bytes": 237798
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-necked_column-107-preload06-default-c03/private-evaluation/actual-execution.mp4",
+    "bytes": 251747
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-stepped_prism-101-preload06-default-c00/private-evaluation/actual-execution.mp4",
+    "bytes": 80890
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-u_handle-110-normal-fast-c01/private-evaluation/actual-execution.mp4",
+    "bytes": 81447
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-stepped_prism-101-fast-c03/private-evaluation/actual-execution.mp4",
+    "bytes": 91129
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-stepped_prism-101-surface-c03/private-evaluation/actual-execution.mp4",
+    "bytes": 109783
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-grooved_block-104-preload06-medium-c01/private-evaluation/actual-execution.mp4",
+    "bytes": 246641
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-5115/private-evaluation/actual-execution.mp4",
+    "bytes": 196538
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-5116/private-evaluation/actual-execution.mp4",
+    "bytes": 260430
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-stepped_prism-101-normal-fast-c00/private-evaluation/actual-execution.mp4",
+    "bytes": 133377
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-6111/private-evaluation/actual-execution.mp4",
+    "bytes": 195980
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-u_handle-110-normal-medium-c01/private-evaluation/actual-execution.mp4",
+    "bytes": 80778
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-u_handle-110-normal-default-c01/private-evaluation/actual-execution.mp4",
+    "bytes": 81313
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-5101/private-evaluation/actual-execution.mp4",
+    "bytes": 196365
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-5103/private-evaluation/actual-execution.mp4",
+    "bytes": 196224
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-5118/private-evaluation/actual-execution.mp4",
+    "bytes": 260866
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-stepped_prism-101-normal-default-c00/private-evaluation/actual-execution.mp4",
+    "bytes": 264874
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-5109/private-evaluation/actual-execution.mp4",
+    "bytes": 196083
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-tracked-u-place-delay2-default/private-evaluation/actual-execution.mp4",
+    "bytes": 107937
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-tracked-u-lift-default/private-evaluation/actual-execution.mp4",
+    "bytes": 238461
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-6109/private-evaluation/actual-execution.mp4",
+    "bytes": 196554
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-stepped_prism-101-preload06-default-c03/private-evaluation/actual-execution.mp4",
+    "bytes": 230653
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-stepped_prism-101-preload06-medium-c03/private-evaluation/actual-execution.mp4",
+    "bytes": 231962
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-u_handle-110-fast-c02/private-evaluation/actual-execution.mp4",
+    "bytes": 195553
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-grooved_block-104-preload06-medium-c02/private-evaluation/actual-execution.mp4",
+    "bytes": 234727
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-6106/private-evaluation/actual-execution.mp4",
+    "bytes": 259687
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-necked_column-107-preload06-medium-c02/private-evaluation/actual-execution.mp4",
+    "bytes": 292772
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-stepped_prism-101-surface-c01/private-evaluation/actual-execution.mp4",
+    "bytes": 246043
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-u_handle-110-fast-c00/private-evaluation/actual-execution.mp4",
+    "bytes": 80707
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-6117/private-evaluation/actual-execution.mp4",
+    "bytes": 197086
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-necked_column-107-preload06-default-c01/private-evaluation/actual-execution.mp4",
+    "bytes": 247918
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-6102/private-evaluation/actual-execution.mp4",
+    "bytes": 259973
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-6108/private-evaluation/actual-execution.mp4",
+    "bytes": 259654
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-grooved_block-104-preload06-default-c01/private-evaluation/actual-execution.mp4",
+    "bytes": 243455
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-5113/private-evaluation/actual-execution.mp4",
+    "bytes": 195231
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-stepped_prism-101-preload06-default-c01/private-evaluation/actual-execution.mp4",
+    "bytes": 246827
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-6112/private-evaluation/actual-execution.mp4",
+    "bytes": 260733
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-stepped_prism-101-normal-medium-c00/private-evaluation/actual-execution.mp4",
+    "bytes": 283244
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-5107/private-evaluation/actual-execution.mp4",
+    "bytes": 195367
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-u_handle-110-preload06-default-c01/private-evaluation/actual-execution.mp4",
+    "bytes": 80992
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-tracked-u-place-medium/private-evaluation/actual-execution.mp4",
+    "bytes": 380307
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/contact-audit-step-fast/private-evaluation/actual-execution.mp4",
+    "bytes": 133710
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-5102/private-evaluation/actual-execution.mp4",
+    "bytes": 259230
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-stepped_prism-101-surface-c02/private-evaluation/actual-execution.mp4",
+    "bytes": 242073
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-5119/private-evaluation/actual-execution.mp4",
+    "bytes": 195107
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-stepped_prism-101-preload06-medium-c02/private-evaluation/actual-execution.mp4",
+    "bytes": 245936
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-necked_column-107-preload06-default-c00/private-evaluation/actual-execution.mp4",
+    "bytes": 94470
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-6105/private-evaluation/actual-execution.mp4",
+    "bytes": 196266
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-tracked-u-lift-fast/private-evaluation/actual-execution.mp4",
+    "bytes": 238151
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-u_handle-110-preload06-default-c03/private-evaluation/actual-execution.mp4",
+    "bytes": 78953
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-grooved_block-104-preload06-default-c02/private-evaluation/actual-execution.mp4",
+    "bytes": 234104
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-stepped_prism-101-medium-c00/private-evaluation/actual-execution.mp4",
+    "bytes": 272973
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-5106/private-evaluation/actual-execution.mp4",
+    "bytes": 259252
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/contact-audit-u-stop-control/private-evaluation/actual-execution.mp4",
+    "bytes": 80903
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-u_handle-110-preload06-medium-c00/private-evaluation/actual-execution.mp4",
+    "bytes": 78562
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-6113/private-evaluation/actual-execution.mp4",
+    "bytes": 196069
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-u_handle-110-normal-default-c00/private-evaluation/actual-execution.mp4",
+    "bytes": 207832
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/contact-audit-u-tracked/private-evaluation/actual-execution.mp4",
+    "bytes": 113166
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-stepped_prism-101-fast-c00/private-evaluation/actual-execution.mp4",
+    "bytes": 162517
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-5104/private-evaluation/actual-execution.mp4",
+    "bytes": 259696
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-u_handle-110-preload06-medium-c02/private-evaluation/actual-execution.mp4",
+    "bytes": 80426
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-6103/private-evaluation/actual-execution.mp4",
+    "bytes": 195358
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-grooved_block-104-preload06-medium-c03/private-evaluation/actual-execution.mp4",
+    "bytes": 248723
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-grooved_block-104-preload06-default-c03/private-evaluation/actual-execution.mp4",
+    "bytes": 246062
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-6119/private-evaluation/actual-execution.mp4",
+    "bytes": 195701
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-tracked-u-place-delay2-fast/private-evaluation/actual-execution.mp4",
+    "bytes": 98290
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-6115/private-evaluation/actual-execution.mp4",
+    "bytes": 195467
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-5114/private-evaluation/actual-execution.mp4",
+    "bytes": 259753
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-6110/private-evaluation/actual-execution.mp4",
+    "bytes": 258665
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-necked_column-107-preload06-medium-c01/private-evaluation/actual-execution.mp4",
+    "bytes": 256728
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-6107/private-evaluation/actual-execution.mp4",
+    "bytes": 196250
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/contact-audit-u-stop/private-evaluation/actual-execution.mp4",
+    "bytes": 81137
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-u_handle-110-surface-c00/private-evaluation/actual-execution.mp4",
+    "bytes": 80690
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-stepped_prism-101-surface-c00/private-evaluation/actual-execution.mp4",
+    "bytes": 255855
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-u_handle-110-surface-c02/private-evaluation/actual-execution.mp4",
+    "bytes": 195596
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-tracked-u-lift-delay2-fast/private-evaluation/actual-execution.mp4",
+    "bytes": 138842
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-5108/private-evaluation/actual-execution.mp4",
+    "bytes": 260400
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-u_handle-110-medium-c02/private-evaluation/actual-execution.mp4",
+    "bytes": 195673
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-6120/private-evaluation/actual-execution.mp4",
+    "bytes": 259377
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-necked_column-107-preload06-default-c02/private-evaluation/actual-execution.mp4",
+    "bytes": 234438
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-5112/private-evaluation/actual-execution.mp4",
+    "bytes": 260308
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-stepped_prism-101-preload06-medium-c01/private-evaluation/actual-execution.mp4",
+    "bytes": 248445
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-tracked-u-place-fast/private-evaluation/actual-execution.mp4",
+    "bytes": 98412
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-5120/private-evaluation/actual-execution.mp4",
+    "bytes": 261989
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-grooved_block-104-preload06-default-c00/private-evaluation/actual-execution.mp4",
+    "bytes": 243990
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-tracked-u-place-delay2-medium/private-evaluation/actual-execution.mp4",
+    "bytes": 119373
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-6101/private-evaluation/actual-execution.mp4",
+    "bytes": 195318
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-5105/private-evaluation/actual-execution.mp4",
+    "bytes": 196919
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-5117/private-evaluation/actual-execution.mp4",
+    "bytes": 195813
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-tracked-u-place-default/private-evaluation/actual-execution.mp4",
+    "bytes": 107378
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-grooved_block-104-preload06-medium-c00/private-evaluation/actual-execution.mp4",
+    "bytes": 246688
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-necked_column-107-preload06-medium-c03/private-evaluation/actual-execution.mp4",
+    "bytes": 284463
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-stepped_prism-101-medium-c03/private-evaluation/actual-execution.mp4",
+    "bytes": 83033
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-necked_column-107-preload06-medium-c00/private-evaluation/actual-execution.mp4",
+    "bytes": 95548
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-u_handle-110-preload06-medium-c03/private-evaluation/actual-execution.mp4",
+    "bytes": 78206
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/online-negative-current/private-evaluation/actual-execution.mp4",
+    "bytes": 189328
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-5111/private-evaluation/actual-execution.mp4",
+    "bytes": 196052
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-u_handle-110-normal-medium-c00/private-evaluation/actual-execution.mp4",
+    "bytes": 107736
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-tracked-u-lift-delay2-default/private-evaluation/actual-execution.mp4",
+    "bytes": 113425
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-6114/private-evaluation/actual-execution.mp4",
+    "bytes": 260811
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-u_handle-110-preload06-default-c02/private-evaluation/actual-execution.mp4",
+    "bytes": 80219
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-stepped_prism-101-preload06-medium-c00/private-evaluation/actual-execution.mp4",
+    "bytes": 199326
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-u_handle-110-preload06-default-c00/private-evaluation/actual-execution.mp4",
+    "bytes": 92082
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-6116/private-evaluation/actual-execution.mp4",
+    "bytes": 260623
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-tracked-u-lift-delay2-medium/private-evaluation/actual-execution.mp4",
+    "bytes": 124269
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-5110/private-evaluation/actual-execution.mp4",
+    "bytes": 260137
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-6118/private-evaluation/actual-execution.mp4",
+    "bytes": 259502
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-stepped_prism-101-preload06-default-c02/private-evaluation/actual-execution.mp4",
+    "bytes": 245605
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-u_handle-110-medium-c00/private-evaluation/actual-execution.mp4",
+    "bytes": 80676
+  },
+  {
+    "path": "runs/r4-prerequisites-overnight-20261103-02/physical-u_handle-110-preload06-medium-c01/private-evaluation/actual-execution.mp4",
+    "bytes": 80475
+  }
+]

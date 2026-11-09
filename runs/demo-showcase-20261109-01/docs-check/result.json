@@ -1,0 +1,10 @@
+{
+  "status": "passed",
+  "files": 24,
+  "markdown_files": 23,
+  "html_pages": 1,
+  "local_links_checked": 331,
+  "historical_run_links_excluded": 36,
+  "errors": [],
+  "scope": "Local links, anchors, HTML unique ids and image text; not browser rendering or remote publication"
+}

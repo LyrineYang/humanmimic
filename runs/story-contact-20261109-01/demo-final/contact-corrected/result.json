@@ -1,0 +1,29 @@
+{
+  "execution_status": "passed",
+  "correction": true,
+  "seed": 3101,
+  "scope": "Post-grasp simplified rigid clamp, one task-normal offset; not LEAP or pretrained policy",
+  "offset_truth_m": 0.008,
+  "width_error_truth_m": 0.0,
+  "final_edge_error_mm": 0.05457176833166544,
+  "peak_probe_force_n": 1.060718356439314,
+  "probe_count": 1,
+  "sim_time_s": 10.030000000000019,
+  "object_final_height_m": 0.02499957201210236,
+  "memory": {
+    "grasp_id": "fixed-clamp-1",
+    "normal": [
+      1.0,
+      0.0,
+      0.0
+    ],
+    "mean_m": 0.03294542823166833,
+    "sigma_m": 0.0003,
+    "events": [
+      "plane-touch-1"
+    ],
+    "valid": true,
+    "scope": "Local support offset along one normal; fixed grasp and orientation"
+  },
+  "task_status": "passed"
+}

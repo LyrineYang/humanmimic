@@ -1,0 +1,530 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "condition": "seed7101-width--8",
+      "arm": "baseline",
+      "status": "passed",
+      "restored_edge_error_m": 0.040057652026353585,
+      "steps": 353
+    },
+    {
+      "condition": "seed7101-width--8",
+      "arm": "contact",
+      "status": "passed",
+      "restored_edge_error_m": 0.034449097386809346,
+      "steps": 353
+    },
+    {
+      "condition": "seed7101-width--4",
+      "arm": "baseline",
+      "status": "passed",
+      "restored_edge_error_m": 0.00011544388110579229,
+      "steps": 353
+    },
+    {
+      "condition": "seed7101-width--4",
+      "arm": "contact",
+      "status": "passed",
+      "restored_edge_error_m": 0.001975391988336045,
+      "steps": 353
+    },
+    {
+      "condition": "seed7101-width-+0",
+      "arm": "baseline",
+      "status": "passed",
+      "restored_edge_error_m": 0.0008444709801380679,
+      "steps": 353
+    },
+    {
+      "condition": "seed7101-width-+0",
+      "arm": "contact",
+      "status": "passed",
+      "restored_edge_error_m": 0.000366421457382915,
+      "steps": 353
+    },
+    {
+      "condition": "seed7101-width-+4",
+      "arm": "baseline",
+      "status": "passed",
+      "restored_edge_error_m": 0.0011771729951394264,
+      "steps": 353
+    },
+    {
+      "condition": "seed7101-width-+4",
+      "arm": "contact",
+      "status": "passed",
+      "restored_edge_error_m": 0.0011771729951394264,
+      "steps": 353
+    },
+    {
+      "condition": "seed7101-width-+8",
+      "arm": "baseline",
+      "status": "passed",
+      "restored_edge_error_m": 0.0015439840172858377,
+      "steps": 353
+    },
+    {
+      "condition": "seed7101-width-+8",
+      "arm": "contact",
+      "status": "passed",
+      "restored_edge_error_m": 0.0015439840172858377,
+      "steps": 353
+    },
+    {
+      "condition": "seed7102-width--8",
+      "arm": "baseline",
+      "status": "passed",
+      "restored_edge_error_m": 0.0073219683877475406,
+      "steps": 353
+    },
+    {
+      "condition": "seed7102-width--8",
+      "arm": "contact",
+      "status": "passed",
+      "restored_edge_error_m": 0.0018856988386943552,
+      "steps": 353
+    },
+    {
+      "condition": "seed7102-width--4",
+      "arm": "baseline",
+      "status": "passed",
+      "restored_edge_error_m": 0.02508869901792067,
+      "steps": 353
+    },
+    {
+      "condition": "seed7102-width--4",
+      "arm": "contact",
+      "status": "passed",
+      "restored_edge_error_m": 0.020526619736014107,
+      "steps": 353
+    },
+    {
+      "condition": "seed7102-width-+0",
+      "arm": "baseline",
+      "status": "passed",
+      "restored_edge_error_m": 0.0054455855294479535,
+      "steps": 353
+    },
+    {
+      "condition": "seed7102-width-+0",
+      "arm": "contact",
+      "status": "passed",
+      "restored_edge_error_m": 0.005254982872114795,
+      "steps": 353
+    },
+    {
+      "condition": "seed7102-width-+4",
+      "arm": "baseline",
+      "status": "passed",
+      "restored_edge_error_m": 0.004480595268251428,
+      "steps": 353
+    },
+    {
+      "condition": "seed7102-width-+4",
+      "arm": "contact",
+      "status": "passed",
+      "restored_edge_error_m": 0.0013986850630151558,
+      "steps": 353
+    },
+    {
+      "condition": "seed7102-width-+8",
+      "arm": "baseline",
+      "status": "passed",
+      "restored_edge_error_m": 0.00908760909576499,
+      "steps": 353
+    },
+    {
+      "condition": "seed7102-width-+8",
+      "arm": "contact",
+      "status": "passed",
+      "restored_edge_error_m": 0.0034797465781658543,
+      "steps": 353
+    },
+    {
+      "condition": "seed7103-width--8",
+      "arm": "baseline",
+      "status": "passed",
+      "restored_edge_error_m": 0.005467382926345105,
+      "steps": 353
+    },
+    {
+      "condition": "seed7103-width--8",
+      "arm": "contact",
+      "status": "passed",
+      "restored_edge_error_m": 0.005467382926345105,
+      "steps": 353
+    },
+    {
+      "condition": "seed7103-width--4",
+      "arm": "baseline",
+      "status": "passed",
+      "restored_edge_error_m": 0.0003622489394664724,
+      "steps": 353
+    },
+    {
+      "condition": "seed7103-width--4",
+      "arm": "contact",
+      "status": "passed",
+      "restored_edge_error_m": 0.0031825840735241195,
+      "steps": 353
+    },
+    {
+      "condition": "seed7103-width-+0",
+      "arm": "baseline",
+      "status": "passed",
+      "restored_edge_error_m": 6.733093819614316e-05,
+      "steps": 353
+    },
+    {
+      "condition": "seed7103-width-+0",
+      "arm": "contact",
+      "status": "passed",
+      "restored_edge_error_m": 0.0003179331478463665,
+      "steps": 353
+    },
+    {
+      "condition": "seed7103-width-+4",
+      "arm": "baseline",
+      "status": "passed",
+      "restored_edge_error_m": 0.0019449537075122564,
+      "steps": 353
+    },
+    {
+      "condition": "seed7103-width-+4",
+      "arm": "contact",
+      "status": "passed",
+      "restored_edge_error_m": 0.0005760920404045897,
+      "steps": 353
+    },
+    {
+      "condition": "seed7103-width-+8",
+      "arm": "baseline",
+      "status": "passed",
+      "restored_edge_error_m": 0.007887324470916113,
+      "steps": 353
+    },
+    {
+      "condition": "seed7103-width-+8",
+      "arm": "contact",
+      "status": "passed",
+      "restored_edge_error_m": 0.007887324470916113,
+      "steps": 353
+    },
+    {
+      "condition": "seed7104-width--8",
+      "arm": "baseline",
+      "status": "passed",
+      "restored_edge_error_m": 0.060924169797312855,
+      "steps": 353
+    },
+    {
+      "condition": "seed7104-width--8",
+      "arm": "contact",
+      "status": "passed",
+      "restored_edge_error_m": 0.03527179614715387,
+      "steps": 353
+    },
+    {
+      "condition": "seed7104-width--4",
+      "arm": "baseline",
+      "status": "passed",
+      "restored_edge_error_m": 0.026094589212639588,
+      "steps": 353
+    },
+    {
+      "condition": "seed7104-width--4",
+      "arm": "contact",
+      "status": "passed",
+      "restored_edge_error_m": 0.023781035996720115,
+      "steps": 353
+    },
+    {
+      "condition": "seed7104-width-+0",
+      "arm": "baseline",
+      "status": "passed",
+      "restored_edge_error_m": 0.006206188218580377,
+      "steps": 353
+    },
+    {
+      "condition": "seed7104-width-+0",
+      "arm": "contact",
+      "status": "passed",
+      "restored_edge_error_m": 0.005462454671465541,
+      "steps": 353
+    },
+    {
+      "condition": "seed7104-width-+4",
+      "arm": "baseline",
+      "status": "passed",
+      "restored_edge_error_m": 0.004758237290831066,
+      "steps": 353
+    },
+    {
+      "condition": "seed7104-width-+4",
+      "arm": "contact",
+      "status": "passed",
+      "restored_edge_error_m": 0.0020897772546042137,
+      "steps": 353
+    },
+    {
+      "condition": "seed7104-width-+8",
+      "arm": "baseline",
+      "status": "passed",
+      "restored_edge_error_m": 0.00542078341681515,
+      "steps": 353
+    },
+    {
+      "condition": "seed7104-width-+8",
+      "arm": "contact",
+      "status": "passed",
+      "restored_edge_error_m": 0.0003698595097763255,
+      "steps": 353
+    },
+    {
+      "condition": "seed7105-width--8",
+      "arm": "baseline",
+      "status": "passed",
+      "restored_edge_error_m": 0.023400785070599506,
+      "steps": 353
+    },
+    {
+      "condition": "seed7105-width--8",
+      "arm": "contact",
+      "status": "passed",
+      "restored_edge_error_m": 0.001035466926978118,
+      "steps": 353
+    },
+    {
+      "condition": "seed7105-width--4",
+      "arm": "baseline",
+      "status": "passed",
+      "restored_edge_error_m": 0.027480760978281504,
+      "steps": 353
+    },
+    {
+      "condition": "seed7105-width--4",
+      "arm": "contact",
+      "status": "passed",
+      "restored_edge_error_m": 0.025817108306336184,
+      "steps": 353
+    },
+    {
+      "condition": "seed7105-width-+0",
+      "arm": "baseline",
+      "status": "passed",
+      "restored_edge_error_m": 0.005047524028591932,
+      "steps": 353
+    },
+    {
+      "condition": "seed7105-width-+0",
+      "arm": "contact",
+      "status": "passed",
+      "restored_edge_error_m": 0.004634516895767382,
+      "steps": 353
+    },
+    {
+      "condition": "seed7105-width-+4",
+      "arm": "baseline",
+      "status": "passed",
+      "restored_edge_error_m": 0.00558988282647252,
+      "steps": 353
+    },
+    {
+      "condition": "seed7105-width-+4",
+      "arm": "contact",
+      "status": "passed",
+      "restored_edge_error_m": 0.0029154132473732386,
+      "steps": 353
+    },
+    {
+      "condition": "seed7105-width-+8",
+      "arm": "baseline",
+      "status": "passed",
+      "restored_edge_error_m": 0.002122117448919658,
+      "steps": 353
+    },
+    {
+      "condition": "seed7105-width-+8",
+      "arm": "contact",
+      "status": "passed",
+      "restored_edge_error_m": 0.0009744190994565582,
+      "steps": 353
+    },
+    {
+      "condition": "seed7106-width--8",
+      "arm": "baseline",
+      "status": "passed",
+      "restored_edge_error_m": 0.004757203514112823,
+      "steps": 353
+    },
+    {
+      "condition": "seed7106-width--8",
+      "arm": "contact",
+      "status": "passed",
+      "restored_edge_error_m": 0.0006191581309026584,
+      "steps": 353
+    },
+    {
+      "condition": "seed7106-width--4",
+      "arm": "baseline",
+      "status": "passed",
+      "restored_edge_error_m": 0.04210761315768445,
+      "steps": 353
+    },
+    {
+      "condition": "seed7106-width--4",
+      "arm": "contact",
+      "status": "passed",
+      "restored_edge_error_m": 0.03967082415901295,
+      "steps": 353
+    },
+    {
+      "condition": "seed7106-width-+0",
+      "arm": "baseline",
+      "status": "passed",
+      "restored_edge_error_m": 0.0014640054318310891,
+      "steps": 353
+    },
+    {
+      "condition": "seed7106-width-+0",
+      "arm": "contact",
+      "status": "passed",
+      "restored_edge_error_m": 0.0014600393567349157,
+      "steps": 353
+    },
+    {
+      "condition": "seed7106-width-+4",
+      "arm": "baseline",
+      "status": "passed",
+      "restored_edge_error_m": 0.004260857696555265,
+      "steps": 353
+    },
+    {
+      "condition": "seed7106-width-+4",
+      "arm": "contact",
+      "status": "passed",
+      "restored_edge_error_m": 0.0018717480385594953,
+      "steps": 353
+    },
+    {
+      "condition": "seed7106-width-+8",
+      "arm": "baseline",
+      "status": "passed",
+      "restored_edge_error_m": 0.051057281783819616,
+      "steps": 353
+    },
+    {
+      "condition": "seed7106-width-+8",
+      "arm": "contact",
+      "status": "passed",
+      "restored_edge_error_m": 0.051057281783819616,
+      "steps": 353
+    }
+  ],
+  "paired_forks": 30,
+  "metrics": {
+    "baseline": {
+      "edge_error_m": 0.012719480735154623,
+      "penalized_error_m": 0.02563997620932042,
+      "prerelease_edge_error_m": 0.0028261344247732965,
+      "orientation_error_deg": 31.887410790063363,
+      "drift_m": 1.2382927720163794e-06,
+      "y_error_m": 0.031057102830600203,
+      "both_valid_edge_mae_m": 0.00357611466865501,
+      "failure_counts_nonexclusive": {
+        "reachable": 0,
+        "lower_reachable": 0,
+        "detached": 0,
+        "table_supported": 0,
+        "orientation": 10,
+        "drift": 0
+      }
+    },
+    "contact": {
+      "edge_error_m": 0.009550667237221843,
+      "penalized_error_m": 0.024579578235944907,
+      "prerelease_edge_error_m": 0.001058559171426652,
+      "orientation_error_deg": 31.80276664149105,
+      "drift_m": 1.2241775628458435e-06,
+      "y_error_m": 0.031075229020508282,
+      "both_valid_edge_mae_m": 0.0022706290809079693,
+      "failure_counts_nonexclusive": {
+        "reachable": 0,
+        "lower_reachable": 0,
+        "detached": 0,
+        "table_supported": 0,
+        "orientation": 10,
+        "drift": 0
+      }
+    }
+  },
+  "both_valid_pairs": 16,
+  "by_width": {
+    "-8": {
+      "baseline": {
+        "raw_mae_m": 0.02365486028707857,
+        "penalized_mae_m": 0.05182069496621881,
+        "valid": 0
+      },
+      "contact": {
+        "raw_mae_m": 0.013121433392813908,
+        "penalized_mae_m": 0.05,
+        "valid": 0
+      }
+    },
+    "-4": {
+      "baseline": {
+        "raw_mae_m": 0.020208225864516413,
+        "penalized_mae_m": 0.03341294880342871,
+        "valid": 2
+      },
+      "contact": {
+        "raw_mae_m": 0.019158927376657253,
+        "penalized_mae_m": 0.03419299601031002,
+        "valid": 2
+      }
+    },
+    "0": {
+      "baseline": {
+        "raw_mae_m": 0.0031791841877975937,
+        "penalized_mae_m": 0.0031791841877975937,
+        "valid": 6
+      },
+      "contact": {
+        "raw_mae_m": 0.0029160580668853193,
+        "penalized_mae_m": 0.0029160580668853193,
+        "valid": 6
+      }
+    },
+    "4": {
+      "baseline": {
+        "raw_mae_m": 0.0037019499641269935,
+        "penalized_mae_m": 0.011839087798270422,
+        "valid": 5
+      },
+      "contact": {
+        "raw_mae_m": 0.0016714814398493532,
+        "penalized_mae_m": 0.009808619273992783,
+        "valid": 5
+      }
+    },
+    "8": {
+      "baseline": {
+        "raw_mae_m": 0.01285318337225356,
+        "penalized_mae_m": 0.02794796529088657,
+        "valid": 3
+      },
+      "contact": {
+        "raw_mae_m": 0.010885435909903382,
+        "penalized_mae_m": 0.025980217828536392,
+        "valid": 3
+      }
+    }
+  },
+  "maximum_probe_3d_force_n": 6.879378250218904,
+  "cuda": "Tesla V100-SXM2-32GB",
+  "rendered": false,
+  "new_experiment_samples": 0,
+  "scope": "Archive equality, finite states, monotonic time, free object, no rigid coupling, final metric reconstruction; not a replacement for task success"
+}

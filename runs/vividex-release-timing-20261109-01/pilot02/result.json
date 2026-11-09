@@ -1,0 +1,318 @@
+{
+  "execution_status": "passed",
+  "comparisons": {
+    "early": {
+      "penalized_mae_m": [
+        0.0028052195808683476,
+        0.0003311468760634449
+      ],
+      "relative_improvement": 0.8819533136293953,
+      "valid_counts": {
+        "baseline": 2,
+        "contact": 2
+      },
+      "paired_bootstrap_95ci_m": [
+        0.0024740727048049027,
+        0.0024740727048049027
+      ],
+      "research_status": "passed"
+    },
+    "supported": {
+      "penalized_mae_m": [
+        0.002780085835220391,
+        0.0024190804102631504
+      ],
+      "relative_improvement": 0.12985405716029697,
+      "valid_counts": {
+        "baseline": 2,
+        "contact": 2
+      },
+      "paired_bootstrap_95ci_m": [
+        0.0003610054249572406,
+        0.0003610054249572406
+      ],
+      "research_status": "failed"
+    }
+  },
+  "trial_count": 2,
+  "trials": [
+    {
+      "condition": {
+        "id": "seed8101-physical0-prior4",
+        "seed": 8101,
+        "halfwidth_delta_mm": 0,
+        "prior_halfwidth_error_mm": 4
+      },
+      "variants": {
+        "early-baseline": {
+          "edge_error_m": 0.0010871145459268386,
+          "penalized_error_m": 0.0010871145459268386,
+          "valid": true,
+          "prerelease_edge_error_m": 0.00037201635018211526,
+          "residual_dx_m": -0.0046413415006761535,
+          "timing": "early",
+          "variant": "baseline",
+          "probe_valid": true,
+          "probe_peak_n": 0.6535919532254009,
+          "offset_m": 0.011300840237776319,
+          "reachable": true,
+          "lower_reachable": true,
+          "detached": true,
+          "table_supported": true,
+          "drift_m": 1.7073035530985362e-06,
+          "orientation_error_deg": 2.916206412700623
+        },
+        "early-contact": {
+          "edge_error_m": 0.00015142356833004744,
+          "penalized_error_m": 0.00015142356833004744,
+          "valid": true,
+          "prerelease_edge_error_m": 0.0008818513977120884,
+          "residual_dx_m": -0.0020165242216560707,
+          "timing": "early",
+          "variant": "contact",
+          "probe_valid": true,
+          "probe_peak_n": 0.6535919532254009,
+          "offset_m": 0.008676022958756236,
+          "reachable": true,
+          "lower_reachable": true,
+          "detached": true,
+          "table_supported": true,
+          "drift_m": 1.7010306725567164e-06,
+          "orientation_error_deg": 2.406036588820782
+        },
+        "supported-baseline": {
+          "edge_error_m": 0.0010139363309830327,
+          "penalized_error_m": 0.0010139363309830327,
+          "valid": true,
+          "prerelease_edge_error_m": 0.0005964863186795066,
+          "residual_dx_m": -0.004597139226976618,
+          "timing": "supported",
+          "variant": "baseline",
+          "probe_valid": true,
+          "probe_peak_n": 0.9820438294837582,
+          "offset_m": 0.011300840237776319,
+          "reachable": true,
+          "lower_reachable": true,
+          "detached": true,
+          "table_supported": true,
+          "drift_m": 1.7055885509642418e-06,
+          "orientation_error_deg": 2.8797493004625427
+        },
+        "supported-contact": {
+          "edge_error_m": 0.0002869563742023684,
+          "penalized_error_m": 0.0002869563742023684,
+          "valid": true,
+          "prerelease_edge_error_m": 0.0010255078720667124,
+          "residual_dx_m": -0.001101638311051454,
+          "timing": "supported",
+          "variant": "contact",
+          "probe_valid": true,
+          "probe_peak_n": 0.9820438294837582,
+          "offset_m": 0.007805339321851155,
+          "reachable": true,
+          "lower_reachable": true,
+          "detached": true,
+          "table_supported": true,
+          "drift_m": 1.7057992762084192e-06,
+          "orientation_error_deg": 2.487500143618585
+        }
+      },
+      "probe": {
+        "early": {
+          "valid": true,
+          "peak_n": 0.6535919532254009,
+          "memory": {
+            "grasp_id": "seed8101-physical0-prior4-early-native-grasp",
+            "normal": [
+              1.0,
+              0.0,
+              0.0
+            ],
+            "mean_m": 0.008676022958756236,
+            "sigma_m": 0.0003,
+            "events": [
+              "one-probe"
+            ],
+            "valid": true,
+            "scope": "Local support offset along one normal; fixed grasp and orientation"
+          },
+          "accepted": true
+        },
+        "supported": {
+          "valid": true,
+          "peak_n": 0.9820438294837582,
+          "memory": {
+            "grasp_id": "seed8101-physical0-prior4-supported-native-grasp",
+            "normal": [
+              1.0,
+              0.0,
+              0.0
+            ],
+            "mean_m": 0.007805339321851155,
+            "sigma_m": 0.0003,
+            "events": [
+              "one-probe"
+            ],
+            "valid": true,
+            "scope": "Local support offset along one normal; fixed grasp and orientation"
+          },
+          "accepted": true
+        }
+      },
+      "scope": "Privileged-state pretrained grasp; nominal pose prior shared; unknown local box extent; scripted residual/lower/release; external calibrated probe",
+      "public_grasp_gate": {
+        "load_z_n": 8.80934954511344,
+        "passed": true
+      },
+      "policy_steps": 60,
+      "goal_edge_x_m": 0.010912490844944667,
+      "common_states_sha256": "d5c263bdd9b6c0eb24e2b3a41e7c350b94f3a3d854d0762a04fbf5a3ac689b07",
+      "policy_input_actions_sha256": "8498edaebda3dc7e213bc6c50488be5544a984d5fbe57dafea683b7b6f774680",
+      "fork_sha256": {
+        "early": "0e0bbc21f3f49334904709e4ee461d3f5c9fa45783ea52e66d603e9d6bcf82c4",
+        "supported": "c275edd81ffdab8ecf364ee7ca83f2bfe551df471713627c4ffec1851a0c3916"
+      },
+      "base_fork_sha256": "d36437e98908905e9c83df5c747ac271350b51f35c756f77207ce5d2ac62b737"
+    },
+    {
+      "condition": {
+        "id": "seed8101-physical-8-prior0",
+        "seed": 8101,
+        "halfwidth_delta_mm": -8,
+        "prior_halfwidth_error_mm": 0
+      },
+      "variants": {
+        "early-baseline": {
+          "edge_error_m": 0.004523324615809857,
+          "penalized_error_m": 0.004523324615809857,
+          "valid": true,
+          "prerelease_edge_error_m": 0.004601979766261803,
+          "residual_dx_m": 0.00013723769169526542,
+          "timing": "early",
+          "variant": "baseline",
+          "probe_valid": true,
+          "probe_peak_n": 0.5953266198035854,
+          "offset_m": -0.0032407253244543695,
+          "reachable": true,
+          "lower_reachable": true,
+          "detached": true,
+          "table_supported": true,
+          "drift_m": 4.475116436570834e-06,
+          "orientation_error_deg": 3.706930859638878
+        },
+        "early-contact": {
+          "edge_error_m": 0.0005108701837968424,
+          "penalized_error_m": 0.0005108701837968424,
+          "valid": true,
+          "prerelease_edge_error_m": 0.0004027482790504508,
+          "residual_dx_m": 0.004148123858708625,
+          "timing": "early",
+          "variant": "contact",
+          "probe_valid": true,
+          "probe_peak_n": 0.5953266198035854,
+          "offset_m": -0.007251611491467729,
+          "reachable": true,
+          "lower_reachable": true,
+          "detached": true,
+          "table_supported": true,
+          "drift_m": 4.477473625747529e-06,
+          "orientation_error_deg": 3.6891329705987377
+        },
+        "supported-baseline": {
+          "edge_error_m": 0.004546235339457749,
+          "penalized_error_m": 0.004546235339457749,
+          "valid": true,
+          "prerelease_edge_error_m": 0.004649713635070059,
+          "residual_dx_m": 0.00010541811438371726,
+          "timing": "supported",
+          "variant": "baseline",
+          "probe_valid": true,
+          "probe_peak_n": 1.0321157908790561,
+          "offset_m": -0.0032407253244543695,
+          "reachable": true,
+          "lower_reachable": true,
+          "detached": true,
+          "table_supported": true,
+          "drift_m": 4.466575029813812e-06,
+          "orientation_error_deg": 3.7447916612138386
+        },
+        "supported-contact": {
+          "edge_error_m": 0.004551204446323932,
+          "penalized_error_m": 0.004551204446323932,
+          "valid": true,
+          "prerelease_edge_error_m": 0.004654539346074682,
+          "residual_dx_m": 0.00010067485363411677,
+          "timing": "supported",
+          "variant": "contact",
+          "probe_valid": true,
+          "probe_peak_n": 1.0321157908790561,
+          "offset_m": -0.003235982063704769,
+          "reachable": true,
+          "lower_reachable": true,
+          "detached": true,
+          "table_supported": true,
+          "drift_m": 4.46651142162699e-06,
+          "orientation_error_deg": 3.7450775497178723
+        }
+      },
+      "probe": {
+        "early": {
+          "valid": true,
+          "peak_n": 0.5953266198035854,
+          "memory": {
+            "grasp_id": "seed8101-physical-8-prior0-early-native-grasp",
+            "normal": [
+              1.0,
+              0.0,
+              0.0
+            ],
+            "mean_m": -0.007251611491467729,
+            "sigma_m": 0.0003,
+            "events": [
+              "one-probe"
+            ],
+            "valid": true,
+            "scope": "Local support offset along one normal; fixed grasp and orientation"
+          },
+          "accepted": true
+        },
+        "supported": {
+          "valid": true,
+          "peak_n": 1.0321157908790561,
+          "memory": {
+            "grasp_id": "seed8101-physical-8-prior0-supported-native-grasp",
+            "normal": [
+              1.0,
+              0.0,
+              0.0
+            ],
+            "mean_m": -0.003235982063704769,
+            "sigma_m": 0.0003,
+            "events": [
+              "one-probe"
+            ],
+            "valid": true,
+            "scope": "Local support offset along one normal; fixed grasp and orientation"
+          },
+          "accepted": true
+        }
+      },
+      "scope": "Privileged-state pretrained grasp; nominal pose prior shared; unknown local box extent; scripted residual/lower/release; external calibrated probe",
+      "public_grasp_gate": {
+        "load_z_n": 5.596031356263611,
+        "passed": true
+      },
+      "policy_steps": 60,
+      "goal_edge_x_m": 0.013365486794520057,
+      "common_states_sha256": "e5c04c0141f59e1a7b3dc55cb14586e174d99848d1b1bad41e0a83a606e67311",
+      "policy_input_actions_sha256": "6999676c8ecb8b443c33cab66d40f14ac21e01e4bb26190e9145caca3efe6266",
+      "fork_sha256": {
+        "early": "14263ec8425c95dc63250cca3a730ed22f20541acae9c00ec876accf1e2192b8",
+        "supported": "97c5c6840c26a58ac7209889b682eece93038c67f6037716bdc6cd97b32f8725"
+      },
+      "base_fork_sha256": "0db36ec0a3d677b6c793cb9aedd644f15ea1e43636f1f623cbf14d2ab605b356"
+    }
+  ],
+  "scope": "Privileged-state pretrained grasp; nominal pose prior shared; unknown local box extent; scripted residual/lower/release; external calibrated probe",
+  "protocol_sha256": "e07968bc4fa7853d3c013587acc8d5ba3bc1a0cbe8161da940f2d26a53812c67"
+}

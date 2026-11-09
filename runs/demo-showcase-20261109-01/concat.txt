@@ -1,0 +1,6 @@
+file '/home/junqiy/projects/humanmimic/runs/demo-showcase-20261109-01/media/intro.mp4'
+file '/home/junqiy/projects/humanmimic/runs/demo-showcase-20261109-01/media/place.mp4'
+file '/home/junqiy/projects/humanmimic/runs/demo-showcase-20261109-01/media/hold.mp4'
+file '/home/junqiy/projects/humanmimic/runs/demo-showcase-20261109-01/media/load.mp4'
+file '/home/junqiy/projects/humanmimic/runs/demo-showcase-20261109-01/media/touch.mp4'
+file '/home/junqiy/projects/humanmimic/runs/demo-showcase-20261109-01/media/outro.mp4'

@@ -1,0 +1,60 @@
+{
+  "condition": {
+    "id": "seed7105-width-+8",
+    "seed": 7105,
+    "halfwidth_delta_mm": 8
+  },
+  "variants": {
+    "baseline": {
+      "edge_error_m": 0.002122117448919658,
+      "penalized_error_m": 0.002122117448919658,
+      "valid": true,
+      "prerelease_edge_error_m": 0.002587454989181115,
+      "residual_dx_m": 3.7767108878872246e-05,
+      "offset_m": -0.00972003197640764,
+      "reachable": true,
+      "lower_reachable": true,
+      "detached": true,
+      "table_supported": true,
+      "drift_m": 9.221136523055875e-07,
+      "orientation_error_deg": 1.8308910514997057
+    },
+    "contact": {
+      "edge_error_m": 0.0009744190994565582,
+      "penalized_error_m": 0.0009744190994565582,
+      "valid": true,
+      "prerelease_edge_error_m": 0.0007101821424085053,
+      "residual_dx_m": -0.003052228703416676,
+      "offset_m": -0.006630036164112079,
+      "reachable": true,
+      "lower_reachable": true,
+      "detached": true,
+      "table_supported": true,
+      "drift_m": 8.978593141517876e-07,
+      "orientation_error_deg": 1.8161520720741944
+    }
+  },
+  "scope": "Privileged-state pretrained grasp; nominal pose prior shared; unknown local box extent; scripted residual/lower/release; external calibrated probe",
+  "probe_valid": true,
+  "probe_peak_n": 0.5690161507486472,
+  "memory": {
+    "grasp_id": "seed7105-width-+8-native-grasp",
+    "normal": [
+      1.0,
+      0.0,
+      0.0
+    ],
+    "mean_m": -0.006630036164112079,
+    "sigma_m": 0.0003,
+    "events": [
+      "one-probe"
+    ],
+    "valid": true,
+    "scope": "Local support offset along one normal; fixed grasp and orientation"
+  },
+  "policy_steps": 41,
+  "goal_edge_x_m": -0.15587600743030045,
+  "common_states_sha256": "698c17a88ec8c3b375134f24ee49f0d1fcb252d4c610b004c10307417d326ddd",
+  "policy_input_actions_sha256": "e0848e3616de6899ae71ffd7469cbddfdbb51c63c3cc1e2481444e35812c846e",
+  "fork_sha256": "18a40a047a26acac0080ee33a719fce52caa24e3fe4052fe52164ebfd35a1d2f"
+}

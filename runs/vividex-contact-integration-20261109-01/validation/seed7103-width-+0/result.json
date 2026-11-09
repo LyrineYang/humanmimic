@@ -1,0 +1,60 @@
+{
+  "condition": {
+    "id": "seed7103-width-+0",
+    "seed": 7103,
+    "halfwidth_delta_mm": 0
+  },
+  "variants": {
+    "baseline": {
+      "edge_error_m": 6.733093819614316e-05,
+      "penalized_error_m": 6.733093819614316e-05,
+      "valid": true,
+      "prerelease_edge_error_m": 0.00011704982691373295,
+      "residual_dx_m": 1.931226587127341e-05,
+      "offset_m": 0.006418038771314319,
+      "reachable": true,
+      "lower_reachable": true,
+      "detached": true,
+      "table_supported": true,
+      "drift_m": 1.840007171542349e-06,
+      "orientation_error_deg": 0.6620069240677051
+    },
+    "contact": {
+      "edge_error_m": 0.0003179331478463665,
+      "penalized_error_m": 0.0003179331478463665,
+      "valid": true,
+      "prerelease_edge_error_m": 0.0005007804780612357,
+      "residual_dx_m": -0.0003656669899009257,
+      "offset_m": 0.006803018027086519,
+      "reachable": true,
+      "lower_reachable": true,
+      "detached": true,
+      "table_supported": true,
+      "drift_m": 1.8399915559631547e-06,
+      "orientation_error_deg": 0.662203132575566
+    }
+  },
+  "scope": "Privileged-state pretrained grasp; nominal pose prior shared; unknown local box extent; scripted residual/lower/release; external calibrated probe",
+  "probe_valid": true,
+  "probe_peak_n": 0.6842592705424466,
+  "memory": {
+    "grasp_id": "seed7103-width-+0-native-grasp",
+    "normal": [
+      1.0,
+      0.0,
+      0.0
+    ],
+    "mean_m": 0.006803018027086519,
+    "sigma_m": 0.0003,
+    "events": [
+      "one-probe"
+    ],
+    "valid": true,
+    "scope": "Local support offset along one normal; fixed grasp and orientation"
+  },
+  "policy_steps": 60,
+  "goal_edge_x_m": 0.03282130975986914,
+  "common_states_sha256": "e0832c30863a6c7570b94e0e6e73bc6a7cd7be44a23883555331553c55b79494",
+  "policy_input_actions_sha256": "dcf040c8cd36a9696f231a224937f71fa818a2a5f1412fbc20bf503e8f8209c1",
+  "fork_sha256": "18b0c88efd8ec702cba06b8e297ca95630133b05fd20e92c2f030b396c40a7e8"
+}

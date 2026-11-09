@@ -1,0 +1,60 @@
+{
+  "condition": {
+    "id": "seed7102-width-+8",
+    "seed": 7102,
+    "halfwidth_delta_mm": 8
+  },
+  "variants": {
+    "baseline": {
+      "edge_error_m": 0.00908760909576499,
+      "penalized_error_m": 0.00908760909576499,
+      "valid": true,
+      "prerelease_edge_error_m": 0.004906247124786746,
+      "residual_dx_m": 4.511381623142213e-05,
+      "offset_m": 0.002960870209784385,
+      "reachable": true,
+      "lower_reachable": true,
+      "detached": true,
+      "table_supported": true,
+      "drift_m": 8.975492266768546e-07,
+      "orientation_error_deg": 0.6609271694907691
+    },
+    "contact": {
+      "edge_error_m": 0.0034797465781658543,
+      "penalized_error_m": 0.0034797465781658543,
+      "valid": true,
+      "prerelease_edge_error_m": 0.0009142390537730458,
+      "residual_dx_m": -0.00540507123476552,
+      "offset_m": 0.008411055260781328,
+      "reachable": true,
+      "lower_reachable": true,
+      "detached": true,
+      "table_supported": true,
+      "drift_m": 9.01049904444548e-07,
+      "orientation_error_deg": 0.5714690780481442
+    }
+  },
+  "scope": "Privileged-state pretrained grasp; nominal pose prior shared; unknown local box extent; scripted residual/lower/release; external calibrated probe",
+  "probe_valid": true,
+  "probe_peak_n": 0.8237092441389995,
+  "memory": {
+    "grasp_id": "seed7102-width-+8-native-grasp",
+    "normal": [
+      1.0,
+      0.0,
+      0.0
+    ],
+    "mean_m": 0.008411055260781328,
+    "sigma_m": 0.0003,
+    "events": [
+      "one-probe"
+    ],
+    "valid": true,
+    "scope": "Local support offset along one normal; fixed grasp and orientation"
+  },
+  "policy_steps": 60,
+  "goal_edge_x_m": 0.009429422596218921,
+  "common_states_sha256": "ad5f8cac2353723b0c9a0a67a42b3c7032df2133e3d2b9684c462bc633a3d488",
+  "policy_input_actions_sha256": "f9162729fba0923db39a36e2bcd5abb21294b097dd84cd088eae4cfba6078195",
+  "fork_sha256": "b0c4dad61799736b73a8d6fcd80900624ad8f73c6289b9dbb0f0e5a2390b89d3"
+}

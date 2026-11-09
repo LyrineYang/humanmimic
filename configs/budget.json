@@ -85,5 +85,40 @@
       "initial_parallel_children": 2,
       "maximum_parallel_children": 4
     }
+  },
+  "local_demo_campaign": {
+    "kind": "pretrained_contact_demo",
+    "campaign_id": "story-contact-20261109",
+    "authorization": "2026-11-09 user explicitly authorizes 8 new local GPU-hours; story first; DexTrack LEAP then ViViDex pretrained inference; no training",
+    "gpu_hours_max": 8,
+    "wall_hours_max": 24,
+    "wall_limit_source": "Additional conservative self-imposed window from first admitted GPU job; user limit is 8 cumulative GPUh",
+    "concurrent_gpus_max": 1,
+    "cpu_threads_per_worker": 4,
+    "training": false,
+    "heldout": false,
+    "paid_usd": 0,
+    "stage_gpu_hours": {
+      "preflight": 0.25,
+      "reproduction": 3,
+      "contact_demo": 3.75,
+      "verification": 1
+    },
+    "unallocated_gpu_hours": 0,
+    "minimum_free_disk_gib": 100,
+    "campaign_output_cap_gib": 15,
+    "clock_policy": "Charge whole GPU-slot occupancy, initialization, rendering, failures and cleanup; separate from expired 20261102 ledger; no reset on restart",
+    "shared_gpu_authorization": {
+      "gpu_uuids": [
+        "GPU-41c264dc-74e0-3ea6-c3b0-26cfb1972a80"
+      ],
+      "source": "Previous explicit GPU0 sharing authorization persists; never stop foreign jobs",
+      "minimum_free_headroom_mib": 6144,
+      "initial_parallel_children": 1,
+      "maximum_parallel_children": 1
+    },
+    "video_generation_authorized": true,
+    "latest_scope": "2026-11-09 continue stable grasp/load transfer, early versus supported one-probe comparison on new seeds; record raw successes and failures; no showcase or training; unchanged8GPUh ledger",
+    "showcase_generation_authorized": false
   }
 }

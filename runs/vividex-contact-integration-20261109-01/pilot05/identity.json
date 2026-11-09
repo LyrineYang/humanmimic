@@ -1,0 +1,15 @@
+{
+  "entry_sha256": "399204a162686d42fe174e3dace9088852756fc92e5eee079bf432652a32b509",
+  "protocol_sha256": "ec98180e50a6f16fc6ee9aec729598bcd89ccac16bb48f089792cce3b84aa3d0",
+  "checkpoint_sha256": "2c3e3bd7ade50f18ed0bea0ccff57c6af3814629f860cf353cf3917085a6b210",
+  "config_sha256": "bce252fb96b713bedb25270f11f277b586570826e0f9e5d7a0db1146849bd1db",
+  "source_commit": "9790140170d8be49b828ab214ce3537a2475fcea",
+  "source_diff": "diff --git a/hand_imitation/env/models/control.py b/hand_imitation/env/models/control.py\nindex 045c149..2ede9b2 100644\n--- a/hand_imitation/env/models/control.py\n+++ b/hand_imitation/env/models/control.py\n@@ -194,8 +194,8 @@ class SingleObjectTask(Task):\n         full_rot = np.concatenate((hand_rot, obj_rot.reshape((1,4))), 0)\n         full_vel = np.concatenate((hand_vel, obj_vel), 0)\n \n-        obs['position'] = np.concatenate((base_pos[:42], full_com.reshape(-1), full_rot.reshape(-1))).astype(np.float32)\n-        obs['velocity'] = np.concatenate((base_vel[:42], full_vel.reshape(-1))).astype(np.float32)\n+        obs['position'] = np.concatenate((base_pos[:36], full_com.reshape(-1), full_rot.reshape(-1))).astype(np.float32)\n+        obs['velocity'] = np.concatenate((base_vel[:36], full_vel.reshape(-1))).astype(np.float32)\n         obs['hand_position'] = np.concatenate((base_pos[:30], hand_com.reshape(-1), hand_rot.reshape(-1))).astype(np.float32)\n         obs['hand_velocity'] = np.concatenate((base_vel[:30], hand_vel.reshape(-1))).astype(np.float32)\n         obs['state'] = np.concatenate((obs['position'], obs['velocity']))\n",
+  "torch": "2.5.1+cu118",
+  "mujoco": "2.3.7",
+  "gpu": "Tesla V100-SXM2-32GB",
+  "training": false,
+  "heldout": false,
+  "video": false,
+  "scope": "Privileged-state pretrained grasp; nominal pose prior shared; unknown local box extent; scripted residual/lower/release; external calibrated probe"
+}

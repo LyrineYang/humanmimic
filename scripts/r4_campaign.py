@@ -93,15 +93,17 @@ def admitted_device(devices, uuid, limits):
 
 
 def validate_limits(limits):
-    # This version is specifically the user's local 144 GPUh / 36h authorization.
-    for name, maximum in [("gpu_hours_max", 144), ("wall_hours_max", 36), ("concurrent_gpus_max", 4)]:
+    demo = limits.get("kind") == "pretrained_contact_demo"
+    maxima = (8, 24, 1) if demo else (144, 36, 4)
+    for name, maximum in zip(("gpu_hours_max", "wall_hours_max", "concurrent_gpus_max"), maxima):
         value = limits[name]
         if isinstance(value, bool) or not isinstance(value, (int, float)) or not math.isfinite(value) or not 0 < value <= maximum:
             raise ValueError("Invalid authorized limit: " + name)
     if limits["training"] or limits["heldout"] or limits["paid_usd"]:
         raise ValueError("Only non-training, development, local simulation is authorized")
     stages = limits["stage_gpu_hours"]
-    if set(stages) != {"prerequisites", "E1", "E2", "E3"} or any(not math.isfinite(v) or v <= 0 for v in stages.values()):
+    expected = {"preflight", "reproduction", "contact_demo", "verification"} if demo else {"prerequisites", "E1", "E2", "E3"}
+    if set(stages) != expected or any(not math.isfinite(v) or v <= 0 for v in stages.values()):
         raise ValueError("Invalid stage allocations")
     if sum(stages.values()) + limits["unallocated_gpu_hours"] > limits["gpu_hours_max"] or limits["unallocated_gpu_hours"] < 0:
         raise ValueError("Stage allocations exceed total authorization")
@@ -181,10 +183,9 @@ def assert_frozen(plan, cache=None):
     for path, value in plan["frozen_sha256"].items():
         stat = Path(path).stat()
         signature = (stat.st_dev, stat.st_ino, stat.st_size, stat.st_mtime_ns, stat.st_ctime_ns)
-        # Full hashes on admission, then rehash any metadata change. Re-reading
-        # every frozen video/trajectory for each trial would waste the window.
-        if cache is not None and cache.get(path) == (value, signature):
-            continue
+        # Metadata is not proof of unchanged bytes: this host can reuse ctime
+        # ticks for same-size writes, even when mtime is restored. Hash at each
+        # admission; retain the optional cache only as an inspection snapshot.
         if digest(path) != value:
             raise RuntimeError("Frozen input/source changed: " + path)
         if cache is not None:

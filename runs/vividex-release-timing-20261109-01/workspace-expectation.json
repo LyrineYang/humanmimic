@@ -1,0 +1,12 @@
+{
+  "change": "Expand common post-policy free-wrist stage to +/-0.6m; increase bounded support approach travel to45mm",
+  "reason": "Developer conditions reject full lowering due inherited root ranges; load detection remains false while object is airborne; wide object needs more than30mm bounded load transfer approach",
+  "unchanged": [
+    "pretrained action normalization/limits until its60steps finish",
+    "native fingers/contact physics",
+    "both baseline and correction hardware/actions exceptcontactresidual",
+    "old gates and all recorded failures"
+  ],
+  "expected": "Load transfer detected using the same motor-load ratio; no unseen seed use",
+  "created_utc": "2026-11-09T15:50:11.101912+00:00"
+}

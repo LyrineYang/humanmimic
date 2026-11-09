@@ -1,0 +1,52 @@
+{
+  "episodes": [
+    {
+      "episode": 0,
+      "seed": 5101,
+      "steps": 60,
+      "sim_time_s": 1.5,
+      "final_position_error_m": 0.005442685294580615,
+      "upstream_success_at_3cm": true,
+      "maximum_height_gain_m": 0.10007248156464307,
+      "total_reward": 800.8963719699901,
+      "video": "episode-00.mp4",
+      "video_sha256": "6a835acde71cca45ffa1431f9be0a82f9c04ab27eacdd442d885201f7b73db0e",
+      "release_verified": false,
+      "action": "relocate",
+      "last_250ms_detached_and_target_contact": false,
+      "note": "Only relocation uses the 3cm upstream endpoint metric; detachment/contact is a diagnostic, full containment and stable release remain separate"
+    },
+    {
+      "episode": 1,
+      "seed": 5102,
+      "steps": 60,
+      "sim_time_s": 1.5,
+      "final_position_error_m": 0.005617298287696796,
+      "upstream_success_at_3cm": true,
+      "maximum_height_gain_m": 0.12418954449940683,
+      "total_reward": 840.5331848583163,
+      "video": "episode-01.mp4",
+      "video_sha256": "300ed8963a51415e667f39aaf6835e1a866d1216dd010fbeb542260a776396b0",
+      "release_verified": false,
+      "action": "relocate",
+      "last_250ms_detached_and_target_contact": false,
+      "note": "Only relocation uses the 3cm upstream endpoint metric; detachment/contact is a diagnostic, full containment and stable release remain separate"
+    },
+    {
+      "episode": 2,
+      "seed": 5103,
+      "steps": 60,
+      "sim_time_s": 1.5,
+      "final_position_error_m": 0.00813929702825034,
+      "upstream_success_at_3cm": true,
+      "maximum_height_gain_m": 0.13789944671333504,
+      "total_reward": 837.1556069365008,
+      "video": "episode-02.mp4",
+      "video_sha256": "c96f8e3d7a287091238eff1b58875ed7a364298513b5bb35f65df57fbea668f1",
+      "release_verified": false,
+      "action": "relocate",
+      "last_250ms_detached_and_target_contact": false,
+      "note": "Only relocation uses the 3cm upstream endpoint metric; detachment/contact is a diagnostic, full containment and stable release remain separate"
+    }
+  ]
+}

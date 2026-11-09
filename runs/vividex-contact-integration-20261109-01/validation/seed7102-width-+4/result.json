@@ -1,0 +1,60 @@
+{
+  "condition": {
+    "id": "seed7102-width-+4",
+    "seed": 7102,
+    "halfwidth_delta_mm": 4
+  },
+  "variants": {
+    "baseline": {
+      "edge_error_m": 0.004480595268251428,
+      "penalized_error_m": 0.004480595268251428,
+      "valid": true,
+      "prerelease_edge_error_m": 0.0027786540315299334,
+      "residual_dx_m": 9.183632126813501e-05,
+      "offset_m": -0.007878190503252645,
+      "reachable": true,
+      "lower_reachable": true,
+      "detached": true,
+      "table_supported": true,
+      "drift_m": 1.2200021221600107e-06,
+      "orientation_error_deg": 1.6831878650464849
+    },
+    "contact": {
+      "edge_error_m": 0.0013986850630151558,
+      "penalized_error_m": 0.0013986850630151558,
+      "valid": true,
+      "prerelease_edge_error_m": 0.000525100708410605,
+      "residual_dx_m": -0.0030172183665533488,
+      "offset_m": -0.004769135815431162,
+      "reachable": true,
+      "lower_reachable": true,
+      "detached": true,
+      "table_supported": true,
+      "drift_m": 1.211179829757723e-06,
+      "orientation_error_deg": 1.6896898681732775
+    }
+  },
+  "scope": "Privileged-state pretrained grasp; nominal pose prior shared; unknown local box extent; scripted residual/lower/release; external calibrated probe",
+  "probe_valid": true,
+  "probe_peak_n": 0.5624170622689076,
+  "memory": {
+    "grasp_id": "seed7102-width-+4-native-grasp",
+    "normal": [
+      1.0,
+      0.0,
+      0.0
+    ],
+    "mean_m": -0.004769135815431162,
+    "sigma_m": 0.0003,
+    "events": [
+      "one-probe"
+    ],
+    "valid": true,
+    "scope": "Local support offset along one normal; fixed grasp and orientation"
+  },
+  "policy_steps": 60,
+  "goal_edge_x_m": 0.025876361692830443,
+  "common_states_sha256": "30b3a9cd95fd0a7edf9ac766048273ad4c3a4f4082ebe85d9061dc26a8ba8890",
+  "policy_input_actions_sha256": "5832d308b4edbebbe166b39a3a1aab54c523abd35a2ead44d54d927f7e474010",
+  "fork_sha256": "707762fecce35d48226e17a9de2cbf6b329249ba9a983e7f0c5cd788fbef2fa4"
+}

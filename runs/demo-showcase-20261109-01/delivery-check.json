@@ -1,0 +1,24 @@
+{
+  "status": "passed",
+  "scope": "Media packaging and source preservation; not new physical or learned-policy acceptance",
+  "checks": {
+    "gallery_local_links_exist": true,
+    "zip_crc_and_contents_match": true,
+    "150_previous_runtime_files_unchanged": true,
+    "selected_source_hashes_unchanged": true,
+    "269_original_recordings_retained": true,
+    "original_campaign_jobs_finished": true,
+    "original_gpu_cost_unchanged": true,
+    "media_decode_and_frame_counts": true,
+    "documentation_links": true
+  },
+  "gallery_local_links": 14,
+  "changed_previous_runtime_files": [],
+  "missing_gallery_files": [],
+  "media_frame_visual_review": "poster and nine-point storyboard inspected",
+  "browser_interaction": "awaiting_verification",
+  "new_research_gpu_hours": 0,
+  "original_campaign_gpu_hours": 3.0269522614598583,
+  "showcase_sha256": "57461fd2aed9ad94d06f1481bf31419bdd0dc421e0544091ecd1ff4fcd9e49f3",
+  "bundle_bytes": 3196779
+}

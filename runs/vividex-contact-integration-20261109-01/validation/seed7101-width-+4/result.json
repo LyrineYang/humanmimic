@@ -1,0 +1,58 @@
+{
+  "condition": {
+    "id": "seed7101-width-+4",
+    "seed": 7101,
+    "halfwidth_delta_mm": 4
+  },
+  "variants": {
+    "baseline": {
+      "edge_error_m": 0.0011771729951394264,
+      "penalized_error_m": 0.05,
+      "valid": false,
+      "prerelease_edge_error_m": 0.001168097628487491,
+      "residual_dx_m": 9.20624886603591e-05,
+      "offset_m": -0.0005762262188986345,
+      "reachable": true,
+      "lower_reachable": true,
+      "detached": true,
+      "table_supported": true,
+      "drift_m": 1.3261028347440899e-06,
+      "orientation_error_deg": 1.8272373167187603
+    },
+    "contact": {
+      "edge_error_m": 0.0011771729951394264,
+      "penalized_error_m": 0.05,
+      "valid": false,
+      "prerelease_edge_error_m": 0.001168097628487491,
+      "residual_dx_m": 9.20624886603591e-05,
+      "offset_m": -0.0005762262188986345,
+      "reachable": true,
+      "lower_reachable": true,
+      "detached": true,
+      "table_supported": true,
+      "drift_m": 1.3261028347440899e-06,
+      "orientation_error_deg": 1.8272373167187603
+    }
+  },
+  "scope": "Privileged-state pretrained grasp; nominal pose prior shared; unknown local box extent; scripted residual/lower/release; external calibrated probe",
+  "probe_valid": false,
+  "probe_peak_n": 5.446652141536883,
+  "memory": {
+    "grasp_id": "seed7101-width-+4-native-grasp",
+    "normal": [
+      1.0,
+      0.0,
+      0.0
+    ],
+    "mean_m": -0.0005762262188986345,
+    "sigma_m": 0.01,
+    "events": [],
+    "valid": false,
+    "scope": "Local support offset along one normal; fixed grasp and orientation"
+  },
+  "policy_steps": 6,
+  "goal_edge_x_m": -0.02934750141253651,
+  "common_states_sha256": "7800e23f3c6c51e9e82d692fa4dacf84eedad4fe7f71c7242585a0639592c251",
+  "policy_input_actions_sha256": "5b7959c128c63fa36ba7cd2d705c8fe83802444d0b4152d233b131cd063a446c",
+  "fork_sha256": "8b3e74843d32c8f459bb07ab638680fe0d351da275b2052453bc1b42054ed115"
+}

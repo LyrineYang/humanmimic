@@ -1,0 +1,77 @@
+{
+  "execution_status": "passed",
+  "research_status": "failed",
+  "trial_count": 1,
+  "penalized_mae_m": [
+    0.09157755978893575,
+    0.09157755978893575
+  ],
+  "relative_improvement": 0.0,
+  "valid_counts": {
+    "baseline": 0,
+    "contact": 0
+  },
+  "probe_valid_count": 0,
+  "trials": [
+    {
+      "condition": {
+        "id": "seed6101-width-plus4",
+        "seed": 6101,
+        "halfwidth_delta_mm": 4
+      },
+      "variants": {
+        "baseline": {
+          "edge_error_m": 0.09157755978893575,
+          "penalized_error_m": 0.09157755978893575,
+          "valid": false,
+          "prerelease_edge_error_m": 0.002213919631330552,
+          "residual_dx_m": 1.5673338616378762e-05,
+          "offset_m": 0.020528346624834964,
+          "reachable": true,
+          "lower_reachable": true,
+          "detached": true,
+          "table_supported": false,
+          "drift_m": 5.042979193531661e-06,
+          "orientation_error_deg": 77.20062180922054
+        },
+        "contact": {
+          "edge_error_m": 0.09157755978893575,
+          "penalized_error_m": 0.09157755978893575,
+          "valid": false,
+          "prerelease_edge_error_m": 0.002213919631330552,
+          "residual_dx_m": 1.5673338616378762e-05,
+          "offset_m": 0.020528346624834964,
+          "reachable": true,
+          "lower_reachable": true,
+          "detached": true,
+          "table_supported": false,
+          "drift_m": 5.042979193531661e-06,
+          "orientation_error_deg": 77.20062180922054
+        }
+      },
+      "scope": "Privileged-state pretrained grasp; nominal pose prior shared; unknown local box extent; scripted residual/lower/release; external calibrated probe",
+      "probe_valid": false,
+      "probe_peak_n": 11.429653268862253,
+      "memory": {
+        "grasp_id": "seed6101-width-plus4-native-grasp",
+        "normal": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "mean_m": 0.020528346624834964,
+        "sigma_m": 0.01,
+        "events": [],
+        "valid": false,
+        "scope": "Local support offset along one normal; fixed grasp and orientation"
+      },
+      "policy_steps": 60,
+      "goal_edge_x_m": 0.15540240303634506,
+      "common_states_sha256": "366afc2bdc5aae4c943e3e85ad7baa404186084973b8e5cb02f95cdb181146d4",
+      "policy_input_actions_sha256": "e8dce353b4685e54767b9e995eab5b3681836afda1cdf70f6ad2f006d701c4da",
+      "fork_sha256": "6a0b4b32934800705af0c066e1465b01e67f7fef3013a44a4f11bdb0266cadbd"
+    }
+  ],
+  "scope": "Privileged-state pretrained grasp; nominal pose prior shared; unknown local box extent; scripted residual/lower/release; external calibrated probe",
+  "protocol_sha256": "0d699d9e0d24b4f0676bde942634d903c75391c4add12767b70ee6e8fc63c118"
+}

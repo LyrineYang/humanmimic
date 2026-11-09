@@ -1,0 +1,37 @@
+{
+  "split": "development_debug",
+  "conditions": [
+    {
+      "id": "seed6101-width-plus4",
+      "seed": 6101,
+      "halfwidth_delta_mm": 4
+    },
+    {
+      "id": "seed6102-width-minus4",
+      "seed": 6102,
+      "halfwidth_delta_mm": -4
+    }
+  ],
+  "stabilize_s": 3.0,
+  "probe_start_gap_m": 0.012,
+  "probe_max_travel_m": 0.03,
+  "probe_speed_m_s": 0.002,
+  "probe_retract_m_s": 0.04,
+  "residual_limit_m": 0.02,
+  "placement_dx_m": 0.0,
+  "settle_s": 2.0,
+  "root_tracking_kp": 8.0,
+  "root_tracking_kd": 0.4,
+  "upright_updates": 2,
+  "support_clearance_m": -0.003,
+  "passive_release": true,
+  "acceptance": {
+    "minimum_relative_penalized_mae_improvement": 0.25,
+    "minimum_contact_valid_fraction": 0.8,
+    "no_valid_count_regression": true,
+    "probe_peak_3d_force_max_n": 2,
+    "release_drift_m": 0.002,
+    "orientation_error_deg": 10,
+    "failure_penalty_floor_m": 0.05
+  }
+}

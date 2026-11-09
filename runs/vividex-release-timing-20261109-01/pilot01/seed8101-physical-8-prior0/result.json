@@ -1,0 +1,138 @@
+{
+  "condition": {
+    "id": "seed8101-physical-8-prior0",
+    "seed": 8101,
+    "halfwidth_delta_mm": -8,
+    "prior_halfwidth_error_mm": 0
+  },
+  "variants": {
+    "early-baseline": {
+      "edge_error_m": 0.11285797625777566,
+      "penalized_error_m": 0.11285797625777566,
+      "valid": false,
+      "prerelease_edge_error_m": 0.007429044815968039,
+      "residual_dx_m": 0.006848802899171495,
+      "timing": "early",
+      "variant": "baseline",
+      "probe_valid": true,
+      "probe_peak_n": 0.5953266198035854,
+      "offset_m": -0.0032407253244543695,
+      "reachable": true,
+      "lower_reachable": true,
+      "detached": true,
+      "table_supported": true,
+      "drift_m": 1.2032446613256022e-07,
+      "orientation_error_deg": 90.90031590192865
+    },
+    "early-contact": {
+      "edge_error_m": 0.11037147640067,
+      "penalized_error_m": 0.11037147640067,
+      "valid": false,
+      "prerelease_edge_error_m": 0.005423137126792453,
+      "residual_dx_m": 0.010859689066184855,
+      "timing": "early",
+      "variant": "contact",
+      "probe_valid": true,
+      "probe_peak_n": 0.5953266198035854,
+      "offset_m": -0.007251611491467729,
+      "reachable": true,
+      "lower_reachable": true,
+      "detached": true,
+      "table_supported": true,
+      "drift_m": 9.013401105877937e-08,
+      "orientation_error_deg": 90.772852009439
+    },
+    "supported-baseline": {
+      "edge_error_m": 0.11160931373491251,
+      "penalized_error_m": 0.11160931373491251,
+      "valid": false,
+      "prerelease_edge_error_m": 0.00766972982643381,
+      "residual_dx_m": 0.007056306734223309,
+      "timing": "supported",
+      "variant": "baseline",
+      "probe_valid": true,
+      "probe_peak_n": 1.0036530488911588,
+      "offset_m": -0.0032407253244543695,
+      "reachable": true,
+      "lower_reachable": true,
+      "detached": true,
+      "table_supported": true,
+      "drift_m": 9.181465196170633e-08,
+      "orientation_error_deg": 90.75715310160672
+    },
+    "supported-contact": {
+      "edge_error_m": 0.11242355607015,
+      "penalized_error_m": 0.11242355607015,
+      "valid": false,
+      "prerelease_edge_error_m": 0.006829978404609242,
+      "residual_dx_m": 0.00888731167830054,
+      "timing": "supported",
+      "variant": "contact",
+      "probe_valid": true,
+      "probe_peak_n": 1.0036530488911588,
+      "offset_m": -0.005071730268531599,
+      "reachable": true,
+      "lower_reachable": true,
+      "detached": true,
+      "table_supported": true,
+      "drift_m": 1.0211858379831563e-07,
+      "orientation_error_deg": 90.8341743160932
+    }
+  },
+  "probe": {
+    "early": {
+      "valid": true,
+      "peak_n": 0.5953266198035854,
+      "memory": {
+        "grasp_id": "seed8101-physical-8-prior0-early-native-grasp",
+        "normal": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "mean_m": -0.007251611491467729,
+        "sigma_m": 0.0003,
+        "events": [
+          "one-probe"
+        ],
+        "valid": true,
+        "scope": "Local support offset along one normal; fixed grasp and orientation"
+      },
+      "accepted": true
+    },
+    "supported": {
+      "valid": true,
+      "peak_n": 1.0036530488911588,
+      "memory": {
+        "grasp_id": "seed8101-physical-8-prior0-supported-native-grasp",
+        "normal": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "mean_m": -0.005071730268531599,
+        "sigma_m": 0.0003,
+        "events": [
+          "one-probe"
+        ],
+        "valid": true,
+        "scope": "Local support offset along one normal; fixed grasp and orientation"
+      },
+      "accepted": true
+    }
+  },
+  "scope": "Privileged-state pretrained grasp; nominal pose prior shared; unknown local box extent; scripted residual/lower/release; external calibrated probe",
+  "public_grasp_gate": {
+    "load_z_n": 5.596031356263611,
+    "passed": true
+  },
+  "policy_steps": 60,
+  "goal_edge_x_m": 0.022403473956858627,
+  "common_states_sha256": "e5c04c0141f59e1a7b3dc55cb14586e174d99848d1b1bad41e0a83a606e67311",
+  "policy_input_actions_sha256": "6999676c8ecb8b443c33cab66d40f14ac21e01e4bb26190e9145caca3efe6266",
+  "fork_sha256": {
+    "early": "b3f29b1d1f156bd69865a80625f69e1cd852b1957ca009b2b74668804400c418",
+    "supported": "4ef2ddff1453d9d18c548c7d431dc5ae481c0c30a5f95f052d18d7c54fa3b4c7"
+  },
+  "base_fork_sha256": "0db36ec0a3d677b6c793cb9aedd644f15ea1e43636f1f623cbf14d2ab605b356"
+}

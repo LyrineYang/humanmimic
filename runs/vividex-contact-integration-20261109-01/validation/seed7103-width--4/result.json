@@ -1,0 +1,60 @@
+{
+  "condition": {
+    "id": "seed7103-width--4",
+    "seed": 7103,
+    "halfwidth_delta_mm": -4
+  },
+  "variants": {
+    "baseline": {
+      "edge_error_m": 0.0003622489394664724,
+      "penalized_error_m": 0.0003622489394664724,
+      "valid": true,
+      "prerelease_edge_error_m": 0.0028505216145659137,
+      "residual_dx_m": 3.1439178891569386e-05,
+      "offset_m": 0.01249029118291635,
+      "reachable": true,
+      "lower_reachable": true,
+      "detached": true,
+      "table_supported": true,
+      "drift_m": 2.9105767900932973e-06,
+      "orientation_error_deg": 0.5402512126546701
+    },
+    "contact": {
+      "edge_error_m": 0.0031825840735241195,
+      "penalized_error_m": 0.0031825840735241195,
+      "valid": true,
+      "prerelease_edge_error_m": 0.00023707278693922695,
+      "residual_dx_m": 0.002929371177519541,
+      "offset_m": 0.009592359184288378,
+      "reachable": true,
+      "lower_reachable": true,
+      "detached": true,
+      "table_supported": true,
+      "drift_m": 2.9131043537413755e-06,
+      "orientation_error_deg": 0.5155555322478194
+    }
+  },
+  "scope": "Privileged-state pretrained grasp; nominal pose prior shared; unknown local box extent; scripted residual/lower/release; external calibrated probe",
+  "probe_valid": true,
+  "probe_peak_n": 0.22526682446495788,
+  "memory": {
+    "grasp_id": "seed7103-width--4-native-grasp",
+    "normal": [
+      1.0,
+      0.0,
+      0.0
+    ],
+    "mean_m": 0.009592359184288378,
+    "sigma_m": 0.0003,
+    "events": [
+      "one-probe"
+    ],
+    "valid": true,
+    "scope": "Local support offset along one normal; fixed grasp and orientation"
+  },
+  "policy_steps": 60,
+  "goal_edge_x_m": 0.06331920129190816,
+  "common_states_sha256": "27a1d5ea582fb8e8a618a2cdc986090ea89f33106192f1ce4b29be0b4051bb3e",
+  "policy_input_actions_sha256": "84ec5fce0ee64d8d4064b88f76b4cc60045a36910aaa553ca2dc7756ee6a77f0",
+  "fork_sha256": "51771daa91ab314e75781ad3ab2255118ce6fe2b31c11bed9059a48e8f58e6c4"
+}

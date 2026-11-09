@@ -1,0 +1,82 @@
+{
+  "split": "development_debug",
+  "conditions": [
+    {
+      "id": "seed8102-physical+0-prior-8",
+      "seed": 8102,
+      "halfwidth_delta_mm": 0,
+      "prior_halfwidth_error_mm": -8
+    },
+    {
+      "id": "seed8102-physical+0-prior+8",
+      "seed": 8102,
+      "halfwidth_delta_mm": 0,
+      "prior_halfwidth_error_mm": 8
+    },
+    {
+      "id": "seed8102-physical-8-prior+0",
+      "seed": 8102,
+      "halfwidth_delta_mm": -8,
+      "prior_halfwidth_error_mm": 0
+    },
+    {
+      "id": "seed8102-physical+8-prior+0",
+      "seed": 8102,
+      "halfwidth_delta_mm": 8,
+      "prior_halfwidth_error_mm": 0
+    },
+    {
+      "id": "seed8103-physical+0-prior+0",
+      "seed": 8103,
+      "halfwidth_delta_mm": 0,
+      "prior_halfwidth_error_mm": 0
+    },
+    {
+      "id": "seed8103-physical+8-prior+0",
+      "seed": 8103,
+      "halfwidth_delta_mm": 8,
+      "prior_halfwidth_error_mm": 0
+    }
+  ],
+  "stabilize_s": 3.0,
+  "probe_start_gap_m": 0.012,
+  "probe_max_travel_m": 0.03,
+  "probe_speed_m_s": 0.002,
+  "probe_retract_m_s": 0.04,
+  "residual_limit_m": 0.02,
+  "placement_dx_m": 0.0,
+  "settle_s": 2.0,
+  "root_tracking_kp": 8.0,
+  "root_tracking_kd": 0.4,
+  "upright_updates": 2,
+  "support_clearance_m": -0.003,
+  "passive_release": true,
+  "acceptance": {
+    "minimum_relative_penalized_mae_improvement": 0.25,
+    "minimum_contact_valid_fraction": 0.8,
+    "no_valid_count_regression": true,
+    "probe_peak_3d_force_max_n": 2,
+    "release_drift_m": 0.002,
+    "orientation_error_deg": 10,
+    "failure_penalty_floor_m": 0.05,
+    "seed_cluster_bootstrap_95ci_lower_positive": true
+  },
+  "frozen_utc": "2026-11-09T14:38:04.325243+00:00",
+  "notes": [
+    "Development only; new controller gates, all outcomes retained; no training"
+  ],
+  "probe_timings": [
+    "early",
+    "supported"
+  ],
+  "edge_goal_dx_m": 0.0,
+  "palm_fixed_alignment": true,
+  "grip_margin_rad": 0.08,
+  "release_open_gain": 0.0,
+  "grasp_load_min_n": 0.5,
+  "support_max_steps": 60,
+  "support_step_m": 0.0005,
+  "support_load_ratio": 0.3,
+  "residual_clearance_m": 0.02,
+  "probe_skin_m": 0.0005
+}

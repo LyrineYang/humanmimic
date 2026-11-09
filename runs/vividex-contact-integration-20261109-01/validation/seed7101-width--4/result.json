@@ -1,0 +1,60 @@
+{
+  "condition": {
+    "id": "seed7101-width--4",
+    "seed": 7101,
+    "halfwidth_delta_mm": -4
+  },
+  "variants": {
+    "baseline": {
+      "edge_error_m": 0.00011544388110579229,
+      "penalized_error_m": 0.00011544388110579229,
+      "valid": true,
+      "prerelease_edge_error_m": 0.002735670251003741,
+      "residual_dx_m": 1.9972568077231134e-05,
+      "offset_m": -0.0038079150400493478,
+      "reachable": true,
+      "lower_reachable": true,
+      "detached": true,
+      "table_supported": true,
+      "drift_m": 2.7931382976571276e-06,
+      "orientation_error_deg": 2.9490368209001376
+    },
+    "contact": {
+      "edge_error_m": 0.001975391988336045,
+      "penalized_error_m": 0.001975391988336045,
+      "valid": true,
+      "prerelease_edge_error_m": 0.0003826685671877994,
+      "residual_dx_m": 0.002256974029784864,
+      "offset_m": -0.0060449165017569945,
+      "reachable": true,
+      "lower_reachable": true,
+      "detached": true,
+      "table_supported": true,
+      "drift_m": 2.8167345573932045e-06,
+      "orientation_error_deg": 2.6102880097047283
+    }
+  },
+  "scope": "Privileged-state pretrained grasp; nominal pose prior shared; unknown local box extent; scripted residual/lower/release; external calibrated probe",
+  "probe_valid": true,
+  "probe_peak_n": 0.5674494413963823,
+  "memory": {
+    "grasp_id": "seed7101-width--4-native-grasp",
+    "normal": [
+      1.0,
+      0.0,
+      0.0
+    ],
+    "mean_m": -0.0060449165017569945,
+    "sigma_m": 0.0003,
+    "events": [
+      "one-probe"
+    ],
+    "valid": true,
+    "scope": "Local support offset along one normal; fixed grasp and orientation"
+  },
+  "policy_steps": 60,
+  "goal_edge_x_m": -0.13695934506124635,
+  "common_states_sha256": "13d7226464c1be5909e4362a74542bf8c12a59b0122af0668a032ada0dff6756",
+  "policy_input_actions_sha256": "9a71816cf58bfbbb3917312b99f2de101746427260d29a0029ca948699aedbdf",
+  "fork_sha256": "50176d78b940842934f371781cdff91eebf821c0b34010cfc5d4f7ecb14c9964"
+}

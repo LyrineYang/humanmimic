@@ -1,0 +1,109 @@
+{
+  "run_id": "vividex-contact-integration-20261109-01",
+  "implementation_status": "passed",
+  "cuda_archive_verification": "passed",
+  "research_status": "failed",
+  "scope": "Privileged-state pretrained grasp; nominal pose prior shared; unknown local box extent; scripted residual/lower/release; external calibrated probe",
+  "protocol": "configs/vividex-contact-pair-validation.json",
+  "protocol_sha256": "dde51fff78fba65dca7fa90d7112bd2bc385a48c5384650ffd1f3e575121f980",
+  "trial_count": 30,
+  "valid_counts": {
+    "baseline": 16,
+    "contact": 16
+  },
+  "penalized_mae_m": [
+    0.025639976209320424,
+    0.024579578235944907
+  ],
+  "relative_improvement": 0.04135721362292255,
+  "paired_bootstrap_95ci_m": [
+    3.6613294156648634e-05,
+    0.0023191778876011796
+  ],
+  "bootstrap_scope": "Seed-cluster bootstrap within frozen local development conditions; not object-generalization",
+  "probe_valid_count": 25,
+  "maximum_probe_force_n": 6.879378250218904,
+  "metrics": {
+    "baseline": {
+      "edge_error_m": 0.012719480735154623,
+      "penalized_error_m": 0.02563997620932042,
+      "prerelease_edge_error_m": 0.0028261344247732965,
+      "orientation_error_deg": 31.887410790063363,
+      "drift_m": 1.2382927720163794e-06,
+      "y_error_m": 0.031057102830600203,
+      "both_valid_edge_mae_m": 0.00357611466865501,
+      "failure_counts_nonexclusive": {
+        "reachable": 0,
+        "lower_reachable": 0,
+        "detached": 0,
+        "table_supported": 0,
+        "orientation": 10,
+        "drift": 0
+      }
+    },
+    "contact": {
+      "edge_error_m": 0.009550667237221843,
+      "penalized_error_m": 0.024579578235944907,
+      "prerelease_edge_error_m": 0.001058559171426652,
+      "orientation_error_deg": 31.80276664149105,
+      "drift_m": 1.2241775628458435e-06,
+      "y_error_m": 0.031075229020508282,
+      "both_valid_edge_mae_m": 0.0022706290809079693,
+      "failure_counts_nonexclusive": {
+        "reachable": 0,
+        "lower_reachable": 0,
+        "detached": 0,
+        "table_supported": 0,
+        "orientation": 10,
+        "drift": 0
+      }
+    }
+  },
+  "both_valid_pairs": 16,
+  "new_gpu_hours": 0.2286425760189175,
+  "campaign_gpu_hours": 0.34636068134232323,
+  "remaining_gpu_hours": 7.653639318657676,
+  "ledger": "/home/junqiy/projects/humanmimic-data/r4/runs/story-contact-20261109/ledger.json",
+  "all_jobs_finished": true,
+  "original_144h_ledger_unchanged": true,
+  "video_generated": false,
+  "showcase_authorized": false,
+  "raw_demo_authorized": true,
+  "training": false,
+  "heldout_used": false,
+  "environment_changes": "None; existing isolated vividex-demo runtime",
+  "checks": {
+    "source_parse": "passed",
+    "headless_gpu_inference_physics": "passed",
+    "archive_restoration": "passed_60_arms_30_forks",
+    "animation_replay": "not_run",
+    "live_camera": "not_run"
+  },
+  "raw_files": {
+    "result": "runs/vividex-contact-integration-20261109-01/validation/result.json",
+    "verification": "runs/vividex-contact-integration-20261109-01/archive-verification.json",
+    "frozen_source": "runs/vividex-contact-integration-20261109-01/frozen-source"
+  },
+  "limitations": [
+    "One sugar-box family and fixed pretrained state policy; not visual learning",
+    "Shared privileged pose, hidden extent; one scalar support offset, not full geometry",
+    "External calibrated probe and custom common release adapter; not LEAP",
+    "Probe2N bound not achieved in5 cases; whole-hand2N bound not evaluated",
+    "30 development verification conditions are now used; do not tune and call them unseen",
+    "Earlier pilot script hashes and raw states retained; complete source snapshot stored for final frozen validation"
+  ],
+  "next": [
+    "Detect stable grasp and load transfer from public signals before accepting/reusing contact memory",
+    "Compare timing of the same single probe before versus after support, on newly frozen seeds",
+    "Measure release-induced offset changes; preserve after-release task metric and failure penalties"
+  ],
+  "delivery_checks": {
+    "status": "passed",
+    "unchanged_prior_mp4": 41,
+    "new_mp4": 0,
+    "documentation_pages": 24,
+    "local_links": 348
+  },
+  "result_sha256": "0fc2cfe7ba0a2be703ca3d600557ff494ed7d96f83d90a76fb01eaaee33fd3d4",
+  "archive_verification_sha256": "ce6ac3179d98329df744d76fa3a889fd187729919c6a945aa781edc6a8b470c5"
+}

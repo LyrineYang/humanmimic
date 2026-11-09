@@ -1,0 +1,16 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1600
+PlayResY: 900
+WrapStyle: 2
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Default,WenQuanYi Zen Hei,30,&H00FFFFFF,&H00FFFFFF,&H00101824,&H00101824,0,0,0,0,100,100,0,0,1,0,0,7,0,0,0,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.00,0:00:03.00,Default,,0,0,0,,{\an7\pos(100,165)\fs28\1c&HC3DF72&}HUMANMIMIC  /  RESEARCH PREVIEW
+Dialogue: 0,0:00:00.00,0:00:03.00,Default,,0,0,0,,{\an7\pos(100,270)\fs57\1c&HFFFFFF&}下一步：让模型随操作经验修正
+Dialogue: 0,0:00:00.00,0:00:03.00,Default,,0,0,0,,{\an7\pos(100,390)\fs32\1c&H7FC7F5&}研究目标 / 尚待验证
+Dialogue: 0,0:00:00.00,0:00:03.00,Default,,0,0,0,,{\an7\pos(100,505)\fs30\1c&HCAB8A9&}视频给初始动作 → 接触修正物体模型 → 任务相关观察\N当前优先：2 N 内成功抓放、完整置信度校准、E3 对照

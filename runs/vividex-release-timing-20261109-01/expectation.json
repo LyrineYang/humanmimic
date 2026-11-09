@@ -1,0 +1,31 @@
+{
+  "created_utc": "2026-11-09T15:22:37.501295+00:00",
+  "expected": [
+    "Native free object, same frozen ViViDex weights, no scratch training",
+    "Shared palm-fixed orientation alignment, proprioceptive load transfer and soft finger release improve stability",
+    "Factorial early/supported probe timing x baseline/contact residual; one probe per path, same channels, speed, force/travel cap",
+    "Actual shape perturbation stress test retained; separately fixed physical shape with perturbed coarse prior isolates model error",
+    "Targets independent of perturbed prior; all new validation seeds frozen after debug; used7101-7106 not called unseen",
+    "Save every successful/failed validation path as raw uncut video with state/action timing; no showcase",
+    "Same25%penalizedMAE,80%valid,2Nprobe,2mmsettle,10degorientation gates; retain all failures"
+  ],
+  "base_gpu_hours": 0.34636068134232323,
+  "development_seeds": [
+    8101,
+    8102,
+    8103
+  ],
+  "validation_seeds_reserved": [
+    8201,
+    8202,
+    8203,
+    8204,
+    8205,
+    8206
+  ],
+  "never_claim": [
+    "Unseen physical-object generalization from a fixed-object prior corruption study",
+    "Whole-hand2Nbound or visual policy",
+    "Changing baseline physics, using truth-only correction or removing failed rows"
+  ]
+}

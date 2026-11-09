@@ -1,0 +1,2 @@
+[image2 @ 0x7ebf580] The specified filename '/home/junqiy/projects/humanmimic/runs/demo-showcase-20261109-01/media/poster.png' does not contain an image sequence pattern or a pattern is invalid.
+[image2 @ 0x7ebf580] Use a pattern such as %03d for an image sequence or use the -update option (with -frames:v 1 if needed) to write a single image.

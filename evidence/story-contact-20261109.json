@@ -1,0 +1,77 @@
+{
+  "date": "2026-11-09",
+  "latest_user_scope": "Preserve research results and existing demos; save future-demo data; no new video generation",
+  "research_question": "Can one calibrated-plane contact correct the task-normal object-to-hand support offset and improve subsequent placement with a fixed controller?",
+  "source_root": "runs/story-contact-20261109-01",
+  "statuses": {
+    "DexTrack_LEAP_weights": "needs_input: official linked OneDrive GET returned403 on this machine; not evidence that authors did not release weights",
+    "ViViDex_relocation": "passed:3 of3 development endpoints within upstream3cm criterion",
+    "ViViDex_place_inference": "passed:3 development executions; full containment metric awaiting_verification",
+    "scripted_support_release": "passed:3 of3 development executions; fingers-open then reverse recorded wrist targets; not learned release",
+    "contact_offset_diagnostic": "passed:6 of6 frozen development conditions; simplified fixed clamp, known plane, one scalar",
+    "full_LEAP_E3": "awaiting_verification",
+    "new_video_generation": "disabled by user"
+  },
+  "contact_diagnostic": {
+    "settings_used": 6,
+    "role": "Previously unused development verification points, now marked used; not project heldout",
+    "all_reported": true,
+    "baseline_mean_mm": 8.666666666666652,
+    "corrected_mean_mm": 0.0679961151789435,
+    "corrected_max_mm": 0.16599150946926267,
+    "successes": 6,
+    "contact_peak_max_n": 1.0607183564401752
+  },
+  "relocation_errors_mm": [
+    5.442685294580615,
+    5.617298287696796,
+    8.13929702825034
+  ],
+  "release_settling_drift_mm": [
+    0.1382566406391561,
+    0.18220023775938898,
+    0.20223598403390497
+  ],
+  "release_criterion": "No hand contact and cup contact in final.25s; <=2mm object displacement in final.5s; no full volume containment claim",
+  "fresh_development_seeds_used": [
+    4101,
+    4102,
+    4103,
+    4104,
+    4105,
+    4106,
+    5101,
+    5102,
+    5103,
+    5201,
+    5301,
+    5401,
+    5402,
+    5403
+  ],
+  "project_heldout_used": false,
+  "training": false,
+  "new_gpu_hours": 0.11771810532340574,
+  "gpu_hours_max": 8,
+  "ledger": "/home/junqiy/projects/humanmimic-data/r4/runs/story-contact-20261109/ledger.json",
+  "source_commit": "9790140170d8be49b828ab214ce3537a2475fcea",
+  "object_assets_commit": "96a275cab048eec625edfb6814f551fb9c329981",
+  "checkpoint_sha256": {
+    "vividex-sugar-pose1": "2c3e3bd7ade50f18ed0bea0ccff57c6af3814629f860cf353cf3917085a6b210",
+    "vividex-place": "ab0cdfa83c0a2e1b9664bf2a1488b0434b697b7027978c252068c78c985eda83"
+  },
+  "preserved_artifacts": {
+    "contact_pair": "runs/story-contact-20261109-01/demo-final",
+    "contact_verification": "runs/story-contact-20261109-01/verification-summary.json",
+    "contact_state_archive": "runs/story-contact-20261109-01/contact-state-archive",
+    "pretrained_state_archive": "runs/story-contact-20261109-01/vividex-state-archive",
+    "pre_existing_presentation": "runs/story-contact-20261109-01/presentation",
+    "successful_release_raw": "runs/story-contact-20261109-01/vividex-release-retrace"
+  },
+  "remaining_gpu_hours": 7.882281894676594,
+  "active_jobs": 0,
+  "preservation_check": "runs/story-contact-20261109-01/preservation-check.json",
+  "artifact_index": "runs/story-contact-20261109-01/preservation-index.json",
+  "archive_check": "passed:6 model/state bundles restored, no rendering; outcomes equal prior recordings",
+  "new_or_modified_videos_since_user_stop": 0
+}

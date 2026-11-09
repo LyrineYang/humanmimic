@@ -1,0 +1,60 @@
+{
+  "condition": {
+    "id": "seed7104-width-+4",
+    "seed": 7104,
+    "halfwidth_delta_mm": 4
+  },
+  "variants": {
+    "baseline": {
+      "edge_error_m": 0.004758237290831066,
+      "penalized_error_m": 0.004758237290831066,
+      "valid": true,
+      "prerelease_edge_error_m": 0.0025278535954543213,
+      "residual_dx_m": 5.5893954488392406e-05,
+      "offset_m": -0.0037125326107519813,
+      "reachable": true,
+      "lower_reachable": true,
+      "detached": true,
+      "table_supported": true,
+      "drift_m": 1.2103604458592741e-06,
+      "orientation_error_deg": 1.6911921312963414
+    },
+    "contact": {
+      "edge_error_m": 0.0020897772546042137,
+      "penalized_error_m": 0.0020897772546042137,
+      "valid": true,
+      "prerelease_edge_error_m": 0.0002700436853614596,
+      "residual_dx_m": -0.0025901247906777863,
+      "offset_m": -0.0010665138655858069,
+      "reachable": true,
+      "lower_reachable": true,
+      "detached": true,
+      "table_supported": true,
+      "drift_m": 1.1966586973099238e-06,
+      "orientation_error_deg": 1.6429597577562733
+    }
+  },
+  "scope": "Privileged-state pretrained grasp; nominal pose prior shared; unknown local box extent; scripted residual/lower/release; external calibrated probe",
+  "probe_valid": true,
+  "probe_peak_n": 0.8888755188990868,
+  "memory": {
+    "grasp_id": "seed7104-width-+4-native-grasp",
+    "normal": [
+      1.0,
+      0.0,
+      0.0
+    ],
+    "mean_m": -0.0010665138655858069,
+    "sigma_m": 0.0003,
+    "events": [
+      "one-probe"
+    ],
+    "valid": true,
+    "scope": "Local support offset along one normal; fixed grasp and orientation"
+  },
+  "policy_steps": 60,
+  "goal_edge_x_m": -0.09101085960843036,
+  "common_states_sha256": "5a897a4d48015e1d2e6fec3778d6743885a4401e20cca712b5f5ea40eddb9133",
+  "policy_input_actions_sha256": "91b4c116fcc710c97872d2b2d9c29dfff1866ef5b76ea1c0eeee89233993cb09",
+  "fork_sha256": "3a13cf19b25772fa44dc16b96fb2513cf425156bba10af1ee93565be32770796"
+}

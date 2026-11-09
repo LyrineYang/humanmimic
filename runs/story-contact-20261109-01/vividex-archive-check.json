@@ -1,0 +1,30 @@
+{
+  "status": "passed",
+  "gpu": "Tesla V100-SXM2-32GB",
+  "mujoco": "2.3.7",
+  "rendering": false,
+  "new_video": false,
+  "rows": [
+    {
+      "state_file": "/home/junqiy/projects/humanmimic/runs/story-contact-20261109-01/vividex-state-archive/episode-00-states.npz",
+      "state_sha256": "04ff2431d394e3b3b2f203efda93c0d93cbb0d5d31737e0a7e39cafb32bbfc77",
+      "model_sha256": "c4c6089131fa11a7094f3040b8ebabeb2ff06f63d6cbe75b0f12f0f95c27e193",
+      "samples": 225,
+      "final_position_restore_error_m": 0.0
+    },
+    {
+      "state_file": "/home/junqiy/projects/humanmimic/runs/story-contact-20261109-01/vividex-state-archive/episode-01-states.npz",
+      "state_sha256": "53797e8dc709d4b9dee56c27a0141ed15d6be69c8a67ba382480463bb9ebbc81",
+      "model_sha256": "6d1c59566e8b43b55996d1d17ac43dbbfe69b2f936f6215ecad6a91ea77a2288",
+      "samples": 225,
+      "final_position_restore_error_m": 0.0
+    },
+    {
+      "state_file": "/home/junqiy/projects/humanmimic/runs/story-contact-20261109-01/vividex-state-archive/episode-02-states.npz",
+      "state_sha256": "27807d08a4a9214943182a7fb0852425783f180c847c64bc6c6a838f5ff8ded2",
+      "model_sha256": "94a46665a71b6b3a50a9cb29baf2fcf974a49cfb125a13f1f69683c3f9799369",
+      "samples": 225,
+      "final_position_restore_error_m": 0.0
+    }
+  ]
+}

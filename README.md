@@ -1,3 +1,5 @@
+> 本地接手、已保存演示和实验索引：[2026-11-09迁移入口](docs/migration-20261109/README.md)。
+
 <p align="center">
   <img src="docs/assets/hero.svg" alt="HumanMimic — Video to humanoid motion. Run, inspect and extend a simulation pipeline." width="100%">
 </p>
@@ -18,7 +20,7 @@ HumanMimic connects GEM-X motion estimation, a pretrained SONIC controller and M
 
 **Developer preview · Simulation only · Rebuildable Linux/V100 CUDA example.** Recorded-video and reference-motion workflows are implemented. Live-camera work is skipped for the current stage; video-based object reconstruction and dexterous interaction are the next research direction.
 
-**R4 research in development:** Learn an initial manipulation from video, then use interaction evidence to revise the object model and spend observations where they matter for stable grasping and precise placement. LEAP sensing, CUDA shape/pose/compliance estimation and explicit memory have runnable components. Current 2 N grasp/place acceptance, the complete video-to-policy learning pipeline and manipulation gains remain unverified. Read the [experiment design (Chinese)](docs/r4-multimodal.zh-CN.md), [latest prerequisite results](docs/results.md#r4--november-3-prerequisite-results) or [video-learning alternatives and reproduction estimates (Chinese)](docs/research-video-interaction.zh-CN.md#11-视频学习操控的候选实现与复现难度2026-11-04).
+**R4 research in development:** Learn an initial manipulation from video, then use interaction evidence to revise the object model and spend observations where they matter for stable grasping and precise placement. LEAP sensing, CUDA shape/pose/compliance estimation and explicit memory have runnable components. Current 2 N grasp/place acceptance, the complete video-to-policy learning pipeline and manipulation gains remain unverified. Frozen ViViDex inference and paired contact correction now run locally; the 30-pair after-release accuracy gate failed ([current results](docs/results.md#vividex-contact-integration--november-9-2026)). Read the [experiment design (Chinese)](docs/r4-multimodal.zh-CN.md), [latest prerequisite results](docs/results.md#r4--november-3-prerequisite-results) or [video-learning alternatives and reproduction estimates (Chinese)](docs/research-video-interaction.zh-CN.md#11-视频学习操控的候选实现与复现难度2026-11-04).
 
 ## What you can do
 

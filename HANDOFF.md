@@ -6,6 +6,12 @@
 
 这是交接快照；当前状态仍以[PLAN.md](PLAN.md)为准，历史证据以[EXPERIMENTS.md](EXPERIMENTS.md)及原始`runs/`为准，规则见[AGENTS.md](AGENTS.md)。不要把旧实验段落中的“正在运行”当成当前任务。
 
+**2026-11-09当前接续：接触校正已接到ViViDex原生Adroit/自由物体的放置残差接口，已完成30组冻结开发条件的最终释放验证：主指标仅改善4.14%、两组均16/30合格，收益验收failed。** 全部作业finished，不重复提交已用条件；当前目录`runs/vividex-contact-integration-20261109-01/`，命令/数据协议为`configs/vividex-contact-pair-validation.json`。same checkpoint、共同预训练/探触前缀、同一物理状态分支；baseline不使用接触偏差，contact使用。两组共享腕部稳定/竖直对齐/被动卸载撤手。视频澄清：允许原始实验demo，禁止showcase合集；默认仍只保存数据。原8GPUh台账沿用，不从零训练、无付费、保留集未用；详情和最终判定以PLAN/EXPERIMENTS为准。
+
+**2026-11-09前轮保存快照（视频权限已被最新澄清覆盖）：** 新8GPU小时独立授权见configs/budget.json#local_demo_campaign；video_generation_authorized=false，预训练入口默认不录制。已完成ViViDex搬移、脚本释放工程检查及单方向接触校正切片，边界/成本/素材位置以PLAN顶部、evidence/story-contact-20261109.json和docs/results.md最新段为准。原始失败、旧视频与3.027卡时旧ledger保留。`vividex-state-archive`和`contact-state-archive`保存完整模型/实际状态，后续不需为保存成果先生成视频。
+
+**2026-11-09早先展示快照（已被上方范围覆盖）：** 用户当前优先快速demo，已把既有4段物理录像制作成34.56秒原速合集与离线包，入口见[展示目录与计划](docs/results.md#demo-showcase--november-9-2026)。两段操作是旧超2N开发参考，画面保留限制说明；R2本机只有静态预览，完整片待从原机取回。没有新研究试次或训练。原36小时窗口已于11月5日08:54:06结束，不能因四卡当前空闲或台账仍有数字余量而自动恢复执行。新GPU复现窗口待明确，准备优先评估DexTrack/ViViDex现成权重，研究验收不变。
+
 ## 0. 最新服务器接续（2026-11-04，优先于下方历史快照）
 
 - **研究主线与能力：** 视频提供操作意图/初始参考，执行中的多模态记忆与接触证据修正物体模型，任务相关探触服务拿稳、放准。显式估计/控制原型已有运行证据，视频到策略训练未接通；E3收益尚未证明。六个公开候选项目及复现边界见[研究评估](docs/research-video-interaction.zh-CN.md#11-视频学习操控的候选实现与复现难度2026-11-04)，本机均未安装验收，不能据此替换既定实验或启动训练。

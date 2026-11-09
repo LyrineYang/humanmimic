@@ -1,0 +1,18 @@
+{
+  "split": "development_debug",
+  "conditions": [
+    {
+      "id": "seed6101-width-plus4",
+      "seed": 6101,
+      "halfwidth_delta_mm": 4
+    }
+  ],
+  "stabilize_s": 3.0,
+  "probe_start_gap_m": 0.025,
+  "probe_max_travel_m": 0.055,
+  "probe_speed_m_s": 0.01,
+  "probe_retract_m_s": 0.04,
+  "residual_limit_m": 0.02,
+  "placement_dx_m": 0.0,
+  "settle_s": 2.0
+}
