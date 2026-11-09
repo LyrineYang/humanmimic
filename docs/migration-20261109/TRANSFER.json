@@ -1,0 +1,391 @@
+{
+  "repository": "LyrineYang/humanmimic",
+  "release_id": 439758793,
+  "tag": "humanmimic-handoff-20261109",
+  "draft_required": true,
+  "part_size": 134217728,
+  "complete_source_manifest": true,
+  "archives": [
+    {
+      "path": "archives/humanmimic/humanmimic-001.tar.gz",
+      "size": 3465911378,
+      "sha256": "5240bec3596046814b3f0a53b11f7a7cedd0529e6446a38bde7e3f3d9a5fddb1",
+      "parts": [
+        {
+          "name": "humanmimic-001.tar.gz.part-000",
+          "size": 134217728,
+          "sha256": "2e0fdf8032c93fdab54d37b63b549aa0e8a7b06745d248c1fc3c74f44e2a4fea"
+        },
+        {
+          "name": "humanmimic-001.tar.gz.part-001",
+          "size": 134217728,
+          "sha256": "0ba88fe3d4f8f264d9303041c9bf0696b5e9250862c9192460a0b63b6d99ca98"
+        },
+        {
+          "name": "humanmimic-001.tar.gz.part-002",
+          "size": 134217728,
+          "sha256": "a64385d0271f217cb3b84e6e7acde2b70d4a1c645d883eadbb2f34d41dc1451d"
+        },
+        {
+          "name": "humanmimic-001.tar.gz.part-003",
+          "size": 134217728,
+          "sha256": "79544402e371d043d20131e47dc5ae58eb6b56e719e8c64b2418e33bbf61b62c"
+        },
+        {
+          "name": "humanmimic-001.tar.gz.part-004",
+          "size": 134217728,
+          "sha256": "69279d88edffa271b26e5b6e79add58fa74efb10914d405fb72713b46139fe9f"
+        },
+        {
+          "name": "humanmimic-001.tar.gz.part-005",
+          "size": 134217728,
+          "sha256": "1e1e7650234f41a32571f0c73ee6a3e5373a280a45aa1e484ddff41f5406a738"
+        },
+        {
+          "name": "humanmimic-001.tar.gz.part-006",
+          "size": 134217728,
+          "sha256": "b6e4d364dd18f1e74e044d28c6fbfe0141289ce0aef2b7b2124eda169054239c"
+        },
+        {
+          "name": "humanmimic-001.tar.gz.part-007",
+          "size": 134217728,
+          "sha256": "d74e14cb874a64b652906bbf3a9a76349ea6d7c5da588cc1fa06f8ddc845e8d0"
+        },
+        {
+          "name": "humanmimic-001.tar.gz.part-008",
+          "size": 134217728,
+          "sha256": "b52eb91a98cf7b47d0bacc9662c45085414ef16fd5ed371fd04502c73cb35911"
+        },
+        {
+          "name": "humanmimic-001.tar.gz.part-009",
+          "size": 134217728,
+          "sha256": "6a65c4a2ecf197d44499b89f7e1e41386be540fe22c9804b682db5bf13f2aa67"
+        },
+        {
+          "name": "humanmimic-001.tar.gz.part-010",
+          "size": 134217728,
+          "sha256": "606059745e018224aac2949fc36120ab426929737459c2fa8e19e2f343f04f61"
+        },
+        {
+          "name": "humanmimic-001.tar.gz.part-011",
+          "size": 134217728,
+          "sha256": "00d5551ee2c5ca748fb3b0b33fc786c1bf80afdd98b958bb35602d58c296fc81"
+        },
+        {
+          "name": "humanmimic-001.tar.gz.part-012",
+          "size": 134217728,
+          "sha256": "c1787f3c2c3fb4670d74192ab528273194365196a7139212947dc17234493bc8"
+        },
+        {
+          "name": "humanmimic-001.tar.gz.part-013",
+          "size": 134217728,
+          "sha256": "a4a48e9a0a3272a5edf7f40c9464ef0ad6407e8d023bfc3a5b76c0cd16413178"
+        },
+        {
+          "name": "humanmimic-001.tar.gz.part-014",
+          "size": 134217728,
+          "sha256": "29aa8d1e23f8e025e4d36a04cb8e22e811164867036eb89983dc7ca684e40860"
+        },
+        {
+          "name": "humanmimic-001.tar.gz.part-015",
+          "size": 134217728,
+          "sha256": "c3551d6631dc6ba0249ef877ce0ba1942360560e9c5fb1403c59c37550702055"
+        },
+        {
+          "name": "humanmimic-001.tar.gz.part-016",
+          "size": 134217728,
+          "sha256": "3ab1ffe3b63c265de974db43adda3b62c17c56a93907634709c1ac5458bb8455"
+        },
+        {
+          "name": "humanmimic-001.tar.gz.part-017",
+          "size": 134217728,
+          "sha256": "ea95682c069b6c3db259cd56ac8b44416aeae7d64df8e4bedea4e722742d7f4d"
+        },
+        {
+          "name": "humanmimic-001.tar.gz.part-018",
+          "size": 134217728,
+          "sha256": "8e4a66df0e4450a80da88c9bb4714cf989568ee3434fbbeba15b8680db5b3a31"
+        },
+        {
+          "name": "humanmimic-001.tar.gz.part-019",
+          "size": 134217728,
+          "sha256": "920937f56823e885907fab9894a40b8301e4a325432de6bcdf4b3599b870581c"
+        },
+        {
+          "name": "humanmimic-001.tar.gz.part-020",
+          "size": 134217728,
+          "sha256": "c79aee5df6d009f53b417ade11271a3e2e0632f5262e027388abf8b416cf03b2"
+        },
+        {
+          "name": "humanmimic-001.tar.gz.part-021",
+          "size": 134217728,
+          "sha256": "cf1981a79de584c718dc0f99c3e611324b662878bac818a696bcdbfbf4282c44"
+        },
+        {
+          "name": "humanmimic-001.tar.gz.part-022",
+          "size": 134217728,
+          "sha256": "2c4d3628c66fb8551fe7bbcd3a4ad80358885166c26d66503386aa8036fc48cc"
+        },
+        {
+          "name": "humanmimic-001.tar.gz.part-023",
+          "size": 134217728,
+          "sha256": "4e04550f893f0e6c9cd3f8e1b8b2eb281f8050c8efa2e1b65b8acdfef2b2e68d"
+        },
+        {
+          "name": "humanmimic-001.tar.gz.part-024",
+          "size": 134217728,
+          "sha256": "a065f21b445daa8fb19d2d943f8ea3d52622df8ec55f9db8b07c3f8d7604638d"
+        },
+        {
+          "name": "humanmimic-001.tar.gz.part-025",
+          "size": 110468178,
+          "sha256": "eba3988c9094e124b51cf25f42f589a77ef38e556b7d17b642217dd94a72d88c"
+        }
+      ]
+    },
+    {
+      "path": "archives/humanmimic/humanmimic-002.tar.gz",
+      "size": 1807644289,
+      "sha256": "60a4765f9c530a667ebe30f2794f5d6b7c4919ff547e6af6abe9b4037579319a",
+      "parts": [
+        {
+          "name": "humanmimic-002.tar.gz.part-000",
+          "size": 134217728,
+          "sha256": "340248626a68be41ed050079bb7f65d6e54b03736a089f2255f85dddefca3c71"
+        },
+        {
+          "name": "humanmimic-002.tar.gz.part-001",
+          "size": 134217728,
+          "sha256": "fbb00426513e4ee9a3ace40c08d5fbbe8cc11566d08c9500ba5ff6006f89e5c8"
+        },
+        {
+          "name": "humanmimic-002.tar.gz.part-002",
+          "size": 134217728,
+          "sha256": "3d8f2b5d47e392b146ed3488857fdf968971c7d62862b24466bf83cd77fbc555"
+        },
+        {
+          "name": "humanmimic-002.tar.gz.part-003",
+          "size": 134217728,
+          "sha256": "2c7fc51bd0d9f6d715ffdfa3d307fb84627453f169502c3ffaa223017ec425e7"
+        },
+        {
+          "name": "humanmimic-002.tar.gz.part-004",
+          "size": 134217728,
+          "sha256": "2f51066148be0eb22989d55a7169b2cd7e9f5be224d9111a24d95fcdf00265b2"
+        },
+        {
+          "name": "humanmimic-002.tar.gz.part-005",
+          "size": 134217728,
+          "sha256": "32fe40c5cc9aa14d38533ca07784add4d43accfdeb8db4df50cdf9fa9bb86498"
+        },
+        {
+          "name": "humanmimic-002.tar.gz.part-006",
+          "size": 134217728,
+          "sha256": "9e6ca0afea009353061a6e110af0c05ee6aca899cc3fc874e4ae79ea0f464049"
+        },
+        {
+          "name": "humanmimic-002.tar.gz.part-007",
+          "size": 134217728,
+          "sha256": "a861157ab198b2f8edf0fbf3ccbc045853ebf67e467a29bb49c81c03f345b7cd"
+        },
+        {
+          "name": "humanmimic-002.tar.gz.part-008",
+          "size": 134217728,
+          "sha256": "41c297801f705a66b1112cb6e90a851b57da14c1e6d3b8f6294064e7b3c3c22e"
+        },
+        {
+          "name": "humanmimic-002.tar.gz.part-009",
+          "size": 134217728,
+          "sha256": "a079e7aabacca2c41c01d25adbcdfcfa392661115f62d9261297534fb61a6b45"
+        },
+        {
+          "name": "humanmimic-002.tar.gz.part-010",
+          "size": 134217728,
+          "sha256": "f6d4f3338b8720e085b897f2970d62aea1dd36e4fdf155316cfdf0f443256e96"
+        },
+        {
+          "name": "humanmimic-002.tar.gz.part-011",
+          "size": 134217728,
+          "sha256": "73ff5aa4c49e48117259308376f08fd922bc8e47c761c80f77720eb39c5abe75"
+        },
+        {
+          "name": "humanmimic-002.tar.gz.part-012",
+          "size": 134217728,
+          "sha256": "a917bf9b3e926bfeda9e439bf60c1ef144868afea6a008b4aa4fa2d27ac0003d"
+        },
+        {
+          "name": "humanmimic-002.tar.gz.part-013",
+          "size": 62813825,
+          "sha256": "2799d1d6ac151bc955383b5ec747508096e3b50389dce02e59f59d366314dc6a"
+        }
+      ]
+    },
+    {
+      "path": "archives/humanmimic/humanmimic-003.tar.gz",
+      "size": 1801542897,
+      "sha256": "bae16679353e9e6cd6346c447aba92a2336889685cf942a7d36d03f1a95afe77",
+      "parts": [
+        {
+          "name": "humanmimic-003.tar.gz.part-000",
+          "size": 134217728,
+          "sha256": "515fd48c3c69103efefb1e9b87e880caa960f196cc53c3799005a5b3ca281242"
+        },
+        {
+          "name": "humanmimic-003.tar.gz.part-001",
+          "size": 134217728,
+          "sha256": "93c15927c54b9893427a212aadac3a6497f3e8c242191bd8dabda13a917fb8e4"
+        },
+        {
+          "name": "humanmimic-003.tar.gz.part-002",
+          "size": 134217728,
+          "sha256": "d275e8e12549ca9b9834d80267a4be38583927c807b33e0aa188e911f8f994b2"
+        },
+        {
+          "name": "humanmimic-003.tar.gz.part-003",
+          "size": 134217728,
+          "sha256": "bca13fc89ecc8490435a82cba73c52d6619f5f26645f62f151087d0f03c61a31"
+        },
+        {
+          "name": "humanmimic-003.tar.gz.part-004",
+          "size": 134217728,
+          "sha256": "cad7335a7024449518bdd985fb4ae8c78df67b7c1e6b699c7b3fcfeae9515f1a"
+        },
+        {
+          "name": "humanmimic-003.tar.gz.part-005",
+          "size": 134217728,
+          "sha256": "20a1f0cafd3af7d3528be8a3836194e872c8d484a42f058a0977e17fd24ed584"
+        },
+        {
+          "name": "humanmimic-003.tar.gz.part-006",
+          "size": 134217728,
+          "sha256": "e8f550543ca9a68654bdb066f0ea60a08271cca01b8a264c7d050ba0b6620ec1"
+        },
+        {
+          "name": "humanmimic-003.tar.gz.part-007",
+          "size": 134217728,
+          "sha256": "68879e8d66b9b8f01af4d599cbd9fbf44ced6e2f1f72dde8c89cfb85863b5044"
+        },
+        {
+          "name": "humanmimic-003.tar.gz.part-008",
+          "size": 134217728,
+          "sha256": "3d7d2d38e9cb0a30d831c1168f8f2c4fb6927fc3fb20646aaf03f45b1209b694"
+        },
+        {
+          "name": "humanmimic-003.tar.gz.part-009",
+          "size": 134217728,
+          "sha256": "d7f992a24e8231ce77e03dc747cec22228a9e1c8b841d865dac9ef85a7dee707"
+        },
+        {
+          "name": "humanmimic-003.tar.gz.part-010",
+          "size": 134217728,
+          "sha256": "e1df0e9e3664633f51f5d68446c2ccc4bf5b6c08da9098d909a28c0ada7c3c3b"
+        },
+        {
+          "name": "humanmimic-003.tar.gz.part-011",
+          "size": 134217728,
+          "sha256": "ac8941a0da430fe403cb3f796a435cff053d0b03b5409bd1875d9764d0501e03"
+        },
+        {
+          "name": "humanmimic-003.tar.gz.part-012",
+          "size": 134217728,
+          "sha256": "ed7ad020b891d0d4f1a144ae35d36915b246839e83f7c389ee13aa01715d3d63"
+        },
+        {
+          "name": "humanmimic-003.tar.gz.part-013",
+          "size": 56712433,
+          "sha256": "a4ced82b89d76a87f06a97a257986bd977b1e1fa04c530d5fe275c3768b21f33"
+        }
+      ]
+    },
+    {
+      "path": "archives/humanmimic/humanmimic-004.tar.gz",
+      "size": 877186614,
+      "sha256": "d9a73eb6a11019e28b32edbda8a81fa5878b8fa1a90c0a390c3329bf7f0c0bdd",
+      "parts": [
+        {
+          "name": "humanmimic-004.tar.gz.part-000",
+          "size": 134217728,
+          "sha256": "0cfd7a268a194295fb530caf4ed547a60a0e1d7002496a784f41925e036e7d32"
+        },
+        {
+          "name": "humanmimic-004.tar.gz.part-001",
+          "size": 134217728,
+          "sha256": "2436000c8523c8723bfad23128985ed956fb5a0d2aba5cb57585ebcd2e909362"
+        },
+        {
+          "name": "humanmimic-004.tar.gz.part-002",
+          "size": 134217728,
+          "sha256": "b89b323ef06f4af5a988642cb4f857c7e7689e11980566e2c36cc110ae35053c"
+        },
+        {
+          "name": "humanmimic-004.tar.gz.part-003",
+          "size": 134217728,
+          "sha256": "886e991eed1d08adb3fcf5f76778a94d24566425312ece3ff69194000c7085da"
+        },
+        {
+          "name": "humanmimic-004.tar.gz.part-004",
+          "size": 134217728,
+          "sha256": "7e3a2b5dfd08322b266ac29587f5c58061dc4c3876f2d53e90e8ad7ad78488f2"
+        },
+        {
+          "name": "humanmimic-004.tar.gz.part-005",
+          "size": 134217728,
+          "sha256": "de7d9021cb17a6206cab1339cab959b247e63f081ba0c4886caee0b5d56fdd58"
+        },
+        {
+          "name": "humanmimic-004.tar.gz.part-006",
+          "size": 71880246,
+          "sha256": "3f3ecd3e48c8f776b8bed3d8b41241eff7f9e5aa00b2057d6a6a18d427bd9863"
+        }
+      ]
+    },
+    {
+      "path": "archives/humanmimic/humanmimic-log-supplement.tar.gz",
+      "size": 957,
+      "sha256": "3cf84c83bbd8d1cfdcc8e5b5b267064dcadb3516a3d6ceb465eda992fa53a3e8",
+      "parts": [
+        {
+          "name": "humanmimic-log-supplement.tar.gz",
+          "size": 957,
+          "sha256": "3cf84c83bbd8d1cfdcc8e5b5b267064dcadb3516a3d6ceb465eda992fa53a3e8"
+        }
+      ]
+    },
+    {
+      "path": "archives/humanmimic/humanmimic-reviewed-supplement.tar.gz",
+      "size": 74678402,
+      "sha256": "f25dbfa4b23d5a8b3fa3719743b404f50cc087f4c521d13a221debcb191cca10",
+      "parts": [
+        {
+          "name": "humanmimic-reviewed-supplement.tar.gz",
+          "size": 74678402,
+          "sha256": "f25dbfa4b23d5a8b3fa3719743b404f50cc087f4c521d13a221debcb191cca10"
+        }
+      ]
+    },
+    {
+      "path": "quickstart.tar.gz",
+      "size": 14453843,
+      "sha256": "73b3c6438d03912740882ccbb13db100867894485d3ce03c236f917e804e412a",
+      "parts": [
+        {
+          "name": "quickstart.tar.gz",
+          "size": 14453843,
+          "sha256": "73b3c6438d03912740882ccbb13db100867894485d3ce03c236f917e804e412a"
+        }
+      ]
+    },
+    {
+      "path": "handoff-metadata.tar.gz",
+      "size": 76897004,
+      "sha256": "573c9d591ffce977c0e07ec2d6d4ae2d7361f294f0eb1a861ce4e448d457e814",
+      "parts": [
+        {
+          "name": "handoff-metadata.tar.gz",
+          "size": 76897004,
+          "sha256": "573c9d591ffce977c0e07ec2d6d4ae2d7361f294f0eb1a861ce4e448d457e814"
+        }
+      ]
+    }
+  ]
+}

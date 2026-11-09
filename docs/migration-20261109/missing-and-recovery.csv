@@ -1,0 +1,12 @@
+project,path,status,availability,reason,recovery
+humanmimic,/mnt/d/humanoid-demo-r2/models/,needs_input,仅找到引用,原WSL的GEM-X/SOMA/SMPL等模型不在当前服务器;受限许可继续适用,从原机凭合法授权私有导出并按configs/r2-suite-frozen-20261101.json及原资产清单核对
+humanmimic,/mnt/d/humanoid-demo-r2/sources/,needs_input,仅找到引用,完整R2源视频未迁入当前服务器,从原机同路径补取原片与来源资料
+humanmimic,/mnt/d/humanoid-demo-r2/runs/,needs_input,仅找到引用,R2完整状态缓存失败录像台账未迁入当前服务器;这里的静态预览不是完整视频,从原机同路径补取并保留heldout-use-ledger.jsonl
+humanmimic,/home/lyrine/projects/humanoid-demo/runs/,needs_input,仅找到引用,R1历史完整运行证据不在本服务器;原机位置来自REMOTE_WORK.md,从原WSL同路径补取并检查指向D盘的外部symlink实际内容
+humanmimic,humanmimic/models/sonic-default/,needs_input,仅找到引用,原R1 SONIC ONNX与观测配置本机没有,从原机按configs/r1-suite.json的SHA补取;不可只带TensorRT缓存
+humanmimic,humanmimic/vendor/GEM-X,awaiting_verification,仅Git子模块引用,目录未初始化;锁定提交20555befe2fbbe5b2015e1fff7ff214dc18ea9d6已保存,在本地取得源代码;git submodule update --init --recursive并核对冻结提交
+humanmimic,humanmimic/vendor/GR00T-WholeBodyControl,awaiting_verification,仅Git子模块引用,目录未初始化;锁定提交45c03facbf848e0c743091b7d9c17952096ff908已保存,在本地初始化子模块并获取LFS真实资产;按R1清单核对XML和参考CSV
+humanmimic,MANO授权资产本机路径未知,needs_input,无法获取,用户已有授权但尚未提供可读路径;当前R4机制实验不依赖它,用户从合法来源在本地配置MANO路径;不得将授权声明当作文件已取得
+humanmimic,humanmimic/runs/vividex-release-timing-20261109-01/原始录像,awaiting_verification,尚未生成,迁移请求前未开始该次录像作业;状态动作指标和生成脚本已保存,新机先验收render-vividex-raw-gpu.py再按全部成功和失败条件录制;不制作showcase
+humanmimic,GitHub草稿Release 439758793,awaiting_verification,上传与回读中,用户指定GitHub;仓库公开而完整原始数据保留私有,使用有push权限账号运行download_handoff.py按TRANSFER.json下载重组;不要发布草稿
+humanmimic,本地完整下载解包与GPU运行,awaiting_verification,待接收端验证,源端归档回读不能替代接收端校验和运行验收,执行README.md的下载与verify_handoff.py;再检查目标GPU环境

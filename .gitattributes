@@ -1,0 +1,6 @@
+# Keep experimental artifacts byte-identical across operating systems.
+runs/** -text
+docs/migration-20261109/*.csv -text
+*.patch -text
+*.py text eol=lf
+*.sh text eol=lf

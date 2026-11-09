@@ -33,9 +33,30 @@ python3 -m http.server 8000 --bind 127.0.0.1
 
 服务器交接目录为`/home/junqiy/projects/humanmimic-handoff-20261109/`，由四个源目录和相关外部日志/脚本盘点而来，未按`.gitignore`跳过实验内容。原项目工作树与实验进程保留。
 
-仓库是公开的；完整原始归档使用同仓库的**草稿Release**作为私有交接位置，仅有写入权限的账号可见。标签计划为`humanmimic-handoff-20261109`。上传和接收端核验的实际状态以本目录的`delivery-status.json`为准；未通过时不能宣称完整迁移。
+仓库是公开的；完整原始归档使用同仓库的[草稿Release](https://github.com/LyrineYang/humanmimic/releases/tag/untagged-e119888ff4c20ae988c9)作为私有交接位置，仅有写入权限的账号可见，匿名请求已验证404。标签为`humanmimic-handoff-20261109`。源端保存13,292个文件、15.33GB内容，压缩归档合计约8.12GB；65个传输分片均有SHA-256。上传和远端回读的实际状态以本目录的`delivery-status.json`为准；未通过时不能宣称完整迁移。
 
-大归档将分片上传，分片可独立重试。最终下载/重组工具与SHA清单随交接交付。若暂未上传，可直接用已有SSH下载源端交接目录；不能用GitHub自动生成的Source code ZIP替代原始数据归档。
+分片以128MiB为上限，支持片级续传：已经验证的片会跳过，中断片重新下载。完整上传通过后，在本机登录有仓库push权限的GitHub账号并执行：
+
+```bash
+gh auth login
+python3 scripts/download-handoff.py \
+  --manifest docs/migration-20261109/TRANSFER.json \
+  --output ../humanmimic-transfer
+gh release download humanmimic-handoff-20261109 -R LyrineYang/humanmimic \
+  --pattern SHA256SUMS --pattern archive-manifest.csv \
+  --pattern handoff-status.json --pattern metadata-file-manifest.csv \
+  --dir ../humanmimic-transfer --clobber
+cd ../humanmimic-transfer
+tar -xzf handoff-metadata.tar.gz
+python3 verify_handoff.py --root .
+mkdir -p restored
+for volume in archives/humanmimic/*.tar.gz; do tar -xzf "$volume" -C restored; done
+python3 verify_handoff.py --root restored --restored
+```
+
+下载脚本验证GitHub存储摘要、每片下载内容和重组归档的SHA；整卷tar各自独立，不能跨卷cat拼接。Linux也可`sha256sum -c SHA256SUMS`，macOS用`shasum -a 256 -c SHA256SUMS`。仓库设置了结果文件`-text`属性以保持不同操作系统下字节一致。
+
+日常开发用Git最新源码；全量归档是服务器发布前快照，并附发布后source bundle，不要覆盖新克隆中已更新的文档。按归档README将`humanmimic-data/`置于源码旁，并恢复上游Git bundle；分析原始记录则用解包的`runs/`。排除、历史缺口和补取方式见[缺失清单](missing-and-recovery.csv)。如果尚未上传完，可先用已有SSH下载源端目录。GitHub自动生成的Source code ZIP仅含Git文件，不含完整原始归档。
 
 ## 环境和缺口
 
