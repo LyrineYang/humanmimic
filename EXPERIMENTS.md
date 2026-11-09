@@ -644,3 +644,8 @@ next_action: null
 `runs/vividex-release-timing-20261109-01/pilot04/result.json`：6个开发条件，early失败惩罚MAE11.788→9.673mm，supported11.856→9.908mm，各5/6有效，研究验收failed。公共工作空间扩展仅在固定PPO动作完成后生效，属于仿真工程技巧。源码准备、实际执行和研究收益分别记录；新种子与本轮录像未执行。全部开发失败和状态在完整归档，Git仅发布明确列出的测量与展示文件。
 
 迁移未修改原服务器工作树或中断实验；隔离发布副本保留28项已有暂存更改。恢复Git历史/索引的实际检查passed；原暂存补丁逐字节相同。全量文件回读及GitHub传输核验进度见`docs/migration-20261109/delivery-status.json`，未通过前不标完整迁移。
+
+
+## 2026-11-09 GitHub交付收尾（用户收窄核验范围）
+
+按最新要求停止新增归档和完整回读/解包核验。代码、28项原暂存改动与237项结果/演示已推送main；已有65个附件共8,118,315,384字节全部上传GitHub草稿Release，源文件13,292个。GitHub上传成功及附件元数据核对passed；不追加GPU运行、训练或录像。早期已完成的部分回读记录保留，不将其扩大为全量回读通过。服务器原件和实验进程保持不动。历史R1/R2、MANO和新机运行仍待补；当前内容上传完成不代表研究验收通过。证据：`docs/migration-20261109/delivery-status.json`和`upload-only-report.json`。

@@ -1,6 +1,6 @@
-# 当前接续：本地交接
+# 当前接续：GitHub推送与本地接手
 
-先读`docs/migration-20261109/README.md`和`delivery-status.json`，区分Git已有演示与完整原始归档。pilot04开发收益仍未达门槛，8201–8206未使用；先完成目标机环境和状态恢复验证，不启动新训练或showcase。原预算窗口与账本不能随迁移重置。
+最新用户要求：停止新增打包及复杂核验，完成GitHub推送、内容更新和报告。先读`docs/migration-20261109/README.md`和`delivery-status.json`；代码/精选演示在main，已有大文件附件在同仓库草稿Release。不要恢复已取消的完整解包核验任务。pilot04开发收益仍未达门槛，8201–8206未使用；先完成目标机环境和状态恢复验证，不启动新训练或showcase。原预算窗口与账本不能随迁移重置。
 
 # HumanMimic 当前接续提示
 

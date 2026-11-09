@@ -1,4 +1,4 @@
-> 本地接手、已保存演示和实验索引：[2026-11-09迁移入口](docs/migration-20261109/README.md)。
+> GitHub推送状态、本地接手、已保存演示和实验索引：[2026-11-09迁移入口](docs/migration-20261109/README.md)。
 
 <p align="center">
   <img src="docs/assets/hero.svg" alt="HumanMimic — Video to humanoid motion. Run, inspect and extend a simulation pipeline." width="100%">

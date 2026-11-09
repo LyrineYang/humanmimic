@@ -1,13 +1,14 @@
 # HumanMimic 本地接手与结果入口
 
-本次按用户要求仅交接HumanMimic。代码、冻结协议、实验摘要及精选原始演示直接进入Git；服务器现有完整原始数据另做逐文件SHA-256归档。Git仓库不是完整原始数据备份。
+**推送结果：已完成服务器现有可迁内容的GitHub上传。** `main`保存代码、配置和237项精选结果/演示；已有65个大文件附件（8,118,315,384字节，约8.12GB）全部上传同仓库草稿Release，对应13,292个源文件。没有新增打包或恢复复杂核验。源服务器原件保留；旧WSL数据等历史缺口单列，未声称整个历史项目已齐全。上传记录见[delivery-status.json](delivery-status.json)和[upload-only-report.json](upload-only-report.json)。
+
+本次仅交接HumanMimic。代码、冻结协议、实验摘要及237项精选结果/原始演示已commit并push到main；大文件使用已经生成的同仓库Release附件。用户最新要求是不再创建归档、不继续复杂核验，完成推送和内容更新。下方校验命令仅供本地按需使用，不是本轮继续执行的任务。
 
 ## 本地先用起来
 
 ```bash
 git clone https://github.com/LyrineYang/humanmimic.git
 cd humanmimic
-python3 scripts/verify-handoff-assets.py
 python3 -m http.server 8000 --bind 127.0.0.1
 ```
 
@@ -19,7 +20,7 @@ python3 -m http.server 8000 --bind 127.0.0.1
 - [接触校正机制](../../runs/story-contact-20261109-01/demo-final/contact-corrected/execution.mp4)与[相同探触基线](../../runs/story-contact-20261109-01/demo-final/force-only/execution.mp4)：简化固定夹持、已知平面、单方向，不是完整灵巧手操作收益。
 - [已有历史LEAP演示目录](../../runs/demo-showcase-20261109-01/index.html)：超过当前2N力界的旧开发参考。本次仅保存既有文件，没有生成新showcase或录像。
 
-以上材料随普通clone可得。`published-files.csv`列出实际提交文件的大小与SHA-256。`selected-results.csv`是精选索引；完整源端索引见`artifact-index.csv.gz`，解压后可用表格软件筛选。索引中的路径相对于恢复根目录（含`humanmimic/`和相邻`humanmimic-data/`），不能把“索引有记录”理解为原始文件已进入Git。
+以上材料随普通clone可得，无需运行核验流程即可查看。可选的文件校验入口为`python3 scripts/verify-handoff-assets.py`。`published-files.csv`列出实际提交文件的大小与SHA-256。`selected-results.csv`是精选索引；完整源端索引见`artifact-index.csv.gz`，解压后可用表格软件筛选。索引中的路径相对于恢复根目录（含`humanmimic/`和相邻`humanmimic-data/`），不能把“索引有记录”理解为原始文件已进入Git。
 
 ## 当前结果与下一步
 
@@ -33,9 +34,9 @@ python3 -m http.server 8000 --bind 127.0.0.1
 
 服务器交接目录为`/home/junqiy/projects/humanmimic-handoff-20261109/`，由四个源目录和相关外部日志/脚本盘点而来，未按`.gitignore`跳过实验内容。原项目工作树与实验进程保留。
 
-仓库是公开的；完整原始归档使用同仓库的[草稿Release](https://github.com/LyrineYang/humanmimic/releases/tag/untagged-e119888ff4c20ae988c9)作为私有交接位置，仅有写入权限的账号可见，匿名请求已验证404。标签为`humanmimic-handoff-20261109`。源端保存13,292个文件、15.33GB内容，压缩归档合计约8.12GB；65个传输分片均有SHA-256。上传和远端回读的实际状态以本目录的`delivery-status.json`为准；未通过时不能宣称完整迁移。
+仓库是公开的；完整原始归档使用同仓库的[草稿Release](https://github.com/LyrineYang/humanmimic/releases/tag/untagged-e93bcff1989da42021d9)作为私有交接位置，仅有写入权限的账号可见，匿名请求已验证404。标签为`humanmimic-handoff-20261109`。源端保存13,292个文件、15.33GB内容，压缩归档合计约8.12GB；65个传输分片均有SHA-256。最终上传状态以本目录的`delivery-status.json`为准；按用户最新要求，不继续全量远端回读和解包核验。附件内的早期状态文字保留为打包时快照，以main中的当前报告为准。
 
-分片以128MiB为上限，支持片级续传：已经验证的片会跳过，中断片重新下载。完整上传通过后，在本机登录有仓库push权限的GitHub账号并执行：
+分片以128MiB为上限，支持片级续传：已经验证的片会跳过，中断片重新下载。下载已有大文件附件时，在本机登录有仓库push权限的GitHub账号并执行：
 
 ```bash
 gh auth login
@@ -56,7 +57,7 @@ python3 verify_handoff.py --root restored --restored
 
 下载脚本验证GitHub存储摘要、每片下载内容和重组归档的SHA；整卷tar各自独立，不能跨卷cat拼接。Linux也可`sha256sum -c SHA256SUMS`，macOS用`shasum -a 256 -c SHA256SUMS`。仓库设置了结果文件`-text`属性以保持不同操作系统下字节一致。
 
-日常开发用Git最新源码；全量归档是服务器发布前快照，并附发布后source bundle，不要覆盖新克隆中已更新的文档。按归档README将`humanmimic-data/`置于源码旁，并恢复上游Git bundle；分析原始记录则用解包的`runs/`。排除、历史缺口和补取方式见[缺失清单](missing-and-recovery.csv)。如果尚未上传完，可先用已有SSH下载源端目录。GitHub自动生成的Source code ZIP仅含Git文件，不含完整原始归档。
+日常开发用Git最新源码；全量归档是服务器发布前快照，并附发布后source bundle，不要覆盖新克隆中已更新的文档。按归档README将`humanmimic-data/`置于源码旁，并恢复上游Git bundle；分析原始记录则用解包的`runs/`。排除、历史缺口和补取方式见[缺失清单](missing-and-recovery.csv)。服务器原件与已有附件保留。GitHub自动生成的Source code ZIP仅含Git文件，不含完整原始归档。
 
 ## 环境和缺口
 
