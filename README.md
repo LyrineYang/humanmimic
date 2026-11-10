@@ -1,3 +1,5 @@
+> 技术迭代、设计取舍与接续路线：[技术迭代交接文档](docs/technical-iteration-handoff.zh-CN.md)。
+
 > GitHub推送状态、本地接手、已保存演示和实验索引：[2026-11-09迁移入口](docs/migration-20261109/README.md)。
 
 <p align="center">

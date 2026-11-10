@@ -1,3 +1,5 @@
+> 为什么走到当前路线、哪些设计已实现、哪些实验仍失败：见[技术迭代交接](docs/technical-iteration-handoff.zh-CN.md)（2026-11-10，北京时间）。
+
 > 最新GitHub交付：代码与精选结果已推送main，65个既有大文件附件已上传；用户要求不再新增打包或复杂核验。入口：[推送报告与本地接手](docs/migration-20261109/README.md)。服务器原件保留，历史缺口单列。
 
 # HumanMimic：Linux迁移与R4交接

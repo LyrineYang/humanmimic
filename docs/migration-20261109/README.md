@@ -1,5 +1,7 @@
 # HumanMimic 本地接手与结果入口
 
+技术路线、历次设计决策与失败分析见[技术迭代交接](../technical-iteration-handoff.zh-CN.md)。
+
 **推送结果：已完成服务器现有可迁内容的GitHub上传。** `main`保存代码、配置和237项精选结果/演示；已有65个大文件附件（8,118,315,384字节，约8.12GB）全部上传同仓库草稿Release，对应13,292个源文件。没有新增打包或恢复复杂核验。源服务器原件保留；旧WSL数据等历史缺口单列，未声称整个历史项目已齐全。上传记录见[delivery-status.json](delivery-status.json)和[upload-only-report.json](upload-only-report.json)。
 
 本次仅交接HumanMimic。代码、冻结协议、实验摘要及237项精选结果/原始演示已commit并push到main；大文件使用已经生成的同仓库Release附件。用户最新要求是不再创建归档、不继续复杂核验，完成推送和内容更新。下方校验命令仅供本地按需使用，不是本轮继续执行的任务。

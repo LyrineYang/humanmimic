@@ -649,3 +649,8 @@ next_action: null
 ## 2026-11-09 GitHub交付收尾（用户收窄核验范围）
 
 按最新要求停止新增归档和完整回读/解包核验。代码、28项原暂存改动与237项结果/演示已推送main；已有65个附件共8,118,315,384字节全部上传GitHub草稿Release，源文件13,292个。GitHub上传成功及附件元数据核对passed；不追加GPU运行、训练或录像。早期已完成的部分回读记录保留，不将其扩大为全量回读通过。服务器原件和实验进程保持不动。历史R1/R2、MANO和新机运行仍待补；当前内容上传完成不代表研究验收通过。证据：`docs/migration-20261109/delivery-status.json`和`upload-only-report.json`。
+
+
+## 2026-11-10 技术迭代交接文档（北京时间）
+
+根据当前对话、已读取的server-research审查会话、Git历史、方案、源码与既有结果，新增`docs/technical-iteration-handoff.zh-CN.md`，记录R1/R2到R4与ViViDex切片的迭代、设计取舍、失败和后续接续。明确222为链接数、状态策略与视频学习的区别、持物与释放后指标的区别、E2归因与E3优先级、显式记忆与未完成WSM、预算及数据边界。26处本地链接存在性检查passed，Markdown围栏和diff空白检查passed；仅文档检查，不是源码或GPU验收。没有新增代码实现、实验、录像、归档或预算。本轮按用户授权commit并push；记录见`runs/technical-handoff-docs-20261110-01/result.json`。

@@ -1,0 +1,17 @@
+{
+  "date": "2026-11-10",
+  "timezone": "Asia/Shanghai",
+  "status": "passed",
+  "scope": "documentation and local link availability only",
+  "base_commit": "4b27315bf63bd62bc28c389bedbad5d2d2731323",
+  "document": "docs/technical-iteration-handoff.zh-CN.md",
+  "document_sha256": "190a260bedd74ba03396eb0b317242f737ca8d5afd20115c493d3a614f638e0a",
+  "local_links_checked": 26,
+  "missing_local_links": [],
+  "referenced_review_thread_read": "01a19b46-55b5-7481-bfc0-d714ae890a8f",
+  "new_gpu_runs": 0,
+  "new_videos": 0,
+  "new_archives": 0,
+  "scientific_acceptance_changed": false,
+  "runtime_verification": "not performed; documentation-only change"
+}
